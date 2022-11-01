@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/backend/leon.iml" filepath="$PROJECT_DIR$/backend/leon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/leon-core/leon-core.iml" filepath="$PROJECT_DIR$/backend/leon-core/leon-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/leon-repository/leon-repository.iml" filepath="$PROJECT_DIR$/backend/leon-repository/leon-repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/leon-service/leon-service.iml" filepath="$PROJECT_DIR$/backend/leon-service/leon-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/leon-web/leon-web.iml" filepath="$PROJECT_DIR$/backend/leon-web/leon-web.iml" />
+    </modules>
+  </component>
+</project>
