@@ -16,13 +16,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "MULTIPLE_CHOICE_QUESTIONS")
-public class MultipleChoiceQuestionEntity {
+public class MultipleChoiceQuestionEntity extends AbstractQuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String questionContent;
+    private String question;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<OptionEntity> options;

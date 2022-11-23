@@ -16,13 +16,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "DROPDOWN_QUESTION")
-public class DropdownQuestionEntity {
+public class DropdownQuestionEntity extends AbstractQuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String questionContent;
+    private String question;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<OptionEntity> options;

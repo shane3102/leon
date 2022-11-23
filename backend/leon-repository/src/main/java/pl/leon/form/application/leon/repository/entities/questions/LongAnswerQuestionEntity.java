@@ -16,13 +16,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "LONG_ANSWER_QUESTIONS")
-public class LongAnswerQuestionEntity {
+public class LongAnswerQuestionEntity extends AbstractQuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String questionContent;
+    private String question;
 
     @OneToMany(
             mappedBy = "longAnswerQuestionEntity",

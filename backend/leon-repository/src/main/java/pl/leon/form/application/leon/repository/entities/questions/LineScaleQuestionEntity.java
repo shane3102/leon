@@ -16,13 +16,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "LINE_SCALE_QUESTIONS")
-public class LineScaleQuestionEntity {
+public class LineScaleQuestionEntity extends AbstractQuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String questionContent;
+    private String question;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<OptionEntity> options;
