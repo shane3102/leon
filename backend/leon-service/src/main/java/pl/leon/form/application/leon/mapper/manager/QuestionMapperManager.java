@@ -28,7 +28,7 @@ import java.util.Map;
 @AllArgsConstructor
 @SuppressWarnings({"unchecked"})
 public class QuestionMapperManager {
-    private Map<Class<? extends AbstractQuestionEntity>, QuestionMapper> mappers;
+    private Map<Class<?>, QuestionMapper> mappers;
 
     private final DropdownQuestionMapper dropdownQuestionMapper;
     private final LineScaleQuestionMapper lineScaleQuestionMapper;
@@ -37,7 +37,7 @@ public class QuestionMapperManager {
     private final ShortAnswerQuestionMapper shortAnswerQuestionMapper;
     private final SingleChoiceQuestionMapper singleChoiceQuestionMapper;
 
-    public QuestionResponse mapToResponse(AbstractQuestionEntity questionEntity) {
+    public QuestionResponse mapToResponse(Object questionEntity) {
         log.info("Entity type: {}", questionEntity.getClass());
         QuestionResponse response = mappers.get(questionEntity.getClass()).mapToResponse(questionEntity);
         log.info("Response: {}", response);
