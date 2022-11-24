@@ -1,5 +1,7 @@
 package pl.leon.form.application.leon.repository.entities.questions;
 
+import lombok.Builder;
+import lombok.Data;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 
@@ -14,9 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
+@Data
 @Entity
+@Builder
 @Table(name = "SHORT_ANSWER_QUESTIONS")
-public class ShortAnswerQuestionEntity extends AbstractQuestionEntity {
+public class ShortAnswerQuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

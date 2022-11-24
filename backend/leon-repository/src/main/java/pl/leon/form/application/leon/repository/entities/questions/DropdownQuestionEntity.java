@@ -1,5 +1,7 @@
 package pl.leon.form.application.leon.repository.entities.questions;
 
+import lombok.Builder;
+import lombok.Data;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 
@@ -14,9 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
+@Data
 @Entity
+@Builder
 @Table(name = "DROPDOWN_QUESTION")
-public class DropdownQuestionEntity extends AbstractQuestionEntity {
+public class DropdownQuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

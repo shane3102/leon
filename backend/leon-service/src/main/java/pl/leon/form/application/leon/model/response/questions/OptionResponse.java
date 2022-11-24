@@ -1,13 +1,15 @@
 package pl.leon.form.application.leon.model.response.questions;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AnswerResponse {
+public class OptionResponse {
     private Long id;
     private String content;
 }
