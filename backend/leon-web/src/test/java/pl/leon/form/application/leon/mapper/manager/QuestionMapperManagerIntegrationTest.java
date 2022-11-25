@@ -1,8 +1,6 @@
 package pl.leon.form.application.leon.mapper.manager;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.leon.form.application.leon.model.response.questions.OptionResponse;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.model.response.questions.type.QuestionType;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
@@ -23,6 +22,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.DROPDOWN;
+import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.LINE_SCALE;
+import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.LONG_ANSWER;
+import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.MULTIPLE_CHOICE;
+import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.SHORT_ANSWER;
+import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.SINGLE_CHOICE;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -52,12 +57,12 @@ public class QuestionMapperManagerIntegrationTest {
 
     private static Stream<Arguments> entityArguments() {
         return Stream.of(
-                Arguments.of(dropdownQuestion, choiceAnswerResponse),
-                Arguments.of(lineScaleQuestion, lineScaleAnswerResponse),
-                Arguments.of(longAnswerQuestion, textAnswerResponse),
-                Arguments.of(multipleChoiceQuestion, choiceAnswerResponse),
-                Arguments.of(shortAnswerQuestion, textAnswerResponse),
-                Arguments.of(singleChoiceQuestion, choiceAnswerResponse)
+                Arguments.of(dropdownQuestion, choiceAnswerResponse, DROPDOWN),
+                Arguments.of(lineScaleQuestion, lineScaleAnswerResponse, LINE_SCALE),
+                Arguments.of(longAnswerQuestion, textAnswerResponse, LONG_ANSWER),
+                Arguments.of(multipleChoiceQuestion, choiceAnswerResponse, MULTIPLE_CHOICE),
+                Arguments.of(shortAnswerQuestion, textAnswerResponse, SHORT_ANSWER),
+                Arguments.of(singleChoiceQuestion, choiceAnswerResponse, SINGLE_CHOICE)
         );
     }
 
@@ -126,8 +131,9 @@ public class QuestionMapperManagerIntegrationTest {
 
     @ParameterizedTest
     @MethodSource("entityArguments")
-    void givenQuestionEntity_whenMapToQuestionResponse_thenResponseEqualExpected(Object mappedQuestionEntity, QuestionResponse expectedResponse) {
+    void givenQuestionEntity_whenMapToQuestionResponse_thenResponseEqualExpected(Object mappedQuestionEntity, QuestionResponse expectedResponse, QuestionType questionType) {
         // given
+        expectedResponse.setType(questionType);
 
         // when
         QuestionResponse response = questionMapperManager.mapToResponse(mappedQuestionEntity);
