@@ -1,6 +1,8 @@
 package pl.leon.form.application.leon.web.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,41 +10,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.leon.form.application.leon.model.response.FormToCompleteResponse;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.service.FormService;
+import pl.leon.form.application.leon.service.FormToCompleteService;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/form")
 @AllArgsConstructor
 public class FormController {
 
     private final FormService formService;
+    private final FormToCompleteService formToCompleteService;
 
-    @PostMapping("/create")
-    public FormEntity create(@RequestBody FormEntity formEntity) {
-        return formService.create(formEntity);
-    }
-
-    @GetMapping("/{id}")
-    public FormEntity read(@PathVariable Long id) {
-        return formService.read(id);
-    }
-
-    @PutMapping("/update/{id}")
-    public FormEntity update(@PathVariable Long id, @RequestBody FormEntity formEntity) {
-        return formService.update(id, formEntity);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id) {
-        formService.delete(id);
-    }
-
-    @GetMapping("/list")
-    public List<FormEntity> list() {
-        return formService.list();
+    @GetMapping("/get-random-form")
+    public ResponseEntity<FormToCompleteResponse> getRandomForm(@RequestParam(name = "answer-count") Short allAnswerCount) {
+        log.info("getRandomForm()");
+        FormToCompleteResponse response = formToCompleteService.generateFormToComplete(allAnswerCount);
+        log.info("getRandomForm() = {}", response);
+        return ResponseEntity.ok(response);
     }
 }
