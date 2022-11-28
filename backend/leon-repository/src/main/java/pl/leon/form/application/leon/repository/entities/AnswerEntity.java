@@ -1,5 +1,7 @@
 package pl.leon.form.application.leon.repository.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ANSWERS")
 public class AnswerEntity {
     @Id

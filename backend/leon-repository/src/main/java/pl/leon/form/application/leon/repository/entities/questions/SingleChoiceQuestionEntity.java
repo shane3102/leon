@@ -1,7 +1,9 @@
 package pl.leon.form.application.leon.repository.entities.questions;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 
@@ -19,6 +21,8 @@ import java.util.List;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "SINGLE_CHOICE_QUESTIONS")
 public class SingleChoiceQuestionEntity {
 
