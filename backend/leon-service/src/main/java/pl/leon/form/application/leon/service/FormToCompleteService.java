@@ -10,7 +10,6 @@ import pl.leon.form.application.leon.service.question.QuestionServiceInterface;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -18,24 +17,19 @@ import java.util.stream.Stream;
 public class FormToCompleteService {
     List<QuestionServiceInterface> questionServices;
 
-    public FormToCompleteResponse generateFormToComplete(Short questionsToGenerate) {
+    public FormToCompleteResponse generateFormToComplete(Short questionsToGeneratePerType) {
 
-        log.info("generateFormToComplete({})", questionsToGenerate);
-        if (questionsToGenerate < questionServices.size()) {
-            //TODO custom exception + to gdzieś do walidacji bardziej
-            throw new RuntimeException();
-        }
-
-        Short questionsForEachType = (short) (questionsToGenerate / questionServices.size());
+        log.info("generateFormToComplete({})", questionsToGeneratePerType);
 
         List<QuestionResponse> questions = questionServices
                 .stream().map(
-                        service -> (List<QuestionResponse>) service.getRandomQuestions(questionsForEachType)
+                        service -> (List<QuestionResponse>) service.getRandomQuestions(questionsToGeneratePerType)
                 )
-                .flatMap(Collection::stream).collect(Collectors.toList());
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
 
         FormToCompleteResponse response = FormToCompleteResponse.builder().questions(questions).build();
-        log.info("generateFormToComplete({}) = {}", questionsToGenerate, response);
+        log.info("generateFormToComplete({}) = {}", questionsToGeneratePerType, response);
 
         return response;
 
