@@ -34,8 +34,7 @@ public class ShortAnswerQuestionEntity {
 
     @OneToMany(
             mappedBy = "shortAnswerQuestionEntity",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     private List<AnswerEntity> answers;
 
