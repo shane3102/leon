@@ -11,7 +11,6 @@ import pl.leon.form.application.leon.mapper.QuestionMapper;
 import pl.leon.form.application.leon.mapper.ShortAnswerQuestionMapper;
 import pl.leon.form.application.leon.mapper.SingleChoiceQuestionMapper;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
-import pl.leon.form.application.leon.repository.entities.questions.AbstractQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -20,7 +19,6 @@ import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQu
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j

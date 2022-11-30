@@ -1,9 +1,9 @@
 package pl.leon.form.application.leon.service.question;
 
-import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.TooManyQuestionsToGenerate;
 import pl.leon.form.application.leon.mapper.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 
@@ -23,7 +23,7 @@ public interface QuestionServiceInterface<T> {
 
         if (allQuestions < count) {
             // TODO custom exception
-            throw new RuntimeException();
+            throw new TooManyQuestionsToGenerate();
         }
 
         List<Long> randomQuestionIds = new ArrayList<>();
