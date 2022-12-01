@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.leon.form.application.leon.mapper.manager.QuestionMapperManager;
+import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 
