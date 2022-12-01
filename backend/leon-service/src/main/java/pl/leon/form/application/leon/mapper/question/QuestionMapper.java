@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.mapper;
+package pl.leon.form.application.leon.mapper.question;
 
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;

@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.mapper;
+package pl.leon.form.application.leon.mapper.question;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

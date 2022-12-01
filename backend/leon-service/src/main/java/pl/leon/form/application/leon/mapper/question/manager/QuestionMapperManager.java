@@ -1,15 +1,15 @@
-package pl.leon.form.application.leon.mapper.manager;
+package pl.leon.form.application.leon.mapper.question.manager;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.leon.form.application.leon.mapper.DropdownQuestionMapper;
-import pl.leon.form.application.leon.mapper.LineScaleQuestionMapper;
-import pl.leon.form.application.leon.mapper.LongAnswerQuestionMapper;
-import pl.leon.form.application.leon.mapper.MultipleChoiceQuestionMapper;
-import pl.leon.form.application.leon.mapper.QuestionMapper;
-import pl.leon.form.application.leon.mapper.ShortAnswerQuestionMapper;
-import pl.leon.form.application.leon.mapper.SingleChoiceQuestionMapper;
+import pl.leon.form.application.leon.mapper.question.DropdownQuestionMapper;
+import pl.leon.form.application.leon.mapper.question.LineScaleQuestionMapper;
+import pl.leon.form.application.leon.mapper.question.LongAnswerQuestionMapper;
+import pl.leon.form.application.leon.mapper.question.MultipleChoiceQuestionMapper;
+import pl.leon.form.application.leon.mapper.question.QuestionMapper;
+import pl.leon.form.application.leon.mapper.question.ShortAnswerQuestionMapper;
+import pl.leon.form.application.leon.mapper.question.SingleChoiceQuestionMapper;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;

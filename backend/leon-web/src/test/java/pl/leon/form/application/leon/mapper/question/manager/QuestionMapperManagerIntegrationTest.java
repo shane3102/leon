@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.mapper.manager;
+package pl.leon.form.application.leon.mapper.question.manager;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
