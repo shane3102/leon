@@ -21,8 +21,8 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/form")
 @AllArgsConstructor
+@RequestMapping("/api/form")
 public class FormController {
 
     private final FormService formService;

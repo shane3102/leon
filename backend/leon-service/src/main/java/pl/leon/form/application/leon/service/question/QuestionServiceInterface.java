@@ -4,7 +4,7 @@ import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.TooManyQuestionsToGenerate;
-import pl.leon.form.application.leon.mapper.manager.QuestionMapperManager;
+import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 
 import java.util.ArrayList;
