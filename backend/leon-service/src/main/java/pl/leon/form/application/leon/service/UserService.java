@@ -5,14 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.leon.form.application.leon.core.security.SecurityUtils;
 import pl.leon.form.application.leon.mapper.UserMapper;
 import pl.leon.form.application.leon.model.request.UserRegistrationRequest;
 import pl.leon.form.application.leon.model.response.UserResponse;
 import pl.leon.form.application.leon.repository.UserRepository;
 import pl.leon.form.application.leon.repository.entities.UserEntity;
-import pl.leon.form.application.leon.service.security.SecurityUtils;
 
 @Slf4j
 @Service

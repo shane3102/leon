@@ -25,7 +25,6 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<?> getLoggedUser() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         return ResponseEntity.ok(service.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
     }
 }
