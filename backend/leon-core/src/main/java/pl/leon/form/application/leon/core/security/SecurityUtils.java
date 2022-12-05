@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.service.security;
+package pl.leon.form.application.leon.core.security;
 
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;

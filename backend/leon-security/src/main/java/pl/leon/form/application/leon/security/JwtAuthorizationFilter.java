@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.service.security;
+package pl.leon.form.application.leon.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -33,7 +33,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("SIEMA");
         UsernamePasswordAuthenticationToken auth = getAuthentication(request);
         if (auth == null) {
             filterChain.doFilter(request, response);

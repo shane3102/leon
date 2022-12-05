@@ -1,9 +1,11 @@
-package pl.leon.form.application.leon.service.security;
+package pl.leon.form.application.leon.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.CouldNotParseLoginRequestAttempt;
+import pl.leon.form.application.leon.core.exceptions.i_am_a_teapot.concrete.OtherExceptionWhileExtractingToken;
 import pl.leon.form.application.leon.model.request.UserLoginAttemptRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,14 +31,11 @@ public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticati
                     authenticationRequest.getUsername(), authenticationRequest.getPassword()
             );
             setDetails(request, token);
-            System.out.println("SIEMA KURWA");
             return this.getAuthenticationManager().authenticate(token);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e){
-            System.out.println("KURWA NO");
-            System.out.println(e.getMessage());
+            throw new CouldNotParseLoginRequestAttempt();
+        } catch (Exception e) {
+            throw new OtherExceptionWhileExtractingToken(e.getMessage());
         }
-        return null;
     }
 }

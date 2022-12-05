@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.service.security;
+package pl.leon.form.application.leon.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
