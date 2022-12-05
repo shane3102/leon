@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.service.UserService;
@@ -43,17 +44,21 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (token == null || !token.startsWith(TOKEN_PREFIX) || token.contains("undefined")) {
+        try {
+            String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+            if (token == null || !token.startsWith(TOKEN_PREFIX) || token.contains("undefined")) {
+                return null;
+            }
+
+            String username = JWT.require(Algorithm.HMAC256(secret))
+                    .build()
+                    .verify(token.replace(TOKEN_PREFIX, ""))
+                    .getSubject();
+            if (username == null) return null;
+            UserDetails userDetails = userService.loadUserByUsername(username);
+            return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
+        } catch (UsernameNotFoundException ignored) {
             return null;
         }
-
-        String username = JWT.require(Algorithm.HMAC256(secret))
-                .build()
-                .verify(token.replace(TOKEN_PREFIX, ""))
-                .getSubject();
-        if (username == null) return null;
-        UserDetails userDetails = userService.loadUserByUsername(username);
-        return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
     }
 }
