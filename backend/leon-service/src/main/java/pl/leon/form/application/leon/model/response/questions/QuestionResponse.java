@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.leon.form.application.leon.model.response.questions.type.QuestionType;
+import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
 
 import java.util.List;
 
