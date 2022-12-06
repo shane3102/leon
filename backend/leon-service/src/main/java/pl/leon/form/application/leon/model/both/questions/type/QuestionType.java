@@ -1,5 +1,7 @@
-package pl.leon.form.application.leon.model.response.questions.type;
+package pl.leon.form.application.leon.model.both.questions.type;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
@@ -31,5 +33,10 @@ public enum QuestionType {
                 .filter(questionType -> Objects.equals(questionType.getEntityClass(), entity))
                 .findFirst()
                 .orElseThrow(/*TODO customowy exception*/);
+    }
+
+    @JsonCreator
+    public static QuestionType create(@JsonProperty("name") String name) {
+        return valueOf(name);
     }
 }

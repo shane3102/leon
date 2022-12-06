@@ -39,12 +39,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.DROPDOWN;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.LINE_SCALE;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.LONG_ANSWER;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.MULTIPLE_CHOICE;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.SHORT_ANSWER;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.SINGLE_CHOICE;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.DROPDOWN;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.LINE_SCALE;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.LONG_ANSWER;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.MULTIPLE_CHOICE;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.SHORT_ANSWER;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.SINGLE_CHOICE;
 
 @SpringBootTest
 @AutoConfigureMockMvc

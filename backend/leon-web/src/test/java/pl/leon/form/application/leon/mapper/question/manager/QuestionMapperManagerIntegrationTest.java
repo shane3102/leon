@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.leon.form.application.leon.model.response.questions.OptionResponse;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
-import pl.leon.form.application.leon.model.response.questions.type.QuestionType;
+import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.DROPDOWN;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.LINE_SCALE;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.LONG_ANSWER;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.MULTIPLE_CHOICE;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.SHORT_ANSWER;
-import static pl.leon.form.application.leon.model.response.questions.type.QuestionType.SINGLE_CHOICE;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.DROPDOWN;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.LINE_SCALE;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.LONG_ANSWER;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.MULTIPLE_CHOICE;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.SHORT_ANSWER;
+import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.SINGLE_CHOICE;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

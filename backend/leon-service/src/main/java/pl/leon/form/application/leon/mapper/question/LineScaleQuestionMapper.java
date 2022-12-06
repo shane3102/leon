@@ -10,6 +10,6 @@ import pl.leon.form.application.leon.repository.entities.questions.LineScaleQues
 @Mapper(componentModel = "spring")
 public abstract class LineScaleQuestionMapper implements QuestionMapper<LineScaleQuestionEntity> {
     @Override
-    @Mapping(target="type", expression = "java(pl.leon.form.application.leon.model.response.questions.type.QuestionType.getTypeByEntity(questionEntity.getClass()))")
+    @Mapping(target="type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(questionEntity.getClass()))")
     public abstract QuestionResponse mapToResponse(LineScaleQuestionEntity questionEntity);
 }
