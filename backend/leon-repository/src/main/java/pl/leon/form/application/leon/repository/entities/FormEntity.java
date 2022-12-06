@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -26,6 +27,10 @@ public class FormEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private LocalDate dateTo;
+
+    private boolean disableQuestionsAfterDateTo;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

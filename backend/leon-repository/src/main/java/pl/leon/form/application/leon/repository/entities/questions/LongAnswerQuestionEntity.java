@@ -30,6 +30,8 @@ public class LongAnswerQuestionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private boolean disabled;
+
     private String question;
 
     @OneToMany(
