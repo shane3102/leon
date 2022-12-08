@@ -19,7 +19,11 @@ import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQu
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -40,6 +44,21 @@ public class QuestionMapperManager {
         QuestionResponse response = mappers.get(questionEntity.getClass()).mapToResponse(questionEntity);
         log.info("Response: {}", response);
         return response;
+    }
+
+    public List<QuestionResponse> mapToResponses(List... questionLists) {
+        log.info("mapToResponses({})", questionLists == null ? null : questionLists.length);
+
+        List<QuestionResponse> resultList = new ArrayList<>();
+
+        for (List<Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
+            concreteQuestionList.forEach(
+                    question -> resultList.add(mapToResponse(question))
+            );
+        }
+
+        log.info("mapToResponses({}) = {}", questionLists == null ? null : questionLists.length, resultList);
+        return resultList;
     }
 
     @PostConstruct

@@ -3,10 +3,13 @@ package pl.leon.form.application.leon.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.request.FormRequest;
 import pl.leon.form.application.leon.model.request.questions.OptionRequest;
 import pl.leon.form.application.leon.model.request.questions.QuestionRequest;
+import pl.leon.form.application.leon.model.response.FormResponse;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
@@ -28,7 +31,10 @@ import static pl.leon.form.application.leon.model.both.questions.type.QuestionTy
 
 @Component
 @Mapper(componentModel = "spring")
-public interface FormMapper {
+public abstract class FormMapper {
+
+    @Autowired
+    protected QuestionMapperManager questionMapperManager;
 
     @Mappings({
             @Mapping(target = "dropdownQuestions", source = "questions"),
@@ -39,85 +45,97 @@ public interface FormMapper {
             @Mapping(target = "singleChoiceQuestions", source = "questions"),
 
     })
-    FormEntity mapToEntity(FormRequest formRequest);
+    public abstract FormEntity mapToEntity(FormRequest formRequest);
 
-    default List<DropdownQuestionEntity> mapToDropdownQuestions(List<QuestionRequest> requests) {
+    @Mappings({
+            @Mapping(target = "questions", expression = "java(questionMapperManager.mapToResponses(" +
+                    "formEntity.getDropdownQuestions(), " +
+                    "formEntity.getLineScaleQuestions(), " +
+                    "formEntity.getLongAnswerQuestions(), " +
+                    "formEntity.getMultipleChoiceQuestions(), " +
+                    "formEntity.getShortAnswerQuestions(), " +
+                    "formEntity.getSingleChoiceQuestions()" +
+                    "))")
+    })
+    public abstract FormResponse mapToResponse(FormEntity formEntity);
+
+    protected List<DropdownQuestionEntity> mapToDropdownQuestions(List<QuestionRequest> requests) {
         return requests.stream().filter(request -> DROPDOWN.equals(request.getType()))
                 .map(this::mapToDropdownQuestion)
                 .collect(Collectors.toList());
     }
 
-    default DropdownQuestionEntity mapToDropdownQuestion(QuestionRequest request) {
+    protected DropdownQuestionEntity mapToDropdownQuestion(QuestionRequest request) {
         return DropdownQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .build();
     }
 
-    default List<LineScaleQuestionEntity> mapToLineScaleQuestions(List<QuestionRequest> requests) {
+    protected List<LineScaleQuestionEntity> mapToLineScaleQuestions(List<QuestionRequest> requests) {
         return requests.stream().filter(request -> LINE_SCALE.equals(request.getType()))
                 .map(this::mapToLineScaleQuestion)
                 .collect(Collectors.toList());
     }
 
-    default LineScaleQuestionEntity mapToLineScaleQuestion(QuestionRequest request) {
+    protected LineScaleQuestionEntity mapToLineScaleQuestion(QuestionRequest request) {
         return LineScaleQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .build();
     }
 
-    default List<LongAnswerQuestionEntity> mapToLongAnswerQuestions(List<QuestionRequest> requests) {
+    protected List<LongAnswerQuestionEntity> mapToLongAnswerQuestions(List<QuestionRequest> requests) {
         return requests.stream().filter(request -> LONG_ANSWER.equals(request.getType()))
                 .map(this::mapToLongAnswerQuestion)
                 .collect(Collectors.toList());
     }
 
-    default LongAnswerQuestionEntity mapToLongAnswerQuestion(QuestionRequest request) {
+    protected LongAnswerQuestionEntity mapToLongAnswerQuestion(QuestionRequest request) {
         return LongAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
                 .build();
     }
 
-    default List<MultipleChoiceQuestionEntity> mapToMultipleTypeQuestions(List<QuestionRequest> requests) {
+    protected List<MultipleChoiceQuestionEntity> mapToMultipleTypeQuestions(List<QuestionRequest> requests) {
         return requests.stream().filter(request -> MULTIPLE_CHOICE.equals(request.getType()))
                 .map(this::mapToMultipleChoiceQuestion)
                 .collect(Collectors.toList());
     }
 
-    default MultipleChoiceQuestionEntity mapToMultipleChoiceQuestion(QuestionRequest request) {
+    protected MultipleChoiceQuestionEntity mapToMultipleChoiceQuestion(QuestionRequest request) {
         return MultipleChoiceQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .build();
     }
 
-    default List<ShortAnswerQuestionEntity> mapToShortAnswerQuestions(List<QuestionRequest> requests) {
+    protected List<ShortAnswerQuestionEntity> mapToShortAnswerQuestions(List<QuestionRequest> requests) {
         return requests.stream().filter(request -> SHORT_ANSWER.equals(request.getType()))
                 .map(this::mapToShortAnswerQuestion)
                 .collect(Collectors.toList());
     }
 
-    default ShortAnswerQuestionEntity mapToShortAnswerQuestion(QuestionRequest request) {
+    protected ShortAnswerQuestionEntity mapToShortAnswerQuestion(QuestionRequest request) {
         return ShortAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
                 .build();
     }
 
-    default List<SingleChoiceQuestionEntity> mapToSingleTypeQuestions(List<QuestionRequest> requests) {
+    protected List<SingleChoiceQuestionEntity> mapToSingleTypeQuestions(List<QuestionRequest> requests) {
         return requests.stream().filter(request -> SINGLE_CHOICE.equals(request.getType()))
                 .map(this::mapToSingleChoiceQuestion)
                 .collect(Collectors.toList());
     }
 
-    default SingleChoiceQuestionEntity mapToSingleChoiceQuestion(QuestionRequest request) {
+    protected SingleChoiceQuestionEntity mapToSingleChoiceQuestion(QuestionRequest request) {
         return SingleChoiceQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .build();
     }
 
-    default OptionEntity mapToOption(OptionRequest optionRequest) {
+    protected OptionEntity mapToOption(OptionRequest optionRequest) {
         return OptionEntity.builder()
                 .content(optionRequest.getContent())
                 .build();
