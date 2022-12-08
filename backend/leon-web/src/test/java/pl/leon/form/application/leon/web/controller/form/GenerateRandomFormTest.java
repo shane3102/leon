@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.web.controller;
+package pl.leon.form.application.leon.web.controller.form;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
@@ -49,7 +49,7 @@ import static pl.leon.form.application.leon.model.both.questions.type.QuestionTy
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class FormControllerIntegrationTest {
+class GenerateRandomFormTest {
 
     private static final String URL = "/api/form";
 
@@ -225,20 +225,20 @@ class FormControllerIntegrationTest {
     //TODO parametrize and enchance (and name xd)
     @ParameterizedTest
     @MethodSource("provideParametersForGeneratingRandomForms")
-    void given_when_then(int numberOfQuestionsToGeneratePerType,
-                         List<DropdownQuestionEntity> dropdownQuestions,
-                         int expectedUnusedDropdownQuestions,
-                         List<LineScaleQuestionEntity> lineScaleQuestions,
-                         int expectedUnusedLineScaleQuestions,
-                         List<MultipleChoiceQuestionEntity> multipleChoiceQuestions,
-                         int expectedUnusedMultipleChoiceQuestions,
-                         List<SingleChoiceQuestionEntity> singleChoiceQuestions,
-                         int expectedUnusedSingleChoiceQuestions,
-                         List<ShortAnswerQuestionEntity> shortAnswerQuestions,
-                         int expectedUnusedShortAnswerQuestions,
-                         List<LongAnswerQuestionEntity> longAnswerQuestions,
-                         int expectedUnusedLongAnswerQuestions,
-                         String expectedExceptionMessage) throws Exception {
+    void givenNumberOfQuestionsToGenerate_whenGenerateQuestions_thenQuestionCountEqualAndUnusedQuestionsCountEqualExpected(int numberOfQuestionsToGeneratePerType,
+                                                                                                                           List<DropdownQuestionEntity> dropdownQuestions,
+                                                                                                                           int expectedUnusedDropdownQuestions,
+                                                                                                                           List<LineScaleQuestionEntity> lineScaleQuestions,
+                                                                                                                           int expectedUnusedLineScaleQuestions,
+                                                                                                                           List<MultipleChoiceQuestionEntity> multipleChoiceQuestions,
+                                                                                                                           int expectedUnusedMultipleChoiceQuestions,
+                                                                                                                           List<SingleChoiceQuestionEntity> singleChoiceQuestions,
+                                                                                                                           int expectedUnusedSingleChoiceQuestions,
+                                                                                                                           List<ShortAnswerQuestionEntity> shortAnswerQuestions,
+                                                                                                                           int expectedUnusedShortAnswerQuestions,
+                                                                                                                           List<LongAnswerQuestionEntity> longAnswerQuestions,
+                                                                                                                           int expectedUnusedLongAnswerQuestions,
+                                                                                                                           String expectedExceptionMessage) throws Exception {
         // given
         dropdownQuestionRepository.saveAll(dropdownQuestions);
         lineScaleQuestionRepository.saveAll(lineScaleQuestions);
