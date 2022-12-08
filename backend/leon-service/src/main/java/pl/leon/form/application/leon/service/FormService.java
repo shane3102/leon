@@ -1,21 +1,35 @@
 package pl.leon.form.application.leon.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import pl.leon.form.application.leon.mapper.FormMapper;
+import pl.leon.form.application.leon.model.request.FormRequest;
+import pl.leon.form.application.leon.model.response.FormResponse;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
+import pl.leon.form.application.leon.repository.entities.UserEntity;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class FormService {
 
+    private final FormMapper mapper;
     private final FormRepository formRepository;
 
-    public FormEntity create(FormEntity entity) {
-        entity = formRepository.save(entity);
-        return entity;
+    public FormResponse create(FormRequest request) {
+        log.info("create({})", request);
+        FormEntity formEntity = mapper.mapToEntity(request);
+        // TODO w mapperze to przypisanie
+        formEntity.setUser((UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        formEntity = formRepository.save(formEntity);
+        FormResponse response = mapper.mapToResponse(formEntity);
+        log.info("create({}) = {}", request, response);
+        return response;
     }
 
     public FormEntity read(Long id) {
@@ -33,7 +47,7 @@ public class FormService {
         }
     }
 
-    public List<FormEntity> list(){
+    public List<FormEntity> list() {
         return formRepository.findAll();
     }
 }
