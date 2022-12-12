@@ -3,6 +3,7 @@ package pl.leon.form.application.leon.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.mapper.FormMapper;
 import pl.leon.form.application.leon.model.request.FormRequest;
@@ -21,11 +22,14 @@ public class FormService {
     private final FormMapper mapper;
     private final FormRepository formRepository;
 
+    private final UserService userService;
+
     public FormResponse create(FormRequest request) {
         log.info("create({})", request);
         FormEntity formEntity = mapper.mapToEntity(request);
         // TODO w mapperze to przypisanie
-        formEntity.setUser((UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+        formEntity.setUser((UserEntity) userService.loadUserByUsername(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()));
         formEntity = formRepository.save(formEntity);
         FormResponse response = mapper.mapToResponse(formEntity);
         log.info("create({}) = {}", request, response);

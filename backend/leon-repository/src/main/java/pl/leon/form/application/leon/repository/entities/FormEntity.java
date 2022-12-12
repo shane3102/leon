@@ -38,21 +38,21 @@ public class FormEntity {
 
     private String subject;
 
-    @OneToMany(mappedBy = "form", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<DropdownQuestionEntity> dropdownQuestions;
 
-    @OneToMany(mappedBy = "form", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<LineScaleQuestionEntity> lineScaleQuestions;
 
-    @OneToMany(mappedBy = "form", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<LongAnswerQuestionEntity> longAnswerQuestions;
 
-    @OneToMany(mappedBy = "form", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<MultipleChoiceQuestionEntity> multipleChoiceQuestions;
 
-    @OneToMany(mappedBy = "form", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<ShortAnswerQuestionEntity> shortAnswerQuestions;
 
-    @OneToMany(mappedBy = "form", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<SingleChoiceQuestionEntity> singleChoiceQuestions;
 }
