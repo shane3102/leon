@@ -11,6 +11,7 @@ import pl.leon.form.application.leon.model.request.questions.OptionRequest;
 import pl.leon.form.application.leon.model.request.questions.QuestionRequest;
 import pl.leon.form.application.leon.model.response.FormResponse;
 import pl.leon.form.application.leon.model.response.FormSnippetResponse;
+import pl.leon.form.application.leon.repository.UserRepository;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
@@ -19,6 +20,7 @@ import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQue
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
+import pl.leon.form.application.leon.service.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +37,9 @@ import static pl.leon.form.application.leon.model.both.questions.type.QuestionTy
 public abstract class FormMapper {
 
     @Autowired
+    protected UserService userService;
+
+    @Autowired
     protected QuestionMapperManager questionMapperManager;
 
     @Mappings({
@@ -44,7 +49,10 @@ public abstract class FormMapper {
             @Mapping(target = "multipleChoiceQuestions", source = "questions"),
             @Mapping(target = "shortAnswerQuestions", source = "questions"),
             @Mapping(target = "singleChoiceQuestions", source = "questions"),
-
+            @Mapping(target = "user", expression = "java(" +
+                    "(pl.leon.form.application.leon.repository.entities.UserEntity) " +
+                    "userService.loadUserByUsername(((org.springframework.security.core.userdetails.User) " +
+                    "org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()))")
     })
     public abstract FormEntity mapToEntity(FormRequest formRequest);
 

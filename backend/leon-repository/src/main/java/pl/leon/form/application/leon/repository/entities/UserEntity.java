@@ -36,7 +36,7 @@ public class UserEntity implements UserDetails {
     private String username;
     private String password;
     private String email;
-    //TODO na enum
+    // TODO na enum
     private boolean isEnabled;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;

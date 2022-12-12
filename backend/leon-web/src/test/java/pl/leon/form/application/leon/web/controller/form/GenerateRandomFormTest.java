@@ -222,7 +222,6 @@ class GenerateRandomFormTest {
         longAnswerQuestionRepository.deleteAll();
     }
 
-    //TODO parametrize and enchance (and name xd)
     @ParameterizedTest
     @MethodSource("provideParametersForGeneratingRandomForms")
     void givenNumberOfQuestionsToGenerate_whenGenerateQuestions_thenQuestionCountEqualAndUnusedQuestionsCountEqualExpected(int numberOfQuestionsToGeneratePerType,
