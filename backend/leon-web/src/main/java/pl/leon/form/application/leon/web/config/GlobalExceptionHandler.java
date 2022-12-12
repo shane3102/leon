@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.leon.form.application.leon.core.exceptions.ExceptionMessage;
 import pl.leon.form.application.leon.core.exceptions.bad_request.BadRequestException;
 import pl.leon.form.application.leon.core.exceptions.i_am_a_teapot.IAmATeapotException;
+import pl.leon.form.application.leon.core.exceptions.internal_server_error.InternalServerErrorException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -21,5 +22,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({IAmATeapotException.class})
     public final ExceptionMessage handleIAmATeapot(IAmATeapotException iAmATeapotException) {
         return new ExceptionMessage(iAmATeapotException.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({InternalServerErrorException.class})
+    public final ExceptionMessage handleNetworkAuthenticationRequired(InternalServerErrorException internalServerErrorException) {
+        return new ExceptionMessage(internalServerErrorException.getMessage());
     }
 }

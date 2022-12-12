@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import pl.leon.form.application.leon.core.exceptions.internal_server_error.concrete.ExceptionWhenFilterChainingAuthentication;
 import pl.leon.form.application.leon.service.UserService;
 
 @Configuration
@@ -46,8 +47,7 @@ public class JwtSecurityConfiguration {
                                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.I_AM_A_TEAPOT));
 
                     } catch (Exception e) {
-                        // TODO custom exception
-                        throw new RuntimeException();
+                        throw new ExceptionWhenFilterChainingAuthentication(e.getMessage());
                     }
                 })
                 .httpBasic(Customizer.withDefaults());

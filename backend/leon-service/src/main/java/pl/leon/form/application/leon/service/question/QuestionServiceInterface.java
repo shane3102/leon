@@ -22,7 +22,6 @@ public interface QuestionServiceInterface<T> {
         long allQuestions = getRepository().count();
 
         if (allQuestions < count) {
-            // TODO custom exception
             throw new TooManyQuestionsToGenerate();
         }
 

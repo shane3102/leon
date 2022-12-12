@@ -11,7 +11,10 @@ public enum ExceptionMessages {
     COULD_NOT_PARSE_LOGIN_REQUEST_ATTEMPT("Login request attempt was badly shaped"),
 
     // i am a teapot
-    OTHER_EXCEPTION_WHILE_EXTRACTING_TOKEN("Unexpected exception while extracting access token. Exception message: ");
+    OTHER_EXCEPTION_WHILE_EXTRACTING_TOKEN("Unexpected exception while extracting access token. Exception message: "),
+
+    // internal server error
+    EXCEPTION_WHEN_FILTER_CHAINING_AUTHENTICATION("There was an exception when filter chaining authentication. Exception message: ");
 
     private final String message;
 }
