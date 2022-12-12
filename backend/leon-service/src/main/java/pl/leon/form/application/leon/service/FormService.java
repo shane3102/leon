@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.mapper.FormMapper;
 import pl.leon.form.application.leon.model.request.FormRequest;
 import pl.leon.form.application.leon.model.response.FormResponse;
+import pl.leon.form.application.leon.model.response.FormSnippetResponse;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.UserEntity;
@@ -28,12 +29,15 @@ public class FormService {
         log.info("create({})", request);
         FormEntity formEntity = mapper.mapToEntity(request);
         // TODO w mapperze to przypisanie
-        System.out.println(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         formEntity.setUser((UserEntity) userService.loadUserByUsername(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()));
         formEntity = formRepository.save(formEntity);
         FormResponse response = mapper.mapToResponse(formEntity);
         log.info("create({}) = {}", request, response);
         return response;
+    }
+
+    public List<FormSnippetResponse> list() {
+        return mapper.mapToSnippetResponses(formRepository.findAll());
     }
 
     public FormEntity read(Long id) {
@@ -49,9 +53,5 @@ public class FormService {
         if (formRepository.existsById(id)) {
             formRepository.deleteById(id);
         }
-    }
-
-    public List<FormEntity> list() {
-        return formRepository.findAll();
     }
 }

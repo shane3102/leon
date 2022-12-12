@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.leon.form.application.leon.model.request.FormRequest;
 import pl.leon.form.application.leon.model.response.FormResponse;
+import pl.leon.form.application.leon.model.response.FormSnippetResponse;
 import pl.leon.form.application.leon.model.response.FormToCompleteResponse;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.service.FormService;
@@ -45,6 +46,14 @@ public class FormController {
         log.info("addNewForm({})", form);
         FormResponse response = formService.create(form);
         log.info("addNewForm({}) = {}", form, response);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> listConcreteForms() {
+        log.info("listConcreteForms()");
+        List<FormSnippetResponse> response = formService.list();
+        log.info("listConcreteForms() = {}", response == null ? null : response.size());
         return ResponseEntity.ok(response);
     }
 }

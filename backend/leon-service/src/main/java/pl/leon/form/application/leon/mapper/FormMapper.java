@@ -10,6 +10,7 @@ import pl.leon.form.application.leon.model.request.FormRequest;
 import pl.leon.form.application.leon.model.request.questions.OptionRequest;
 import pl.leon.form.application.leon.model.request.questions.QuestionRequest;
 import pl.leon.form.application.leon.model.response.FormResponse;
+import pl.leon.form.application.leon.model.response.FormSnippetResponse;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
@@ -58,6 +59,13 @@ public abstract class FormMapper {
                     "))")
     })
     public abstract FormResponse mapToResponse(FormEntity formEntity);
+
+    @Mappings({
+            @Mapping(target = "author", source = "user.username")
+    })
+    public abstract FormSnippetResponse mapToSnippetResponse(FormEntity formEntity);
+
+    public abstract List<FormSnippetResponse> mapToSnippetResponses(List<FormEntity> formEntities);
 
     protected List<DropdownQuestionEntity> mapToDropdownQuestions(List<QuestionRequest> requests) {
         return requests.stream().filter(request -> DROPDOWN.equals(request.getType()))
