@@ -1,6 +1,9 @@
 package pl.leon.form.application.leon.repository.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -22,6 +25,9 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "form")
 public class FormEntity {
     @Id
