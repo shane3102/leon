@@ -28,8 +28,6 @@ public class FormService {
     public FormResponse create(FormRequest request) {
         log.info("create({})", request);
         FormEntity formEntity = mapper.mapToEntity(request);
-        // TODO w mapperze to przypisanie
-//        formEntity.setUser((UserEntity) userService.loadUserByUsername(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()));
         formEntity = formRepository.save(formEntity);
         FormResponse response = mapper.mapToResponse(formEntity);
         log.info("create({}) = {}", request, response);
