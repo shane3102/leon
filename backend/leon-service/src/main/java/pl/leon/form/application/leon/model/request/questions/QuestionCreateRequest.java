@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionRequest {
+public class QuestionCreateRequest {
     private Long id;
     private String question;
     private List<OptionRequest> options;

@@ -1,22 +1,20 @@
 package pl.leon.form.application.leon.web.controller.form;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.params.provider.Arguments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import pl.leon.form.application.leon.model.request.FormRequest;
+import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
 import pl.leon.form.application.leon.model.request.questions.OptionRequest;
-import pl.leon.form.application.leon.model.request.questions.QuestionRequest;
+import pl.leon.form.application.leon.model.request.questions.QuestionCreateRequest;
 import pl.leon.form.application.leon.model.response.FormResponse;
 import pl.leon.form.application.leon.model.response.FormSnippetResponse;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
@@ -129,13 +127,13 @@ public class FormSimpleCrudTest {
         private final List<String> SHORT_ANSWER_QUESTION_CONTENTS = List.of(QUESTION_1_CONTENT_SHORT_ANSWER);
         private final List<String> SINGLE_CHOICE_QUESTION_CONTENTS = List.of(QUESTION_1_CONTENT_SINGLE_CHOICE, QUESTION_2_CONTENT_SINGLE_CHOICE);
 
-        private FormRequest formRequest;
+        private FormCreateRequest formCreateRequest;
 
         @BeforeAll
         void beforeAll() {
             userRepository.save(UserEntity.builder().username(USERNAME).build());
 
-            QuestionRequest dropDownQuestion1 = QuestionRequest.builder()
+            QuestionCreateRequest dropDownQuestion1 = QuestionCreateRequest.builder()
                     .question(QUESTION_1_CONTENT_DROPDOWN)
                     .type(DROPDOWN)
                     .options(List.of(
@@ -146,7 +144,7 @@ public class FormSimpleCrudTest {
                     ))
                     .build();
 
-            QuestionRequest dropDownQuestion2 = QuestionRequest.builder()
+            QuestionCreateRequest dropDownQuestion2 = QuestionCreateRequest.builder()
                     .question(QUESTION_2_CONTENT_DROPDOWN)
                     .type(DROPDOWN)
                     .options(List.of(
@@ -156,7 +154,7 @@ public class FormSimpleCrudTest {
                             OptionRequest.builder().content(ANSWER_4).build()
                     )).build();
 
-            QuestionRequest dropDownQuestion3 = QuestionRequest.builder()
+            QuestionCreateRequest dropDownQuestion3 = QuestionCreateRequest.builder()
                     .question(QUESTION_3_CONTENT_DROPDOWN)
                     .type(DROPDOWN)
                     .options(List.of(
@@ -166,7 +164,7 @@ public class FormSimpleCrudTest {
                             OptionRequest.builder().content(ANSWER_4).build()
                     )).build();
 
-            QuestionRequest lineScaleQuestion1 = QuestionRequest.builder()
+            QuestionCreateRequest lineScaleQuestion1 = QuestionCreateRequest.builder()
                     .question(QUESTION_1_CONTENT_LINE_SCALE)
                     .type(LINE_SCALE)
                     .options(List.of(
@@ -176,7 +174,7 @@ public class FormSimpleCrudTest {
                             OptionRequest.builder().content(ANSWER_4).build()
                     )).build();
 
-            QuestionRequest lineScaleQuestion2 = QuestionRequest.builder()
+            QuestionCreateRequest lineScaleQuestion2 = QuestionCreateRequest.builder()
                     .question(QUESTION_2_CONTENT_LINE_SCALE)
                     .type(LINE_SCALE)
                     .options(List.of(
@@ -186,27 +184,27 @@ public class FormSimpleCrudTest {
                             OptionRequest.builder().content(ANSWER_4).build()
                     )).build();
 
-            QuestionRequest longAnswerQuestion1 = QuestionRequest.builder()
+            QuestionCreateRequest longAnswerQuestion1 = QuestionCreateRequest.builder()
                     .question(QUESTION_1_CONTENT_LONG_ANSWER)
                     .type(LONG_ANSWER)
                     .build();
 
-            QuestionRequest longAnswerQuestion2 = QuestionRequest.builder()
+            QuestionCreateRequest longAnswerQuestion2 = QuestionCreateRequest.builder()
                     .question(QUESTION_2_CONTENT_LONG_ANSWER)
                     .type(LONG_ANSWER)
                     .build();
 
-            QuestionRequest longAnswerQuestion3 = QuestionRequest.builder()
+            QuestionCreateRequest longAnswerQuestion3 = QuestionCreateRequest.builder()
                     .question(QUESTION_3_CONTENT_LONG_ANSWER)
                     .type(LONG_ANSWER)
                     .build();
 
-            QuestionRequest longAnswerQuestion4 = QuestionRequest.builder()
+            QuestionCreateRequest longAnswerQuestion4 = QuestionCreateRequest.builder()
                     .question(QUESTION_4_CONTENT_LONG_ANSWER)
                     .type(LONG_ANSWER)
                     .build();
 
-            QuestionRequest multipleChoiceQuestion1 = QuestionRequest.builder()
+            QuestionCreateRequest multipleChoiceQuestion1 = QuestionCreateRequest.builder()
                     .question(QUESTION_1_CONTENT_MULTIPLE_CHOICE)
                     .type(MULTIPLE_CHOICE)
                     .options(List.of(
@@ -216,7 +214,7 @@ public class FormSimpleCrudTest {
                             OptionRequest.builder().content(ANSWER_4).build()
                     )).build();
 
-            QuestionRequest multipleChoiceQuestion2 = QuestionRequest.builder()
+            QuestionCreateRequest multipleChoiceQuestion2 = QuestionCreateRequest.builder()
                     .question(QUESTION_2_CONTENT_MULTIPLE_CHOICE)
                     .type(MULTIPLE_CHOICE)
                     .options(List.of(
@@ -226,12 +224,12 @@ public class FormSimpleCrudTest {
                             OptionRequest.builder().content(ANSWER_4).build()
                     )).build();
 
-            QuestionRequest shortAnswerQuestion1 = QuestionRequest.builder()
+            QuestionCreateRequest shortAnswerQuestion1 = QuestionCreateRequest.builder()
                     .question(QUESTION_1_CONTENT_SHORT_ANSWER)
                     .type(SHORT_ANSWER)
                     .build();
 
-            QuestionRequest singleChoiceQuestion1 = QuestionRequest.builder()
+            QuestionCreateRequest singleChoiceQuestion1 = QuestionCreateRequest.builder()
                     .question(QUESTION_1_CONTENT_SINGLE_CHOICE)
                     .type(SINGLE_CHOICE)
                     .options(List.of(
@@ -242,7 +240,7 @@ public class FormSimpleCrudTest {
                     ))
                     .build();
 
-            QuestionRequest singleChoiceQuestion2 = QuestionRequest.builder()
+            QuestionCreateRequest singleChoiceQuestion2 = QuestionCreateRequest.builder()
                     .question(QUESTION_2_CONTENT_SINGLE_CHOICE)
                     .type(SINGLE_CHOICE)
                     .options(List.of(
@@ -253,7 +251,7 @@ public class FormSimpleCrudTest {
                     ))
                     .build();
 
-            formRequest = FormRequest.builder()
+            formCreateRequest = FormCreateRequest.builder()
                     .dateTo(FORM_DATE_TO)
                     .disableQuestionsAfterDateTo(DISABLE_FORM_QUESTIONS_AFTER_DATE_TO)
                     .questions(List.of(
@@ -279,7 +277,7 @@ public class FormSimpleCrudTest {
         @WithMockUser
         void givenFormRequest_whenAddNewForm_thenResponseContentEqualAndEachQuestionInDatabase() throws Exception {
             // given
-            String requestBody = mapper.writeValueAsString(formRequest);
+            String requestBody = mapper.writeValueAsString(formCreateRequest);
 
             // when
             String jsonResponse = mockMvc.perform(post(URL + "/add")

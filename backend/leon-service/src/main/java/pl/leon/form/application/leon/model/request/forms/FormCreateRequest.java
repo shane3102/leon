@@ -1,10 +1,10 @@
-package pl.leon.form.application.leon.model.request;
+package pl.leon.form.application.leon.model.request.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.leon.form.application.leon.model.request.questions.QuestionRequest;
+import pl.leon.form.application.leon.model.request.questions.QuestionCreateRequest;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormRequest {
+public class FormCreateRequest {
     private Long id;
     private LocalDate dateTo;
     private boolean disableQuestionsAfterDateTo;
-    private List<QuestionRequest> questions;
+    private List<QuestionCreateRequest> questions;
 }
