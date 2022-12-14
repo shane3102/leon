@@ -28,7 +28,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "form")
+@Table(name = "FORM")
 public class FormEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

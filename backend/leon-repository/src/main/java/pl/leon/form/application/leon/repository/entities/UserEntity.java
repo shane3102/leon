@@ -44,6 +44,9 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     private List<FormEntity> addedForms;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
+    private List<FormCompletedEntity> formsCompletedByUser;
+
     // TODO zaimplementować metody poniżej (może coś się przyda)
 
     @Override
