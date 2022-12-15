@@ -3,9 +3,9 @@ package pl.leon.form.application.leon.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.leon.form.application.leon.model.response.FormToCompleteResponse;
+import pl.leon.form.application.leon.model.response.forms.FormToCompleteResponse;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
-import pl.leon.form.application.leon.service.question.QuestionServiceInterface;
+import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
 
 import java.util.Collection;
 import java.util.List;
