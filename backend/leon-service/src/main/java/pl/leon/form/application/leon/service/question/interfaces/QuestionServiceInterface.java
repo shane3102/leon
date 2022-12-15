@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.service.question;
+package pl.leon.form.application.leon.service.question.interfaces;
 
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.jpa.repository.JpaRepository;
