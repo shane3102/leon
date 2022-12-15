@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.leon.form.application.leon.core.exceptions.ExceptionMessages;
-import pl.leon.form.application.leon.model.response.FormToCompleteResponse;
+import pl.leon.form.application.leon.model.response.forms.FormToCompleteResponse;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;

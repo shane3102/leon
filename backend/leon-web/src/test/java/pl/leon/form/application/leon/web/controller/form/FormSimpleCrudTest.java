@@ -13,10 +13,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
-import pl.leon.form.application.leon.model.request.questions.OptionRequest;
+import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.request.questions.QuestionCreateRequest;
-import pl.leon.form.application.leon.model.response.FormResponse;
-import pl.leon.form.application.leon.model.response.FormSnippetResponse;
+import pl.leon.form.application.leon.model.response.forms.FormResponse;
+import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
@@ -137,10 +137,10 @@ public class FormSimpleCrudTest {
                     .question(QUESTION_1_CONTENT_DROPDOWN)
                     .type(DROPDOWN)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     ))
                     .build();
 
@@ -148,40 +148,40 @@ public class FormSimpleCrudTest {
                     .question(QUESTION_2_CONTENT_DROPDOWN)
                     .type(DROPDOWN)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     )).build();
 
             QuestionCreateRequest dropDownQuestion3 = QuestionCreateRequest.builder()
                     .question(QUESTION_3_CONTENT_DROPDOWN)
                     .type(DROPDOWN)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     )).build();
 
             QuestionCreateRequest lineScaleQuestion1 = QuestionCreateRequest.builder()
                     .question(QUESTION_1_CONTENT_LINE_SCALE)
                     .type(LINE_SCALE)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     )).build();
 
             QuestionCreateRequest lineScaleQuestion2 = QuestionCreateRequest.builder()
                     .question(QUESTION_2_CONTENT_LINE_SCALE)
                     .type(LINE_SCALE)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     )).build();
 
             QuestionCreateRequest longAnswerQuestion1 = QuestionCreateRequest.builder()
@@ -208,20 +208,20 @@ public class FormSimpleCrudTest {
                     .question(QUESTION_1_CONTENT_MULTIPLE_CHOICE)
                     .type(MULTIPLE_CHOICE)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     )).build();
 
             QuestionCreateRequest multipleChoiceQuestion2 = QuestionCreateRequest.builder()
                     .question(QUESTION_2_CONTENT_MULTIPLE_CHOICE)
                     .type(MULTIPLE_CHOICE)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     )).build();
 
             QuestionCreateRequest shortAnswerQuestion1 = QuestionCreateRequest.builder()
@@ -233,10 +233,10 @@ public class FormSimpleCrudTest {
                     .question(QUESTION_1_CONTENT_SINGLE_CHOICE)
                     .type(SINGLE_CHOICE)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     ))
                     .build();
 
@@ -244,10 +244,10 @@ public class FormSimpleCrudTest {
                     .question(QUESTION_2_CONTENT_SINGLE_CHOICE)
                     .type(SINGLE_CHOICE)
                     .options(List.of(
-                            OptionRequest.builder().content(ANSWER_1).build(),
-                            OptionRequest.builder().content(ANSWER_2).build(),
-                            OptionRequest.builder().content(ANSWER_3).build(),
-                            OptionRequest.builder().content(ANSWER_4).build()
+                            Option.builder().content(ANSWER_1).build(),
+                            Option.builder().content(ANSWER_2).build(),
+                            Option.builder().content(ANSWER_3).build(),
+                            Option.builder().content(ANSWER_4).build()
                     ))
                     .build();
 
