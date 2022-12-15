@@ -10,6 +10,7 @@ import pl.leon.form.application.leon.mapper.question.MultipleChoiceQuestionMappe
 import pl.leon.form.application.leon.mapper.question.QuestionMapper;
 import pl.leon.form.application.leon.mapper.question.ShortAnswerQuestionMapper;
 import pl.leon.form.application.leon.mapper.question.SingleChoiceQuestionMapper;
+import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
@@ -46,6 +47,13 @@ public class QuestionMapperManager {
         return response;
     }
 
+    public QuestionAnswering mapToAnswering(Map.Entry<Object, Object> questionAnsweringEntity) {
+        log.info("Entity type: {}", questionAnsweringEntity.getClass());
+        QuestionAnswering response = mappers.get(questionAnsweringEntity.getClass()).mapToAnswering(questionAnsweringEntity);
+        log.info("Response: {}", response);
+        return response;
+    }
+
     public List<QuestionResponse> mapToResponses(List... questionLists) {
         log.info("mapToResponses({})", questionLists == null ? null : questionLists.length);
 
@@ -58,6 +66,21 @@ public class QuestionMapperManager {
         }
 
         log.info("mapToResponses({}) = {}", questionLists == null ? null : questionLists.length, resultList);
+        return resultList;
+    }
+
+    public List<QuestionAnswering> mapToAnswering(Map... questionLists) {
+        log.info("mapToAnswering({})", questionLists == null ? null : questionLists.length);
+
+        List<QuestionAnswering> resultList = new ArrayList<>();
+
+        for (Map<Object,Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new Map[]{})) {
+            concreteQuestionList.entrySet().forEach(
+                    question -> resultList.add(mapToAnswering(question))
+            );
+        }
+
+        log.info("mapToAnswering({}) = {}", questionLists == null ? null : questionLists.length, resultList);
         return resultList;
     }
 
