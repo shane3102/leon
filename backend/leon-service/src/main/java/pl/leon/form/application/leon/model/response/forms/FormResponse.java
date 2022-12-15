@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.model.response;
+package pl.leon.form.application.leon.model.response.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

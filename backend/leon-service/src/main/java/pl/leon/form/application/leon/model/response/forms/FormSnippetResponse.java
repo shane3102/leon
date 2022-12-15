@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.model.request.questions;
+package pl.leon.form.application.leon.model.response.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OptionRequest {
+public class FormSnippetResponse {
     private Long id;
-    private String content;
+    private String subject;
+    private String author;
 }
