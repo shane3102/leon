@@ -12,6 +12,8 @@ import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQue
 import pl.leon.form.application.leon.service.question.interfaces.AddNewAnswerInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
 
+import java.util.ArrayList;
+
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -23,6 +25,11 @@ public class LongAnswerQuestionService implements QuestionServiceInterface<LongA
 
     @Override
     public void persistNewAnswer(LongAnswerQuestionEntity question, AnswerEntity answer) {
+
+        if (question.getAnswers() == null) {
+            question.setAnswers(new ArrayList<>());
+        }
+
         question.getAnswers().add(answer);
         repository.save(question);
     }

@@ -49,7 +49,7 @@ import static pl.leon.form.application.leon.model.both.questions.type.QuestionTy
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class GenerateRandomFormTest {
+class FormGenerateRandomTest {
 
     private static final String URL = "/api/form";
 

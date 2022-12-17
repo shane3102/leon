@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class FormToCompleteService {
-    List<QuestionServiceInterface> questionServices;
+    private final List<QuestionServiceInterface> questionServices;
 
     public FormToCompleteResponse generateFormToComplete(Short questionsToGeneratePerType) {
 

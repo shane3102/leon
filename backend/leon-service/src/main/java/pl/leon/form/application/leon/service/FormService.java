@@ -2,16 +2,13 @@ package pl.leon.form.application.leon.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.mapper.FormMapper;
-import pl.leon.form.application.leon.model.request.FormRequest;
-import pl.leon.form.application.leon.model.response.FormResponse;
-import pl.leon.form.application.leon.model.response.FormSnippetResponse;
+import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
+import pl.leon.form.application.leon.model.response.forms.FormResponse;
+import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
-import pl.leon.form.application.leon.repository.entities.UserEntity;
 
 import java.util.List;
 
@@ -23,14 +20,12 @@ public class FormService {
     private final FormMapper mapper;
     private final FormRepository formRepository;
 
-    private final UserService userService;
-
-    public FormResponse create(FormRequest request) {
-        log.info("create({})", request);
-        FormEntity formEntity = mapper.mapToEntity(request);
+    public FormResponse addNewForm(FormCreateRequest request) {
+        log.info("addNewForm({})", request);
+        FormEntity formEntity = mapper.mapCreateRequestToEntity(request);
         formEntity = formRepository.save(formEntity);
         FormResponse response = mapper.mapToResponse(formEntity);
-        log.info("create({}) = {}", request, response);
+        log.info("addNewForm({}) = {}", request, response);
         return response;
     }
 
