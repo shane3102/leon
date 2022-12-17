@@ -2,6 +2,8 @@ package pl.leon.form.application.leon.mapper.question.manager;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.mapper.question.DropdownQuestionMapper;
 import pl.leon.form.application.leon.mapper.question.LineScaleQuestionMapper;
@@ -20,6 +22,8 @@ import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQu
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,8 +52,9 @@ public class QuestionMapperManager {
     }
 
     public QuestionAnswering mapToAnswering(Map.Entry<Object, Object> questionAnsweringEntity) {
-        log.info("Entity type: {}", questionAnsweringEntity.getClass());
-        QuestionAnswering response = mappers.get(questionAnsweringEntity.getClass()).mapToAnswering(questionAnsweringEntity);
+        log.info("Entity type: {}", Hibernate.unproxy(questionAnsweringEntity.getKey()).getClass());
+        QuestionAnswering response = mappers.get(Hibernate.unproxy(questionAnsweringEntity.getKey()).getClass())
+                .mapToAnswering((Map.Entry) Hibernate.unproxy(questionAnsweringEntity));
         log.info("Response: {}", response);
         return response;
     }
@@ -74,7 +79,7 @@ public class QuestionMapperManager {
 
         List<QuestionAnswering> resultList = new ArrayList<>();
 
-        for (Map<Object,Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new Map[]{})) {
+        for (Map<Object, Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new Map[]{})) {
             concreteQuestionList.entrySet().forEach(
                     question -> resultList.add(mapToAnswering(question))
             );

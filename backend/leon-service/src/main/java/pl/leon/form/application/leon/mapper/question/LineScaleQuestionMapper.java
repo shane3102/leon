@@ -27,7 +27,7 @@ public abstract class LineScaleQuestionMapper implements QuestionMapper<LineScal
             @Mapping(target = "id", source = "key.id"),
             @Mapping(target = "chosenOption.id", source = "value.id"),
             @Mapping(target = "chosenOption.content", source = "value.content"),
-            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(lineScaleAnswer.getKey().getClass()))")
+            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(org.hibernate.Hibernate.unproxy(lineScaleAnswer.getKey()).getClass()))")
     })
     public abstract QuestionAnswering mapToAnsweringByOption(Map.Entry<LineScaleQuestionEntity, OptionEntity> lineScaleAnswer);
 

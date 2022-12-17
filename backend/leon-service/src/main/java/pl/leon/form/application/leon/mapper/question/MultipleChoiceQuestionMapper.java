@@ -27,7 +27,7 @@ public abstract class MultipleChoiceQuestionMapper implements QuestionMapper<Mul
             @Mapping(target = "id", source = "key.id"),
             @Mapping(target = "chosenOption.id", source = "value.id"),
             @Mapping(target = "chosenOption.content", source = "value.content"),
-            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(multipleChoiceAnswer.getKey().getClass()))")
+            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(org.hibernate.Hibernate.unproxy(multipleChoiceAnswer.getKey()).getClass()))")
     })
     public abstract QuestionAnswering mapToAnsweringByOption(Map.Entry<MultipleChoiceQuestionEntity, OptionEntity> multipleChoiceAnswer);
 
