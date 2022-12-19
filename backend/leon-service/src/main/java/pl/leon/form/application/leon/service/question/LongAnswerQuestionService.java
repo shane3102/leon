@@ -12,7 +12,10 @@ import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQue
 import pl.leon.form.application.leon.service.question.interfaces.AddNewAnswerInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -24,13 +27,19 @@ public class LongAnswerQuestionService implements QuestionServiceInterface<LongA
     private final LongAnswerQuestionRepository repository;
 
     @Override
-    public void persistNewAnswer(LongAnswerQuestionEntity question, AnswerEntity answer) {
+    public Map.Entry<Object, AnswerEntity> persistNewAnswer(LongAnswerQuestionEntity question, AnswerEntity answer) {
 
         if (question.getAnswers() == null) {
             question.setAnswers(new ArrayList<>());
         }
 
         question.getAnswers().add(answer);
-        repository.save(question);
+        LongAnswerQuestionEntity savedLongAnswer = repository.save(question);
+
+        AnswerEntity persistedAnswer = savedLongAnswer.getAnswers().stream()
+                .filter(answerPersisted -> Objects.equals(answer.getContent(), answerPersisted.getContent()))
+                .findFirst().orElseThrow(/*TODO custom exception*/);
+
+        return new AbstractMap.SimpleEntry<>(savedLongAnswer, persistedAnswer);
     }
 }
