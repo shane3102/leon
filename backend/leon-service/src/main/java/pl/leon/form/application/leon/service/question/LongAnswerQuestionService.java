@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.leon.form.application.leon.core.exceptions.i_am_a_teapot.concrete.NewlyAddedAnswerWasNotAttachedToQuestion;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
@@ -38,7 +39,7 @@ public class LongAnswerQuestionService implements QuestionServiceInterface<LongA
 
         AnswerEntity persistedAnswer = savedLongAnswer.getAnswers().stream()
                 .filter(answerPersisted -> Objects.equals(answer.getContent(), answerPersisted.getContent()))
-                .findFirst().orElseThrow(/*TODO custom exception*/);
+                .findFirst().orElseThrow(NewlyAddedAnswerWasNotAttachedToQuestion::new);
 
         return new AbstractMap.SimpleEntry<>(savedLongAnswer, persistedAnswer);
     }

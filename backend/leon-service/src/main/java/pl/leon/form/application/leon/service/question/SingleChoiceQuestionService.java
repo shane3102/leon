@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.ChosenOptionWasNotFoundInAvailableOptions;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
@@ -31,7 +32,7 @@ public class SingleChoiceQuestionService implements QuestionServiceInterface<Sin
                 .limit(1)
                 .peek(chosenOption -> chosenOption.setCount(chosenOption.getCount() + 1))
                 .findFirst()
-                .orElseThrow(/*TODO custom exception*/).getCount();
+                .orElseThrow(ChosenOptionWasNotFoundInAvailableOptions::new).getCount();
 
         repository.save(question);
         log.info("incrementOption({}, {}) -> before increment = {}, after increment = {}", question, option, beforeCount, resultCount);
