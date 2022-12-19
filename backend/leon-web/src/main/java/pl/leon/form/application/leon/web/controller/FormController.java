@@ -4,22 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.leon.form.application.leon.model.request.FormRequest;
-import pl.leon.form.application.leon.model.response.FormResponse;
-import pl.leon.form.application.leon.model.response.FormSnippetResponse;
-import pl.leon.form.application.leon.model.response.FormToCompleteResponse;
-import pl.leon.form.application.leon.repository.entities.FormEntity;
+import pl.leon.form.application.leon.model.both.FormCompleted;
+import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
+import pl.leon.form.application.leon.model.response.forms.FormResponse;
+import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
+import pl.leon.form.application.leon.model.response.forms.FormToCompleteResponse;
 import pl.leon.form.application.leon.service.FormService;
 import pl.leon.form.application.leon.service.FormToCompleteService;
+import pl.leon.form.application.leon.service.question.FormCompletedService;
 
 import java.util.List;
 
@@ -30,6 +28,7 @@ import java.util.List;
 public class FormController {
 
     private final FormService formService;
+    private final FormCompletedService formCompletedService;
     private final FormToCompleteService formToCompleteService;
 
     @GetMapping("/get-random-form")
@@ -42,9 +41,9 @@ public class FormController {
 
     @PostMapping("/add")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<?> addNewForm(@RequestBody FormRequest form) {
+    public ResponseEntity<?> addNewForm(@RequestBody FormCreateRequest form) {
         log.info("addNewForm({})", form);
-        FormResponse response = formService.create(form);
+        FormResponse response = formService.addNewForm(form);
         log.info("addNewForm({}) = {}", form, response);
         return ResponseEntity.ok(response);
     }
@@ -54,6 +53,14 @@ public class FormController {
         log.info("listConcreteForms()");
         List<FormSnippetResponse> response = formService.list();
         log.info("listConcreteForms() = {}", response == null ? null : response.size());
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/submit")
+    public ResponseEntity<?> submitForm(@RequestBody FormCompleted formCompleted) {
+        log.info("submitForm({})", formCompleted);
+        FormCompleted response = formCompletedService.submitCompletedForm(formCompleted);
+        log.info("submitForm({}) = {}", formCompleted, response);
         return ResponseEntity.ok(response);
     }
 }
