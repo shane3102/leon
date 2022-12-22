@@ -2,7 +2,9 @@ package pl.leon.form.application.leon.web.controller.form;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.both.FormCompleted;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
@@ -20,6 +23,7 @@ import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
+import pl.leon.form.application.leon.repository.OptionRepository;
 import pl.leon.form.application.leon.repository.ShortAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
@@ -86,6 +90,9 @@ public class FormSubmitCompletedTest {
     private SingleChoiceQuestionRepository singleChoiceQuestionRepository;
 
     @Autowired
+    private OptionRepository optionRepository;
+
+    @Autowired
     private ObjectMapper mapper;
 
     @Autowired
@@ -102,6 +109,7 @@ public class FormSubmitCompletedTest {
     private static final String ANSWER_CONTENT_3 = "Odpowiedz 3";
     private static final String ANSWER_CONTENT_4 = "Odpowiedz 4";
     private static final Long ANSWER_DEFAULT_COUNT = 1L;
+    private static final Long EXPECTED_ANSWER_COUNT = 2L;
 
     private static final String ANSWER_FOR_TEXT_QUESTION_1 = "Odpowiedz konkretna 1";
     private static final String ANSWER_FOR_TEXT_QUESTION_2 = "Odpowiedz konkretna 2";
@@ -152,13 +160,36 @@ public class FormSubmitCompletedTest {
 
     private static List<String> options = List.of(ANSWER_CONTENT_1, ANSWER_CONTENT_2, ANSWER_CONTENT_3, ANSWER_CONTENT_4);
 
-    private static FormEntity form1;
+    private static FormEntity form1 = new FormEntity();
     private static FormEntity form2;
     private static FormEntity form3;
 
     private static Stream<Arguments> questionProvider() {
         return Stream.of(
                 Arguments.of(
+                        form1,
+                        Map.of(
+                                dropdownQuestion1, 2,
+                                dropdownQuestion3, 1
+                        ),
+                        Map.of(
+                                lineScaleQuestion2, 0
+                        ),
+                        Map.of(
+                                multipleChoiceQuestion3, 3
+                        ),
+                        Map.of(singleChoiceQuestion1, 1),
+                        Map.of(
+                                shortAnswerQuestion1, ANSWER_FOR_TEXT_QUESTION_1,
+                                shortAnswerQuestion4, ANSWER_FOR_TEXT_QUESTION_3
+                        ),
+                        Map.of(
+                                longAnswerQuestion2, ANSWER_FOR_TEXT_QUESTION_2,
+                                longAnswerQuestion4, ANSWER_FOR_TEXT_QUESTION_4
+                        )
+                ),
+                Arguments.of(
+                        null,
                         Map.of(
                                 dropdownQuestion1, 0,
                                 dropdownQuestion2, 1
@@ -183,6 +214,7 @@ public class FormSubmitCompletedTest {
     }
 
     @BeforeAll
+    @Transactional
     void beforeAll() {
         dropdownQuestion1 = DropdownQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
         dropdownQuestion2 = DropdownQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
@@ -241,6 +273,25 @@ public class FormSubmitCompletedTest {
                 .longAnswerQuestions(new ArrayList<>(List.of(longAnswerQuestion2, longAnswerQuestion4))).build();
         form1 = formRepository.save(form1);
 
+        dropdownQuestion1.setForm(form1);
+        dropdownQuestionRepository.save(dropdownQuestion1);
+        dropdownQuestion3.setForm(form1);
+        dropdownQuestionRepository.save(dropdownQuestion3);
+        lineScaleQuestion2.setForm(form1);
+        lineScaleQuestionRepository.save(lineScaleQuestion2);
+        multipleChoiceQuestion3.setForm(form1);
+        multipleChoiceQuestionRepository.save(multipleChoiceQuestion3);
+        singleChoiceQuestion1.setForm(form1);
+        singleChoiceQuestionRepository.save(singleChoiceQuestion1);
+        shortAnswerQuestion1.setForm(form1);
+        shortAnswerQuestionRepository.save(shortAnswerQuestion1);
+        shortAnswerQuestion4.setForm(form1);
+        shortAnswerQuestionRepository.save(shortAnswerQuestion4);
+        longAnswerQuestion2.setForm(form1);
+        longAnswerQuestionRepository.save(longAnswerQuestion2);
+        longAnswerQuestion4.setForm(form1);
+        longAnswerQuestionRepository.save(longAnswerQuestion4);
+
         form2 = FormEntity.builder()
                 .dropdownQuestions(new ArrayList<>(List.of(dropdownQuestion4)))
                 .lineScaleQuestions(new ArrayList<>(List.of(lineScaleQuestion1, lineScaleQuestion3)))
@@ -275,9 +326,11 @@ public class FormSubmitCompletedTest {
         longAnswerQuestionRepository.deleteAll();
     }
 
+    @Transactional
     @ParameterizedTest
     @MethodSource("questionProvider")
     void givenCompletedForm_whenSubmit_thenConcreteFormSubmittedAndOptionsIncrementedAndAnswersAdded(
+            FormEntity submittedForm,
             Map<DropdownQuestionEntity, Integer> dropdownQuestionAndAnswerNumber,
             Map<LineScaleQuestionEntity, Integer> lineScaleQuestionAndAnswerNumber,
             Map<MultipleChoiceQuestionEntity, Integer> multipleChoiceQuestionAndAnswerNumber,
@@ -303,6 +356,7 @@ public class FormSubmitCompletedTest {
                 .flatMap(questionStream -> questionStream).collect(Collectors.toList());
 
         FormCompleted formCompleted = FormCompleted.builder()
+                .completedFormId(submittedForm == null ? null : submittedForm.getId())
                 .answers(answeredQuestion)
                 .build();
 
@@ -320,6 +374,11 @@ public class FormSubmitCompletedTest {
                 .getContentAsString();
 
         FormCompleted responseFormCompleted = mapper.readValue(responseJson, FormCompleted.class);
+
+        List<Long> dropdownChosenAnswerCount = dropdownQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> dropdownQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
+        List<Long> lineScaleChosenAnswerCount = lineScaleQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> lineScaleQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
+        List<Long> multipleChoiceChosenAnswerCount = multipleChoiceQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> multipleChoiceQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
+        List<Long> singleChoiceChosenAnswerCount = singleChoiceQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> singleChoiceQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
 
         // then
         assertAll(
@@ -385,7 +444,11 @@ public class FormSubmitCompletedTest {
 
                             return foundShortAnswerCorrespondingEntity.isPresent() &&
                                     foundShortAnswerCorrespondingEntity.get().getValue().equals(longAnswer.getAnswer());
-                        }))
+                        })),
+                () -> assertTrue(dropdownChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
+                () -> assertTrue(lineScaleChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
+                () -> assertTrue(multipleChoiceChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
+                () -> assertTrue(singleChoiceChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count)))
         );
     }
 }
