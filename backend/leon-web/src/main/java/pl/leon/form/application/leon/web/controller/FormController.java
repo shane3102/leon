@@ -17,7 +17,7 @@ import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
 import pl.leon.form.application.leon.model.response.forms.FormToCompleteResponse;
 import pl.leon.form.application.leon.service.FormService;
 import pl.leon.form.application.leon.service.FormToCompleteService;
-import pl.leon.form.application.leon.service.question.FormCompletedService;
+import pl.leon.form.application.leon.service.FormCompletedService;
 
 import java.util.List;
 
