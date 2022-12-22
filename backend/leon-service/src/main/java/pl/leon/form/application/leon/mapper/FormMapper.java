@@ -18,6 +18,7 @@ import pl.leon.form.application.leon.model.request.questions.QuestionCreateReque
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
 import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
+import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
@@ -59,6 +60,9 @@ public abstract class FormMapper {
     protected UserService userService;
 
     @Autowired
+    protected FormRepository formRepository;
+
+    @Autowired
     protected DropdownQuestionRepository dropdownQuestionRepository;
     @Autowired
     protected LineScaleQuestionRepository lineScaleQuestionRepository;
@@ -91,6 +95,7 @@ public abstract class FormMapper {
     public abstract FormEntity mapCreateRequestToEntity(FormCreateRequest formCreateRequest);
 
     @Mappings({
+            @Mapping(target = "completedForm", source = "completedFormId"),
             @Mapping(target = "answeredDropdownQuestions", source = "answers"),
             @Mapping(target = "answeredLineScaleQuestions", source = "answers"),
             @Mapping(target = "answeredLongAnswerQuestions", source = "answers"),
@@ -106,10 +111,10 @@ public abstract class FormMapper {
 
         formCompletedEntity.user(
                 SecurityContextHolder.getContext().getAuthentication() == null || SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")
-                ?
-                null
-                :
-                (UserEntity) userService.loadUserByUsername(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()));
+                        ?
+                        null
+                        :
+                        (UserEntity) userService.loadUserByUsername(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()));
     }
 
     @Mappings({
@@ -142,6 +147,10 @@ public abstract class FormMapper {
     public abstract FormSnippetResponse mapToSnippetResponse(FormEntity formEntity);
 
     public abstract List<FormSnippetResponse> mapToSnippetResponses(List<FormEntity> formEntities);
+
+    protected FormEntity mapIdToForm(Long formId) {
+        return formId == null ? null : formRepository.getById(formId);
+    }
 
     protected List<DropdownQuestionEntity> mapToDropdownQuestions(List<QuestionCreateRequest> requests) {
         return requests.stream().filter(request -> DROPDOWN.equals(request.getType()))
