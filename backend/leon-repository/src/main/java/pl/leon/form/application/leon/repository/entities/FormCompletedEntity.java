@@ -10,6 +10,7 @@ import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQue
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
+import pl.leon.form.application.leon.repository.validation.form_completed.FormCompletedValidation;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,6 +31,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FormCompletedValidation
 @Table(name = "COMPLETED_FORM")
 public class FormCompletedEntity {
     @Id
