@@ -27,15 +27,12 @@ public class FormCompletedConstraintValidator implements ConstraintValidator<For
             return true;
         }
 
-        FormEntity formInDatabase = formRepository.getById(formCompletedEntity.getCompletedForm().getId());
-
-        boolean result = true;
-//                doCompletedFormHasSameDropdownQuestionsAsFormInDatabase(formInDatabase, formCompletedEntity, context) &&
-//                        doCompletedFormHasSameLineScaleQuestionsAsFormInDatabase(formInDatabase, formCompletedEntity, context) &&
-//                        doCompletedFormHasSameLongAnswerQuestionsAsFormInDatabase(formInDatabase, formCompletedEntity, context) &&
-//                        doCompletedFormHasSameMultipleChoiceQuestionsAsFormInDatabase(formInDatabase, formCompletedEntity, context) &&
-//                        doCompletedFormHasSameShortAnswerQuestionsAsFormInDatabase(formInDatabase, formCompletedEntity, context) &&
-//                        doCompletedFormHasSameSingleChoiceQuestionsAsFormInDatabase(formInDatabase, formCompletedEntity, context);
+        boolean result = doCompletedFormHasSameDropdownQuestionsAsFormInDatabase(formCompletedEntity.getCompletedForm(), formCompletedEntity, context) &&
+                doCompletedFormHasSameLineScaleQuestionsAsFormInDatabase(formCompletedEntity.getCompletedForm(), formCompletedEntity, context) &&
+                doCompletedFormHasSameLongAnswerQuestionsAsFormInDatabase(formCompletedEntity.getCompletedForm(), formCompletedEntity, context) &&
+                doCompletedFormHasSameMultipleChoiceQuestionsAsFormInDatabase(formCompletedEntity.getCompletedForm(), formCompletedEntity, context) &&
+                doCompletedFormHasSameShortAnswerQuestionsAsFormInDatabase(formCompletedEntity.getCompletedForm(), formCompletedEntity, context) &&
+                doCompletedFormHasSameSingleChoiceQuestionsAsFormInDatabase(formCompletedEntity.getCompletedForm(), formCompletedEntity, context);
 
         return result;
 
