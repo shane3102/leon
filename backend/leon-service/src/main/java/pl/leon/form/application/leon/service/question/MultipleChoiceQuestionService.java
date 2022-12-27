@@ -8,33 +8,44 @@ import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.ChosenOptionWasNotFoundInAvailableOptions;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
+import pl.leon.form.application.leon.repository.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
 import pl.leon.form.application.leon.service.question.interfaces.IncrementCountForOptionInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Service
 @AllArgsConstructor
-public class MultipleChoiceQuestionService implements QuestionServiceInterface<MultipleChoiceQuestionEntity>, IncrementCountForOptionInterface<MultipleChoiceQuestionEntity> {
+public class MultipleChoiceQuestionService implements QuestionServiceInterface<MultipleChoiceQuestionEntity> {
     @Getter(AccessLevel.PUBLIC)
     private final QuestionMapperManager questionMapperManager;
     @Getter(AccessLevel.PUBLIC)
     private final MultipleChoiceQuestionRepository repository;
 
-    @Override
-    public void incrementOption(MultipleChoiceQuestionEntity question, OptionEntity option) {
-        log.info("incrementOption({}, {})", question, option);
+    public void incrementEachOption(MultipleChoiceQuestionEntity question, OptionsEntity options) {
+        log.info("incrementEachOption()");
 
-        Long beforeCount = option.getCount();
+        List<Long> beforeCountList = new ArrayList<>();
+        List<Long> resultCountList = new ArrayList<>();
 
-        Long resultCount = question.getOptions().stream().filter(checkedOption -> checkedOption.equals(option))
-                .limit(1)
-                .peek(chosenOption -> chosenOption.setCount(chosenOption.getCount() + 1))
-                .findFirst()
-                .orElseThrow(ChosenOptionWasNotFoundInAvailableOptions::new).getCount();
+        options.getChosenOptions().forEach(option -> {
+            Long beforeCount = option.getCount();
 
-        repository.save(question);
-        log.info("incrementOption({}, {}) -> before increment = {}, after increment = {}", question, option, beforeCount, resultCount);
+            Long resultCount = question.getOptions().stream().filter(checkedOption -> checkedOption.equals(option))
+                    .limit(1)
+                    .peek(chosenOption -> chosenOption.setCount(chosenOption.getCount() + 1))
+                    .findFirst()
+                    .orElseThrow(ChosenOptionWasNotFoundInAvailableOptions::new).getCount();
+
+            repository.save(question);
+
+            beforeCountList.add(beforeCount);
+            resultCountList.add(resultCount);
+        });
+        log.info("incrementEachOption() -> before increment list = {}, after increment list = {}", beforeCountList, resultCountList);
     }
 }

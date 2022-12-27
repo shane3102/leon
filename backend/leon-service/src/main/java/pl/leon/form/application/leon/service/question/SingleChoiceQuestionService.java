@@ -24,7 +24,7 @@ public class SingleChoiceQuestionService implements QuestionServiceInterface<Sin
 
     @Override
     public void incrementOption(SingleChoiceQuestionEntity question, OptionEntity option) {
-        log.info("incrementOption({}, {})", question, option);
+        log.info("incrementOption()");
 
         Long beforeCount = option.getCount();
 
@@ -35,6 +35,6 @@ public class SingleChoiceQuestionService implements QuestionServiceInterface<Sin
                 .orElseThrow(ChosenOptionWasNotFoundInAvailableOptions::new).getCount();
 
         repository.save(question);
-        log.info("incrementOption({}, {}) -> before increment = {}, after increment = {}", question, option, beforeCount, resultCount);
+        log.info("incrementOption() -> before increment = {}, after increment = {}", beforeCount, resultCount);
     }
 }

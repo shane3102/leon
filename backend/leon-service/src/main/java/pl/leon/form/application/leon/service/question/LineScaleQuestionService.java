@@ -24,7 +24,7 @@ public class LineScaleQuestionService implements QuestionServiceInterface<LineSc
 
     @Override
     public void incrementOption(LineScaleQuestionEntity question, OptionEntity option) {
-        log.info("incrementOption({}, {})", question, option);
+        log.info("incrementOption()");
 
         Long beforeCount = option.getCount();
 
@@ -35,6 +35,6 @@ public class LineScaleQuestionService implements QuestionServiceInterface<LineSc
                 .orElseThrow(ChosenOptionWasNotFoundInAvailableOptions::new).getCount();
 
         repository.save(question);
-        log.info("incrementOption({}, {}) -> before increment = {}, after increment = {}", question, option, beforeCount, resultCount);
+        log.info("incrementOption() -> before increment = {}, after increment = {}", beforeCount, resultCount);
     }
 }
