@@ -25,8 +25,7 @@ public abstract class SingleChoiceQuestionMapper implements QuestionMapper<Singl
     @Override
     @Mappings({
             @Mapping(target = "id", source = "key.id"),
-            @Mapping(target = "chosenOption.id", source = "value.id"),
-            @Mapping(target = "chosenOption.content", source = "value.content"),
+            @Mapping(target = "chosenOptions", source = "value"),
             @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(org.hibernate.Hibernate.unproxy(singleChoiceAnswer.getKey()).getClass()))")
     })
     public abstract QuestionAnswering mapToAnsweringByOption(Map.Entry<SingleChoiceQuestionEntity, OptionEntity> singleChoiceAnswer);

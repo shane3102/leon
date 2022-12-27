@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.stereotype.Component;
+import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
@@ -13,7 +14,9 @@ import pl.leon.form.application.leon.repository.entities.questions.LineScaleQues
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
 import java.util.AbstractMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 @Mapper(componentModel = "spring")
@@ -25,8 +28,7 @@ public abstract class LineScaleQuestionMapper implements QuestionMapper<LineScal
     @Override
     @Mappings({
             @Mapping(target = "id", source = "key.id"),
-            @Mapping(target = "chosenOption.id", source = "value.id"),
-            @Mapping(target = "chosenOption.content", source = "value.content"),
+            @Mapping(target = "chosenOptions", source = "value"),
             @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(org.hibernate.Hibernate.unproxy(lineScaleAnswer.getKey()).getClass()))")
     })
     public abstract QuestionAnswering mapToAnsweringByOption(Map.Entry<LineScaleQuestionEntity, OptionEntity> lineScaleAnswer);
@@ -35,7 +37,7 @@ public abstract class LineScaleQuestionMapper implements QuestionMapper<LineScal
     public abstract QuestionAnswering mapToAnsweringByAnswer(Map.Entry<LineScaleQuestionEntity, AnswerEntity> lineScaleAnswer);
 
     @Override
-    public QuestionAnswering mapToAnswering(Map.Entry<LineScaleQuestionEntity, Object> singleChoiceAnswer){
+    public QuestionAnswering mapToAnswering(Map.Entry<LineScaleQuestionEntity, Object> singleChoiceAnswer) {
         return mapToAnsweringByOption(new AbstractMap.SimpleEntry<>(singleChoiceAnswer.getKey(), (OptionEntity) singleChoiceAnswer.getValue()));
     }
 }
