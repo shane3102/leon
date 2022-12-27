@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.leon.form.application.leon.repository.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -69,9 +70,9 @@ public class FormCompletedEntity {
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "multiple_choice_option_mapping",
             joinColumns = {@JoinColumn(name = "completed_form_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "option_id", referencedColumnName = "id")})
+            inverseJoinColumns = {@JoinColumn(name = "options_id", referencedColumnName = "id")})
     @MapKeyJoinColumn(name = "multiple_choice_id")
-    private Map<MultipleChoiceQuestionEntity, OptionEntity> answeredMultipleChoiceQuestions;
+    private Map<MultipleChoiceQuestionEntity, OptionsEntity> answeredMultipleChoiceQuestions;
 
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "short_answer_option_mapping",
