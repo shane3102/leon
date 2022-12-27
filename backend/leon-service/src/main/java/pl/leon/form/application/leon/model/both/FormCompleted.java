@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.leon.form.application.leon.core.enums.FormLevelType;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 
 import java.util.List;
@@ -15,4 +16,6 @@ import java.util.List;
 public class FormCompleted {
     private Long completedFormId;
     private List<QuestionAnswering> answers;
+    private FormLevelType uxLevel;
+    private FormLevelType uiLevel;
 }

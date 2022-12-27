@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.leon.form.application.leon.core.enums.FormLevelType;
 import pl.leon.form.application.leon.repository.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
@@ -15,6 +16,8 @@ import pl.leon.form.application.leon.repository.validation.form_completed.FormCo
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,6 +44,12 @@ public class FormCompletedEntity {
 
     @OneToOne(cascade = CascadeType.MERGE)
     private FormEntity completedForm;
+
+    @Enumerated(EnumType.STRING)
+    private FormLevelType uxLevel;
+
+    @Enumerated(EnumType.STRING)
+    private FormLevelType uiLevel;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
