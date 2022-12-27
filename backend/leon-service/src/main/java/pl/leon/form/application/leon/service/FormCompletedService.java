@@ -50,7 +50,7 @@ public class FormCompletedService {
         formCompletedEntity.getAnsweredDropdownQuestions().forEach(dropdownQuestionService::incrementOption);
         formCompletedEntity.getAnsweredLineScaleQuestions().forEach(lineScaleQuestionService::incrementOption);
         formCompletedEntity.getAnsweredSingleChoiceQuestions().forEach(singleChoiceQuestionService::incrementOption);
-        formCompletedEntity.getAnsweredMultipleChoiceQuestions().forEach(multipleChoiceQuestionService::incrementOption);
+        formCompletedEntity.getAnsweredMultipleChoiceQuestions().forEach(multipleChoiceQuestionService::incrementEachOption);
 
         Map<LongAnswerQuestionEntity, AnswerEntity> persistedLongQuestionAnswerMap = formCompletedEntity.getAnsweredLongAnswerQuestions()
                 .entrySet()

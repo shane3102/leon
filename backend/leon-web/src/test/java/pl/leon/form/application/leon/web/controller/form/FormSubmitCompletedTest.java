@@ -2,9 +2,7 @@ package pl.leon.form.application.leon.web.controller.form;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,6 +22,7 @@ import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.OptionRepository;
+import pl.leon.form.application.leon.repository.OptionsEntity;
 import pl.leon.form.application.leon.repository.ShortAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
@@ -341,7 +340,7 @@ public class FormSubmitCompletedTest {
         // given
         Stream<QuestionAnswering> dropdownQuestionAnsweringStream = dropdownQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), map.getKey().getOptions().get(map.getValue()))));
         Stream<QuestionAnswering> lineScaleQuestionAnsweringStream = lineScaleQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), map.getKey().getOptions().get(map.getValue()))));
-        Stream<QuestionAnswering> multipleChoiceQuestionAnsweringStream = multipleChoiceQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), map.getKey().getOptions().get(map.getValue()))));
+        Stream<QuestionAnswering> multipleChoiceQuestionAnsweringStream = multipleChoiceQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), OptionsEntity.builder().chosenOptions(new ArrayList<>(List.of(map.getKey().getOptions().get(map.getValue())))).build())));
         Stream<QuestionAnswering> singleChoiceQuestionAnsweringStream = singleChoiceQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), map.getKey().getOptions().get(map.getValue()))));
         Stream<QuestionAnswering> shortAnswerQuestionAnsweringStream = shortAnswerQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), AnswerEntity.builder().content(map.getValue()).build())));
         Stream<QuestionAnswering> longAnswerQuestionAnsweringStream = longAnswerQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), AnswerEntity.builder().content(map.getValue()).build())));
@@ -391,7 +390,7 @@ public class FormSubmitCompletedTest {
                                     .filter(dropdownEntity -> Objects.equals(dropdownEntity.getKey().getId(), dropdownAnswer.getId()))
                                     .findFirst();
                             return foundDropdownCorrespondingEntity.isPresent() &&
-                                    options.get(foundDropdownCorrespondingEntity.get().getValue()).equals(dropdownAnswer.getChosenOption().getContent());
+                                    options.get(foundDropdownCorrespondingEntity.get().getValue()).equals(dropdownAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> LINE_SCALE.equals(answer.getType()))
@@ -401,7 +400,7 @@ public class FormSubmitCompletedTest {
                                     .filter(dropdownEntity -> Objects.equals(dropdownEntity.getKey().getId(), lineScaleAnswer.getId()))
                                     .findFirst();
                             return foundLineScaleCorrespondingEntity.isPresent() &&
-                                    options.get(foundLineScaleCorrespondingEntity.get().getValue()).equals(lineScaleAnswer.getChosenOption().getContent());
+                                    options.get(foundLineScaleCorrespondingEntity.get().getValue()).equals(lineScaleAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> MULTIPLE_CHOICE.equals(answer.getType()))
@@ -411,7 +410,7 @@ public class FormSubmitCompletedTest {
                                     .filter(multipleChoiceEntity -> Objects.equals(multipleChoiceEntity.getKey().getId(), multipleChoiceAnswer.getId()))
                                     .findFirst();
                             return foundMultipleChoiceCorrespondingEntity.isPresent() &&
-                                    options.get(foundMultipleChoiceCorrespondingEntity.get().getValue()).equals(multipleChoiceAnswer.getChosenOption().getContent());
+                                    options.get(foundMultipleChoiceCorrespondingEntity.get().getValue()).equals(multipleChoiceAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> SINGLE_CHOICE.equals(answer.getType()))
@@ -421,7 +420,7 @@ public class FormSubmitCompletedTest {
                                     .filter(singleChoiceEntity -> Objects.equals(singleChoiceEntity.getKey().getId(), singleChoiceAnswer.getId()))
                                     .findFirst();
                             return foundSingleChoiceCorrespondingEntity.isPresent() &&
-                                    options.get(foundSingleChoiceCorrespondingEntity.get().getValue()).equals(singleChoiceAnswer.getChosenOption().getContent());
+                                    options.get(foundSingleChoiceCorrespondingEntity.get().getValue()).equals(singleChoiceAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> SHORT_ANSWER.equals(answer.getType()))
