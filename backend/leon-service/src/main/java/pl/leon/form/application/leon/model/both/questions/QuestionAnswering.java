@@ -7,13 +7,15 @@ import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
 
+import java.util.Set;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuestionAnswering {
     private Long id;
-    private Option chosenOption;
+    private Set<Option> chosenOptions;
     private String answer;
     private QuestionType type;
 }
