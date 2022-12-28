@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@SuppressWarnings("unchecked")
 public interface QuestionServiceInterface<T> {
 
     JpaRepository<T, Long> getRepository();
