@@ -14,6 +14,7 @@ public enum ExceptionMessages {
     // i am a teapot
     OTHER_EXCEPTION_WHILE_EXTRACTING_TOKEN("Unexpected exception while extracting access token. Exception message: "),
     NEWLY_ADDED_ANSWER_WAS_NOT_ATTACHED_TO_QUESTION("Newly added answer was not attached to question"),
+    THERE_IS_NO_QUESTION_SERVICE("While obtaining there is no question service found. Probably critical error"),
 
     // internal server error
     EXCEPTION_WHEN_FILTER_CHAINING_AUTHENTICATION("There was an exception when filter chaining authentication. Exception message: ");
