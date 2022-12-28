@@ -117,7 +117,7 @@ class FormGenerateRandomTest {
 
     private static Stream<Arguments> provideParametersForGeneratingRandomForms() {
         return Stream.of(
-                // number of questions to generate per type;
+                // number of questions to generate;
                 // a pair of entities to save and number of entities unused:
                 // dropdown,
                 // line scale,
@@ -127,7 +127,7 @@ class FormGenerateRandomTest {
                 // long answer;
                 // expected exception message
                 Arguments.of(
-                        2,
+                        11,
                         List.of(dropdownQuestion1, dropdownQuestion2, dropdownQuestion3),
                         1,
                         List.of(lineScaleQuestion1, lineScaleQuestion2, lineScaleQuestion3, lineScaleQuestion4),
@@ -135,7 +135,7 @@ class FormGenerateRandomTest {
                         List.of(multipleChoiceQuestion1, multipleChoiceQuestion2, multipleChoiceQuestion3, multipleChoiceQuestion4),
                         2,
                         List.of(singleChoiceQuestion3, singleChoiceQuestion4),
-                        0,
+                        1,
                         List.of(shortAnswerQuestion1, shortAnswerQuestion2, shortAnswerQuestion3, shortAnswerQuestion4),
                         2,
                         List.of(longAnswerQuestion2, longAnswerQuestion3, longAnswerQuestion4),
@@ -143,23 +143,39 @@ class FormGenerateRandomTest {
                         null
                 ),
                 Arguments.of(
-                        4,
+                        12,
                         List.of(dropdownQuestion1, dropdownQuestion2, dropdownQuestion3, dropdownQuestion4),
-                        0,
+                        2,
                         List.of(lineScaleQuestion1, lineScaleQuestion2, lineScaleQuestion3, lineScaleQuestion4),
-                        0,
+                        2,
                         List.of(multipleChoiceQuestion1, multipleChoiceQuestion2, multipleChoiceQuestion3, multipleChoiceQuestion4),
-                        0,
+                        2,
                         List.of(singleChoiceQuestion1, singleChoiceQuestion2, singleChoiceQuestion3, singleChoiceQuestion4),
-                        0,
+                        2,
                         List.of(shortAnswerQuestion1, shortAnswerQuestion2, shortAnswerQuestion3, shortAnswerQuestion4),
-                        0,
+                        2,
                         List.of(longAnswerQuestion1, longAnswerQuestion2, longAnswerQuestion3, longAnswerQuestion4),
-                        0,
+                        2,
                         null
                 ),
                 Arguments.of(
-                        5,
+                        6,
+                        List.of(dropdownQuestion1, dropdownQuestion2, dropdownQuestion3, dropdownQuestion4),
+                        3,
+                        List.of(lineScaleQuestion1, lineScaleQuestion2, lineScaleQuestion3, lineScaleQuestion4),
+                        3,
+                        List.of(multipleChoiceQuestion1, multipleChoiceQuestion2, multipleChoiceQuestion3, multipleChoiceQuestion4),
+                        3,
+                        List.of(singleChoiceQuestion1, singleChoiceQuestion2, singleChoiceQuestion3, singleChoiceQuestion4),
+                        3,
+                        List.of(shortAnswerQuestion1, shortAnswerQuestion2, shortAnswerQuestion3, shortAnswerQuestion4),
+                        3,
+                        List.of(longAnswerQuestion1, longAnswerQuestion2, longAnswerQuestion3, longAnswerQuestion4),
+                        3,
+                        null
+                ),
+                Arguments.of(
+                        25,
                         List.of(dropdownQuestion1, dropdownQuestion2, dropdownQuestion3, dropdownQuestion4),
                         0,
                         List.of(lineScaleQuestion1, lineScaleQuestion2, lineScaleQuestion3, lineScaleQuestion4),
@@ -224,7 +240,7 @@ class FormGenerateRandomTest {
 
     @ParameterizedTest
     @MethodSource("provideParametersForGeneratingRandomForms")
-    void givenNumberOfQuestionsToGenerate_whenGenerateQuestions_thenQuestionCountEqualAndUnusedQuestionsCountEqualExpected(int numberOfQuestionsToGeneratePerType,
+    void givenNumberOfQuestionsToGenerate_whenGenerateQuestions_thenQuestionCountEqualAndUnusedQuestionsCountEqualExpected(int numberOfQuestionsToGenerate,
                                                                                                                            List<DropdownQuestionEntity> dropdownQuestions,
                                                                                                                            int expectedUnusedDropdownQuestions,
                                                                                                                            List<LineScaleQuestionEntity> lineScaleQuestions,
@@ -248,7 +264,7 @@ class FormGenerateRandomTest {
 
         // when + then
         if (expectedExceptionMessage == null) {
-            String responseJson = mockMvc.perform(get(URL + "/get-random-form").param("question-count", Integer.toString(numberOfQuestionsToGeneratePerType)))
+            String responseJson = mockMvc.perform(get(URL + "/get-random-form").param("question-count", Integer.toString(numberOfQuestionsToGenerate)))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andReturn()
@@ -261,13 +277,7 @@ class FormGenerateRandomTest {
             assertAll(
                     () -> assertNotNull(formToCompleteResponse, "Response is null"),
                     () -> assertNotNull(formToCompleteResponse.getQuestions(), "Questions are null"),
-                    () -> assertEquals(QUESTION_TYPE_COUNT * numberOfQuestionsToGeneratePerType, formToCompleteResponse.getQuestions().size(), "Question count not equal expected"),
-                    () -> assertEquals(numberOfQuestionsToGeneratePerType, formToCompleteResponse.getQuestions().stream().filter(q -> DROPDOWN.equals(q.getType())).count(), "Question count not equal expected"),
-                    () -> assertEquals(numberOfQuestionsToGeneratePerType, formToCompleteResponse.getQuestions().stream().filter(q -> LINE_SCALE.equals(q.getType())).count(), "Question count not equal expected"),
-                    () -> assertEquals(numberOfQuestionsToGeneratePerType, formToCompleteResponse.getQuestions().stream().filter(q -> MULTIPLE_CHOICE.equals(q.getType())).count(), "Question count not equal expected"),
-                    () -> assertEquals(numberOfQuestionsToGeneratePerType, formToCompleteResponse.getQuestions().stream().filter(q -> SINGLE_CHOICE.equals(q.getType())).count(), "Question count not equal expected"),
-                    () -> assertEquals(numberOfQuestionsToGeneratePerType, formToCompleteResponse.getQuestions().stream().filter(q -> SHORT_ANSWER.equals(q.getType())).count(), "Question count not equal expected"),
-                    () -> assertEquals(numberOfQuestionsToGeneratePerType, formToCompleteResponse.getQuestions().stream().filter(q -> LONG_ANSWER.equals(q.getType())).count(), "Question count not equal expected")
+                    () -> assertEquals(numberOfQuestionsToGenerate, formToCompleteResponse.getQuestions().size(), "Question count not equal expected")
             );
 
             long unusedDropdownQuestions = dropdownQuestionRepository.count() - formToCompleteResponse.getQuestions().stream().filter(question -> DROPDOWN.equals(question.getType())).count();
@@ -287,7 +297,7 @@ class FormGenerateRandomTest {
             );
 
         } else {
-            Exception exception = mockMvc.perform(get(URL + "/get-random-form").param("question-count", Integer.toString(numberOfQuestionsToGeneratePerType)))
+            Exception exception = mockMvc.perform(get(URL + "/get-random-form").param("question-count", Integer.toString(numberOfQuestionsToGenerate)))
                     .andDo(print())
                     .andReturn()
                     .getResolvedException();
