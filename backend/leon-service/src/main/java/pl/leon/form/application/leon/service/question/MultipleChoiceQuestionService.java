@@ -27,6 +27,8 @@ public class MultipleChoiceQuestionService implements QuestionServiceInterface<M
     public void incrementEachOption(MultipleChoiceQuestionEntity question, OptionsEntity options) {
         log.info("incrementEachOption()");
 
+        question.setCountAnswers(question.getCountAnswers() + 1);
+
         List<Long> beforeCountList = new ArrayList<>();
         List<Long> resultCountList = new ArrayList<>();
 

@@ -34,6 +34,8 @@ public class LongAnswerQuestionService implements QuestionServiceInterface<LongA
             question.setAnswers(new ArrayList<>());
         }
 
+        question.setCountAnswers(question.getCountAnswers() + 1);
+
         question.getAnswers().add(answer);
         LongAnswerQuestionEntity savedLongAnswer = repository.save(question);
 

@@ -26,6 +26,8 @@ public class LineScaleQuestionService implements QuestionServiceInterface<LineSc
     public void incrementOption(LineScaleQuestionEntity question, OptionEntity option) {
         log.info("incrementOption()");
 
+        question.setCountAnswers(question.getCountAnswers() + 1);
+
         Long beforeCount = option.getCount();
 
         Long resultCount = question.getOptions().stream().filter(checkedOption -> checkedOption.equals(option))
