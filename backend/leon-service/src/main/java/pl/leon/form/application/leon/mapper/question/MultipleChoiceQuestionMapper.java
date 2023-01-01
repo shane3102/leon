@@ -4,21 +4,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.stereotype.Component;
-import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
-import pl.leon.form.application.leon.repository.OptionsEntity;
+import pl.leon.form.application.leon.repository.entities.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
-import pl.leon.form.application.leon.repository.entities.OptionEntity;
-import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
-import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
 import java.util.AbstractMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 @Mapper(componentModel = "spring")

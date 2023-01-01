@@ -30,6 +30,8 @@ public class ShortAnswerQuestionService implements QuestionServiceInterface<Shor
     @Override
     public Map.Entry<Object, AnswerEntity> persistNewAnswer(ShortAnswerQuestionEntity question, AnswerEntity answer) {
 
+        question.setCountAnswers(question.getCountAnswers() + 1);
+
         if (question.getAnswers() == null) {
             question.setAnswers(new ArrayList<>());
         }

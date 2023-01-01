@@ -37,6 +37,8 @@ public class LineScaleQuestionEntity {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<OptionEntity> options;
 
+    private Long countAnswers;
+
     @ManyToOne
     @JoinColumn(name = "form_id")
     private FormEntity form;

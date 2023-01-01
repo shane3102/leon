@@ -26,6 +26,8 @@ public class DropdownQuestionService implements QuestionServiceInterface<Dropdow
     public void incrementOption(DropdownQuestionEntity question, OptionEntity option) {
         log.info("incrementOption()");
 
+        question.setCountAnswers(question.getCountAnswers() + 1);
+
         Long beforeCount = option.getCount();
 
         Long resultCount = question.getOptions().stream().filter(checkedOption -> checkedOption.equals(option))

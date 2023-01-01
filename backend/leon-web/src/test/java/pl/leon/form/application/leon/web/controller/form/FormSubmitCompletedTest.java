@@ -22,7 +22,7 @@ import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.OptionRepository;
-import pl.leon.form.application.leon.repository.OptionsEntity;
+import pl.leon.form.application.leon.repository.entities.OptionsEntity;
 import pl.leon.form.application.leon.repository.ShortAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
@@ -109,6 +109,9 @@ public class FormSubmitCompletedTest {
     private static final String ANSWER_CONTENT_4 = "Odpowiedz 4";
     private static final Long ANSWER_DEFAULT_COUNT = 1L;
     private static final Long EXPECTED_ANSWER_COUNT = 2L;
+
+    private static  final Long QUESTION_DEFAULT_COUNT = 4L;
+    private static  final Long EXPECTED_QUESTION_COUNT = 5L;
 
     private static final String ANSWER_FOR_TEXT_QUESTION_1 = "Odpowiedz konkretna 1";
     private static final String ANSWER_FOR_TEXT_QUESTION_2 = "Odpowiedz konkretna 2";
@@ -215,50 +218,50 @@ public class FormSubmitCompletedTest {
     @BeforeAll
     @Transactional
     void beforeAll() {
-        dropdownQuestion1 = DropdownQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        dropdownQuestion2 = DropdownQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        dropdownQuestion3 = DropdownQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        dropdownQuestion4 = DropdownQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        dropdownQuestion1 = DropdownQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        dropdownQuestion2 = DropdownQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        dropdownQuestion3 = DropdownQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        dropdownQuestion4 = DropdownQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
 
         dropdownQuestions = List.of(dropdownQuestion1, dropdownQuestion2, dropdownQuestion3, dropdownQuestion4);
         dropdownQuestions = dropdownQuestionRepository.saveAll(dropdownQuestions);
 
-        lineScaleQuestion1 = LineScaleQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        lineScaleQuestion2 = LineScaleQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        lineScaleQuestion3 = LineScaleQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        lineScaleQuestion4 = LineScaleQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        lineScaleQuestion1 = LineScaleQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        lineScaleQuestion2 = LineScaleQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        lineScaleQuestion3 = LineScaleQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        lineScaleQuestion4 = LineScaleQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
 
         lineScaleQuestions = List.of(lineScaleQuestion1, lineScaleQuestion2, lineScaleQuestion3, lineScaleQuestion4);
         lineScaleQuestions = lineScaleQuestionRepository.saveAll(lineScaleQuestions);
 
-        multipleChoiceQuestion1 = MultipleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        multipleChoiceQuestion2 = MultipleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        multipleChoiceQuestion3 = MultipleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        multipleChoiceQuestion4 = MultipleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        multipleChoiceQuestion1 = MultipleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        multipleChoiceQuestion2 = MultipleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        multipleChoiceQuestion3 = MultipleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        multipleChoiceQuestion4 = MultipleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
 
         multipleChoiceQuestions = List.of(multipleChoiceQuestion1, multipleChoiceQuestion2, multipleChoiceQuestion3, multipleChoiceQuestion4);
         multipleChoiceQuestions = multipleChoiceQuestionRepository.saveAll(multipleChoiceQuestions);
 
-        singleChoiceQuestion1 = SingleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        singleChoiceQuestion2 = SingleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        singleChoiceQuestion3 = SingleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
-        singleChoiceQuestion4 = SingleChoiceQuestionEntity.builder().question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        singleChoiceQuestion1 = SingleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        singleChoiceQuestion2 = SingleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        singleChoiceQuestion3 = SingleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
+        singleChoiceQuestion4 = SingleChoiceQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).count(ANSWER_DEFAULT_COUNT).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).count(ANSWER_DEFAULT_COUNT).build()))).build();
 
         singleChoiceQuestions = List.of(singleChoiceQuestion1, singleChoiceQuestion2, singleChoiceQuestion3, singleChoiceQuestion4);
         singleChoiceQuestions = singleChoiceQuestionRepository.saveAll(singleChoiceQuestions);
 
-        shortAnswerQuestion1 = ShortAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
-        shortAnswerQuestion2 = ShortAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
-        shortAnswerQuestion3 = ShortAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
-        shortAnswerQuestion4 = ShortAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
+        shortAnswerQuestion1 = ShortAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
+        shortAnswerQuestion2 = ShortAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
+        shortAnswerQuestion3 = ShortAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
+        shortAnswerQuestion4 = ShortAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
 
         shortAnswerQuestions = List.of(shortAnswerQuestion1, shortAnswerQuestion2, shortAnswerQuestion3, shortAnswerQuestion4);
         shortAnswerQuestions = shortAnswerQuestionRepository.saveAll(shortAnswerQuestions);
 
-        longAnswerQuestion1 = LongAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
-        longAnswerQuestion2 = LongAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
-        longAnswerQuestion3 = LongAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
-        longAnswerQuestion4 = LongAnswerQuestionEntity.builder().question(QUESTION_CONTENT).build();
+        longAnswerQuestion1 = LongAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
+        longAnswerQuestion2 = LongAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
+        longAnswerQuestion3 = LongAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
+        longAnswerQuestion4 = LongAnswerQuestionEntity.builder().countAnswers(QUESTION_DEFAULT_COUNT).question(QUESTION_CONTENT).build();
 
         longAnswerQuestions = List.of(longAnswerQuestion1, longAnswerQuestion2, longAnswerQuestion3, longAnswerQuestion4);
         longAnswerQuestions = longAnswerQuestionRepository.saveAll(longAnswerQuestions);
@@ -379,6 +382,13 @@ public class FormSubmitCompletedTest {
         List<Long> multipleChoiceChosenAnswerCount = multipleChoiceQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> multipleChoiceQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
         List<Long> singleChoiceChosenAnswerCount = singleChoiceQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> singleChoiceQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
 
+        List<Long> dropdownQuestionAnswersCount = dropdownQuestionAndAnswerNumber.keySet().stream().map(integer -> dropdownQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> lineScaleQuestionAnswersCount = lineScaleQuestionAndAnswerNumber.keySet().stream().map(integer -> lineScaleQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> multipleChoiceQuestionAnswersCount = multipleChoiceQuestionAndAnswerNumber.keySet().stream().map(integer -> multipleChoiceQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> singleChoiceQuestionAnswersCount = singleChoiceQuestionAndAnswerNumber.keySet().stream().map(integer -> singleChoiceQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> shortAnswerQuestionAnswersCount = shortAnswerQuestionAndAnswerNumber.keySet().stream().map(integer -> shortAnswerQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> longAnswerQuestionAnswersCount = longAnswerQuestionAndAnswerNumber.keySet().stream().map(integer -> longAnswerQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
+
         // then
         assertAll(
                 () -> assertNotNull(responseFormCompleted),
@@ -444,10 +454,18 @@ public class FormSubmitCompletedTest {
                             return foundShortAnswerCorrespondingEntity.isPresent() &&
                                     foundShortAnswerCorrespondingEntity.get().getValue().equals(longAnswer.getAnswer());
                         })),
+
                 () -> assertTrue(dropdownChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
                 () -> assertTrue(lineScaleChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
                 () -> assertTrue(multipleChoiceChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
-                () -> assertTrue(singleChoiceChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count)))
+                () -> assertTrue(singleChoiceChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
+
+                () -> assertTrue(dropdownQuestionAnswersCount.stream().allMatch(count -> Objects.equals(EXPECTED_QUESTION_COUNT, count))),
+                () -> assertTrue(lineScaleQuestionAnswersCount.stream().allMatch(count -> Objects.equals(EXPECTED_QUESTION_COUNT, count))),
+                () -> assertTrue(multipleChoiceQuestionAnswersCount.stream().allMatch(count -> Objects.equals(EXPECTED_QUESTION_COUNT, count))),
+                () -> assertTrue(singleChoiceQuestionAnswersCount.stream().allMatch(count -> Objects.equals(EXPECTED_QUESTION_COUNT, count))),
+                () -> assertTrue(shortAnswerQuestionAnswersCount.stream().allMatch(count -> Objects.equals(EXPECTED_QUESTION_COUNT, count))),
+                () -> assertTrue(longAnswerQuestionAnswersCount.stream().allMatch(count -> Objects.equals(EXPECTED_QUESTION_COUNT, count)))
         );
     }
 }

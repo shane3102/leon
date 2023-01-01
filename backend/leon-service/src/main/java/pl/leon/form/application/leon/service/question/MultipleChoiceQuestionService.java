@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.ChosenOptionWasNotFoundInAvailableOptions;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
-import pl.leon.form.application.leon.repository.OptionsEntity;
-import pl.leon.form.application.leon.repository.entities.OptionEntity;
+import pl.leon.form.application.leon.repository.entities.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
-import pl.leon.form.application.leon.service.question.interfaces.IncrementCountForOptionInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
 
 import java.util.ArrayList;
@@ -28,6 +26,8 @@ public class MultipleChoiceQuestionService implements QuestionServiceInterface<M
 
     public void incrementEachOption(MultipleChoiceQuestionEntity question, OptionsEntity options) {
         log.info("incrementEachOption()");
+
+        question.setCountAnswers(question.getCountAnswers() + 1);
 
         List<Long> beforeCountList = new ArrayList<>();
         List<Long> resultCountList = new ArrayList<>();

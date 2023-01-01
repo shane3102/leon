@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.repository;
+package pl.leon.form.application.leon.repository.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
