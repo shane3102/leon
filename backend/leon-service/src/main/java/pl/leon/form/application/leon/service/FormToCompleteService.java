@@ -30,7 +30,7 @@ public class FormToCompleteService {
         List<QuestionResponse> questions = questionServiceAndQuestionsToGenerateMap(questionToGenerateCount)
                 .entrySet()
                 .stream().map(
-                        serviceQuestionCountEntry -> (List<QuestionResponse>) serviceQuestionCountEntry.getKey().getRandomQuestions(serviceQuestionCountEntry.getValue())
+                        serviceQuestionCountEntry -> (List<QuestionResponse>) serviceQuestionCountEntry.getKey().getQuestionsWithMinimumCount(serviceQuestionCountEntry.getValue())
                 )
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());

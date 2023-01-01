@@ -20,12 +20,9 @@ public interface QuestionServiceInterface<T> {
 
     QuestionMapperManager getQuestionMapperManager();
 
+    @Deprecated
     default List<QuestionResponse> getRandomQuestions(Short count) {
-        long allQuestions = getRepository().count();
-
-        if (allQuestions < count) {
-            throw new TooManyQuestionsToGenerate();
-        }
+        checkIfEnoughQuestionsToGenerate(count);
 
         List<Long> randomQuestionIds = new ArrayList<>();
         while (randomQuestionIds.size() < count) {
@@ -47,7 +44,24 @@ public interface QuestionServiceInterface<T> {
                 .collect(Collectors.toList());
     }
 
-//    default List<QuestionResponse> getQuestionsWithMinimumCount(Short count){
-//
-//    }
+    default List<QuestionResponse> getQuestionsWithMinimumCount(Short count) {
+        checkIfEnoughQuestionsToGenerate(count);
+
+        return getRepository().findAllByOrderByCountAnswersAsc().stream().limit(count).map(entity -> {
+                    if (entity instanceof HibernateProxy) {
+                        return (T) ((HibernateProxy) entity).getHibernateLazyInitializer().getImplementation();
+                    }
+                    return entity;
+                })
+                .map(getQuestionMapperManager()::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    default void checkIfEnoughQuestionsToGenerate(Short count) {
+        long allQuestions = getRepository().count();
+
+        if (allQuestions < count) {
+            throw new TooManyQuestionsToGenerate();
+        }
+    }
 }

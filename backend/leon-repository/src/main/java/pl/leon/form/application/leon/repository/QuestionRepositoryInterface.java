@@ -7,5 +7,5 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface QuestionRepositoryInterface<T> extends JpaRepository<T, Long> {
-    List<T> findAllByOrderByCountAnswers();
+    List<T> findAllByOrderByCountAnswersAsc();
 }
