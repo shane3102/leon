@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.TooManyQuestionsToGenerate;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.repository.QuestionRepositoryInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unchecked")
 public interface QuestionServiceInterface<T> {
 
-    JpaRepository<T, Long> getRepository();
+    QuestionRepositoryInterface<T> getRepository();
 
     QuestionMapperManager getQuestionMapperManager();
 
@@ -45,4 +46,8 @@ public interface QuestionServiceInterface<T> {
                 .map(getQuestionMapperManager()::mapToResponse)
                 .collect(Collectors.toList());
     }
+
+//    default List<QuestionResponse> getQuestionsWithMinimumCount(Short count){
+//
+//    }
 }
