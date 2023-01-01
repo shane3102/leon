@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
-import pl.leon.form.application.leon.repository.OptionsEntity;
+import pl.leon.form.application.leon.repository.entities.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 

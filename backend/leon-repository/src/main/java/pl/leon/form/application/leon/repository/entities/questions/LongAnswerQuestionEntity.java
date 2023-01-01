@@ -40,6 +40,8 @@ public class LongAnswerQuestionEntity {
     )
     private List<AnswerEntity> answers;
 
+    private Long countAnswers;
+
     @ManyToOne
     @JoinColumn(name = "form_id")
     private FormEntity form;
