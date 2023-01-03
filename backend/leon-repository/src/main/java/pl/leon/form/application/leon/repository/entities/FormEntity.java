@@ -38,6 +38,8 @@ public class FormEntity {
 
     private boolean disableQuestionsAfterDateTo;
 
+    private boolean disableQuestionsForRandomForms;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;

@@ -1,7 +1,6 @@
 package pl.leon.form.application.leon.service.question.interfaces;
 
 import org.hibernate.proxy.HibernateProxy;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.TooManyQuestionsToGenerate;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
@@ -47,7 +46,7 @@ public interface QuestionServiceInterface<T> {
     default List<QuestionResponse> getQuestionsWithMinimumCount(Short count) {
         checkIfEnoughQuestionsToGenerate(count);
 
-        return getRepository().findAllByOrderByCountAnswersAsc().stream().limit(count).map(entity -> {
+        return getRepository().findByFormDisableQuestionsForRandomFormsFalseOrderByCountAnswersAsc().stream().limit(count).map(entity -> {
                     if (entity instanceof HibernateProxy) {
                         return (T) ((HibernateProxy) entity).getHibernateLazyInitializer().getImplementation();
                     }

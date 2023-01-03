@@ -17,5 +17,6 @@ public class FormCreateRequest {
     private Long id;
     private LocalDate dateTo;
     private boolean disableQuestionsAfterDateTo;
+    private boolean disableQuestionsForRandomForms;
     private List<QuestionCreateRequest> questions;
 }
