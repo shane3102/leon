@@ -46,7 +46,7 @@ public interface QuestionServiceInterface<T> {
     default List<QuestionResponse> getQuestionsWithMinimumCount(Short count) {
         checkIfEnoughQuestionsToGenerate(count);
 
-        return getRepository().findByFormDisableQuestionsForRandomFormsFalseOrderByCountAnswersAsc().stream().limit(count).map(entity -> {
+        return getRepository().findByDisabledFalseOrderByCountAnswersAsc().stream().limit(count).map(entity -> {
                     if (entity instanceof HibernateProxy) {
                         return (T) ((HibernateProxy) entity).getHibernateLazyInitializer().getImplementation();
                     }
