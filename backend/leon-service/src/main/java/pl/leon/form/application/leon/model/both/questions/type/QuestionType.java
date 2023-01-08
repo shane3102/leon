@@ -5,6 +5,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.ShortAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.SingleChoiceQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -20,19 +26,27 @@ import java.util.Objects;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum QuestionType {
 
-    DROPDOWN("DROPDOWN", DropdownQuestionEntity.class),
-    LINE_SCALE("LINE_SCALE", LineScaleQuestionEntity.class),
-    LONG_ANSWER("LONG_ANSWER", LongAnswerQuestionEntity.class),
-    MULTIPLE_CHOICE("MULTIPLE_CHOICE", MultipleChoiceQuestionEntity.class),
-    SHORT_ANSWER("SHORT_ANSWER", ShortAnswerQuestionEntity.class),
-    SINGLE_CHOICE("SINGLE_CHOICE", SingleChoiceQuestionEntity.class);
+    DROPDOWN("DROPDOWN", DropdownQuestionEntity.class, DropdownQuestionAnswerEntity.class),
+    LINE_SCALE("LINE_SCALE", LineScaleQuestionEntity.class, LineScaleQuestionAnswerEntity.class),
+    LONG_ANSWER("LONG_ANSWER", LongAnswerQuestionEntity.class, LongAnswerQuestionAnswerEntity.class),
+    MULTIPLE_CHOICE("MULTIPLE_CHOICE", MultipleChoiceQuestionEntity.class, MultipleChoiceQuestionAnswerEntity.class),
+    SHORT_ANSWER("SHORT_ANSWER", ShortAnswerQuestionEntity.class, ShortAnswerQuestionAnswerEntity.class),
+    SINGLE_CHOICE("SINGLE_CHOICE", SingleChoiceQuestionEntity.class, SingleChoiceQuestionAnswerEntity.class);
 
     private final String name;
-    private final Class<?> entityClass;
+    private final Class<?> questionType;
+    private final Class<?> answeringType;
 
-    public static QuestionType getTypeByEntity(Class<?> entity){
+    public static QuestionType getTypeByQuestionType(Class<?> entity) {
         return Arrays.stream(QuestionType.values())
-                .filter(questionType -> Objects.equals(questionType.getEntityClass(), entity))
+                .filter(questionType -> Objects.equals(questionType.getQuestionType(), entity))
+                .findFirst()
+                .orElseThrow(/*TODO customowy exception*/);
+    }
+
+    public static QuestionType getTypeByAnsweringType(Class<?> entity) {
+        return Arrays.stream(QuestionType.values())
+                .filter(questionType -> Objects.equals(questionType.getAnsweringType(), entity))
                 .findFirst()
                 .orElseThrow(/*TODO customowy exception*/);
     }
