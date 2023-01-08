@@ -14,6 +14,12 @@ import pl.leon.form.application.leon.mapper.question.ShortAnswerQuestionMapper;
 import pl.leon.form.application.leon.mapper.question.SingleChoiceQuestionMapper;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.ShortAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.SingleChoiceQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -51,10 +57,9 @@ public class QuestionMapperManager {
         return response;
     }
 
-    public QuestionAnswering mapToAnswering(Map.Entry<Object, Object> questionAnsweringEntity) {
-        log.info("Entity type: {}", Hibernate.unproxy(questionAnsweringEntity.getKey()).getClass());
-        QuestionAnswering response = mappers.get(Hibernate.unproxy(questionAnsweringEntity.getKey()).getClass())
-                .mapToAnswering((Map.Entry) Hibernate.unproxy(questionAnsweringEntity));
+    public QuestionAnswering mapToAnswering(Object questionAnsweringEntity) {
+        log.info("Entity type: {}", questionAnsweringEntity.getClass());
+        QuestionAnswering response = mappers.get(questionAnsweringEntity.getClass()).mapToAnswering(questionAnsweringEntity);
         log.info("Response: {}", response);
         return response;
     }
@@ -74,13 +79,13 @@ public class QuestionMapperManager {
         return resultList;
     }
 
-    public List<QuestionAnswering> mapToAnswering(Map... questionLists) {
+    public List<QuestionAnswering> mapToAnswering(List... questionLists) {
         log.info("mapToAnswering({})", questionLists == null ? null : questionLists.length);
 
         List<QuestionAnswering> resultList = new ArrayList<>();
 
-        for (Map<Object, Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new Map[]{})) {
-            concreteQuestionList.entrySet().forEach(
+        for (List<Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
+            concreteQuestionList.forEach(
                     question -> resultList.add(mapToAnswering(question))
             );
         }
@@ -97,5 +102,12 @@ public class QuestionMapperManager {
         mappers.put(MultipleChoiceQuestionEntity.class, multipleChoiceQuestionMapper);
         mappers.put(ShortAnswerQuestionEntity.class, shortAnswerQuestionMapper);
         mappers.put(SingleChoiceQuestionEntity.class, singleChoiceQuestionMapper);
+
+        mappers.put(DropdownQuestionAnswerEntity.class, dropdownQuestionMapper);
+        mappers.put(LineScaleQuestionAnswerEntity.class, lineScaleQuestionMapper);
+        mappers.put(LongAnswerQuestionAnswerEntity.class, longAnswerQuestionMapper);
+        mappers.put(MultipleChoiceQuestionAnswerEntity.class, multipleChoiceQuestionMapper);
+        mappers.put(ShortAnswerQuestionAnswerEntity.class, shortAnswerQuestionMapper);
+        mappers.put(SingleChoiceQuestionAnswerEntity.class, singleChoiceQuestionMapper);
     }
 }
