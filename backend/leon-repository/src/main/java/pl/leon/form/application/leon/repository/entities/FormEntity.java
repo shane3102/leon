@@ -36,9 +36,7 @@ public class FormEntity {
 
     private LocalDate dateTo;
 
-    private boolean disableQuestionsAfterDateTo;
-
-    private boolean disableQuestionsForRandomForms;
+    private boolean disabled;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -14,6 +14,5 @@ import java.util.List;
 public class FormResponse {
     private Long id;
     private LocalDate dateTo;
-    private boolean disableQuestionsAfterDateTo;
     private List<QuestionResponse> questions;
 }
