@@ -103,7 +103,6 @@ public class FormSimpleCrudTest {
         private final Long EXPECTED_SINGLE_CHOICE_QUESTIONS = 2L;
 
         private final LocalDate FORM_DATE_TO = LocalDate.now().plusMonths(1);
-        private final boolean DISABLE_FORM_QUESTIONS_AFTER_DATE_TO = true;
 
         private final String QUESTION_1_CONTENT_DROPDOWN = "Pytanie 1 lista wybieralna";
         private final String QUESTION_2_CONTENT_DROPDOWN = "Pytanie 2 lista wybieralna";
@@ -253,7 +252,6 @@ public class FormSimpleCrudTest {
 
             formCreateRequest = FormCreateRequest.builder()
                     .dateTo(FORM_DATE_TO)
-                    .disableQuestionsAfterDateTo(DISABLE_FORM_QUESTIONS_AFTER_DATE_TO)
                     .questions(List.of(
                             dropDownQuestion1,
                             dropDownQuestion2,
@@ -294,7 +292,6 @@ public class FormSimpleCrudTest {
             // then
             assertAll(
                     () -> assertNotNull(formResponse),
-                    () -> assertEquals(DISABLE_FORM_QUESTIONS_AFTER_DATE_TO, formResponse.isDisableQuestionsAfterDateTo()),
                     () -> assertEquals(FORM_DATE_TO, formResponse.getDateTo()),
                     () -> assertEquals(EXPECTED_DROPDOWN_QUESTIONS, dropdownQuestionRepository.count()),
                     () -> assertTrue(dropdownQuestionRepository.findAll().stream().allMatch(dropdownQuestion -> DROPDOWN_QUESTION_CONTENTS.contains(dropdownQuestion.getQuestion()))),

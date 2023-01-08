@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "LINE_SCALE_QUESTIONS")
-public class LineScaleQuestionEntity {
+public class LineScaleQuestionEntity implements QuestionMethodsInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

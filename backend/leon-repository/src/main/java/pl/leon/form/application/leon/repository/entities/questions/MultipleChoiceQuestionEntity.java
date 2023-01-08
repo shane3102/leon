@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "MULTIPLE_CHOICE_QUESTIONS")
-public class MultipleChoiceQuestionEntity {
+public class MultipleChoiceQuestionEntity implements QuestionMethodsInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

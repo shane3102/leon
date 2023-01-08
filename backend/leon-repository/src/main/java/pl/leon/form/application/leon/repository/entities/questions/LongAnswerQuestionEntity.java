@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "LONG_ANSWER_QUESTIONS")
-public class LongAnswerQuestionEntity {
+public class LongAnswerQuestionEntity implements QuestionMethodsInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

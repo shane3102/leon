@@ -201,7 +201,7 @@ class FormGenerateRandomTest {
     @BeforeAll
     @BeforeEach
     void setUp() {
-        FormEntity form = FormEntity.builder().disableQuestionsForRandomForms(false).build();
+        FormEntity form = FormEntity.builder().build();
         formRepository.save(form);
 
         dropdownQuestion1 = DropdownQuestionEntity.builder().form(form).question(QUESTION_CONTENT).options(new ArrayList<>(Arrays.asList(OptionEntity.builder().content(ANSWER_CONTENT_1).build(), OptionEntity.builder().content(ANSWER_CONTENT_2).build(), OptionEntity.builder().content(ANSWER_CONTENT_3).build(), OptionEntity.builder().content(ANSWER_CONTENT_4).build()))).build();

@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "SHORT_ANSWER_QUESTIONS")
-public class ShortAnswerQuestionEntity {
+public class ShortAnswerQuestionEntity implements QuestionMethodsInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

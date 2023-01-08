@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "DROPDOWN_QUESTION")
-public class DropdownQuestionEntity {
+public class DropdownQuestionEntity implements QuestionMethodsInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
