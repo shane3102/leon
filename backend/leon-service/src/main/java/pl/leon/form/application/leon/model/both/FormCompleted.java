@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.core.enums.FormLevelType;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 
+import java.time.Duration;
 import java.util.List;
 
 @Data
@@ -18,4 +19,5 @@ public class FormCompleted {
     private List<QuestionAnswering> answers;
     private FormLevelType uxLevel;
     private FormLevelType uiLevel;
+    private Duration completeDuration;
 }
