@@ -6,14 +6,19 @@ import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.TooMan
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.repository.QuestionRepositoryInterface;
+import pl.leon.form.application.leon.repository.entities.FormEntity;
+import pl.leon.form.application.leon.repository.entities.questions.QuestionMethodsInterface;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @SuppressWarnings("unchecked")
-public interface QuestionServiceInterface<T> {
+public interface QuestionServiceInterface<T extends QuestionMethodsInterface> {
 
     QuestionRepositoryInterface<T> getRepository();
 
@@ -41,6 +46,13 @@ public interface QuestionServiceInterface<T> {
                 })
                 .map(getQuestionMapperManager()::mapToResponse)
                 .collect(Collectors.toList());
+    }
+
+    default Stream<FormEntity> disableQuestions() {
+        return getRepository().findByDisabledFalseAndFormDateTo(LocalDate.now()).stream().peek(question -> {
+            question.setDisabled(true);
+            getRepository().save(question);
+        }).map(QuestionMethodsInterface::getForm);
     }
 
     default List<QuestionResponse> getQuestionsWithMinimumCount(Short count) {
