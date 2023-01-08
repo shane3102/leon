@@ -9,6 +9,8 @@ import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.Chosen
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.SingleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 import pl.leon.form.application.leon.service.question.interfaces.IncrementCountForOptionInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
@@ -16,15 +18,18 @@ import pl.leon.form.application.leon.service.question.interfaces.QuestionService
 @Slf4j
 @Service
 @AllArgsConstructor
-public class SingleChoiceQuestionService implements QuestionServiceInterface<SingleChoiceQuestionEntity>, IncrementCountForOptionInterface<SingleChoiceQuestionEntity> {
+public class SingleChoiceQuestionService implements QuestionServiceInterface<SingleChoiceQuestionEntity>, IncrementCountForOptionInterface<SingleChoiceQuestionAnswerEntity> {
     @Getter(AccessLevel.PUBLIC)
     private final QuestionMapperManager questionMapperManager;
     @Getter(AccessLevel.PUBLIC)
     private final SingleChoiceQuestionRepository repository;
 
     @Override
-    public void incrementOption(SingleChoiceQuestionEntity question, OptionEntity option) {
+    public void incrementOption(SingleChoiceQuestionAnswerEntity answer) {
         log.info("incrementOption()");
+
+        SingleChoiceQuestionEntity question = answer.getQuestion();
+        OptionEntity option = answer.getOption();
 
         question.setCountAnswers(question.getCountAnswers() + 1);
 

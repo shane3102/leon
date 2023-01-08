@@ -9,6 +9,7 @@ import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.Chosen
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.service.question.interfaces.IncrementCountForOptionInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
@@ -16,15 +17,18 @@ import pl.leon.form.application.leon.service.question.interfaces.QuestionService
 @Slf4j
 @Service
 @AllArgsConstructor
-public class DropdownQuestionService implements QuestionServiceInterface<DropdownQuestionEntity>, IncrementCountForOptionInterface<DropdownQuestionEntity> {
+public class DropdownQuestionService implements QuestionServiceInterface<DropdownQuestionEntity>, IncrementCountForOptionInterface<DropdownQuestionAnswerEntity> {
     @Getter(AccessLevel.PUBLIC)
     private final QuestionMapperManager questionMapperManager;
     @Getter(AccessLevel.PUBLIC)
     private final DropdownQuestionRepository repository;
 
     @Override
-    public void incrementOption(DropdownQuestionEntity question, OptionEntity option) {
+    public void incrementOption(DropdownQuestionAnswerEntity answer) {
         log.info("incrementOption()");
+
+        DropdownQuestionEntity question = answer.getQuestion();
+        OptionEntity option = answer.getOption();
 
         question.setCountAnswers(question.getCountAnswers() + 1);
 

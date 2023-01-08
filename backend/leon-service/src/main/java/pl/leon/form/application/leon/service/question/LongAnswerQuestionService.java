@@ -9,6 +9,7 @@ import pl.leon.form.application.leon.core.exceptions.i_am_a_teapot.concrete.Newl
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.service.question.interfaces.AddNewAnswerInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
@@ -21,14 +22,17 @@ import java.util.Objects;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class LongAnswerQuestionService implements QuestionServiceInterface<LongAnswerQuestionEntity>, AddNewAnswerInterface<LongAnswerQuestionEntity> {
+public class LongAnswerQuestionService implements QuestionServiceInterface<LongAnswerQuestionEntity>, AddNewAnswerInterface<LongAnswerQuestionAnswerEntity> {
     @Getter(AccessLevel.PUBLIC)
     private final QuestionMapperManager questionMapperManager;
     @Getter(AccessLevel.PUBLIC)
     private final LongAnswerQuestionRepository repository;
 
     @Override
-    public Map.Entry<Object, AnswerEntity> persistNewAnswer(LongAnswerQuestionEntity question, AnswerEntity answer) {
+    public LongAnswerQuestionAnswerEntity persistNewAnswer(LongAnswerQuestionAnswerEntity answering) {
+
+        LongAnswerQuestionEntity question = answering.getQuestion();
+        AnswerEntity answer = answering.getAnswer();
 
         if (question.getAnswers() == null) {
             question.setAnswers(new ArrayList<>());
@@ -43,6 +47,8 @@ public class LongAnswerQuestionService implements QuestionServiceInterface<LongA
                 .filter(answerPersisted -> Objects.equals(answer.getContent(), answerPersisted.getContent()))
                 .findFirst().orElseThrow(NewlyAddedAnswerWasNotAttachedToQuestion::new);
 
-        return new AbstractMap.SimpleEntry<>(savedLongAnswer, persistedAnswer);
+        answering.setAnswer(persistedAnswer);
+
+        return answering;
     }
 }
