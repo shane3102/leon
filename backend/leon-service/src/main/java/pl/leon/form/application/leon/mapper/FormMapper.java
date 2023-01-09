@@ -31,6 +31,12 @@ import pl.leon.form.application.leon.repository.entities.FormCompletedEntity;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.UserEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.ShortAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.SingleChoiceQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -43,6 +49,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.DROPDOWN;
@@ -165,19 +172,17 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected Map<DropdownQuestionEntity, OptionEntity> mapDropdownAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<DropdownQuestionAnswerEntity> mapDropdownAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> DROPDOWN.equals(answer.getType()))
-                .map(answer -> new HashMap<>(
-                        Map.of(
-                                dropdownQuestionRepository.getById(answer.getId()),
-                                optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId())))
+                .map(answer ->
+                        DropdownQuestionAnswerEntity.builder()
+                                .durationToAnswer(answer.getDurationToAnswer())
+                                .question(dropdownQuestionRepository.getById(answer.getId()))
+                                .option(optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId()))
+                                .build()
                 )
-                .reduce((resultMap, currentMap) -> {
-                    resultMap.putAll(currentMap);
-                    return resultMap;
-                }).map(resultMap -> (Map<DropdownQuestionEntity, OptionEntity>) resultMap)
-                .orElse(Collections.emptyMap());
+                .collect(Collectors.toList());
     }
 
     protected List<LineScaleQuestionEntity> mapToLineScaleQuestions(List<QuestionCreateRequest> requests) {
@@ -193,19 +198,17 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected Map<LineScaleQuestionEntity, OptionEntity> mapLineScaleAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<LineScaleQuestionAnswerEntity> mapLineScaleAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> LINE_SCALE.equals(answer.getType()))
-                .map(answer -> new HashMap<>(
-                        Map.of(
-                                lineScaleQuestionRepository.getById(answer.getId()),
-                                optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId())))
+                .map(answer ->
+                        LineScaleQuestionAnswerEntity.builder()
+                                .durationToAnswer(answer.getDurationToAnswer())
+                                .question(lineScaleQuestionRepository.getById(answer.getId()))
+                                .option(optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId()))
+                                .build()
                 )
-                .reduce((resultMap, currentMap) -> {
-                    resultMap.putAll(currentMap);
-                    return resultMap;
-                }).map(resultMap -> (Map<LineScaleQuestionEntity, OptionEntity>) resultMap)
-                .orElse(Collections.emptyMap());
+                .collect(Collectors.toList());
     }
 
     protected List<LongAnswerQuestionEntity> mapToLongAnswerQuestions(List<QuestionCreateRequest> requests) {
@@ -220,18 +223,17 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected Map<LongAnswerQuestionEntity, AnswerEntity> mapLongAnswerAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<LongAnswerQuestionAnswerEntity> mapLongAnswerAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> LONG_ANSWER.equals(answer.getType()))
-                .map(answer -> {
-                    LongAnswerQuestionEntity longAnswerEntity = longAnswerQuestionRepository.getById(answer.getId());
-                    return new HashMap<>(Map.of(longAnswerEntity, AnswerEntity.builder().longAnswerQuestionEntity(longAnswerEntity).content(answer.getAnswer()).build()));
-                })
-                .reduce((resultMap, currentMap) -> {
-                    resultMap.putAll(currentMap);
-                    return resultMap;
-                }).map(resultMap -> (Map<LongAnswerQuestionEntity, AnswerEntity>) resultMap)
-                .orElse(Collections.emptyMap());
+                .map(answer ->
+                        LongAnswerQuestionAnswerEntity.builder()
+                                .durationToAnswer(answer.getDurationToAnswer())
+                                .question(longAnswerQuestionRepository.getById(answer.getId()))
+                                .answer(AnswerEntity.builder().content(answer.getAnswer()).build())
+                                .build()
+                )
+                .collect(Collectors.toList());
     }
 
     protected List<MultipleChoiceQuestionEntity> mapToMultipleTypeQuestions(List<QuestionCreateRequest> requests) {
@@ -247,19 +249,22 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected Map<MultipleChoiceQuestionEntity, OptionsEntity> mapMultipleChoiceAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<MultipleChoiceQuestionAnswerEntity> mapMultipleChoiceAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> MULTIPLE_CHOICE.equals(answer.getType()))
-                .map(answer -> new HashMap<>(
-                        Map.of(
-                                multipleChoiceQuestionRepository.getById(answer.getId()),
-                                mapToMultipleOptions(answer))
-                ))
-                .reduce((resultMap, currentMap) -> {
-                    resultMap.putAll(currentMap);
-                    return resultMap;
-                }).map(resultMap -> (Map<MultipleChoiceQuestionEntity, OptionsEntity>) resultMap)
-                .orElse(Collections.emptyMap());
+                .map(answer ->
+                        MultipleChoiceQuestionAnswerEntity.builder()
+                                .durationToAnswer(answer.getDurationToAnswer())
+                                .question(multipleChoiceQuestionRepository.getById(answer.getId()))
+                                .options(mapToMultipleOptions(answer.getChosenOptions()))
+                                .build()
+                )
+                .collect(Collectors.toList());
+    }
+
+    protected List<OptionEntity> mapToMultipleOptions(Set<Option> options) {
+        return options.stream().map(option ->
+                optionRepository.getById(option.getId())).collect(Collectors.toList());
     }
 
     protected OptionsEntity mapToMultipleOptions(QuestionAnswering answering) {
@@ -283,18 +288,17 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected Map<ShortAnswerQuestionEntity, AnswerEntity> mapShortAnswerAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<ShortAnswerQuestionAnswerEntity> mapShortAnswerAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> SHORT_ANSWER.equals(answer.getType()))
-                .map(answer -> {
-                    ShortAnswerQuestionEntity shortAnswerEntity = shortAnswerQuestionRepository.getById(answer.getId());
-                    return new HashMap<>(Map.of(shortAnswerEntity, AnswerEntity.builder().shortAnswerQuestionEntity(shortAnswerEntity).content(answer.getAnswer()).build()));
-                })
-                .reduce((resultMap, currentMap) -> {
-                    resultMap.putAll(currentMap);
-                    return resultMap;
-                }).map(resultMap -> (Map<ShortAnswerQuestionEntity, AnswerEntity>) resultMap)
-                .orElse(Collections.emptyMap());
+                .map(answer ->
+                        ShortAnswerQuestionAnswerEntity.builder()
+                                .durationToAnswer(answer.getDurationToAnswer())
+                                .question(shortAnswerQuestionRepository.getById(answer.getId()))
+                                .answer(AnswerEntity.builder().content(answer.getAnswer()).build())
+                                .build()
+                )
+                .collect(Collectors.toList());
     }
 
     protected List<SingleChoiceQuestionEntity> mapToSingleTypeQuestions(List<QuestionCreateRequest> requests) {
@@ -310,19 +314,17 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected Map<SingleChoiceQuestionEntity, OptionEntity> mapSingleChoiceAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<SingleChoiceQuestionAnswerEntity> mapSingleChoiceAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> SINGLE_CHOICE.equals(answer.getType()))
-                .map(answer -> new HashMap<>(
-                        Map.of(
-                                singleChoiceQuestionRepository.getById(answer.getId()),
-                                optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId())))
+                .map(answer ->
+                        SingleChoiceQuestionAnswerEntity.builder()
+                                .durationToAnswer(answer.getDurationToAnswer())
+                                .question(singleChoiceQuestionRepository.getById(answer.getId()))
+                                .option(optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId()))
+                                .build()
                 )
-                .reduce((resultMap, currentMap) -> {
-                    resultMap.putAll(currentMap);
-                    return resultMap;
-                }).map(resultMap -> (Map<SingleChoiceQuestionEntity, OptionEntity>) resultMap)
-                .orElse(Collections.emptyMap());
+                .collect(Collectors.toList());
     }
 
     protected OptionEntity mapToOption(Option option) {

@@ -14,14 +14,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public interface QuestionMapper<T> {
-    QuestionResponse mapToResponse(T entity);
+public interface QuestionMapper<QuestionType, AnsweringType> {
+    QuestionResponse mapToResponse(QuestionType entity);
 
-    QuestionAnswering mapToAnsweringByOption(Map.Entry<T, OptionEntity> tAnswerEntityEntry);
-
-    QuestionAnswering mapToAnsweringByAnswer(Map.Entry<T, AnswerEntity> tAnswerEntityEntry);
-
-    QuestionAnswering mapToAnswering(Map.Entry<T, Object> tObjectEntry);
+    QuestionAnswering mapToAnswering(AnsweringType entity);
 
     default Set<Option> mapToOption(OptionEntity optionEntity) {
         return new HashSet<>(Set.of(

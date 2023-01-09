@@ -50,22 +50,15 @@ public class FormCompletedService {
         formCompletedEntity.getAnsweredDropdownQuestions().forEach(dropdownQuestionService::incrementOption);
         formCompletedEntity.getAnsweredLineScaleQuestions().forEach(lineScaleQuestionService::incrementOption);
         formCompletedEntity.getAnsweredSingleChoiceQuestions().forEach(singleChoiceQuestionService::incrementOption);
-        formCompletedEntity.getAnsweredMultipleChoiceQuestions().forEach(multipleChoiceQuestionService::incrementEachOption);
+        formCompletedEntity.getAnsweredMultipleChoiceQuestions().forEach(multipleChoiceQuestionService::incrementOption);
 
-        Map<LongAnswerQuestionEntity, AnswerEntity> persistedLongQuestionAnswerMap = formCompletedEntity.getAnsweredLongAnswerQuestions()
-                .entrySet()
-                .stream()
-                .map(questionAnswerKey -> longAnswerQuestionService.persistNewAnswer(questionAnswerKey.getKey(), questionAnswerKey.getValue()))
-                .map(questionAnswerKey -> new AbstractMap.SimpleEntry<>((LongAnswerQuestionEntity) questionAnswerKey.getKey(), questionAnswerKey.getValue()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-        formCompletedEntity.setAnsweredLongAnswerQuestions(persistedLongQuestionAnswerMap);
+        formCompletedEntity.setAnsweredLongAnswerQuestions(
+                formCompletedEntity.getAnsweredLongAnswerQuestions().stream().map(longAnswerQuestionService::persistNewAnswer).collect(Collectors.toList())
+        );
 
-        Map<ShortAnswerQuestionEntity, AnswerEntity> persistedShortQuestionAnswerMap = formCompletedEntity.getAnsweredShortAnswerQuestions()
-                .entrySet().stream()
-                .map(questionAnswerKey -> shortAnswerQuestionService.persistNewAnswer(questionAnswerKey.getKey(), questionAnswerKey.getValue()))
-                .map(questionAnswerKey -> new AbstractMap.SimpleEntry<>((ShortAnswerQuestionEntity) questionAnswerKey.getKey(), questionAnswerKey.getValue()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-        formCompletedEntity.setAnsweredShortAnswerQuestions(persistedShortQuestionAnswerMap);
+        formCompletedEntity.setAnsweredShortAnswerQuestions(
+                formCompletedEntity.getAnsweredShortAnswerQuestions().stream().map(shortAnswerQuestionService::persistNewAnswer).collect(Collectors.toList())
+        );
 
         FormCompleted resultFormCompleted = formMapper.mapToCompleted(formCompletedRepository.save(formCompletedEntity));
 

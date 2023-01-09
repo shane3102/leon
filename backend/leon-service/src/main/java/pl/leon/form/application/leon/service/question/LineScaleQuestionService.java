@@ -9,6 +9,7 @@ import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.Chosen
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.service.question.interfaces.IncrementCountForOptionInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
@@ -16,15 +17,18 @@ import pl.leon.form.application.leon.service.question.interfaces.QuestionService
 @Slf4j
 @Service
 @AllArgsConstructor
-public class LineScaleQuestionService implements QuestionServiceInterface<LineScaleQuestionEntity>, IncrementCountForOptionInterface<LineScaleQuestionEntity> {
+public class LineScaleQuestionService implements QuestionServiceInterface<LineScaleQuestionEntity>, IncrementCountForOptionInterface<LineScaleQuestionAnswerEntity> {
     @Getter(AccessLevel.PUBLIC)
     private final QuestionMapperManager questionMapperManager;
     @Getter(AccessLevel.PUBLIC)
     private final LineScaleQuestionRepository repository;
 
     @Override
-    public void incrementOption(LineScaleQuestionEntity question, OptionEntity option) {
+    public void incrementOption(LineScaleQuestionAnswerEntity answer) {
         log.info("incrementOption()");
+
+        LineScaleQuestionEntity question = answer.getQuestion();
+        OptionEntity option = answer.getOption();
 
         question.setCountAnswers(question.getCountAnswers() + 1);
 

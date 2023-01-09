@@ -8,6 +8,8 @@ import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.repository.entities.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
 
 import java.util.AbstractMap;
@@ -15,23 +17,16 @@ import java.util.Map;
 
 @Component
 @Mapper(componentModel = "spring")
-public abstract class MultipleChoiceQuestionMapper implements QuestionMapper<MultipleChoiceQuestionEntity> {
+public abstract class MultipleChoiceQuestionMapper implements QuestionMapper<MultipleChoiceQuestionEntity, MultipleChoiceQuestionAnswerEntity> {
     @Override
-    @Mapping(target="type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(questionEntity.getClass()))")
+    @Mapping(target="type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
     public abstract QuestionResponse mapToResponse(MultipleChoiceQuestionEntity questionEntity);
 
+    @Override
     @Mappings({
-            @Mapping(target = "id", source = "key.id"),
-            @Mapping(target = "chosenOptions", source = "value"),
-            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByEntity(org.hibernate.Hibernate.unproxy(multipleChoiceAnswer.getKey()).getClass()))")
+            @Mapping(target = "id", source = "question.id"),
+            @Mapping(target = "chosenOptions", source = "options"),
+            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByAnsweringType(answeringEntity.getClass()))")
     })
-    public abstract QuestionAnswering mapToAnsweringByOptions(Map.Entry<MultipleChoiceQuestionEntity, OptionsEntity> multipleChoiceAnswer);
-
-    @Override
-    public abstract QuestionAnswering mapToAnsweringByAnswer(Map.Entry<MultipleChoiceQuestionEntity, AnswerEntity> multipleChoiceAnswer);
-
-    @Override
-    public QuestionAnswering mapToAnswering(Map.Entry<MultipleChoiceQuestionEntity, Object> multipleChoiceAnswer){
-        return mapToAnsweringByOptions(new AbstractMap.SimpleEntry<>(multipleChoiceAnswer.getKey(), (OptionsEntity) multipleChoiceAnswer.getValue()));
-    }
+    public abstract QuestionAnswering mapToAnswering(MultipleChoiceQuestionAnswerEntity answeringEntity);
 }

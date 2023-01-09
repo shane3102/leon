@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface AddNewAnswerInterface<T> {
 
-    Map.Entry<Object, AnswerEntity> persistNewAnswer(T question, AnswerEntity answer);
+    T persistNewAnswer(T question);
 }

@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.ChosenOptionWasNotFoundInAvailableOptions;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
+import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.OptionsEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
+import pl.leon.form.application.leon.service.question.interfaces.IncrementCountForOptionInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
 
 import java.util.ArrayList;
@@ -18,21 +22,25 @@ import java.util.List;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class MultipleChoiceQuestionService implements QuestionServiceInterface<MultipleChoiceQuestionEntity> {
+public class MultipleChoiceQuestionService implements QuestionServiceInterface<MultipleChoiceQuestionEntity>, IncrementCountForOptionInterface<MultipleChoiceQuestionAnswerEntity> {
     @Getter(AccessLevel.PUBLIC)
     private final QuestionMapperManager questionMapperManager;
     @Getter(AccessLevel.PUBLIC)
     private final MultipleChoiceQuestionRepository repository;
 
-    public void incrementEachOption(MultipleChoiceQuestionEntity question, OptionsEntity options) {
+    @Override
+    public void incrementOption(MultipleChoiceQuestionAnswerEntity answer) {
         log.info("incrementEachOption()");
+
+        MultipleChoiceQuestionEntity question = answer.getQuestion();
+        List<OptionEntity> options = answer.getOptions();
 
         question.setCountAnswers(question.getCountAnswers() + 1);
 
         List<Long> beforeCountList = new ArrayList<>();
         List<Long> resultCountList = new ArrayList<>();
 
-        options.getChosenOptions().forEach(option -> {
+        options.forEach(option -> {
             Long beforeCount = option.getCount();
 
             Long resultCount = question.getOptions().stream().filter(checkedOption -> checkedOption.equals(option))

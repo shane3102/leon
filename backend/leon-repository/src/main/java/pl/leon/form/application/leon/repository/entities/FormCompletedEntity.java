@@ -5,6 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.core.enums.FormLevelType;
+import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.ShortAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.SingleChoiceQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -27,6 +33,8 @@ import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -50,49 +58,27 @@ public class FormCompletedEntity {
     @Enumerated(EnumType.STRING)
     private FormLevelType uiLevel;
 
+    private Duration formCompleteDuration;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "dropdown_option_mapping",
-            joinColumns = {@JoinColumn(name = "completed_form_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "option_id", referencedColumnName = "id")})
-    @MapKeyJoinColumn(name = "dropdown_id")
-    private Map<DropdownQuestionEntity, OptionEntity> answeredDropdownQuestions;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<DropdownQuestionAnswerEntity> answeredDropdownQuestions;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "line_scale_option_mapping",
-            joinColumns = {@JoinColumn(name = "completed_form_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "option_id", referencedColumnName = "id")})
-    @MapKeyJoinColumn(name = "line_scale_id")
-    private Map<LineScaleQuestionEntity, OptionEntity> answeredLineScaleQuestions;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<LineScaleQuestionAnswerEntity> answeredLineScaleQuestions;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "long_answer_option_mapping",
-            joinColumns = {@JoinColumn(name = "completed_form_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "answer_id", referencedColumnName = "id")})
-    @MapKeyJoinColumn(name = "long_answer_id")
-    private Map<LongAnswerQuestionEntity, AnswerEntity> answeredLongAnswerQuestions;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<LongAnswerQuestionAnswerEntity> answeredLongAnswerQuestions;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "multiple_choice_option_mapping",
-            joinColumns = {@JoinColumn(name = "completed_form_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "options_id", referencedColumnName = "id")})
-    @MapKeyJoinColumn(name = "multiple_choice_id")
-    private Map<MultipleChoiceQuestionEntity, OptionsEntity> answeredMultipleChoiceQuestions;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<MultipleChoiceQuestionAnswerEntity> answeredMultipleChoiceQuestions;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "short_answer_option_mapping",
-            joinColumns = {@JoinColumn(name = "completed_form_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "answer_id", referencedColumnName = "id")})
-    @MapKeyJoinColumn(name = "short_answer_id")
-    private Map<ShortAnswerQuestionEntity, AnswerEntity> answeredShortAnswerQuestions;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<ShortAnswerQuestionAnswerEntity> answeredShortAnswerQuestions;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "single_choice_option_mapping",
-            joinColumns = {@JoinColumn(name = "completed_form_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "option_id", referencedColumnName = "id")})
-    @MapKeyJoinColumn(name = "single_choice_id")
-    private Map<SingleChoiceQuestionEntity, OptionEntity> answeredSingleChoiceQuestions;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<SingleChoiceQuestionAnswerEntity> answeredSingleChoiceQuestions;
 }

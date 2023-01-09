@@ -13,13 +13,6 @@ import java.util.Objects;
 @Service
 public class FormCompletedConstraintValidator implements ConstraintValidator<FormCompletedValidation, FormCompletedEntity> {
 
-    private FormRepository formRepository;
-
-    @Override
-    public void initialize(FormCompletedValidation constraintAnnotation) {
-        this.formRepository = (FormRepository) ValidationContextProvider.getBean(FormRepository.class);
-    }
-
     @Override
     public boolean isValid(FormCompletedEntity formCompletedEntity, ConstraintValidatorContext context) {
 
@@ -42,10 +35,9 @@ public class FormCompletedConstraintValidator implements ConstraintValidator<For
         boolean result =
                 formInDatabase.getDropdownQuestions().size() == formCompleted.getAnsweredDropdownQuestions().size() &&
                         formCompleted
-                                .getAnsweredDropdownQuestions()
-                                .keySet().stream()
+                                .getAnsweredDropdownQuestions().stream()
                                 .allMatch(dropdownQuestion -> formInDatabase.getDropdownQuestions().stream()
-                                        .anyMatch(persistedDropDownQuestion -> Objects.equals(dropdownQuestion.getId(), persistedDropDownQuestion.getId())));
+                                        .anyMatch(persistedDropDownQuestion -> Objects.equals(dropdownQuestion.getQuestion().getId(), persistedDropDownQuestion.getId())));
 
 
         if (!result) {
@@ -59,12 +51,12 @@ public class FormCompletedConstraintValidator implements ConstraintValidator<For
 
     public boolean doCompletedFormHasSameLineScaleQuestionsAsFormInDatabase(FormEntity formInDatabase, FormCompletedEntity formCompleted, ConstraintValidatorContext context) {
         boolean result =
-                formInDatabase.getDropdownQuestions().size() == formCompleted.getAnsweredDropdownQuestions().size() &&
+                formInDatabase.getLineScaleQuestions().size() == formCompleted.getAnsweredLineScaleQuestions().size() &&
                         formCompleted
-                                .getAnsweredLineScaleQuestions()
-                                .keySet().stream()
+                                .getAnsweredLineScaleQuestions().stream()
                                 .allMatch(lineScaleQuestion -> formInDatabase.getLineScaleQuestions().stream()
-                                        .anyMatch(persistedLineScaleQuestion -> Objects.equals(lineScaleQuestion.getId(), persistedLineScaleQuestion.getId())));
+                                        .anyMatch(persistedLineScaleQuestion -> Objects.equals(lineScaleQuestion.getQuestion().getId(), persistedLineScaleQuestion.getId())));
+
 
         if (!result) {
             context.buildConstraintViolationWithTemplate(
@@ -76,13 +68,14 @@ public class FormCompletedConstraintValidator implements ConstraintValidator<For
     }
 
     public boolean doCompletedFormHasSameLongAnswerQuestionsAsFormInDatabase(FormEntity formInDatabase, FormCompletedEntity formCompleted, ConstraintValidatorContext context) {
+
         boolean result =
                 formInDatabase.getLongAnswerQuestions().size() == formCompleted.getAnsweredLongAnswerQuestions().size() &&
                         formCompleted
-                                .getAnsweredLongAnswerQuestions()
-                                .keySet().stream()
+                                .getAnsweredLongAnswerQuestions().stream()
                                 .allMatch(longAnswerQuestion -> formInDatabase.getLongAnswerQuestions().stream()
-                                        .anyMatch(persistedLongAnswerQuestion -> Objects.equals(longAnswerQuestion.getId(), persistedLongAnswerQuestion.getId())));
+                                        .anyMatch(persistedLongAnswerQuestion -> Objects.equals(longAnswerQuestion.getQuestion().getId(), persistedLongAnswerQuestion.getId())));
+
 
         if (!result) {
             context.buildConstraintViolationWithTemplate(
@@ -97,10 +90,10 @@ public class FormCompletedConstraintValidator implements ConstraintValidator<For
         boolean result =
                 formInDatabase.getMultipleChoiceQuestions().size() == formCompleted.getAnsweredMultipleChoiceQuestions().size() &&
                         formCompleted
-                                .getAnsweredMultipleChoiceQuestions()
-                                .keySet().stream()
+                                .getAnsweredMultipleChoiceQuestions().stream()
                                 .allMatch(multipleChoiceQuestion -> formInDatabase.getMultipleChoiceQuestions().stream()
-                                        .anyMatch(persistedMultipleChoiceQuestion -> Objects.equals(multipleChoiceQuestion.getId(), persistedMultipleChoiceQuestion.getId())));
+                                        .anyMatch(persistedMultipleChoiceQuestion -> Objects.equals(multipleChoiceQuestion.getQuestion().getId(), persistedMultipleChoiceQuestion.getId())));
+
 
         if (!result) {
             context.buildConstraintViolationWithTemplate(
@@ -115,10 +108,10 @@ public class FormCompletedConstraintValidator implements ConstraintValidator<For
         boolean result =
                 formInDatabase.getShortAnswerQuestions().size() == formCompleted.getAnsweredShortAnswerQuestions().size() &&
                         formCompleted
-                                .getAnsweredShortAnswerQuestions()
-                                .keySet().stream()
+                                .getAnsweredShortAnswerQuestions().stream()
                                 .allMatch(shortAnswerQuestion -> formInDatabase.getShortAnswerQuestions().stream()
-                                        .anyMatch(persistedShortAnswerQuestion -> Objects.equals(shortAnswerQuestion.getId(), persistedShortAnswerQuestion.getId())));
+                                        .anyMatch(persistedShortAnswerQuestion -> Objects.equals(shortAnswerQuestion.getQuestion().getId(), persistedShortAnswerQuestion.getId())));
+
 
         if (!result) {
             context.buildConstraintViolationWithTemplate(
@@ -133,10 +126,10 @@ public class FormCompletedConstraintValidator implements ConstraintValidator<For
         boolean result =
                 formInDatabase.getSingleChoiceQuestions().size() == formCompleted.getAnsweredSingleChoiceQuestions().size() &&
                         formCompleted
-                                .getAnsweredSingleChoiceQuestions()
-                                .keySet().stream()
+                                .getAnsweredSingleChoiceQuestions().stream()
                                 .allMatch(singleChoiceQuestion -> formInDatabase.getSingleChoiceQuestions().stream()
-                                        .anyMatch(persistedSingleChoiceQuestion -> Objects.equals(singleChoiceQuestion.getId(), persistedSingleChoiceQuestion.getId())));
+                                        .anyMatch(persistedSingleChoiceQuestion -> Objects.equals(singleChoiceQuestion.getQuestion().getId(), persistedSingleChoiceQuestion.getId())));
+
 
         if (!result) {
             context.buildConstraintViolationWithTemplate(

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
 
+import java.time.Duration;
 import java.util.Set;
 
 @Data
@@ -18,4 +19,5 @@ public class QuestionAnswering {
     private Set<Option> chosenOptions;
     private String answer;
     private QuestionType type;
+    private Duration durationToAnswer;
 }

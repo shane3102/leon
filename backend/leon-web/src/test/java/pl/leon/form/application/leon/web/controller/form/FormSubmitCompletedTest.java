@@ -28,6 +28,12 @@ import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.ShortAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.question_answers.SingleChoiceQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -35,16 +41,15 @@ import pl.leon.form.application.leon.repository.entities.questions.MultipleChoic
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.time.Duration.ZERO;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -110,8 +115,8 @@ public class FormSubmitCompletedTest {
     private static final Long ANSWER_DEFAULT_COUNT = 1L;
     private static final Long EXPECTED_ANSWER_COUNT = 2L;
 
-    private static  final Long QUESTION_DEFAULT_COUNT = 4L;
-    private static  final Long EXPECTED_QUESTION_COUNT = 5L;
+    private static final Long QUESTION_DEFAULT_COUNT = 4L;
+    private static final Long EXPECTED_QUESTION_COUNT = 5L;
 
     private static final String ANSWER_FOR_TEXT_QUESTION_1 = "Odpowiedz konkretna 1";
     private static final String ANSWER_FOR_TEXT_QUESTION_2 = "Odpowiedz konkretna 2";
@@ -170,47 +175,53 @@ public class FormSubmitCompletedTest {
         return Stream.of(
                 Arguments.of(
                         form1,
-                        Map.of(
-                                dropdownQuestion1, 2,
-                                dropdownQuestion3, 1
+                        List.of(
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion1).option(dropdownQuestion1.getOptions().get(2)).durationToAnswer(ZERO).build(),
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion3).option(dropdownQuestion3.getOptions().get(1)).durationToAnswer(ZERO).build()
                         ),
-                        Map.of(
-                                lineScaleQuestion2, 0
+                        List.of(
+                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion2).option(lineScaleQuestion2.getOptions().get(0)).durationToAnswer(ZERO).build()
                         ),
-                        Map.of(
-                                multipleChoiceQuestion3, 3
+                        List.of(
+                                MultipleChoiceQuestionAnswerEntity.builder().question(multipleChoiceQuestion3).options(List.of(multipleChoiceQuestion3.getOptions().get(3))).build()
                         ),
-                        Map.of(singleChoiceQuestion1, 1),
-                        Map.of(
-                                shortAnswerQuestion1, ANSWER_FOR_TEXT_QUESTION_1,
-                                shortAnswerQuestion4, ANSWER_FOR_TEXT_QUESTION_3
+                        List.of(
+                                SingleChoiceQuestionAnswerEntity.builder().question(singleChoiceQuestion1).option(singleChoiceQuestion1.getOptions().get(1)).build()
                         ),
-                        Map.of(
-                                longAnswerQuestion2, ANSWER_FOR_TEXT_QUESTION_2,
-                                longAnswerQuestion4, ANSWER_FOR_TEXT_QUESTION_4
+                        List.of(
+                                ShortAnswerQuestionAnswerEntity.builder().question(shortAnswerQuestion1).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_1).build()).build(),
+                                ShortAnswerQuestionAnswerEntity.builder().question(shortAnswerQuestion4).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_3).build()).build()
+                        ),
+                        List.of(
+                                LongAnswerQuestionAnswerEntity.builder().question(longAnswerQuestion2).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_2).build()).build(),
+                                LongAnswerQuestionAnswerEntity.builder().question(longAnswerQuestion4).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_4).build()).build()
                         )
                 ),
                 Arguments.of(
                         null,
-                        Map.of(
-                                dropdownQuestion1, 0,
-                                dropdownQuestion2, 1
+                        List.of(
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion1).option(dropdownQuestion1.getOptions().get(0)).durationToAnswer(ZERO).build(),
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion2).option(dropdownQuestion2.getOptions().get(1)).durationToAnswer(ZERO).build()
                         ),
-                        Map.of(
-                                lineScaleQuestion1, 2,
-                                lineScaleQuestion3, 3
+                        List.of(
+                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion1).option(lineScaleQuestion1.getOptions().get(2)).durationToAnswer(ZERO).build(),
+                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion3).option(lineScaleQuestion3.getOptions().get(3)).durationToAnswer(ZERO).build()
                         ),
-                        Map.of(
-                                multipleChoiceQuestion3, 1,
-                                multipleChoiceQuestion4, 2
+                        List.of(
+                                MultipleChoiceQuestionAnswerEntity.builder().question(multipleChoiceQuestion3).options(List.of(multipleChoiceQuestion3.getOptions().get(1))).build(),
+                                MultipleChoiceQuestionAnswerEntity.builder().question(multipleChoiceQuestion4).options(List.of(multipleChoiceQuestion4.getOptions().get(2))).build()
                         ),
-                        Map.of(singleChoiceQuestion1, 0),
-                        Map.of(
-                                shortAnswerQuestion1, ANSWER_FOR_TEXT_QUESTION_1,
-                                shortAnswerQuestion3, ANSWER_FOR_TEXT_QUESTION_2,
-                                shortAnswerQuestion4, ANSWER_FOR_TEXT_QUESTION_3
+                        List.of(
+                                SingleChoiceQuestionAnswerEntity.builder().question(singleChoiceQuestion1).option(singleChoiceQuestion1.getOptions().get(0)).build()
                         ),
-                        Map.of(longAnswerQuestion4, ANSWER_FOR_TEXT_QUESTION_4)
+                        List.of(
+                                ShortAnswerQuestionAnswerEntity.builder().question(shortAnswerQuestion1).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_1).build()).build(),
+                                ShortAnswerQuestionAnswerEntity.builder().question(shortAnswerQuestion3).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_2).build()).build(),
+                                ShortAnswerQuestionAnswerEntity.builder().question(shortAnswerQuestion4).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_3).build()).build()
+                        ),
+                        List.of(
+                                LongAnswerQuestionAnswerEntity.builder().question(longAnswerQuestion4).answer(AnswerEntity.builder().content(ANSWER_FOR_TEXT_QUESTION_4).build()).build()
+                        )
                 )
         );
     }
@@ -333,20 +344,20 @@ public class FormSubmitCompletedTest {
     @MethodSource("questionProvider")
     void givenCompletedForm_whenSubmit_thenConcreteFormSubmittedAndOptionsIncrementedAndAnswersAdded(
             FormEntity submittedForm,
-            Map<DropdownQuestionEntity, Integer> dropdownQuestionAndAnswerNumber,
-            Map<LineScaleQuestionEntity, Integer> lineScaleQuestionAndAnswerNumber,
-            Map<MultipleChoiceQuestionEntity, Integer> multipleChoiceQuestionAndAnswerNumber,
-            Map<SingleChoiceQuestionEntity, Integer> singleChoiceQuestionAndAnswerNumber,
-            Map<ShortAnswerQuestionEntity, String> shortAnswerQuestionAndAnswerNumber,
-            Map<LongAnswerQuestionEntity, String> longAnswerQuestionAndAnswerNumber
+            List<DropdownQuestionAnswerEntity> dropdownAnswering,
+            List<LineScaleQuestionAnswerEntity> lineScaleAnswering,
+            List<MultipleChoiceQuestionAnswerEntity> multipleChoiceAnswering,
+            List<SingleChoiceQuestionAnswerEntity> singleChoiceAnswering,
+            List<ShortAnswerQuestionAnswerEntity> shortAnswerAnswering,
+            List<LongAnswerQuestionAnswerEntity> longAnswerAnswering
     ) throws Exception {
         // given
-        Stream<QuestionAnswering> dropdownQuestionAnsweringStream = dropdownQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), map.getKey().getOptions().get(map.getValue()))));
-        Stream<QuestionAnswering> lineScaleQuestionAnsweringStream = lineScaleQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), map.getKey().getOptions().get(map.getValue()))));
-        Stream<QuestionAnswering> multipleChoiceQuestionAnsweringStream = multipleChoiceQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), OptionsEntity.builder().chosenOptions(new ArrayList<>(List.of(map.getKey().getOptions().get(map.getValue())))).build())));
-        Stream<QuestionAnswering> singleChoiceQuestionAnsweringStream = singleChoiceQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), map.getKey().getOptions().get(map.getValue()))));
-        Stream<QuestionAnswering> shortAnswerQuestionAnsweringStream = shortAnswerQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), AnswerEntity.builder().content(map.getValue()).build())));
-        Stream<QuestionAnswering> longAnswerQuestionAnsweringStream = longAnswerQuestionAndAnswerNumber.entrySet().stream().map(map -> questionMapperManager.mapToAnswering(new AbstractMap.SimpleEntry<>(map.getKey(), AnswerEntity.builder().content(map.getValue()).build())));
+        Stream<QuestionAnswering> dropdownQuestionAnsweringStream = dropdownAnswering.stream().map(map -> questionMapperManager.mapToAnswering(map));
+        Stream<QuestionAnswering> lineScaleQuestionAnsweringStream = lineScaleAnswering.stream().map(map -> questionMapperManager.mapToAnswering(map));
+        Stream<QuestionAnswering> multipleChoiceQuestionAnsweringStream = multipleChoiceAnswering.stream().map(map -> questionMapperManager.mapToAnswering(map));
+        Stream<QuestionAnswering> singleChoiceQuestionAnsweringStream = singleChoiceAnswering.stream().map(map -> questionMapperManager.mapToAnswering(map));
+        Stream<QuestionAnswering> shortAnswerQuestionAnsweringStream = shortAnswerAnswering.stream().map(map -> questionMapperManager.mapToAnswering(map));
+        Stream<QuestionAnswering> longAnswerQuestionAnsweringStream = longAnswerAnswering.stream().map(map -> questionMapperManager.mapToAnswering(map));
 
         List<QuestionAnswering> answeredQuestion = Stream.of(
                         dropdownQuestionAnsweringStream,
@@ -377,17 +388,17 @@ public class FormSubmitCompletedTest {
 
         FormCompleted responseFormCompleted = mapper.readValue(responseJson, FormCompleted.class);
 
-        List<Long> dropdownChosenAnswerCount = dropdownQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> dropdownQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
-        List<Long> lineScaleChosenAnswerCount = lineScaleQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> lineScaleQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
-        List<Long> multipleChoiceChosenAnswerCount = multipleChoiceQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> multipleChoiceQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
-        List<Long> singleChoiceChosenAnswerCount = singleChoiceQuestionAndAnswerNumber.entrySet().stream().map(keyValue -> singleChoiceQuestionRepository.getById(keyValue.getKey().getId()).getOptions().get(keyValue.getValue()).getCount()).collect(Collectors.toList());
+        List<Long> dropdownChosenAnswerCount = dropdownAnswering.stream().map(dropdownQuestionConcreteAnswering -> optionRepository.getById(dropdownQuestionConcreteAnswering.getOption().getId()).getCount()).collect(Collectors.toList());
+        List<Long> lineScaleChosenAnswerCount = lineScaleAnswering.stream().map(lineScaleQuestionConcreteAnswering -> optionRepository.getById(lineScaleQuestionConcreteAnswering.getOption().getId()).getCount()).collect(Collectors.toList());
+        List<Long> multipleChoiceChosenAnswerCount = multipleChoiceAnswering.stream().flatMap(multipleChoiceQuestionConcreteAnswering -> multipleChoiceQuestionConcreteAnswering.getOptions().stream().map(m -> optionRepository.getById(m.getId()).getCount())).collect(Collectors.toList());
+        List<Long> singleChoiceChosenAnswerCount = singleChoiceAnswering.stream().map(singleChoiceQuestionConcreteAnswering -> optionRepository.getById(singleChoiceQuestionConcreteAnswering.getOption().getId()).getCount()).collect(Collectors.toList());
 
-        List<Long> dropdownQuestionAnswersCount = dropdownQuestionAndAnswerNumber.keySet().stream().map(integer -> dropdownQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
-        List<Long> lineScaleQuestionAnswersCount = lineScaleQuestionAndAnswerNumber.keySet().stream().map(integer -> lineScaleQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
-        List<Long> multipleChoiceQuestionAnswersCount = multipleChoiceQuestionAndAnswerNumber.keySet().stream().map(integer -> multipleChoiceQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
-        List<Long> singleChoiceQuestionAnswersCount = singleChoiceQuestionAndAnswerNumber.keySet().stream().map(integer -> singleChoiceQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
-        List<Long> shortAnswerQuestionAnswersCount = shortAnswerQuestionAndAnswerNumber.keySet().stream().map(integer -> shortAnswerQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
-        List<Long> longAnswerQuestionAnswersCount = longAnswerQuestionAndAnswerNumber.keySet().stream().map(integer -> longAnswerQuestionRepository.getById(integer.getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> dropdownQuestionAnswersCount = dropdownAnswering.stream().map(integer -> dropdownQuestionRepository.getById(integer.getQuestion().getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> lineScaleQuestionAnswersCount = lineScaleAnswering.stream().map(integer -> lineScaleQuestionRepository.getById(integer.getQuestion().getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> multipleChoiceQuestionAnswersCount = multipleChoiceAnswering.stream().map(integer -> multipleChoiceQuestionRepository.getById(integer.getQuestion().getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> singleChoiceQuestionAnswersCount = singleChoiceAnswering.stream().map(integer -> singleChoiceQuestionRepository.getById(integer.getQuestion().getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> shortAnswerQuestionAnswersCount = shortAnswerAnswering.stream().map(integer -> shortAnswerQuestionRepository.getById(integer.getQuestion().getId()).getCountAnswers()).collect(Collectors.toList());
+        List<Long> longAnswerQuestionAnswersCount = longAnswerAnswering.stream().map(integer -> longAnswerQuestionRepository.getById(integer.getQuestion().getId()).getCountAnswers()).collect(Collectors.toList());
 
         // then
         assertAll(
@@ -395,64 +406,64 @@ public class FormSubmitCompletedTest {
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> DROPDOWN.equals(answer.getType()))
                         .allMatch(dropdownAnswer -> {
-                            Optional<Map.Entry<DropdownQuestionEntity, Integer>> foundDropdownCorrespondingEntity = dropdownQuestionAndAnswerNumber
-                                    .entrySet().stream()
-                                    .filter(dropdownEntity -> Objects.equals(dropdownEntity.getKey().getId(), dropdownAnswer.getId()))
+                            Optional<DropdownQuestionAnswerEntity> foundDropdownCorrespondingEntity = dropdownAnswering
+                                    .stream()
+                                    .filter(dropdownEntity -> Objects.equals(dropdownEntity.getQuestion().getId(), dropdownAnswer.getId()))
                                     .findFirst();
                             return foundDropdownCorrespondingEntity.isPresent() &&
-                                    options.get(foundDropdownCorrespondingEntity.get().getValue()).equals(dropdownAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
+                                    foundDropdownCorrespondingEntity.get().getOption().getContent().equals(dropdownAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> LINE_SCALE.equals(answer.getType()))
                         .allMatch(lineScaleAnswer -> {
-                            Optional<Map.Entry<LineScaleQuestionEntity, Integer>> foundLineScaleCorrespondingEntity = lineScaleQuestionAndAnswerNumber
-                                    .entrySet().stream()
-                                    .filter(dropdownEntity -> Objects.equals(dropdownEntity.getKey().getId(), lineScaleAnswer.getId()))
+                            Optional<LineScaleQuestionAnswerEntity> foundLineScaleCorrespondingEntity = lineScaleAnswering
+                                    .stream()
+                                    .filter(dropdownEntity -> Objects.equals(dropdownEntity.getQuestion().getId(), lineScaleAnswer.getId()))
                                     .findFirst();
                             return foundLineScaleCorrespondingEntity.isPresent() &&
-                                    options.get(foundLineScaleCorrespondingEntity.get().getValue()).equals(lineScaleAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
+                                    foundLineScaleCorrespondingEntity.get().getOption().getContent().equals(lineScaleAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> MULTIPLE_CHOICE.equals(answer.getType()))
                         .allMatch(multipleChoiceAnswer -> {
-                            Optional<Map.Entry<MultipleChoiceQuestionEntity, Integer>> foundMultipleChoiceCorrespondingEntity = multipleChoiceQuestionAndAnswerNumber
-                                    .entrySet().stream()
-                                    .filter(multipleChoiceEntity -> Objects.equals(multipleChoiceEntity.getKey().getId(), multipleChoiceAnswer.getId()))
+                            Optional<MultipleChoiceQuestionAnswerEntity> foundMultipleChoiceCorrespondingEntity = multipleChoiceAnswering
+                                    .stream()
+                                    .filter(multipleChoiceEntity -> Objects.equals(multipleChoiceEntity.getQuestion().getId(), multipleChoiceAnswer.getId()))
                                     .findFirst();
                             return foundMultipleChoiceCorrespondingEntity.isPresent() &&
-                                    options.get(foundMultipleChoiceCorrespondingEntity.get().getValue()).equals(multipleChoiceAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
+                                    foundMultipleChoiceCorrespondingEntity.get().getOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent().equals(multipleChoiceAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> SINGLE_CHOICE.equals(answer.getType()))
                         .allMatch(singleChoiceAnswer -> {
-                            Optional<Map.Entry<SingleChoiceQuestionEntity, Integer>> foundSingleChoiceCorrespondingEntity = singleChoiceQuestionAndAnswerNumber
-                                    .entrySet().stream()
-                                    .filter(singleChoiceEntity -> Objects.equals(singleChoiceEntity.getKey().getId(), singleChoiceAnswer.getId()))
+                            Optional<SingleChoiceQuestionAnswerEntity> foundSingleChoiceCorrespondingEntity = singleChoiceAnswering
+                                    .stream()
+                                    .filter(singleChoiceEntity -> Objects.equals(singleChoiceEntity.getQuestion().getId(), singleChoiceAnswer.getId()))
                                     .findFirst();
                             return foundSingleChoiceCorrespondingEntity.isPresent() &&
-                                    options.get(foundSingleChoiceCorrespondingEntity.get().getValue()).equals(singleChoiceAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
+                                    foundSingleChoiceCorrespondingEntity.get().getOption().getContent().equals(singleChoiceAnswer.getChosenOptions().stream().findFirst().orElseThrow(AssertionError::new).getContent());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> SHORT_ANSWER.equals(answer.getType()))
                         .allMatch(shortAnswer -> {
-                            Optional<Map.Entry<ShortAnswerQuestionEntity, String>> foundShortAnswerCorrespondingEntity = shortAnswerQuestionAndAnswerNumber
-                                    .entrySet().stream()
-                                    .filter(shortAnswerEntity -> Objects.equals(shortAnswerEntity.getKey().getId(), shortAnswer.getId()))
+                            Optional<ShortAnswerQuestionAnswerEntity> foundShortAnswerCorrespondingEntity = shortAnswerAnswering
+                                    .stream()
+                                    .filter(shortAnswerEntity -> Objects.equals(shortAnswerEntity.getQuestion().getId(), shortAnswer.getId()))
                                     .findFirst();
 
                             return foundShortAnswerCorrespondingEntity.isPresent() &&
-                                    foundShortAnswerCorrespondingEntity.get().getValue().equals(shortAnswer.getAnswer());
+                                    foundShortAnswerCorrespondingEntity.get().getAnswer().getContent().equals(shortAnswer.getAnswer());
                         })),
                 () -> assertTrue(responseFormCompleted.getAnswers().stream()
                         .filter(answer -> LONG_ANSWER.equals(answer.getType()))
                         .allMatch(longAnswer -> {
-                            Optional<Map.Entry<LongAnswerQuestionEntity, String>> foundShortAnswerCorrespondingEntity = longAnswerQuestionAndAnswerNumber
-                                    .entrySet().stream()
-                                    .filter(longAnswerEntity -> Objects.equals(longAnswerEntity.getKey().getId(), longAnswer.getId()))
+                            Optional<LongAnswerQuestionAnswerEntity> foundShortAnswerCorrespondingEntity = longAnswerAnswering
+                                    .stream()
+                                    .filter(longAnswerEntity -> Objects.equals(longAnswerEntity.getQuestion().getId(), longAnswer.getId()))
                                     .findFirst();
 
                             return foundShortAnswerCorrespondingEntity.isPresent() &&
-                                    foundShortAnswerCorrespondingEntity.get().getValue().equals(longAnswer.getAnswer());
+                                    foundShortAnswerCorrespondingEntity.get().getAnswer().getContent().equals(longAnswer.getAnswer());
                         })),
 
                 () -> assertTrue(dropdownChosenAnswerCount.stream().allMatch(count -> Objects.equals(EXPECTED_ANSWER_COUNT, count))),
