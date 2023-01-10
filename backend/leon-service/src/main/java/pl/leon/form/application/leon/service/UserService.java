@@ -35,8 +35,6 @@ public class UserService implements UserDetailsService {
         UserEntity newUser = UserEntity.builder()
                 .username(registrationRequest.getUsername())
                 .email(registrationRequest.getEmail())
-                .isEnabled(true)
-                .roles(/*TODO dodawanie ról*/null)
                 .password(securityUtils.getPasswordEncoder().encode(registrationRequest.getPassword()))
                 .build();
 

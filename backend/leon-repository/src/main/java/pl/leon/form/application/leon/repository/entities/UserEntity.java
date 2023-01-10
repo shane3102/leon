@@ -20,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,10 +37,6 @@ public class UserEntity implements UserDetails {
     private String username;
     private String password;
     private String email;
-    // TODO na enum
-    private boolean isEnabled;
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     private List<FormEntity> addedForms;
@@ -51,7 +48,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return Collections.emptyList();
     }
 
     @Override
@@ -66,6 +63,11 @@ public class UserEntity implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
         return true;
     }
 }
