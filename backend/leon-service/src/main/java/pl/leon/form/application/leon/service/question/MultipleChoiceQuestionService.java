@@ -9,7 +9,6 @@ import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.Chosen
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
-import pl.leon.form.application.leon.repository.entities.OptionsEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;

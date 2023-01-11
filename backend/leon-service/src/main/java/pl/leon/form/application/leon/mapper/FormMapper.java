@@ -23,7 +23,6 @@ import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
 import pl.leon.form.application.leon.repository.LongAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.MultipleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.OptionRepository;
-import pl.leon.form.application.leon.repository.entities.OptionsEntity;
 import pl.leon.form.application.leon.repository.ShortAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
@@ -265,15 +264,6 @@ public abstract class FormMapper {
     protected List<OptionEntity> mapToMultipleOptions(Set<Option> options) {
         return options.stream().map(option ->
                 optionRepository.getById(option.getId())).collect(Collectors.toList());
-    }
-
-    protected OptionsEntity mapToMultipleOptions(QuestionAnswering answering) {
-        return OptionsEntity.builder()
-                .id(answering.getId())
-                .chosenOptions(answering.getChosenOptions()
-                        .stream()
-                        .map(option -> optionRepository.getById(option.getId())).collect(Collectors.toList()))
-                .build();
     }
 
     protected List<ShortAnswerQuestionEntity> mapToShortAnswerQuestions(List<QuestionCreateRequest> requests) {
