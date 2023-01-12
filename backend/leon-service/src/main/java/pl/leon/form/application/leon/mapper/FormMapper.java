@@ -171,7 +171,7 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected List<DropdownQuestionAnswerEntity> mapDropdownAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<DropdownQuestionAnswerEntity> mapDropdownAnswerToDropdownQuestionAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> DROPDOWN.equals(answer.getType()))
                 .map(answer ->
@@ -197,7 +197,7 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected List<LineScaleQuestionAnswerEntity> mapLineScaleAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<LineScaleQuestionAnswerEntity> mapLineScaleAnswerToLineScaleQuestionAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> LINE_SCALE.equals(answer.getType()))
                 .map(answer ->
@@ -222,7 +222,7 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected List<LongAnswerQuestionAnswerEntity> mapLongAnswerAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<LongAnswerQuestionAnswerEntity> mapLongAnswerAnswerToLongAnswerQuestionAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> LONG_ANSWER.equals(answer.getType()))
                 .map(answer ->
@@ -248,7 +248,7 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected List<MultipleChoiceQuestionAnswerEntity> mapMultipleChoiceAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<MultipleChoiceQuestionAnswerEntity> mapMultipleChoiceAnswerToMultipleChoiceQuestionAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> MULTIPLE_CHOICE.equals(answer.getType()))
                 .map(answer ->
@@ -278,7 +278,7 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected List<ShortAnswerQuestionAnswerEntity> mapShortAnswerAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<ShortAnswerQuestionAnswerEntity> mapShortAnswerAnswerToShortAnswerQuestionAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> SHORT_ANSWER.equals(answer.getType()))
                 .map(answer ->
@@ -291,7 +291,7 @@ public abstract class FormMapper {
                 .collect(Collectors.toList());
     }
 
-    protected List<SingleChoiceQuestionEntity> mapToSingleTypeQuestions(List<QuestionCreateRequest> requests) {
+    protected List<SingleChoiceQuestionEntity> mapToSingleChoiceQuestions(List<QuestionCreateRequest> requests) {
         return requests.stream().filter(request -> SINGLE_CHOICE.equals(request.getType()))
                 .map(this::mapToSingleChoiceQuestion)
                 .collect(Collectors.toList());
@@ -304,7 +304,7 @@ public abstract class FormMapper {
                 .build();
     }
 
-    protected List<SingleChoiceQuestionAnswerEntity> mapSingleChoiceAnswerToMapWithQuestionAndAnswer(List<QuestionAnswering> requests) {
+    protected List<SingleChoiceQuestionAnswerEntity> mapSingleChoiceAnswerToSingleChoiceQuestionAnswer(List<QuestionAnswering> requests) {
         return requests.stream()
                 .filter(answer -> SINGLE_CHOICE.equals(answer.getType()))
                 .map(answer ->
