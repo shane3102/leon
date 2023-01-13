@@ -17,7 +17,10 @@ public enum ExceptionMessages {
     THERE_IS_NO_QUESTION_SERVICE("While obtaining there is no question service found. Probably critical error"),
 
     // internal server error
-    EXCEPTION_WHEN_FILTER_CHAINING_AUTHENTICATION("There was an exception when filter chaining authentication. Exception message: ");
+    EXCEPTION_WHEN_FILTER_CHAINING_AUTHENTICATION("There was an exception when filter chaining authentication. Exception message: "),
+
+    // not found
+    FORM_NOT_FOUND("There is no form with given id");
 
     private final String message;
 }
