@@ -3,6 +3,7 @@ package pl.leon.form.application.leon.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.leon.form.application.leon.core.exceptions.not_found.concrete.FormNotFound;
 import pl.leon.form.application.leon.mapper.FormMapper;
 import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
@@ -54,18 +55,11 @@ public class FormService {
         return mapper.mapToSnippetResponses(formRepository.findAll());
     }
 
-    public FormEntity read(Long id) {
-        return formRepository.findById(id).orElse(null);
-    }
-
-    public FormEntity update(Long id, FormEntity formEntity) {
-        formEntity.setId(id);
-        return formRepository.save(formEntity);
-    }
-
-    public void delete(Long id) {
-        if (formRepository.existsById(id)) {
-            formRepository.deleteById(id);
-        }
+    public FormResponse readConcreteForm(Long id) {
+        log.info("readConcreteForm({})", id);
+        FormEntity formEntity = formRepository.findById(id).orElseThrow(FormNotFound::new);
+        FormResponse formResponse = mapper.mapToResponse(formEntity);
+        log.info("readConcreteForm({}) = {}", id, formResponse);
+        return formResponse;
     }
 }
