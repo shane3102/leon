@@ -33,9 +33,9 @@ public class FormController {
     private final FormToCompleteService formToCompleteService;
 
     @GetMapping("/get-random-form")
-    public ResponseEntity<FormToCompleteResponse> getRandomForm(@RequestParam(name = "question-count") Short questionPerTypeCount) {
+    public ResponseEntity<FormToCompleteResponse> getRandomForm(@RequestParam(name = "question-count") Short questionToGenerateCount) {
         log.info("getRandomForm()");
-        FormToCompleteResponse response = formToCompleteService.generateFormToComplete(questionPerTypeCount);
+        FormToCompleteResponse response = formToCompleteService.generateFormToComplete(questionToGenerateCount);
         log.info("getRandomForm() = {}", response);
         return ResponseEntity.ok(response);
     }
