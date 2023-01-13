@@ -33,7 +33,7 @@ public class FormController {
     private final FormToCompleteService formToCompleteService;
 
     @GetMapping("/get-random-form")
-    public ResponseEntity<FormToCompleteResponse> getRandomForm(@RequestParam(name = "question-count") Short questionToGenerateCount) {
+    public ResponseEntity<?> getRandomForm(@RequestParam(name = "question-count") Short questionToGenerateCount) {
         log.info("getRandomForm()");
         FormToCompleteResponse response = formToCompleteService.generateFormToComplete(questionToGenerateCount);
         log.info("getRandomForm() = {}", response);
@@ -41,7 +41,7 @@ public class FormController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FormResponse> getConcreteForm(@PathVariable Long id) {
+    public ResponseEntity<?> getConcreteForm(@PathVariable Long id) {
         log.info("getConcreteForm({})", id);
         FormResponse formResponse = formService.readConcreteForm(id);
         log.info("getConcreteForm({}) = {}", id, formResponse);
