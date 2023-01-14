@@ -1,3 +1,7 @@
-#mainPage{
+#mainPage {
+    margin-left: 30px;
+    margin-right: 30px;
+    top:30px;
     border-style: solid;
+    text-align: center;
 }

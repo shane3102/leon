@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { ButtonComponent } from './components/headerButton/headerButton.component';
-import { MainPageButtonComponent } from './main-page-button/main-page-button.component';
+import { MainPageButtonComponent } from './components/main-page-button/main-page-button.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MainPageButtonComponent } from './main-page-button/main-page-button.com
     HeaderComponent,
     MainPageComponent,
     ButtonComponent,
-    MainPageButtonComponent
+    MainPageButtonComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
