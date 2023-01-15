@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header-button',
-  templateUrl: './headerButton.component.html',
-  styleUrls: ['./headerButton.component.css']
+  templateUrl: './header-button.component.html',
+  styleUrls: ['./header-button.component.css']
 })
 export class ButtonComponent implements OnInit {
   @Input() color: String;
