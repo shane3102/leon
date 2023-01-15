@@ -1,6 +1,8 @@
 package pl.leon.form.application.leon.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -13,11 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static pl.leon.form.application.leon.core.exceptions.ExceptionMessages.COULD_NOT_PARSE_LOGIN_REQUEST_ATTEMPT;
+import static pl.leon.form.application.leon.core.exceptions.ExceptionMessages.OTHER_EXCEPTION_WHILE_EXTRACTING_TOKEN;
+
 public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
+    @SneakyThrows
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         try {
             BufferedReader reader = request.getReader();
@@ -32,10 +38,12 @@ public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticati
             );
             setDetails(request, token);
             return this.getAuthenticationManager().authenticate(token);
+            // TODO ogarnąć by był ładny message bo tera niema
         } catch (IOException e) {
-            throw new CouldNotParseLoginRequestAttempt();
+            response.sendError(HttpStatus.BAD_REQUEST.value(), COULD_NOT_PARSE_LOGIN_REQUEST_ATTEMPT.getMessage());
         } catch (Exception e) {
-            throw new OtherExceptionWhileExtractingToken(e.getMessage());
+            response.sendError(HttpStatus.I_AM_A_TEAPOT.value(), OTHER_EXCEPTION_WHILE_EXTRACTING_TOKEN.getMessage());
         }
+        return null;
     }
 }
