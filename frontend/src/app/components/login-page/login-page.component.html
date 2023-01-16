@@ -1,0 +1,13 @@
+<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+    <div>
+        <input type="text" formControlName="username">
+        <div id="usernameValidationInfo"></div>
+    </div>
+    <div>
+        <input type="password" formControlName="password">
+        <div id="passwordValidationInfo"></div>
+    </div>
+    <div>
+        <input type="submit" value="Zaloguj">
+    </div>
+</form>
