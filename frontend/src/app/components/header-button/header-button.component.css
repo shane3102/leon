@@ -3,15 +3,15 @@
 }
 
 #btn {
-    font-size: 10px;
+    font-size: 20px;
     padding: 8px;
     border: 0px;
     border-radius: 20px 0px 20px 0px;
-    margin: 2px;
+    margin: 5px;
     display: flex;
 }
 
 #btn:active {
-    margin: 4px;
+    margin: 7px;
     padding: 6px;
 }

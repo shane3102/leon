@@ -1,18 +1,18 @@
 #header{
-    border-radius: 0px 0px 30px 0px;
+    border-radius: 0px 0px 50px 0px;
     background-color: #BAFF39;
     color: #6E6E6E;
-    height: 30px;
+    height: 50px;
     padding: 5px;
     padding-right: 20px;
     padding-left: 20px;
-    font-size: 22px;
+    font-size: 40px;
 }
 
 #popisuwa{
-    top: 40px;
-    height: 30px;
-    width: 30px;
+    top: 60px;
+    height: 50px;
+    width: 50px;
     background-color: #BAFF39;
     margin: 0;
     position: absolute;
@@ -21,7 +21,7 @@
 #popisuwav2{
     height: 100%;
     width: 100%;
-    border-radius: 30px 0px 0 0px;
+    border-radius: 50px 0px 0 0px;
     background-color: white;
     margin: 0;
     position: absolute;
