@@ -6,7 +6,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'siema', component: MainPageComponent },
-  { path: 'login', component: LoginPageComponent }
+  { path: 'login-page', component: LoginPageComponent }
 ];
 
 @NgModule({

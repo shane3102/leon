@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { JwtToken } from '../models/jwt-token';
 import { LoginAttempt } from '../models/login-attempt';
 
@@ -11,16 +11,31 @@ export class JwtClientService {
 
   constructor(private http: HttpClient) { }
 
-  public generateToken(request: LoginAttempt): Observable<JwtToken> {
-    return this.http.post<JwtToken>("/login", request);
+  private generateToken(request: LoginAttempt): Observable<any> {
+    return this.http.post(
+      "/login",
+      request,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
   }
 
-  public login(request: LoginAttempt) {
+  public login(request: LoginAttempt): boolean {
     this.generateToken(request)
       .subscribe(
         res => {
+          console.log("siema")
           localStorage.setItem('token', res.token)
         }
-      )
+      );
+
+    return this.isLogged()
+  }
+
+  public isLogged(): boolean {
+    return localStorage.getItem('token') !== null;
   }
 }
