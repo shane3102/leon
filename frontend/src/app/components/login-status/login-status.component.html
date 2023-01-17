@@ -1,2 +1,3 @@
-<app-header-button routerLink="login-page" color="#6E6E6E" textColor="white" text="Zaloguj"></app-header-button>
-<app-header-button color="#6E6E6E" textColor="white" text="Zarejestruj"></app-header-button>
+<app-header-button *ngIf="!isLogged()" routerLink="login-page" color="#6E6E6E" textColor="white"text="Zaloguj"></app-header-button>
+<app-header-button *ngIf="!isLogged()" color="#6E6E6E" textColor="white" text="Zarejestruj"></app-header-button>
+<app-header-button *ngIf="isLogged()" color="#6E6E6E" textColor="white" text="Wyloguj"(clic)="logout()"></app-header-button>

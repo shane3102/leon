@@ -22,7 +22,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   public login(request: any) {
-    console.log("SIema");
     let loginSuccesful: boolean = this.jwtClient.login(request);
   }
 

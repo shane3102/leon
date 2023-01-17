@@ -27,7 +27,6 @@ export class JwtClientService {
     this.generateToken(request)
       .subscribe(
         res => {
-          console.log("siema")
           localStorage.setItem('token', res.token)
         }
       );

@@ -16,4 +16,8 @@ export class ButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public logout() {
+    localStorage.clear();
+  }
+
 }

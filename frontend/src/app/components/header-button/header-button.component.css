@@ -1,20 +1,17 @@
 #host {
-    justify-content: flex-end;
     float: right;
 }
 
-#btn
-{
+#btn {
     font-size: 10px;
     padding: 8px;
     border: 0px;
-    border-radius: 10px;
+    border-radius: 20px 0px 20px 0px;
     margin: 2px;
     display: flex;
 }
 
-#btn:active
-{
+#btn:active {
     margin: 4px;
     padding: 6px;
 }
