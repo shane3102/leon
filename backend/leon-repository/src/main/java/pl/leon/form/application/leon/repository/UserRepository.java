@@ -7,4 +7,6 @@ import pl.leon.form.application.leon.repository.entities.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByUsername(String username);
+
+    boolean existsByUsername(String username);
 }

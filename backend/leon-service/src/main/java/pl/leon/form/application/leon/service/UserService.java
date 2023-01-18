@@ -30,6 +30,10 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+    public boolean existsUserByUsername(String username) {
+        return repository.existsByUsername(username);
+    }
+
     public UserResponse registerUser(UserRegistrationRequest registrationRequest) {
 
         UserEntity newUser = UserEntity.builder()
