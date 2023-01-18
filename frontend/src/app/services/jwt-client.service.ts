@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, pipe } from 'rxjs';
 import { JwtToken } from '../models/jwt-token';
 import { LoginAttempt } from '../models/login-attempt';
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root'
 })
@@ -11,8 +13,8 @@ export class JwtClientService {
 
   constructor(private http: HttpClient) { }
 
-  private generateToken(request: LoginAttempt): Observable<any> {
-    return this.http.post(
+  private generateToken(request: LoginAttempt): Observable<JwtToken> {
+    return this.http.post<JwtToken>(
       "/login",
       request,
       {
@@ -25,10 +27,16 @@ export class JwtClientService {
 
   public login(request: LoginAttempt): boolean {
     this.generateToken(request)
+      .pipe(untilDestroyed(this))
       .subscribe(
         res => {
-          localStorage.setItem('token', res.token)
-        }
+          if (res.token !== undefined) {
+            localStorage.setItem('token', res.token)
+          }
+        },
+        error => {
+          console.log("siema")
+        },
       );
 
     return this.isLogged()
