@@ -12,6 +12,7 @@ import { MainPageButtonComponent } from './components/main-page-button/main-page
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
