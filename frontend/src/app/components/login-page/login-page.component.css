@@ -1,6 +1,7 @@
 .content {
     border: solid #BAFF39;
     padding: 50px;
+    padding-bottom: 10px;
     padding-right: 10px;
     position: absolute;
     display: flex;
@@ -28,7 +29,11 @@
 }
 
 .loginInput:focus {
-    border: solid #BAFF39;
+    border: solid #BAFF39 !important;
+}
+
+.loginInput.ng-invalid.ng-touched {
+    border: solid red;
 }
 
 #loginSpinner {
@@ -56,6 +61,7 @@
 
 .lineValidationMessage {
     color: red;
+    font-size: 13px;
     display: flex;
     justify-content: center;
     height: 40px;
@@ -70,10 +76,19 @@
     border-radius: 20px 0px 20px 0px;
     border: none;
     padding: 10px;
+    min-height: 58px;
+    min-width: 114px;
 }
 
-#loginButton:active {
-    padding: 6px;
-    margin-bottom: 3.7px;
-    margin-top: 4.5px;
+#loginButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#loginButton:active:enabled {
+    padding: 8px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    min-height: 50px;
+    min-width: 110px;
 }

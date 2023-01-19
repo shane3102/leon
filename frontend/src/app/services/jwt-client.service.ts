@@ -13,7 +13,7 @@ export class JwtClientService {
 
   constructor(private http: HttpClient) { }
 
-  private generateToken(request: LoginAttempt): Observable<JwtToken> {
+  public generateToken(request: LoginAttempt): Observable<JwtToken> {
     return this.http.post<JwtToken>(
       "/login",
       request,
@@ -25,22 +25,22 @@ export class JwtClientService {
     );
   }
 
-  public login(request: LoginAttempt): boolean {
-    this.generateToken(request)
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        res => {
-          if (res.token !== undefined) {
-            localStorage.setItem('token', res.token)
-          }
-        },
-        error => {
-          console.log("siema")
-        },
-      );
+  // public login(request: LoginAttempt): boolean {
+  //   this.generateToken(request)
+  //     .pipe(untilDestroyed(this))
+  //     .subscribe(
+  //       res => {
+  //         if (res.token !== undefined) {
+  //           localStorage.setItem('token', res.token)
+  //         }
+  //       },
+  //       error => {
+  //         console.log("siema")
+  //       },
+  //     );
 
-    return this.isLogged()
-  }
+  //   return this.isLogged()
+  // }
 
   public isLogged(): boolean {
     return localStorage.getItem('token') !== null;

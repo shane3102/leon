@@ -16,10 +16,11 @@ export class UserService {
 
     public existsUserByUsername(username: string): Observable<boolean> {
 
-        let parameters = new HttpParams();
-        parameters.set('username', username);
+        let params = new HttpParams();
+        params = params.set('username', username);
 
-        return this.http.get<boolean>((this.PATH + "/exists"), { params: parameters });
+
+        return this.http.get<boolean>((this.PATH + "/exists"), { params: params });
     }
 
 }

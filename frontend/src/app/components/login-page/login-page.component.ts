@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
-import { Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, pipe } from 'rxjs';
 import { LoginAttempt } from 'src/app/models/login-attempt';
 import { JwtClientService } from 'src/app/services/jwt-client.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,10 +15,15 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginPageComponent implements OnInit {
 
   isLogging: Observable<boolean> = of(false);
+  isCheckingUsername: Observable<boolean> = of(false);
   isLoggingUnsuccesful: Observable<boolean> = of(false);
 
   loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
+    username: new FormControl('', {
+      validators: [Validators.required],
+      asyncValidators: [this.usernameExistsValidator()],
+      updateOn: 'blur'
+    }),
     password: new FormControl('', Validators.required)
   })
 
@@ -31,19 +36,41 @@ export class LoginPageComponent implements OnInit {
   }
 
   public login(request: any) {
-    this.isLogging = of(true);
-    let loginSuccesful: boolean = this.jwtClient.login(request);
-    console.log(loginSuccesful);
-    setTimeout(() => {
-      console.log("siema1");
-      this.isLogging = of(false);
-      console.log("siem2");
-      if (loginSuccesful) {
-        console.log("siema3");
-        this.router.navigateByUrl('/main-page');
-      }
-    }, 0);
-    console.log(loginSuccesful);
+    if (!this.loginForm.invalid) {
+      this.isLogging = of(true);
+      this.jwtClient.generateToken(request).subscribe({
+        next: (res) => {
+          if (res.token !== undefined) {
+            localStorage.setItem('token', res.token);
+            this.router.navigateByUrl('/main-page');
+          }
+        },
+        error: error => {
+          this.isLogging = of(false);
+          this.isLoggingUnsuccesful = of(true);
+        }
+      });
+    }
+  }
+
+  usernameExistsValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      this.isCheckingUsername = of(true);
+      return this.userService.existsUserByUsername(control.value).pipe(
+        map(exists => {
+          this.isCheckingUsername = of(false);
+          return (exists ? null : { usernameDoesNotExist: true })
+        }),
+        catchError(error => {
+          this.isCheckingUsername = of(false);
+          return of(null)
+        })
+      )
+    }
+  }
+
+  public disableLoginError() {
+    this.isLoggingUnsuccesful = of(false);
   }
 
   get getUsernameControl() {
