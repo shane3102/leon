@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MainPageButtonComponent,
     FooterComponent,
     LoginStatusComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,
