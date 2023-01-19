@@ -1,50 +1,3 @@
-.content {
-    border: solid #BAFF39;
-    padding: 50px;
-    padding-bottom: 10px;
-    padding-right: 10px;
-    position: absolute;
-    display: flex;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    border-radius: 50px 0px 50px 0px;
-}
-
-#title {
-    font-size: 30px;
-    color: #6E6E6E;
-    padding-bottom: 20px
-}
-
-.loginInput {
-    border-radius: 20px 0px 20px 0px;
-    border: solid #6E6E6E;
-    color: #6E6E6E;
-    min-width: 300px;
-    font-size: 25px;
-    text-align: center;
-    outline: none;
-}
-
-.loginInput:focus {
-    border: solid #BAFF39 !important;
-}
-
-.loginInput.ng-invalid.ng-touched {
-    border: solid red;
-}
-
-#loginSpinner {
-    margin: auto;
-    width: 30px;
-    height: 30px;
-    color: #BAFF39;
-    display: flex;
-    justify-content: center;
-}
-
 #usernameSpinner {
     margin-top: 65px;
     min-width: 30px;
@@ -52,19 +5,6 @@
     height: 30px;
     justify-content: center;
     color: #BAFF39;
-}
-
-.line {
-    display: flex;
-    justify-content: center;
-}
-
-.lineValidationMessage {
-    color: red;
-    font-size: 13px;
-    display: flex;
-    justify-content: center;
-    height: 40px;
 }
 
 #loginButton {

@@ -2,16 +2,16 @@
     <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
         <div id="title" class="line">Logowanie</div>
         <div class="line">
-            <input placeholder="login" class="loginInput" type="text" formControlName="username" (focus)="disableLoginError()">
+            <input placeholder="Login" class="loginRegisterInput" type="text" formControlName="username" (focus)="disableLoginError()">
         </div>
-        <div class="lineValidationMessage" id="usernameValidationInfo">
+        <div class="lineValidationMessage">
             <span *ngIf="(getUsernameControl && getUsernameControl.touched && getUsernameControl.errors?.['required'])">Login jest wymagany</span>
             <span *ngIf="(getUsernameControl && getUsernameControl.touched && !getUsernameControl.errors?.['required'] && getUsernameControl.errors?.['usernameDoesNotExist'])">Nie istnieje użytkownik o podanym loginie</span>
         </div>
         <div class="line">
-            <input placeholder="hasło" class="loginInput" type="password" formControlName="password" (focus)="disableLoginError()">
+            <input placeholder="Hasło" class="loginRegisterInput" type="password" formControlName="password" (focus)="disableLoginError()">
         </div>
-        <div class="lineValidationMessage" id="passwordValidationInfo">
+        <div class="lineValidationMessage">
             <span
                 *ngIf="getPasswordControl && getPasswordControl.touched && getPasswordControl.errors?.['required']">Hasło
                 jest wymagane</span>
@@ -20,14 +20,12 @@
             <div id="loginButton">
                 <button id="loginButton" [disabled]="!loginForm.valid" type="submit">
                     <div *ngIf="!(isLogging | async)">Zaloguj</div>
-                    <div *ngIf="isLogging | async" id="loginSpinner" class="spinner-border" role="status"></div>
+                    <div *ngIf="isLogging | async" id="loginRegisterSpinner" class="spinner-border" role="status"></div>
                 </button>
             </div>
         </div>
         <div class="lineValidationMessage">
             <span *ngIf="isLoggingUnsuccesful | async">Hasło nieprawidłowe</span>
-        </div>
-        <div class="line">
         </div>
     </form>
     <div style="min-width: 30px; margin: 5px;">
