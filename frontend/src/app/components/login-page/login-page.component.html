@@ -2,14 +2,14 @@
     <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
         <div id="title" class="line">Logowanie</div>
         <div class="line">
-            <input class="loginInput" type="text" formControlName="username" (focus)="disableLoginError()">
+            <input placeholder="login" class="loginInput" type="text" formControlName="username" (focus)="disableLoginError()">
         </div>
         <div class="lineValidationMessage" id="usernameValidationInfo">
             <span *ngIf="(getUsernameControl && getUsernameControl.touched && getUsernameControl.errors?.['required'])">Login jest wymagany</span>
             <span *ngIf="(getUsernameControl && getUsernameControl.touched && !getUsernameControl.errors?.['required'] && getUsernameControl.errors?.['usernameDoesNotExist'])">Nie istnieje użytkownik o podanym loginie</span>
         </div>
         <div class="line">
-            <input class="loginInput" type="password" formControlName="password" (focus)="disableLoginError()">
+            <input placeholder="hasło" class="loginInput" type="password" formControlName="password" (focus)="disableLoginError()">
         </div>
         <div class="lineValidationMessage" id="passwordValidationInfo">
             <span
