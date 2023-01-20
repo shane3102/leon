@@ -41,8 +41,7 @@ public class JwtSecurityConfiguration {
                 .disable()
                 .authorizeRequests((auth) -> {
                     try {
-                        auth.antMatchers("/api/user").authenticated()
-                                .anyRequest().permitAll()
+                        auth.anyRequest().permitAll()
                                 .and()
                                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                                 .and()
