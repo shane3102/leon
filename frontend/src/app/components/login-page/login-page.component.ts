@@ -42,7 +42,12 @@ export class LoginPageComponent implements OnInit {
         next: (res) => {
           if (res.token !== undefined) {
             localStorage.setItem('token', res.token);
-            this.router.navigateByUrl('/main-page');
+            this.userService.getCurrentLoggedUser().subscribe(
+              res =>{
+                localStorage.setItem('username', res.name)
+                this.router.navigateByUrl('/main-page');
+              }
+            );
           }
         },
         error: error => {
