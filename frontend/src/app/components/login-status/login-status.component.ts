@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtClientService } from 'src/app/services/jwt-client.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login-status',
@@ -8,7 +9,7 @@ import { JwtClientService } from 'src/app/services/jwt-client.service';
 })
 export class LoginStatusComponent implements OnInit {
 
-  constructor(private jwtService: JwtClientService) { }
+  constructor(private jwtService: JwtClientService, private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -19,6 +20,10 @@ export class LoginStatusComponent implements OnInit {
 
   public logout() {
     localStorage.clear();
+  }
+
+  public getUsername(): string | null {
+    return "Zalogowano jako: " + localStorage.getItem('username')
   }
 
 }

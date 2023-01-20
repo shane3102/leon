@@ -1,3 +1,4 @@
 <app-header-button *ngIf="!isLogged()" routerLink="login-page" color="#6E6E6E" textColor="white"text="Zaloguj"></app-header-button>
 <app-header-button *ngIf="!isLogged()" routerLink="register-page" color="#6E6E6E" textColor="white" text="Zarejestruj"></app-header-button>
 <app-header-button *ngIf="isLogged()" color="#6E6E6E" textColor="white" text="Wyloguj"(click)="logout()"></app-header-button>
+<div id="userInfo" *ngIf="isLogged()"> {{getUsername()}} </div>
