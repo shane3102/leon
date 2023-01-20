@@ -8,7 +8,7 @@
     border: none;
     padding: 10px;
     min-height: 58px;
-    min-width: 114px;
+    min-width: 200px;
 }
 
 #registerButton:disabled {
@@ -20,6 +20,15 @@
     padding: 8px;
     margin-bottom: 2px;
     margin-top: 2px;
-    min-height: 50px;
-    min-width: 110px;
+    min-height: 52px;
+    min-width: 198px;
+}
+
+#usernameSpinner {
+    margin-top: 65px;
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    color: #BAFF39;
 }

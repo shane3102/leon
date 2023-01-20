@@ -1,34 +1,39 @@
 <div class="content">
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
         <div id="title" class="line">Rejestracja</div>
         <div class="line">
             <input placeholder="Login" class="loginRegisterInput" type="text" formControlName="username">
         </div>
         <div class="lineValidationMessage">
-
+            <span *ngIf="getUsernameControl && getUsernameControl.touched && getUsernameControl.errors?.['required']">Podaj swój login</span>
+            <span *ngIf="getUsernameControl && getUsernameControl.touched && !getUsernameControl.errors?.['required'] && getUsernameControl.errors?.['usernameExist']">Istnieje użytkownik o podanym loginie</span>
         </div>
         <div class="line">
             <input placeholder="Hasło" class="loginRegisterInput" type="password" formControlName="password">
         </div>
         <div class="lineValidationMessage">
-
+            <span
+                *ngIf="getPasswordControl && getPasswordControl.touched && getPasswordControl.errors?.['required']">Hasło jest wymagane</span>
         </div>
         <div class="line">
-            <input placeholder="Powtórz hasło" class="loginRegisterInput" type="password" formControlName="password">
+            <input placeholder="Powtórz hasło" class="loginRegisterInput" type="password" formControlName="passwordConfirmation">
         </div>
         <div class="lineValidationMessage">
-
+            <span
+                *ngIf="getPasswordConfirmationControl && getPasswordConfirmationControl.touched && getPasswordConfirmationControl.errors?.['required']">Powtórzenie hasła jest wymagane</span>
+                <span *ngIf="getPasswordConfirmationControl && getPasswordConfirmationControl.touched && !getPasswordConfirmationControl.errors?.['required'] && registerForm.errors?.['passwordsNotEqual']">Hasła są różne</span>
         </div>
         <div class="line">
             <div id="registerButton">
-                <button id="registerButton" type="submit">
-                    <div>Zarejestruj się</div>
-                    <!-- <div id="loginRegisterSpinner" class="spinner-border" role="status"></div> -->
+                <button id="registerButton" type="submit" [disabled]="!registerForm.valid">
+                    <div *ngIf="!(isRegistering |async)">Zarejestruj się</div>
+                    <div *ngIf="(isRegistering |async)" id="loginRegisterSpinner" class="spinner-border" role="status"></div>
                 </button>
             </div>
         </div>
         <div class="lineValidationMessage"></div>
     </form>
-    <div style="min-width: 30px; margin: 5px;">
+    <div style="min-width: 40px; margin: 5px;">
+        <div *ngIf="(isCheckingUsername | async)" id="usernameSpinner" class="spinner-border" role="status"></div>
     </div>
 </div>
