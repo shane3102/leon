@@ -1,1 +1,12 @@
-<div id="mainPage">Siema</div>
+<div class="main-page-button">
+    <button class="actionButton">
+        <div class="actionButtonText">{{text}}<br></div>
+        <fa-icon style="font-size: 140px;" [icon]="listIcon"></fa-icon>
+        <div class="descriptionWrapper"> 
+            <div class="description">
+                {{description}}
+            </div>
+            <fa-icon style="font-size: 40px;" [icon]="downIcon"></fa-icon>
+        </div>
+    </button>
+</div>
