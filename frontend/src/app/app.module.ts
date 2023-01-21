@@ -15,6 +15,8 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -32,11 +34,13 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
