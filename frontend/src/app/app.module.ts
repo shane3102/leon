@@ -17,6 +17,7 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+    JwtHelperService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
