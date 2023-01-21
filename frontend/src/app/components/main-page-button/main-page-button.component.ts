@@ -10,6 +10,7 @@ export class MainPageButtonComponent implements OnInit {
   @Input() text: string;
   @Input() description: string;
   @Input() iconClass: string;
+  @Input() disable: boolean;
 
   downIcon = faCaretDown;
   listIcon = faList;

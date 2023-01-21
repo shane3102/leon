@@ -9,17 +9,23 @@
     font-size: 30px;
 }
 
+.actionButton:disabled{
+    background-color: #6E6E6E;
+    border: 5px solid #6E6E6E;
+    color: black
+}
+
 .actionButtonText {
     height: 8vw;
     justify-content:center;
 }
 
-.actionButton:hover {
+.actionButton:hover:enabled {
     width: 31vh;
     height: 61vh;
 }
 
-.actionButton:hover .description {
+.actionButton:hover:enabled .description {
     max-height: 20vh;
 }
 

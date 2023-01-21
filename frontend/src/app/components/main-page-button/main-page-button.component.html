@@ -1,8 +1,12 @@
 <div class="main-page-button">
-    <button class="actionButton">
+    <button class="actionButton" [disabled]="disable">
+
         <div class="actionButtonText">{{text}}<br></div>
-        <fa-icon style="font-size: 140px;" [icon]="listIcon"></fa-icon>
-        <div class="descriptionWrapper"> 
+
+        <div *ngIf="disable">DOSTĘPNE JEDYNIE DLA ZALOGOWNAYCH UŻYTKOWNIKÓW</div>
+
+        <fa-icon *ngIf="!disable" style="font-size: 140px;" [icon]="listIcon"></fa-icon>
+        <div *ngIf="!disable" class="descriptionWrapper">
             <div class="description">
                 {{description}}
             </div>

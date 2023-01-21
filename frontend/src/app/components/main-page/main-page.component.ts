@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtClientService } from 'src/app/services/jwt-client.service';
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private jwtClientService: JwtClientService) { }
 
   ngOnInit(): void {
+  }
+
+  public isLogged(): boolean {
+    return this.jwtClientService.isLogged();
   }
 
 }
