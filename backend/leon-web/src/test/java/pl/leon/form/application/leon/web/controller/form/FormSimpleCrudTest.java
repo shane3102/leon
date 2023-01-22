@@ -333,10 +333,10 @@ public class FormSimpleCrudTest {
             UserEntity user2 = userRepository.save(UserEntity.builder().username(USERNAME_2).build());
             UserEntity user3 = userRepository.save(UserEntity.builder().username(USERNAME_3).build());
 
-            formRepository.save(FormEntity.builder().user(user1).subject(FORM_1_TOPIC).build());
-            formRepository.save(FormEntity.builder().user(user2).subject(FORM_2_TOPIC).build());
-            formRepository.save(FormEntity.builder().user(user3).subject(FORM_3_TOPIC).build());
-            formRepository.save(FormEntity.builder().user(user1).subject(FORM_4_TOPIC).build());
+            formRepository.save(FormEntity.builder().user(user1).title(FORM_1_TOPIC).build());
+            formRepository.save(FormEntity.builder().user(user2).title(FORM_2_TOPIC).build());
+            formRepository.save(FormEntity.builder().user(user3).title(FORM_3_TOPIC).build());
+            formRepository.save(FormEntity.builder().user(user1).title(FORM_4_TOPIC).build());
 
         }
 
@@ -359,7 +359,7 @@ public class FormSimpleCrudTest {
             assertAll(
                     () -> assertNotNull(responseList),
                     () -> assertEquals(EXPECTED_FORM_LIST_LENGTH, responseList.size()),
-                    () -> assertTrue(responseList.stream().allMatch(form -> FORM_TOPICS.contains(form.getSubject())))
+                    () -> assertTrue(responseList.stream().allMatch(form -> FORM_TOPICS.contains(form.getTitle())))
             );
         }
     }
