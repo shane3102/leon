@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FormSnippetResponse {
     private Long id;
-    private String subject;
+    private String title;
     private String author;
 }

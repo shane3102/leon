@@ -42,6 +42,8 @@ public class FormEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
+    private String title;
+
     private String subject;
 
     @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE}, orphanRemoval = true)

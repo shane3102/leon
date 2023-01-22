@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class FormResponse {
     private Long id;
+    private String title;
+    private String subject;
     private LocalDate dateTo;
     private List<QuestionResponse> questions;
 }
