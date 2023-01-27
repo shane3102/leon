@@ -17,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { UserAuthModule } from './user-auth/user-auth.module';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
+import { FormModule } from './form/form.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    UserAuthModule
+    UserAuthModule,
+    FormModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
