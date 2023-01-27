@@ -1,0 +1,108 @@
+.btn {
+    color: white;
+    background-color: #6E6E6E;
+    font-size: 20px;
+    padding: 10px;
+    border: 0px;
+    border-radius: 20px 0px 20px 0px;
+    margin: 5px;
+}
+
+.btn:active {
+    color: white;
+    background-color: #6E6E6E;
+    margin: 7px;
+    padding: 8px;
+}
+
+.btnDelete {
+    color: white;
+    background-color: red;
+    font-size: 20px;
+    padding: 8px;
+    border: 0px;
+    border-radius: 20px 0px 20px 0px;
+    margin: 5px;
+}
+
+.btnDelete:active {
+    color: white;
+    background-color: red;
+    margin: 7px;
+    padding: 6px;
+}
+
+.btnSmall {
+    text-align: center;
+    color: white;
+    background-color: #6E6E6E;
+    font-size: 20px;
+    padding: 4px;
+    border: 0px;
+    border-radius: 20px 0px 20px 0px;
+    margin: 5px;
+    margin-left: 10%;
+}
+
+.btnSmall:active {
+    color: white;
+    background-color: #6E6E6E;
+    margin: 7px;
+    padding: 2px;
+    margin-left: 10%;
+}
+
+.btnDeleteSmall {
+    color: white;
+    background-color: red;
+    font-size: 20px;
+    padding: 4px;
+    border: 0px;
+    border-radius: 20px 0px 20px 0px;
+    margin: 5px;
+}
+
+.btnDeleteSmall:active {
+    color: white;
+    background-color: red;
+    margin: 7px;
+    padding: 2px;
+}
+
+.questionInput {
+    outline: none;
+    width: 96%;
+    border-radius: 15px 0px 15px 0px;
+    border: 2px solid #6E6E6E;
+    color: #6E6E6E;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 1%;
+    margin-left: 5%
+}
+
+.answerInput {
+    outline: none;
+    width: 100%;
+    border-radius: 15px 0px 15px 0px;
+    border: 2px solid #6E6E6E;
+    color: #6E6E6E;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 1%;
+    margin-left: 10%
+}
+
+.optionBox{
+    display: flex;
+    justify-content: center;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: red;
+    opacity: 1;
+    /* Firefox */
+}
