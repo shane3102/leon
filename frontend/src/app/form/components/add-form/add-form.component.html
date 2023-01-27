@@ -1,0 +1,14 @@
+<h1>Dodaj nowy formularz</h1>
+<form [formGroup]="questions">
+    <app-add-question 
+    *ngFor="let question of getQuestions.controls; 
+    let i = index" 
+    [questionControls]="$any(question)" 
+    [index]="i" 
+    (deleteEvent)="removeQuestion(i)">
+    </app-add-question>
+    <div class="btn" (click)="addQuestion()">
+        Dodaj pytanie <fa-icon [icon]="faPlus"></fa-icon>
+    </div>
+</form>
+{{questions.value | json}}
