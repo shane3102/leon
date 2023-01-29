@@ -17,6 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { UserAuthModule } from './user-auth/user-auth.module';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
+import { FormModule } from './form/form.module';
+import { AuthGuard } from './authGuard/auth.service';
 
 @NgModule({
   declarations: [
@@ -35,13 +37,15 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    UserAuthModule
+    UserAuthModule,
+    FormModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

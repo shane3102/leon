@@ -23,7 +23,7 @@ import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum QuestionType {
 
     DROPDOWN("DROPDOWN", DropdownQuestionEntity.class, DropdownQuestionAnswerEntity.class),
@@ -51,8 +51,8 @@ public enum QuestionType {
                 .orElseThrow(/*TODO customowy exception*/);
     }
 
-    @JsonCreator
-    public static QuestionType create(@JsonProperty("name") String name) {
-        return valueOf(name);
-    }
+//    @JsonCreator
+//    public static QuestionType create(@JsonFormat String name) {
+//        return valueOf(name);
+//    }
 }

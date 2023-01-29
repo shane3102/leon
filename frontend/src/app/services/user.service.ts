@@ -1,12 +1,9 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { UntilDestroy } from "@ngneat/until-destroy";
-import { untilDestroyed } from "@ngneat/until-destroy/lib/until-destroyed";
 import { Observable } from "rxjs";
 import { Principal } from "../models/principal";
 import { RegistrationForm } from "../models/registration-form";
 
-@UntilDestroy()
 @Injectable({
     providedIn: 'root'
 })

@@ -1,0 +1,28 @@
+<div class="questionAdd">
+    <div class="selectContainer" [formGroup]="questionControls">
+        <select class="selectBox" formControlName="type">
+            <option value="" disabled selected>WYBIERZ RODZAJ PYTANIA</option>
+            <option id="options" *ngFor="let type of questionTypes.types" [value]="type.sent">{{type.name}}</option>
+        </select>
+        <div *ngIf="getTypeControl.value !== undefined">
+            <div [ngSwitch]="getTypeControl.value">
+                <app-add-dropdown-question [questionControls]="questionControls"
+                    *ngSwitchCase='questionTypes.DROPDOWN.sent'></app-add-dropdown-question>
+                <app-add-line-scale-question [questionControls]="questionControls"
+                    *ngSwitchCase='questionTypes.LINE_SCALE.sent'></app-add-line-scale-question>
+                <app-add-long-answer-question [questionControls]="questionControls"
+                    *ngSwitchCase='questionTypes.LONG_ANSWER.sent'></app-add-long-answer-question>
+                <app-add-multiple-choice-question [questionControls]="questionControls"
+                    *ngSwitchCase='questionTypes.MULTIPLE_CHOICE.sent'></app-add-multiple-choice-question>
+                <app-add-short-answer-question [questionControls]="questionControls"
+                    *ngSwitchCase='questionTypes.SHORT_ANSWER.sent'></app-add-short-answer-question>
+                <app-add-single-choice-question [questionControls]="questionControls"
+                    *ngSwitchCase='questionTypes.SINGLE_CHOICE.sent'></app-add-single-choice-question>
+            </div>
+        </div>
+    </div>
+    <div class="btnDelete" (click)="deleteQuestion()">
+        Usuń pytanie
+        <fa-icon [icon]="faMinus"></fa-icon>
+    </div>
+</div>

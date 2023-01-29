@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import jwtDecode from 'jwt-decode';
 import { catchError, map, Observable, of, pipe } from 'rxjs';
-import { LoginAttempt } from 'src/app/models/login-attempt';
 import { JwtClientService } from 'src/app/services/jwt-client.service';
 import { UserService } from 'src/app/services/user.service';
 

@@ -1,0 +1,35 @@
+.questionAdd {
+    margin: 1%;
+    width: 98%;
+    border-radius: 50px 0px 50px 0px;
+    border: 2.5px solid #BAFF39;
+    background-color: rgb(233, 231, 231);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.selectContainer {
+    width: 75%;
+}
+
+.selectBox {
+    border: none;
+    appearance: none;
+    outline: none;
+    width: 100%;
+    border-radius: 15px 0px 15px 0px;
+    border: 2px solid #6E6E6E;
+    color: #6E6E6E;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 1%;
+}
