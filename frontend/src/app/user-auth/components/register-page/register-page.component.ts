@@ -86,15 +86,6 @@ export class RegisterPageComponent implements OnInit {
     }
   }
 
-  passwordsEqualValidator(passwordControlName: string, passwordConfirmationControlName: string): ValidatorFn {
-    return (controls: AbstractControl): ValidationErrors | null => {
-      const passwordControl = controls.get(passwordControlName);
-      const passwordConfirmationControl = controls.get(passwordConfirmationControlName);
-
-      return passwordControl?.value === passwordConfirmationControl?.value ? { passwordsNotEqual: true } : { passwordsNotEqual: true };
-    }
-  }
-
   get getUsernameControl() {
     return this.registerForm.get('username');
   }
