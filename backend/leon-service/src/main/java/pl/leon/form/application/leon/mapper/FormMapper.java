@@ -95,8 +95,7 @@ public abstract class FormMapper {
             @Mapping(target = "singleChoiceQuestions", source = "questions"),
             @Mapping(target = "user", expression = "java(" +
                     "(pl.leon.form.application.leon.repository.entities.UserEntity) " +
-                    "userService.loadUserByUsername(((org.springframework.security.core.userdetails.User) " +
-                    "org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()))")
+                    "userService.loadUserByUsername((java.lang.String)org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()))")
     })
     public abstract FormEntity mapCreateRequestToEntity(FormCreateRequest formCreateRequest);
 
