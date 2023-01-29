@@ -1,14 +1,54 @@
-<h1>Dodaj nowy formularz</h1>
-<form [formGroup]="questions">
-    <app-add-question 
-    *ngFor="let question of getQuestions.controls; 
-    let i = index" 
-    [questionControls]="$any(question)" 
-    [index]="i" 
-    (deleteEvent)="removeQuestion(i)">
+<div id="addFormTitle">Dodaj nowy formularz</div>
+<form [formGroup]="addFormForm">
+
+
+    <div class="inputSegment">
+        <div id="formBasicInfo">Informacje ogólne</div>
+        <input formControlName="title" type="text" placeholder="Tytuł ankiety" class="titleSubjectInput">
+        <textarea style="resize: none;" formControlName="subject" type="text" placeholder="Opis ankiety" class="titleSubjectInput"></textarea>
+        <div class="inputLine">
+            <div class="lineLabel">
+                Dodaj datę końcową ankiety:&nbsp;
+            </div>
+            <div>
+                <input class="checkboxStyle" type="checkbox" (change)="true" #addDateTo>
+            </div>
+        </div>
+        <div class="inputLine" *ngIf="addDateTo.checked">
+            <div class="lineLabel">
+                Data końcowa:&nbsp;
+            </div>
+            <div>
+                <input type="date" formControlName="dateTo">
+            </div>
+        </div>
+    </div>
+
+    <app-add-question *ngFor="let question of getQuestions.controls; 
+    let i = index" [questionControls]="$any(question)" [index]="i" (deleteEvent)="removeQuestion(i)">
     </app-add-question>
-    <div class="btn" (click)="addQuestion()">
-        Dodaj pytanie <fa-icon [icon]="faPlus"></fa-icon>
+
+    <div style="text-align: center; color: red; height: 40px;">
+        <span *ngIf="
+        (noTitleOfSubject | async) && getTitle && getTitle.errors?.['required'] || 
+        (noTitleOfSubject | async) && getSubject && getSubject.errors?.['required']">
+            Dodaj tytuł i opis ankiety
+        </span>
+        <br>
+        <span *ngIf="(formInvalid | async)">
+            Wypełnij prawidłowo wszystkie dodane pytania
+        </span>
+        <br>
+        <span *ngIf="(triedSubmitting | async)">
+            Wymagane jest przynajmniej jedno pytanie
+        </span>
+    </div>
+
+    <div id="actionButtonWrapper">
+        <div class="btn" (click)="addQuestion()">
+            Dodaj pytanie <fa-icon [icon]="faPlus"></fa-icon>
+        </div>
+        <button (click)="submitAddingForm(addFormForm.value)" class="submitButton" type="submit">Prześlij formularz</button>
     </div>
 </form>
-{{questions.value | json}}
+{{addFormForm.value | json}}
