@@ -2,17 +2,17 @@
     color: white;
     background-color: #6E6E6E;
     font-size: 20px;
-    padding: 10px;
+    padding: 1%;
     border: 0px;
     border-radius: 20px 0px 20px 0px;
-    margin: 5px;
+    margin: 1%;
 }
 
 .btn:active {
     color: white;
     background-color: #6E6E6E;
-    margin: 7px;
-    padding: 8px;
+    margin: 1.5%;
+    padding: 0.5%;
 }
 
 .btnDelete {
@@ -23,12 +23,14 @@
     border: 0px;
     border-radius: 20px 0px 20px 0px;
     margin: 5px;
+    margin-right: 1%
 }
 
 .btnDelete:active {
     color: white;
     background-color: red;
     margin: 7px;
+    margin-right: 1%;
     padding: 6px;
 }
 
@@ -39,7 +41,7 @@
     font-size: 20px;
     padding: 4px;
     border: 0px;
-    border-radius: 20px 0px 20px 0px;
+    border-radius: 15px 0px 15px 0px;
     margin: 5px;
     margin-left: 10%;
 }
@@ -47,7 +49,7 @@
 .btnSmall:active {
     color: white;
     background-color: #6E6E6E;
-    margin: 7px;
+    margin: 1%;
     padding: 2px;
     margin-left: 10%;
 }
@@ -56,17 +58,20 @@
     color: white;
     background-color: red;
     font-size: 20px;
-    padding: 4px;
+    padding: 0.5%;
     border: 0px;
-    border-radius: 20px 0px 20px 0px;
-    margin: 5px;
+    border-radius: 15px 0px 15px 0px;
+    margin: 1%;
+    margin-right: 0;
 }
 
 .btnDeleteSmall:active {
     color: white;
     background-color: red;
-    margin: 7px;
-    padding: 2px;
+    padding: 0.25%;
+    margin: 1.25%;
+    margin-left: 1.5%;
+    margin-right: 0;
 }
 
 .questionInput {
@@ -95,9 +100,16 @@
     margin-left: 10%
 }
 
-.optionBox{
+.optionBox {
     display: flex;
     justify-content: center;
+}
+
+.checkboxStyle {
+    margin-top: 10px;
+    font-size: 2rem;
+    width: 0.75em;
+    height: 0.75em;
 }
 
 ::placeholder {
