@@ -38,6 +38,8 @@ public class FormEntity {
 
     private boolean disabled;
 
+    private boolean resultsAvailableForEveryone;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;

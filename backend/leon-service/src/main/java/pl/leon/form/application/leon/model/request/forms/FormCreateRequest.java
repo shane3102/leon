@@ -18,5 +18,6 @@ public class FormCreateRequest {
     private String title;
     private String subject;
     private LocalDate dateTo;
+    private boolean resultsAvailableForEveryone;
     private List<QuestionCreateRequest> questions;
 }

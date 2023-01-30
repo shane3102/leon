@@ -8,6 +8,14 @@
         <textarea style="resize: none;" formControlName="subject" type="text" placeholder="Opis ankiety" class="titleSubjectInput"></textarea>
         <div class="inputLine">
             <div class="lineLabel">
+                Wyniki ankiety dostępne do wglądu dla wszystkich:&nbsp;
+            </div>
+            <div>
+                <input class="checkboxStyle" type="checkbox" formControlName="resultsAvailableForEveryone">
+            </div>
+        </div>
+        <div class="inputLine">
+            <div class="lineLabel">
                 Dodaj datę końcową ankiety:&nbsp;
             </div>
             <div>
@@ -24,13 +32,13 @@
         </div>
     </div>
 
-    <app-add-question *ngFor="let question of getQuestions.controls; 
+    <app-add-question *ngFor="let question of getQuestions.controls;
     let i = index" [questionControls]="$any(question)" [index]="i" (deleteEvent)="removeQuestion(i)">
     </app-add-question>
 
     <div style="text-align: center; color: red; height: 40px;">
         <span *ngIf="
-        (noTitleOfSubject | async) && getTitle && getTitle.errors?.['required'] || 
+        (noTitleOfSubject | async) && getTitle && getTitle.errors?.['required'] ||
         (noTitleOfSubject | async) && getSubject && getSubject.errors?.['required']">
             Dodaj tytuł i opis ankiety
         </span>
