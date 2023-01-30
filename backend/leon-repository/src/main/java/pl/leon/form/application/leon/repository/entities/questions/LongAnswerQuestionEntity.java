@@ -32,6 +32,8 @@ public class LongAnswerQuestionEntity implements QuestionMethodsInterface {
 
     private boolean disabled;
 
+    private boolean disabledFormRandomFormGenerating;
+
     private String question;
 
     @OneToMany(

@@ -19,5 +19,6 @@ public class FormCreateRequest {
     private String subject;
     private LocalDate dateTo;
     private boolean resultsAvailableForEveryone;
+    private boolean disableQuestionsFromRandomGeneratedForms;
     private List<QuestionCreateRequest> questions;
 }

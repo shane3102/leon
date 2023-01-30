@@ -18,4 +18,5 @@ public class QuestionCreateRequest {
     private String question;
     private List<Option> options;
     private QuestionType type;
+    private boolean disabledFormRandomFormGenerating;
 }

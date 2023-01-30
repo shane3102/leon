@@ -32,6 +32,8 @@ public class LineScaleQuestionEntity implements QuestionMethodsInterface {
 
     private boolean disabled;
 
+    private boolean disabledFormRandomFormGenerating;
+
     private String question;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
