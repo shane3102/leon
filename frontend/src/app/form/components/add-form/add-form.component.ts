@@ -25,6 +25,7 @@ export class AddFormComponent implements OnInit {
     'title': new FormControl('', Validators.required),
     'dateTo': new FormControl(''),
     'resultsAvailableForEveryone': new FormControl(''),
+    'disableQuestionsFromRandomGeneratedForms': new FormControl(''),
     'subject': new FormControl('', Validators.required),
     'questions': new FormArray([], minQuestionCount(1))
   })

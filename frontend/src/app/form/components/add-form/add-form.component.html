@@ -8,10 +8,18 @@
         <textarea style="resize: none;" formControlName="subject" type="text" placeholder="Opis ankiety" class="titleSubjectInput"></textarea>
         <div class="inputLine">
             <div class="lineLabel">
-                Wyniki ankiety dostępne do wglądu dla wszystkich:&nbsp;
+                Wyłącz dostępność wyników ankiety dla wszystkich użytkowników:&nbsp;
             </div>
             <div>
-                <input class="checkboxStyle" type="checkbox" formControlName="resultsAvailableForEveryone">
+                <input class="checkboxStyle" type="checkbox" formControlName="disableQuestionsFromRandomGeneratedForms">
+            </div>
+        </div>
+        <div class="inputLine">
+            <div class="lineLabel">
+                Wyłącz pytania ankietowe z losowo generowanych formularzy:&nbsp;
+            </div>
+            <div>
+                <input class="checkboxStyle" type="checkbox" formControlName="disableQuestionsFromRandomGeneratedForms">
             </div>
         </div>
         <div class="inputLine">
