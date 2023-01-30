@@ -36,6 +36,9 @@ public class FormService {
 
     public FormResponse addNewForm(FormCreateRequest request) {
         log.info("addNewForm({})", request);
+        request.getQuestions()
+                .forEach(question -> question.setDisabledFormRandomFormGenerating(request.isDisableQuestionsFromRandomGeneratedForms()));
+
         FormEntity formEntity = mapper.mapCreateRequestToEntity(request);
 
         formEntity.setDropdownQuestions(dropdownQuestionRepository.saveAll(formEntity.getDropdownQuestions()));

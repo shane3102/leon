@@ -167,6 +167,7 @@ public abstract class FormMapper {
         return DropdownQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
+                .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
                 .build();
     }
 
@@ -193,6 +194,7 @@ public abstract class FormMapper {
         return LineScaleQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
+                .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
                 .build();
     }
 
@@ -218,6 +220,7 @@ public abstract class FormMapper {
     protected LongAnswerQuestionEntity mapToLongAnswerQuestion(QuestionCreateRequest request) {
         return LongAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
+                .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
                 .build();
     }
 
@@ -244,6 +247,7 @@ public abstract class FormMapper {
         return MultipleChoiceQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
+                .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
                 .build();
     }
 
@@ -274,6 +278,7 @@ public abstract class FormMapper {
     protected ShortAnswerQuestionEntity mapToShortAnswerQuestion(QuestionCreateRequest request) {
         return ShortAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
+                .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
                 .build();
     }
 
@@ -300,6 +305,7 @@ public abstract class FormMapper {
         return SingleChoiceQuestionEntity.builder()
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
+                .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
                 .build();
     }
 
