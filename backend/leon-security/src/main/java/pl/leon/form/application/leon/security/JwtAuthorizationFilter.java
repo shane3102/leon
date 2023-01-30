@@ -3,6 +3,7 @@ package pl.leon.form.application.leon.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -57,7 +58,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                         .build()
                         .verify(token.replace(TOKEN_PREFIX, ""))
                         .getSubject();
-            } catch (JWTDecodeException ignored) {
+            } catch (JWTDecodeException | TokenExpiredException ignored) {
             }
             if (username == null) return null;
             UserDetails userDetails = userService.loadUserByUsername(username);
