@@ -73,3 +73,7 @@
     margin-left: 2%;
     margin-right: 2%;
 }
+
+.titleSubjectInput:focus{
+    border-color: #BAFF39;
+}

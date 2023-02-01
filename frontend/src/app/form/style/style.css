@@ -89,6 +89,10 @@
     margin-left: 5%
 }
 
+.questionInput:focus {
+    border-color: #BAFF39; 
+}
+
 .answerInput {
     outline: none;
     width: 100%;
@@ -100,6 +104,10 @@
     padding-right: 10px;
     margin: 1%;
     margin-left: 10%
+}
+
+.answerInput:focus{
+    border-color: #BAFF39; 
 }
 
 .optionBox {
