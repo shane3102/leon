@@ -1,0 +1,9 @@
+<div class="question">
+    <div>
+        <select>
+            <option selected disabled style="display:none"></option>
+            <option *ngFor="let option of question.options" [value]="option.content">{{option.content}}</option>
+        </select>
+    </div>
+    {{question.question}}
+</div>

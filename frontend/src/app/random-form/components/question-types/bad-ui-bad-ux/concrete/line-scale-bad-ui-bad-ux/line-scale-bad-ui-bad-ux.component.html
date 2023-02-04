@@ -1,0 +1,11 @@
+<div class="question">
+    <div style="display: flex; justify-content: space-around;">
+        <div *ngFor="let option of question.options; let i=index">
+            {{i+1}}. <input type="radio" [name]="question" [value]="option.content">
+        </div>
+    </div>
+    <div *ngFor="let option of question.options; let i=index">
+        {{i+1}}. {{option.content}}
+    </div>
+    {{question.question}}
+</div>
