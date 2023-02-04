@@ -34,9 +34,17 @@ public class FormController {
 
     @GetMapping("/get-random-form")
     public ResponseEntity<?> getRandomForm(@RequestParam(name = "question-count") Short questionToGenerateCount) {
-        log.info("getRandomForm()");
+        log.info("getRandomForm({})", questionToGenerateCount);
         FormToCompleteResponse response = formToCompleteService.generateFormToComplete(questionToGenerateCount);
-        log.info("getRandomForm() = {}", response);
+        log.info("getRandomForm({}) = {}", questionToGenerateCount, response);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/get-each-random-form")
+    public ResponseEntity<?> getEachRandomForm(@RequestParam(name = "form-count") Short formCount, @RequestParam(name = "question-count") Short questionToGenerateCount) {
+        log.info("getEachRandomForm()");
+        List<FormToCompleteResponse> response = formToCompleteService.generateFormsToComplete(formCount, questionToGenerateCount);
+        log.info("getEachRandomForm() = {}", response);
         return ResponseEntity.ok(response);
     }
 
