@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { QuestionTypes } from '../../model/question-types';
+import { QuestionTypes } from '../../../models/question-types';
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
@@ -16,8 +16,6 @@ export class AddQuestionComponent implements OnInit {
   faMinus = faMinus;
 
   @Output() deleteEvent = new EventEmitter<number>();
-
-  selectedType: string;
 
   questionTypes: QuestionTypes = new QuestionTypes();
 
