@@ -1,0 +1,10 @@
+<form [formGroup]="randomFormGroup">
+    <div style="display: flex; margin-right: auto; flex-wrap: wrap;">
+        <div *ngFor="let question of formToComplete.questions; let i = index">
+            <app-question-bad-ui-bad-ux [formGroup]="getFormGroupOfQuestion(i)" [question]="question"></app-question-bad-ui-bad-ux>
+        </div>
+    </div>
+    <button type="sumbit" (click)="formSentEvent.emit()">Prześlij</button>
+</form>
+
+{{randomFormGroup.value | json}}
