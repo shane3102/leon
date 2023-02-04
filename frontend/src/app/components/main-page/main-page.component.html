@@ -1,5 +1,5 @@
 <div id="mainPage">
-    <app-main-page-button text="Wypełnij losowe ankiety" description="Pozwala wypełnić losowo generowane ankiety spośród pytań dodanych przez użytkowników"></app-main-page-button>
+    <app-main-page-button routerLink="../random-form" text="Wypełnij losowe ankiety" description="Pozwala wypełnić losowo generowane ankiety spośród pytań dodanych przez użytkowników"></app-main-page-button>
     <app-main-page-button text="Ankiety użytkowników" description="Pozwala przejrzeć i wypełnić ankiety dodane przez użytkowników oraz przeglądać ich statystyki."></app-main-page-button>
     <app-main-page-button text="Statystyki dotyczące ankiet losowo generowanych" description="Pozwala na przejrzenie statystyk dotyczących ankiet losowo generowanych"></app-main-page-button>
     <app-main-page-button routerLink="../add-form" text="Dodaj własną ankietę" description="Pozwala na dodanie nowej ankiety" [disable]=!isLogged()></app-main-page-button>
