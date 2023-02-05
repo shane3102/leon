@@ -71,6 +71,7 @@ export class AddFormComponent implements OnInit {
     this.isAdding = of(true);
 
     if (this.addFormForm.invalid) {
+      this.isAdding = of(false);
       if (this.getQuestions.errors?.['minQuestionCount']) {
         this.triedSubmitting = of(true);
         setTimeout(() => this.triedSubmitting = of(false), 2000)
