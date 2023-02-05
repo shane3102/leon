@@ -12,14 +12,16 @@
     border: none;
     border-radius: 20px 0px 20px 0px;
     margin: 1%;
+    min-width: 198px;
 }
 
 .submitButton:active {
-    color: white;
-    background-color: #6E6E6E;
+    color: #6E6E6E;
+    background-color: #BAFF39;
     margin: 1.5%;
     padding: 0.5%;
     outline: none;
+    min-width: calc(198px - 1%);
 }
 
 #addFormTitle {
