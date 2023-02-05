@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-add-short-answer-question',
   templateUrl: './add-short-answer-question.component.html',
-  styleUrls: ['../../../style/style.css', './add-short-answer-question.component.css']
+  styleUrls: ['../../../style/add-question-style.css', './add-short-answer-question.component.css']
 })
 export class AddShortAnswerQuestionComponent implements OnInit {
 

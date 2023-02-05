@@ -5,7 +5,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-add-line-scale-question',
   templateUrl: './add-line-scale-question.component.html',
-  styleUrls: ['./add-line-scale-question.component.css','../../../style/style.css']
+  styleUrls: ['./add-line-scale-question.component.css','../../../style/add-question-style.css']
 })
 export class AddLineScaleQuestionComponent implements OnInit {
 
