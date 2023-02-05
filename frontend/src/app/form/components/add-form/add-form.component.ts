@@ -9,7 +9,7 @@ import { minQuestionCount, whiteSpaceOfEmpty } from '../../validators/form.valid
 @Component({
   selector: 'app-add-form',
   templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.css', '../../style/style.css']
+  styleUrls: ['./add-form.component.css', '../../style/add-question-style.css']
 })
 export class AddFormComponent implements OnInit {
 

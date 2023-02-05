@@ -5,7 +5,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-add-dropdown-question',
   templateUrl: './add-dropdown-question.component.html',
-  styleUrls: ['./add-dropdown-question.component.css', '../../../style/style.css']
+  styleUrls: ['./add-dropdown-question.component.css', '../../../style/add-question-style.css']
 })
 export class AddDropdownQuestionComponent implements OnInit {
 

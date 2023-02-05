@@ -6,7 +6,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-add-question',
   templateUrl: './add-question.component.html',
-  styleUrls: ['./add-question.component.css', '../../style/style.css']
+  styleUrls: ['./add-question.component.css', '../../style/add-question-style.css']
 })
 export class AddQuestionComponent implements OnInit {
 
