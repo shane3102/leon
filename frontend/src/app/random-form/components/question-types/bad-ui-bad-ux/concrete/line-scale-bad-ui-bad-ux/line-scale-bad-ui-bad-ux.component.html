@@ -1,7 +1,7 @@
-<div class="question">
+<div class="question" [formGroup]="questionFormGroup">
     <div style="display: flex; justify-content: space-around;">
         <div *ngFor="let option of question.options; let i=index">
-            {{i+1}}. <input type="radio" [name]="question" [value]="option.content">
+            {{i+1}}. <input type="checkbox" [value]="option | json" (change)="onChange($event)">
         </div>
     </div>
     <div *ngFor="let option of question.options; let i=index">
