@@ -1,7 +1,7 @@
 <div class="questionAdd">
     <div class="selectContainer" [formGroup]="questionControls">
         <select class="selectBox" formControlName="type">
-            <option value="" disabled selected>WYBIERZ RODZAJ PYTANIA</option>
+            <option value="" disabled selected style="display:none">WYBIERZ RODZAJ PYTANIA</option>
             <option id="options" *ngFor="let type of questionTypes.types" [value]="type.sent">{{type.name}}</option>
         </select>
         <div *ngIf="getTypeControl.value !== undefined">
