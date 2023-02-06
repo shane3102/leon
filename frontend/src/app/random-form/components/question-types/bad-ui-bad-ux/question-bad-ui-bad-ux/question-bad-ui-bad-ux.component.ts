@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { QuestionTypes } from 'src/app/models/question-types';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
@@ -11,13 +11,23 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 export class QuestionBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
-  @Input() formGroup: FormGroup
+  @Input() wholeForm: FormGroup
+  questionFormGroup: FormGroup
 
   questionTypes = new QuestionTypes();
 
   constructor() { }
 
   ngOnInit(): void {
+    this.questionFormGroup = new FormGroup({
+      'id': new FormControl(this.question.id),
+      'chosenOptions': new FormArray([]),
+      'answer': new FormControl(),
+      'type': new FormControl(this.question.type),
+      'durationToAnswer': new FormControl(null)//TODO liczenie tego
+    });
+    console.log(this.wholeForm);
+    (this.wholeForm.get('answers') as FormArray).push(this.questionFormGroup)
   }
 
 }
