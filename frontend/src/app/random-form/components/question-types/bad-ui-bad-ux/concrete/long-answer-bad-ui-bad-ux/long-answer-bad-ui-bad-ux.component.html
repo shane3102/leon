@@ -1,4 +1,4 @@
-<div class="question">
-    <textarea></textarea>
+<div class="question" [formGroup]="questionFormGroup">
+    <textarea formControlName="answer"></textarea>
     {{question.question}}
 </div>

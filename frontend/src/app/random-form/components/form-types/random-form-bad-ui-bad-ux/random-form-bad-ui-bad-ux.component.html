@@ -14,6 +14,12 @@
             <span *ngIf="control.get('chosenOptions')?.errors?.['maxOneOptionChosen']">
                 należy wybrać jedną odpowiedź;
             </span>
+            <span *ngIf="control.get('answer')?.errors?.['required']">
+                należy odpowiedzieć na pytanie; 
+            </span>
+            <span *ngIf="control.get('answer')?.errors?.['nullValidator']">
+                należy odpowiedzieć na pytanie; 
+            </span>
         </span>
     </div>
     <button type="sumbit">Prześlij</button><br>

@@ -26,7 +26,6 @@ export class QuestionBadUiBadUxComponent implements OnInit {
       'type': new FormControl(this.question.type),
       'durationToAnswer': new FormControl(null)//TODO liczenie tego
     });
-    console.log(this.wholeForm);
     (this.wholeForm.get('answers') as FormArray).push(this.questionFormGroup)
   }
 
