@@ -1,11 +1,12 @@
+import { JsonPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
   selector: 'app-multiple-choice-bad-ui-bad-ux',
   templateUrl: './multiple-choice-bad-ui-bad-ux.component.html',
-  styleUrls: ['../../style/bad-ui-bad-ux-style.css','./multiple-choice-bad-ui-bad-ux.component.css']
+  styleUrls: ['../../style/bad-ui-bad-ux-style.css', './multiple-choice-bad-ui-bad-ux.component.css']
 })
 export class MultipleChoiceBadUiBadUxComponent implements OnInit {
 
@@ -15,6 +16,26 @@ export class MultipleChoiceBadUiBadUxComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.questionFormGroup.get('chosenOptions')?.addValidators([Validators.required]);
+  }
+
+  get getChosenOptionArray(): FormArray {
+    return this.questionFormGroup.get('chosenOptions') as FormArray
+  }
+
+  onChange(event: Event) {
+    let checkbox = (event.currentTarget as HTMLInputElement)
+
+    let indexOfCheckedElement = this.getChosenOptionArray.value.findIndex((option: any) => {
+      return option.id === JSON.parse(checkbox.value).id
+    })
+
+    if (indexOfCheckedElement == -1) {
+      this.getChosenOptionArray.push(new FormControl(JSON.parse(checkbox.value)))
+    } else {
+      this.getChosenOptionArray.removeAt(indexOfCheckedElement);
+      checkbox.checked = false;
+    }
   }
 
 }

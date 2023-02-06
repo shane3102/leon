@@ -1,8 +1,8 @@
-<div class="question">
+<div class="question" [formGroup]="questionFormGroup">
     <div style="display: flex; justify-content: space-around;">
         <div *ngFor="let option of question.options">
             <div style="display: block;">
-                <div><input type="checkbox"></div>
+                <div><input type="radio" [value]="option | json" (click)="onChange($event)"></div>
                 <div>{{option.content}}</div>
             </div>
         </div>
