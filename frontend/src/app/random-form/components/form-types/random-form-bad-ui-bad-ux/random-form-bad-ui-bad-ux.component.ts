@@ -41,4 +41,8 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
     return this.randomFormGroup.get('answers') as FormArray
   }
 
+  resetTriedSubmitting(){
+    this.triedSubmiting = of(false);
+  }
+
 }

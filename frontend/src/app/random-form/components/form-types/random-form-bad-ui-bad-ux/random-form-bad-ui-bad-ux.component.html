@@ -1,6 +1,6 @@
 <form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
     <div *ngIf="randomFormGroup" style="display: flex; margin-right: auto; flex-wrap: wrap;">
-        <div *ngFor="let question of formToComplete.questions; let i = index">
+        <div *ngFor="let question of formToComplete.questions; let i = index" (click)="resetTriedSubmitting()">
             <app-question-bad-ui-bad-ux [wholeForm]="randomFormGroup"
                 [question]="question"></app-question-bad-ui-bad-ux>
         </div>
@@ -9,10 +9,10 @@
         <span *ngIf="control.invalid && (triedSubmiting | async)">
             Pytanie numer {{i+1}} jest źle wypełnione: 
             <span *ngIf="control.get('chosenOptions')?.errors?.['required']">
-                należy odpowiedzieć na pytanie
+                należy odpowiedzieć na pytanie; 
             </span>
             <span *ngIf="control.get('chosenOptions')?.errors?.['maxOneOptionChosen']">
-                pytanie jednokrotnego wyboru, należy wybrać jedną odpowiedź
+                należy wybrać jedną odpowiedź;
             </span>
         </span>
     </div>
