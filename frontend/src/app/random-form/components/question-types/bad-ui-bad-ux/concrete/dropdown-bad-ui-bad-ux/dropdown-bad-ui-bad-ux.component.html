@@ -1,8 +1,10 @@
-<div class="question">
+<div class="question" [formGroup]="questionFormGroup">
     <div>
-        <select>
-            <option selected disabled style="display:none"></option>
-            <option *ngFor="let option of question.options" [value]="option.content">{{option.content}}</option>
+        <select #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
+            <option selected disabled style="display:none" value="null"></option>
+            <option [value]="option | json" *ngFor="let option of question.options">
+                {{option.content}}
+            </option>
         </select>
     </div>
     {{question.question}}
