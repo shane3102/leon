@@ -17,15 +17,11 @@ export class DropdownBadUiBadUxComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.questionFormGroup.get('chosenOptions')?.addValidators([Validators.required, maxOneOptionChosen])
+    this.questionFormGroup.get('chosenOptions')?.addValidators([Validators.required, maxOneOptionChosen()])
   }
 
   get getChosenOptionArray(): FormArray {
     return this.questionFormGroup.get('chosenOptions') as FormArray
-  }
-
-  getOptionControl(index: number): FormControl {
-    return this.getChosenOptionArray.at(index) as FormControl;
   }
 
   onSelect(option: HTMLSelectElement) {
