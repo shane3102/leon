@@ -1,4 +1,4 @@
 .question{
     border: 1px solid black;
-    width: calc(50vw - 50px);
+    max-width: calc(45vw - 50px);
 }
