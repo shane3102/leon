@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FormToCompleteResponse } from 'src/app/random-form/models/form-to-complete-response';
 
 @Component({
@@ -16,28 +16,29 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
   @Output() formSentEvent = new EventEmitter();
 
   randomFormGroup: FormGroup;
+  triedSubmiting: Observable<boolean> = of(false)
 
   constructor() { }
 
   ngOnInit(): void {
-    this.randomFormGroup= new FormGroup({
-      'answers': new FormArray(this.formToComplete.questions.map(q => {
-        return new FormGroup({
-          'id': new FormControl(q.id),
-          'chosenOptions': new FormArray([]),
-          'answer': new FormControl(),
-          'type': new FormControl(q.type),
-          'durationToAnswer': new FormControl(null)//TODO liczenie tego
-        })
-      })),
+    this.randomFormGroup = new FormGroup({
+      'answers': new FormArray([]),
       'uxLevel': new FormControl('BAD'),
       'uiLevel': new FormControl('BAD'),
       'durationToAnswer': new FormControl(null) //TODO liczenie tego 
     })
   }
 
-  public getFormGroupOfQuestion(index: number): FormGroup{
-    return (this.randomFormGroup.get('answers')as FormArray).at(index) as FormGroup
+  submitForm(request: any) {
+    if (this.randomFormGroup.invalid) {
+      this.triedSubmiting = of(true)
+    } else{
+      this.formSentEvent.emit()
+    }
+  }
+
+  get getAnswersFormArray(): FormArray {
+    return this.randomFormGroup.get('answers') as FormArray
   }
 
 }

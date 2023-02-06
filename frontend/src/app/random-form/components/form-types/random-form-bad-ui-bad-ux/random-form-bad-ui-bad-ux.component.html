@@ -1,10 +1,21 @@
-<form [formGroup]="randomFormGroup">
-    <div style="display: flex; margin-right: auto; flex-wrap: wrap;">
+<form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
+    <div *ngIf="randomFormGroup" style="display: flex; margin-right: auto; flex-wrap: wrap;">
         <div *ngFor="let question of formToComplete.questions; let i = index">
-            <app-question-bad-ui-bad-ux [formGroup]="getFormGroupOfQuestion(i)" [question]="question"></app-question-bad-ui-bad-ux>
+            <app-question-bad-ui-bad-ux [wholeForm]="randomFormGroup"
+                [question]="question"></app-question-bad-ui-bad-ux>
         </div>
     </div>
-    <button type="sumbit" (click)="formSentEvent.emit()">Prześlij</button>
+    <div style="color: green;" *ngFor="let control of getAnswersFormArray.controls; let i = index">
+        <span *ngIf="control.invalid && (triedSubmiting | async)">
+            Pytanie numer {{i+1}} jest źle wypełnione: 
+            <span *ngIf="control.get('chosenOptions')?.errors?.['required']">
+                należy odpowiedzieć na pytanie
+            </span>
+            <span *ngIf="control.get('chosenOptions')?.errors?.['maxOneOptionChosen']">
+                pytanie jednokrotnego wyboru, należy wybrać jedną odpowiedź
+            </span>
+        </span>
+    </div>
+    <button type="sumbit">Prześlij</button><br>
+    {{randomFormGroup.value | json}}
 </form>
-
-{{randomFormGroup.value | json}}
