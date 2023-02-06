@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
@@ -9,6 +10,7 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 export class LongAnswerBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
+  @Input() questionFormGroup: FormGroup
 
   constructor() { }
 
