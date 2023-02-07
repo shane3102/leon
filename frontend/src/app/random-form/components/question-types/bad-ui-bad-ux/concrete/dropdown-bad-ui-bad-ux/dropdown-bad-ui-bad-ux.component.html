@@ -1,4 +1,5 @@
 <div class="question" [formGroup]="questionFormGroup">
+    <h1>Lista rozwijana</h1>
     <div>
         <select #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
             <option selected disabled style="display:none" value="null"></option>
