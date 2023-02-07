@@ -1,4 +1,5 @@
-<div class="question">
-    <input type="text">
+<div class="question" [formGroup]="questionFormGroup">
+    <h1>Krótka odpowiedź</h1>
+    <input type="text" formControlName="answer">
     {{question.question}}
 </div>
