@@ -27,4 +27,8 @@ export class RandomFormService {
         return this.http.get<FormToCompleteResponse[]>((this.PATH + "/get-each-random-form"), { params: params });
     }
 
+    public submitRandomForm(completedRandomForm: any) {
+        return this.http.post(this.PATH + "/submit", completedRandomForm)
+    }
+
 }
