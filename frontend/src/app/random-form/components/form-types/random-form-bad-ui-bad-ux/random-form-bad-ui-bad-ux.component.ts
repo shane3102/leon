@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { FormToCompleteResponse } from 'src/app/random-form/models/form-to-complete-response';
+import { RandomFormService } from 'src/app/random-form/services/random-form.service';
 
 @Component({
   selector: 'app-random-form-bad-ui-bad-ux',
@@ -18,7 +19,7 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
   randomFormGroup: FormGroup;
   triedSubmiting: Observable<boolean> = of(false)
 
-  constructor() { }
+  constructor(private randomFormService: RandomFormService) { }
 
   ngOnInit(): void {
     this.randomFormGroup = new FormGroup({
@@ -32,8 +33,15 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
   submitForm(request: any) {
     if (this.randomFormGroup.invalid) {
       this.triedSubmiting = of(true)
-    } else{
-      this.formSentEvent.emit()
+    } else {
+      this.randomFormService.submitRandomForm(request).subscribe({
+        next: res => {
+          this.formSentEvent.emit()
+        },
+        error: error => {
+          this.resetTriedSubmitting()
+        }
+      })
     }
   }
 
@@ -41,7 +49,7 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
     return this.randomFormGroup.get('answers') as FormArray
   }
 
-  resetTriedSubmitting(){
+  resetTriedSubmitting() {
     this.triedSubmiting = of(false);
   }
 
