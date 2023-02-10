@@ -1,5 +1,8 @@
-<div class="question" [formGroup]="questionFormGroup">
+<div class="question">
     <h1>Długa odpowiedź</h1>
-    <textarea formControlName="answer"></textarea>
-    {{question.question}}
+    <form [formGroup]="questionFormGroup">
+        <textarea formControlName="answer"></textarea>
+        {{question.question}}
+        <button type="reset" (click)="onReset()">Resetuj</button>
+    </form>
 </div>

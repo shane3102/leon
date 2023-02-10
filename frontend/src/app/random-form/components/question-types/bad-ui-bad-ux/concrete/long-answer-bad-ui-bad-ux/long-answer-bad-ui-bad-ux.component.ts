@@ -1,21 +1,33 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
   selector: 'app-long-answer-bad-ui-bad-ux',
   templateUrl: './long-answer-bad-ui-bad-ux.component.html',
-  styleUrls: ['../../style/bad-ui-bad-ux-style.css','./long-answer-bad-ui-bad-ux.component.css']
+  styleUrls: ['../../style/bad-ui-bad-ux-style.css', './long-answer-bad-ui-bad-ux.component.css']
 })
 export class LongAnswerBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup
 
+  private id: number;
+  private type: string;
+
   constructor() { }
 
   ngOnInit(): void {
     this.questionFormGroup.controls['answer']?.setValidators([Validators.required]);
+
+    this.id = this.questionFormGroup.get('id')?.value;
+    this.type = this.questionFormGroup.get('type')?.value;
   }
 
+  onReset() {
+    setTimeout(() => {
+      this.questionFormGroup.setControl('id', new FormControl(this.id))
+      this.questionFormGroup.setControl('type', new FormControl(this.type))
+    }, 0);
+  }
 }

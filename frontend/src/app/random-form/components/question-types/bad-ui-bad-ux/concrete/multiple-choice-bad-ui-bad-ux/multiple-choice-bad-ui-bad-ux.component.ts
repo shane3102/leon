@@ -11,12 +11,18 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 export class MultipleChoiceBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
-  @Input() questionFormGroup: FormGroup
+  @Input() questionFormGroup: FormGroup;
+
+  private id: number;
+  private type: string;
 
   constructor() { }
 
   ngOnInit(): void {
     this.questionFormGroup.get('chosenOptions')?.addValidators([Validators.required]);
+
+    this.id = this.questionFormGroup.get('id')?.value;
+    this.type = this.questionFormGroup.get('type')?.value;
   }
 
   get getChosenOptionArray(): FormArray {
@@ -36,6 +42,14 @@ export class MultipleChoiceBadUiBadUxComponent implements OnInit {
       this.getChosenOptionArray.removeAt(indexOfCheckedElement);
       checkbox.checked = false;
     }
+  }
+
+  onReset() {
+    setTimeout(() => {
+      this.questionFormGroup.setControl('id', new FormControl(this.id));
+      this.questionFormGroup.setControl('type', new FormControl(this.type));
+      (this.questionFormGroup.get('chosenOptions') as FormArray).clear();
+    }, 0);
   }
 
 }

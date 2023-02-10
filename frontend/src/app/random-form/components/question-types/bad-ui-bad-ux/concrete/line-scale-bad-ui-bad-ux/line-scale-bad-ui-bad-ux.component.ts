@@ -13,10 +13,16 @@ export class LineScaleBadUiBadUxComponent implements OnInit {
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup
 
+  private id: number;
+  private type: string;
+
   constructor() { }
 
   ngOnInit(): void {
     this.questionFormGroup.get('chosenOptions')?.addValidators([Validators.required, maxOneOptionChosen()]);
+
+    this.id = this.questionFormGroup.get('id')?.value;
+    this.type = this.questionFormGroup.get('type')?.value;
   }
 
   get getChosenOptionArray(): FormArray {
@@ -34,6 +40,14 @@ export class LineScaleBadUiBadUxComponent implements OnInit {
       this.getChosenOptionArray.removeAt(indexOfCheckedElement);
     }
 
+  }
+
+  onReset() {
+    setTimeout(() => {
+      this.questionFormGroup.setControl('id', new FormControl(this.id));
+      this.questionFormGroup.setControl('type', new FormControl(this.type));
+      (this.questionFormGroup.get('chosenOptions') as FormArray).clear();
+    }, 0);
   }
 
 }

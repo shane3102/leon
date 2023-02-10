@@ -1,12 +1,15 @@
-<div class="question" [formGroup]="questionFormGroup">
+<div class="question">
     <h1>Lista rozwijana</h1>
     <div>
-        <select #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
-            <option selected disabled style="display:none" value="null"></option>
-            <option [value]="option | json" *ngFor="let option of question.options">
-                {{option.content}}
-            </option>
-        </select>
+        <form [formGroup]="questionFormGroup">
+            <select #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
+                <option selected value="null"></option>
+                <option [value]="option | json" *ngFor="let option of question.options">
+                    {{option.content}}
+                </option>
+            </select>
+        </form>
+        {{question.question}}
+        <button type="reset" (click)="onReset()">Resetuj</button>
     </div>
-    {{question.question}}
 </div>

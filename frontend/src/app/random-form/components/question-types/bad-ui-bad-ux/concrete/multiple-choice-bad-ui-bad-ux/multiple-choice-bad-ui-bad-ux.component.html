@@ -1,12 +1,15 @@
-<div class="question" [formGroup]="questionFormGroup">
+<div class="question">
     <h1>Wielokrotny wybór</h1>
-    <div style="display: flex; justify-content: space-around;">
-        <div *ngFor="let option of question.options">
-            <div style="display: block;">
-                <div><input type="radio" [value]="option | json" (click)="onChange($event)"></div>
-                <div>{{option.content}}</div>
+    <form [formGroup]="questionFormGroup">
+        <div style="display: flex; justify-content: space-around;">
+            <div *ngFor="let option of question.options">
+                <div style="display: block;">
+                    <div><input type="radio" [value]="option | json" (click)="onChange($event)"></div>
+                    <div>{{option.content}}</div>
+                </div>
             </div>
         </div>
-    </div>
-    {{question.question}}
+        {{question.question}}
+        <button type="reset" (click)="onReset()">Resetuj</button>
+    </form>
 </div>
