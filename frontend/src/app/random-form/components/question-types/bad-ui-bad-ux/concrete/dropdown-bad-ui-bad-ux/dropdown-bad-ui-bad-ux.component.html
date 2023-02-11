@@ -2,14 +2,14 @@
     <h1>Lista rozwijana</h1>
     <div>
         <form [formGroup]="questionFormGroup">
-            <select #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
-                <option selected value="null"></option>
+            <select id="dropdownElement" #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
+                <option selected></option>
                 <option [value]="option | json" *ngFor="let option of question.options">
                     {{option.content}}
                 </option>
             </select>
+            {{question.question}}
+            <button type="reset" (click)="onReset()">Resetuj</button>
         </form>
-        {{question.question}}
-        <button type="reset" (click)="onReset()">Resetuj</button>
     </div>
 </div>

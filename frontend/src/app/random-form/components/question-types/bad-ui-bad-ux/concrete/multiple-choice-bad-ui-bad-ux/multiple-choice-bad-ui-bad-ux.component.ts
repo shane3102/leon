@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
@@ -12,6 +13,9 @@ export class MultipleChoiceBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup;
+  @Input() resetFormSubject: Observable<void>;
+
+  private resetFormSubscription: Subscription;
 
   private id: number;
   private type: string;
@@ -23,6 +27,18 @@ export class MultipleChoiceBadUiBadUxComponent implements OnInit {
 
     this.id = this.questionFormGroup.get('id')?.value;
     this.type = this.questionFormGroup.get('type')?.value;
+
+    this.resetFormSubscription = this.resetFormSubject.subscribe(() => {
+      document.querySelectorAll(".multipleChoiceRadio").forEach(
+        el => {
+          let radio: HTMLInputElement = el as HTMLInputElement;
+          if (radio.checked) {
+            radio.checked = false;
+          }
+        }
+      )
+      this.onReset();
+    })
   }
 
   get getChosenOptionArray(): FormArray {

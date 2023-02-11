@@ -4,7 +4,7 @@
         <div style="display: flex; justify-content: space-around;">
             <div *ngFor="let option of question.options">
                 <div style="display: block;">
-                    <div><input type="radio" [value]="option | json" (click)="onChange($event)"></div>
+                    <div><input class="multipleChoiceRadio" type="radio" [value]="option | json" (click)="onChange($event)"></div>
                     <div>{{option.content}}</div>
                 </div>
             </div>

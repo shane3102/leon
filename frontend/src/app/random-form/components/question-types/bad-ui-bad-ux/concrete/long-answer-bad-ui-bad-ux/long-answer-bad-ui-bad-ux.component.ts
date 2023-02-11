@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
@@ -10,7 +11,10 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 export class LongAnswerBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
-  @Input() questionFormGroup: FormGroup
+  @Input() questionFormGroup: FormGroup;
+  @Input() resetFormSubject: Observable<void>;
+
+  private resetFormSubscription: Subscription;
 
   private id: number;
   private type: string;
@@ -22,6 +26,10 @@ export class LongAnswerBadUiBadUxComponent implements OnInit {
 
     this.id = this.questionFormGroup.get('id')?.value;
     this.type = this.questionFormGroup.get('type')?.value;
+
+    this.resetFormSubscription = this.resetFormSubject.subscribe(() => {
+      this.onReset();
+    })
   }
 
   onReset() {

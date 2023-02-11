@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 import { maxOneOptionChosen } from '../../validators/bad-ui-bad-ux.validation';
 
@@ -12,6 +13,9 @@ export class SingleChoiceBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup;
+  @Input() resetFormSubject: Observable<void>;
+
+  private resetFormSubscription: Subscription;
 
   private id: number;
   private type: string;
@@ -23,6 +27,18 @@ export class SingleChoiceBadUiBadUxComponent implements OnInit {
 
     this.id = this.questionFormGroup.get('id')?.value;
     this.type = this.questionFormGroup.get('type')?.value;
+
+    this.resetFormSubscription = this.resetFormSubject.subscribe(() => {
+      document.querySelectorAll(".singleChoiceCheckbox").forEach(
+        el => {
+          let checkbox: HTMLInputElement = el as HTMLInputElement;
+          if (checkbox.checked) {
+            checkbox.checked = false;
+          }
+        }
+      )
+      this.onReset();
+    })
   }
 
   get getChosenOptionArray(): FormArray {

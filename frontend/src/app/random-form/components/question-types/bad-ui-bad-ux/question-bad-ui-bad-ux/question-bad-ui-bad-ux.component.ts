@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { QuestionTypes } from 'src/app/models/question-types';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
@@ -12,6 +13,7 @@ export class QuestionBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
   @Input() wholeForm: FormGroup
+  @Input() resetFormSubject: Subject<void>;
   questionFormGroup: FormGroup
 
   questionTypes = new QuestionTypes();

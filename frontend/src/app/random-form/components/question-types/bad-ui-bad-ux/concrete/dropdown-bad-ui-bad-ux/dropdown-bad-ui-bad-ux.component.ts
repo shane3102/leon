@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { OptionResponse } from 'src/app/random-form/models/option-response';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 import { maxOneOptionChosen } from '../../validators/bad-ui-bad-ux.validation';
@@ -13,6 +14,9 @@ export class DropdownBadUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup;
+  @Input() resetFormSubject: Observable<void>;
+
+  private resetFormSubscription: Subscription;
 
   private id: number;
   private type: string;
@@ -24,6 +28,15 @@ export class DropdownBadUiBadUxComponent implements OnInit {
 
     this.id = this.questionFormGroup.get('id')?.value;
     this.type = this.questionFormGroup.get('type')?.value;
+
+    this.resetFormSubscription = this.resetFormSubject.subscribe(() => {
+      
+      let dropdown = document.getElementById("dropdownElement") as HTMLSelectElement
+
+      dropdown.selectedIndex = 0;
+      
+      this.onReset();
+    })
   }
 
   get getChosenOptionArray(): FormArray {
