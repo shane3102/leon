@@ -99,7 +99,7 @@ public class DbMocker {
     private List<LineScaleQuestionEntity> getLineScaleQuestions(int count, int formNumber) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> LineScaleQuestionEntity.builder()
                 .question("Pytanie ze skalą liniową numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
-                .options(getOptions("skala liniowa", formNumber))
+                .options(getOptionsLineScale("skala liniowa", formNumber))
                 .build()).collect(Collectors.toList());
     }
 
@@ -127,6 +127,14 @@ public class DbMocker {
 
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> OptionEntity.builder()
                 .content("Odpowiedz na pytanie typu " + questionTypeName + " numer " + (i + 1) + " na pytanie z ankiety numer " + formNumber)
+                .build()).collect(Collectors.toList());
+    }
+
+    private List<OptionEntity> getOptionsLineScale(String questionTypeName, int formNumber) {
+        int count = random.nextInt(3, 6);
+
+        return Stream.iterate(0, i -> i + 1).limit(count).map(i -> OptionEntity.builder()
+                .content("Odp nr " + (i + 1) + " a " + formNumber)
                 .build()).collect(Collectors.toList());
     }
 }

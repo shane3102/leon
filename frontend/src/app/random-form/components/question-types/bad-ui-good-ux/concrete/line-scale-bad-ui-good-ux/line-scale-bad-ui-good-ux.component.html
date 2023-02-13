@@ -1,3 +1,14 @@
-<div class="question">
-    <p>line-scale-bad-ui-good-ux works!</p>
+<div class="question" [formGroup]="questionFormGroup">
+    {{question.question}}
+    <div style="display: flex; justify-content: space-around;">
+        <div *ngFor="let option of question.options">
+            <div style="display: block; padding-top: 50%;">
+                <div style="rotate: -34.75deg; transform-origin: bottom left;">
+                    {{option.content}}
+                </div>
+                <input type="radio" name="lineScaleAnswer" [value]="option | json" (click)="onChange($event)">
+            </div>
+        </div>
+        <div style="color: white;">wondeful trick hahaha</div>
+    </div>
 </div>
