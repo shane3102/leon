@@ -1,4 +1,9 @@
-
-<div class="question">
-    <p>dropdown-bad-ui-good-ux works!</p>
+<div class="question" [formGroup]="questionFormGroup">
+    {{question.question}}<br>
+    <select #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
+        <option disabled selected style="display: none;">-- Wybierz odpowiedz --</option>
+        <option [value]="option | json" *ngFor="let option of question.options">
+            {{option.content}}
+        </option>
+    </select>
 </div>
