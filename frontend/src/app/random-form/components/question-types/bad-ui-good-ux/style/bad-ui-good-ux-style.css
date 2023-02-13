@@ -1,0 +1,7 @@
+.question {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    width: calc(100%-2px);
+    margin-left: 1px;
+    margin-right: 1px;
+}

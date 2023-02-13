@@ -5,7 +5,7 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 @Component({
   selector: 'app-dropdown-bad-ui-good-ux',
   templateUrl: './dropdown-bad-ui-good-ux.component.html',
-  styleUrls: ['./dropdown-bad-ui-good-ux.component.css']
+  styleUrls: ['../../style/bad-ui-good-ux-style.css','./dropdown-bad-ui-good-ux.component.css']
 })
 export class DropdownBadUiGoodUxComponent implements OnInit {
 

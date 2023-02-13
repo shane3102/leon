@@ -5,7 +5,7 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 @Component({
   selector: 'app-multiple-choice-bad-ui-good-ux',
   templateUrl: './multiple-choice-bad-ui-good-ux.component.html',
-  styleUrls: ['./multiple-choice-bad-ui-good-ux.component.css']
+  styleUrls: ['../../style/bad-ui-good-ux-style.css','../../style/bad-ui-good-ux-style.css','./multiple-choice-bad-ui-good-ux.component.css']
 })
 export class MultipleChoiceBadUiGoodUxComponent implements OnInit {
 
