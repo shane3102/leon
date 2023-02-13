@@ -5,5 +5,4 @@
     <app-multiple-choice-bad-ui-bad-ux [resetFormSubject]="resetFormSubject.asObservable()"  [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.MULTIPLE_CHOICE.sent'></app-multiple-choice-bad-ui-bad-ux>
     <app-short-answer-bad-ui-bad-ux [resetFormSubject]="resetFormSubject.asObservable()"  [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.SHORT_ANSWER.sent'></app-short-answer-bad-ui-bad-ux>
     <app-single-choice-bad-ui-bad-ux [resetFormSubject]="resetFormSubject.asObservable()"  [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.SINGLE_CHOICE.sent'></app-single-choice-bad-ui-bad-ux>
-    {{questionFormGroup.value | json}}
 </div>
