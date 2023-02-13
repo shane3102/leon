@@ -12,7 +12,6 @@ import pl.leon.form.application.leon.repository.entities.questions.QuestionMetho
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,6 +67,27 @@ public interface QuestionServiceInterface<T extends QuestionMethodsInterface> {
                 .collect(Collectors.toList());
     }
 
+    default List<QuestionResponse> getQuestionsWithMinimumCountWhereIdNotIn(Short count, List<Long> questionIds){
+        checkIfEnoughQuestionToGenerateIfIdsNot(count, questionIds);
+
+        return getRepository().findByDisabledFalseAndIdNotInOrderByCountAnswersAsc(questionIds).stream().limit(count).map(entity -> {
+                    if (entity instanceof HibernateProxy) {
+                        return (T) ((HibernateProxy) entity).getHibernateLazyInitializer().getImplementation();
+                    }
+                    return entity;
+                })
+                .map(getQuestionMapperManager()::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    default void checkIfEnoughQuestionToGenerateIfIdsNot(Short count, List<Long> questionIds){
+        long availableQuestions = getRepository().countByIdNotIn(questionIds);
+
+        if (availableQuestions < count) {
+            throw new TooManyQuestionsToGenerate();
+        }
+    }
+
     default void checkIfEnoughQuestionsToGenerate(Short count) {
         long allQuestions = getRepository().count();
 
@@ -75,4 +95,6 @@ public interface QuestionServiceInterface<T extends QuestionMethodsInterface> {
             throw new TooManyQuestionsToGenerate();
         }
     }
+
+
 }

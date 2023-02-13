@@ -1,0 +1,8 @@
+<div class="question">
+    <h1>Krótka odpowiedź</h1>
+    <form [formGroup]="questionFormGroup">
+        <input type="text" formControlName="answer">
+        {{question.question}}
+        <button type="reset" (click)="onReset()">Resetuj</button>
+    </form>
+</div>

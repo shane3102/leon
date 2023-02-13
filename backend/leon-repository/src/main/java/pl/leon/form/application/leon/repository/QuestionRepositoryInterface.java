@@ -10,5 +10,9 @@ import java.util.List;
 public interface QuestionRepositoryInterface<T> extends JpaRepository<T, Long> {
     List<T> findByDisabledFalseOrderByCountAnswersAsc();
 
+    List<T> findByDisabledFalseAndIdNotInOrderByCountAnswersAsc(List<Long> disallowedIds);
+
     List<T> findByDisabledFalseAndFormDateTo(LocalDate dateTo);
+
+    long countByIdNotIn(List<Long> disallowedIds);
 }

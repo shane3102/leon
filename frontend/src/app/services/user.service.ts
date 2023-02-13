@@ -18,7 +18,6 @@ export class UserService {
         let params = new HttpParams();
         params = params.set('username', username);
 
-
         return this.http.get<boolean>((this.PATH + "/exists"), { params: params });
     }
 

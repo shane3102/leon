@@ -31,6 +31,8 @@ public class ShortAnswerQuestionService implements QuestionServiceInterface<Shor
 
     @Override
     public ShortAnswerQuestionAnswerEntity persistNewAnswer(ShortAnswerQuestionAnswerEntity answering) {
+        log.info("persistNewAnswer({})", answering);
+
         ShortAnswerQuestionEntity question = answering.getQuestion();
         AnswerEntity answer = answering.getAnswer();
 
@@ -38,7 +40,7 @@ public class ShortAnswerQuestionService implements QuestionServiceInterface<Shor
             question.setAnswers(new ArrayList<>());
         }
 
-        question.setCountAnswers(question.getCountAnswers() + 1);
+        question.setCountAnswers((question.getCountAnswers() == null ? 0 : question.getCountAnswers()) + 1);
 
         question.getAnswers().add(answer);
         ShortAnswerQuestionEntity savedLongAnswer = repository.save(question);
@@ -49,6 +51,7 @@ public class ShortAnswerQuestionService implements QuestionServiceInterface<Shor
 
         answering.setAnswer(persistedAnswer);
 
+        log.info("persistNewAnswer({}) = {}", answering, answering);
         return answering;
     }
 }

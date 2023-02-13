@@ -16,7 +16,7 @@ export class QuestionTypes {
     ];
 }
 
-class QuestionType{
+export class QuestionType{
     sent: string;
     name: string;
 }

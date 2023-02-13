@@ -30,13 +30,13 @@ public class LineScaleQuestionService implements QuestionServiceInterface<LineSc
         LineScaleQuestionEntity question = answer.getQuestion();
         OptionEntity option = answer.getOption();
 
-        question.setCountAnswers(question.getCountAnswers() + 1);
+        question.setCountAnswers((question.getCountAnswers() == null ? 0 : question.getCountAnswers()) + 1);
 
         Long beforeCount = option.getCount();
 
         Long resultCount = question.getOptions().stream().filter(checkedOption -> checkedOption.equals(option))
                 .limit(1)
-                .peek(chosenOption -> chosenOption.setCount(chosenOption.getCount() + 1))
+                .peek(chosenOption -> chosenOption.setCount((chosenOption.getCount() == null ? 0 : chosenOption.getCount()) + 1))
                 .findFirst()
                 .orElseThrow(ChosenOptionWasNotFoundInAvailableOptions::new).getCount();
 

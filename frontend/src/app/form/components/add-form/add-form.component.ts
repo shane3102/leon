@@ -3,7 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Observable, of } from 'rxjs';
-import { FormService } from '../../services/form.service';
+import { AddNewFormService } from '../../services/add-new-form.service';
 import { minQuestionCount, whiteSpaceOfEmpty } from '../../validators/form.validation';
 
 @Component({
@@ -18,7 +18,7 @@ export class AddFormComponent implements OnInit {
   formInvalid: Observable<boolean> = of(false);
   noTitleOfSubject: Observable<boolean> = of(false)
 
-  constructor(private formService: FormService, private router: Router) { }
+  constructor(private formService: AddNewFormService, private router: Router) { }
 
   public faPlus = faPlus;
 

@@ -19,6 +19,7 @@ import { UserAuthModule } from './user-auth/user-auth.module';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { FormModule } from './form/form.module';
 import { AuthGuard } from './authGuard/auth.service';
+import { RandomFormModule } from './random-form/random-form.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AuthGuard } from './authGuard/auth.service';
     BrowserAnimationsModule,
     FontAwesomeModule,
     UserAuthModule,
-    FormModule
+    FormModule,
+    RandomFormModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
