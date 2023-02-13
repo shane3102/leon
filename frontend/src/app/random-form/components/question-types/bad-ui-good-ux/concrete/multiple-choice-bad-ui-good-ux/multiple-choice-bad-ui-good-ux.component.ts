@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
   selector: 'app-multiple-choice-bad-ui-good-ux',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./multiple-choice-bad-ui-good-ux.component.css']
 })
 export class MultipleChoiceBadUiGoodUxComponent implements OnInit {
+
+  @Input() question: QuestionResponse;
+  @Input() questionFormGroup: FormGroup;
 
   constructor() { }
 

@@ -11,7 +11,6 @@ import { RandomFormService } from 'src/app/random-form/services/random-form.serv
 })
 export class RandomFormBadUiBadUxComponent implements OnInit {
 
-  @Input() formChanged: Observable<string>
   @Input() formToComplete: FormToCompleteResponse = new FormToCompleteResponse();
 
   @Output() formSentEvent = new EventEmitter();

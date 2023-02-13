@@ -1,2 +1,6 @@
-<p>random-form-bad-ui-good-ux works!</p>
-<button (click)="formSentEvent.emit()">Prześlij</button>
+<form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
+    <div *ngFor="let question of formToComplete.questions">
+        <app-question-bad-ui-good-ux [wholeForm]="randomFormGroup" [question]="question"></app-question-bad-ui-good-ux>
+    </div>
+    <button type="sumbit">Prześlij</button>
+</form>
