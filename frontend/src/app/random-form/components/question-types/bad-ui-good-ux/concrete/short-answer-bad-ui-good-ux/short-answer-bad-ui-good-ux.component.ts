@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
   selector: 'app-short-answer-bad-ui-good-ux',
   templateUrl: './short-answer-bad-ui-good-ux.component.html',
-  styleUrls: ['../../style/bad-ui-good-ux-style.css','./short-answer-bad-ui-good-ux.component.css']
+  styleUrls: ['../../style/bad-ui-good-ux-style.css', './short-answer-bad-ui-good-ux.component.css']
 })
 export class ShortAnswerBadUiGoodUxComponent implements OnInit {
 
@@ -15,6 +15,7 @@ export class ShortAnswerBadUiGoodUxComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.questionFormGroup.controls['answer']?.setValidators([Validators.required]);
   }
 
 }
