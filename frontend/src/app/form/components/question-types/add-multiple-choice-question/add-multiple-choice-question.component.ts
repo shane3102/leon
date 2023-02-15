@@ -5,7 +5,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-add-multiple-choice-question',
   templateUrl: './add-multiple-choice-question.component.html',
-  styleUrls: ['./add-multiple-choice-question.component.css','../../../style/style.css']
+  styleUrls: ['./add-multiple-choice-question.component.css','../../../style/add-question-style.css']
 })
 export class AddMultipleChoiceQuestionComponent implements OnInit {
 

@@ -6,7 +6,7 @@
     height: 60vh;
     width: 30vh;
     margin: auto;
-    font-size: 30px;
+    font-size: 3vh;
 }
 
 .actionButton:disabled{
@@ -26,15 +26,15 @@
 }
 
 .actionButton:hover:enabled .description {
-    max-height: 20vh;
+    max-height: 15vh;
 }
 
 .descriptionWrapper {
-    height: 20vh;
+    height: 15vh;
 }
 
 .description {
-    font-size: 21px;
+    font-size: 2vh;
     -webkit-transition: max-height 1s;
     -moz-transition: max-height 1s;
     -ms-transition: max-height 1s;
@@ -42,4 +42,8 @@
     transition: max-height 1s;
     overflow: hidden;
     max-height: 0;
+}
+
+.icon{
+    font-size: 10vh;
 }

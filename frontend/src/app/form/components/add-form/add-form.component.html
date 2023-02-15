@@ -5,7 +5,8 @@
     <div class="inputSegment">
         <div id="formBasicInfo">Informacje ogólne</div>
         <input formControlName="title" type="text" placeholder="Tytuł ankiety" class="titleSubjectInput">
-        <textarea style="resize: none;" formControlName="subject" type="text" placeholder="Opis ankiety" class="titleSubjectInput"></textarea>
+        <textarea style="resize: none;" formControlName="subject" type="text" placeholder="Opis ankiety"
+            class="titleSubjectInput"></textarea>
         <div class="inputLine">
             <div class="lineLabel">
                 Wyłącz dostępność wyników ankiety dla wszystkich użytkowników:&nbsp;
@@ -44,26 +45,28 @@
     let i = index" [questionControls]="$any(question)" [index]="i" (deleteEvent)="removeQuestion(i)">
     </app-add-question>
 
-    <div style="text-align: center; color: red; height: 40px;">
-        <span *ngIf="
+    <div style="text-align: center; color: red; height: 20px;">
+        <div *ngIf="
         (noTitleOfSubject | async) && getTitle && getTitle.errors?.['required'] ||
         (noTitleOfSubject | async) && getSubject && getSubject.errors?.['required']">
             Dodaj tytuł i opis ankiety
-        </span>
-        <br>
-        <span *ngIf="(formInvalid | async)">
+        </div>
+        <div *ngIf="(formInvalid | async)">
             Wypełnij prawidłowo wszystkie dodane pytania
-        </span>
-        <br>
-        <span *ngIf="(triedSubmitting | async)">
+        </div>
+        <div *ngIf="(triedSubmitting | async)">
             Wymagane jest przynajmniej jedno pytanie
-        </span>
+        </div>
     </div>
 
     <div id="actionButtonWrapper">
         <div class="btn" (click)="addQuestion()">
             Dodaj pytanie <fa-icon [icon]="faPlus"></fa-icon>
         </div>
-        <button (click)="submitAddingForm(addFormForm.value)" class="submitButton" type="submit">Prześlij formularz</button>
+        <div (click)="submitAddingForm(addFormForm.value)" class="submitButton" type="submit">
+            <div *ngIf="!(isAdding | async)">Prześlij formularz</div>
+            <div *ngIf="isAdding | async" style="color: #6E6E6E;" id="loadingSpinner" class="spinner-border"
+                role="status"></div>
+        </div>
     </div>
 </form>

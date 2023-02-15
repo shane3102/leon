@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-add-long-answer-question',
   templateUrl: './add-long-answer-question.component.html',
-  styleUrls: ['../../../style/style.css','./add-long-answer-question.component.css']
+  styleUrls: ['../../../style/add-question-style.css','./add-long-answer-question.component.css']
 })
 export class AddLongAnswerQuestionComponent implements OnInit {
 

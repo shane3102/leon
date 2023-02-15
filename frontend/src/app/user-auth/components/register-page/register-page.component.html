@@ -27,7 +27,7 @@
             <div id="registerButton">
                 <button id="registerButton" type="submit" [disabled]="!registerForm.valid">
                     <div *ngIf="!(isRegistering |async)">Zarejestruj się</div>
-                    <div *ngIf="(isRegistering |async)" id="loginRegisterSpinner" class="spinner-border" role="status"></div>
+                    <div *ngIf="(isRegistering |async)" id="loadingSpinner" class="spinner-border" role="status"></div>
                 </button>
             </div>
         </div>

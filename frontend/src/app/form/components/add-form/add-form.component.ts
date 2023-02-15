@@ -9,10 +9,11 @@ import { minQuestionCount, whiteSpaceOfEmpty } from '../../validators/form.valid
 @Component({
   selector: 'app-add-form',
   templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.css', '../../style/style.css']
+  styleUrls: ['./add-form.component.css', '../../style/add-question-style.css']
 })
 export class AddFormComponent implements OnInit {
 
+  isAdding: Observable<boolean> = of(false);
   triedSubmitting: Observable<boolean> = of(false);
   formInvalid: Observable<boolean> = of(false);
   noTitleOfSubject: Observable<boolean> = of(false)
@@ -67,19 +68,29 @@ export class AddFormComponent implements OnInit {
 
   public submitAddingForm(addFormForm: any) {
 
-    if (this.getQuestions.errors?.['minQuestionCount']) {
-      this.triedSubmitting = of(true);
-      setTimeout(() => this.triedSubmitting = of(false), 2000)
-    } else if (this.getQuestions.controls.some(control => control.invalid)) {
-      this.formInvalid = of(true);
-      setTimeout(() => this.formInvalid = of(false), 2000)
-    } else if (this.addFormForm.invalid) {
-      this.noTitleOfSubject = of(true);
-      setTimeout(() => this.noTitleOfSubject = of(false), 2000)
+    this.isAdding = of(true);
+
+    if (this.addFormForm.invalid) {
+      this.isAdding = of(false);
+      if (this.getQuestions.errors?.['minQuestionCount']) {
+        this.triedSubmitting = of(true);
+        setTimeout(() => this.triedSubmitting = of(false), 2000)
+      } else if (this.getQuestions.controls.some(control => control.invalid)) {
+        this.formInvalid = of(true);
+        setTimeout(() => this.formInvalid = of(false), 2000)
+      } else if (this.addFormForm.invalid) {
+        this.noTitleOfSubject = of(true);
+        setTimeout(() => this.noTitleOfSubject = of(false), 2000)
+      }
     } else {
-      this.formService.addNewForm(addFormForm).subscribe(
-        res => this.router.navigateByUrl('/main-page')
-      )
+      this.formService.addNewForm(addFormForm).subscribe({
+        next: res => {
+          this.router.navigateByUrl('/main-page')
+        },
+        error: error => {
+          this.isAdding = of(false);
+        }
+      })
     }
 
   }
