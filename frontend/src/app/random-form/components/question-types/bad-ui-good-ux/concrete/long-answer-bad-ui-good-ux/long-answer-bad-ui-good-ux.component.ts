@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
@@ -15,6 +15,7 @@ export class LongAnswerBadUiGoodUxComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.questionFormGroup.controls['answer']?.setValidators([Validators.required]);
   }
 
 }

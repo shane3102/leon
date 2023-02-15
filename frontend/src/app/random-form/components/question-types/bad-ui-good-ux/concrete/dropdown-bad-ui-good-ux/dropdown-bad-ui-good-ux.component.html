@@ -1,5 +1,5 @@
 <div class="question" [formGroup]="questionFormGroup">
-    {{question.question}}<br>
+    <p>{{question.question}}</p>
     <select #option (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
         <option disabled selected style="display: none;">-- Wybierz odpowiedz --</option>
         <option [value]="option | json" *ngFor="let option of question.options">

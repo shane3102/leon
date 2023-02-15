@@ -1,5 +1,5 @@
 <div class="question" [formGroup]="questionFormGroup">
-    {{question.question}}
+    <p>{{question.question}}</p>
     <div style="display: flex; justify-content: space-around;">
         <div *ngFor="let option of question.options">
             <div style="display: block; padding-top: 50%;">
@@ -9,6 +9,5 @@
                 <input type="radio" name="lineScaleAnswer" [value]="option | json" (click)="onChange($event)">
             </div>
         </div>
-        <div style="color: white;">wondeful trick hahaha</div>
     </div>
 </div>

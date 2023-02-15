@@ -1,3 +1,4 @@
-<div class="question">
-    <p>long-answer-bad-ui-good-ux works!</p>
+<div class="question" [formGroup]="questionFormGroup">
+    <p>{{question.question}}</p>
+    <textarea placeholder="Wpisz odpowiedź..." style="width: 100%;" formControlName="answer"></textarea>
 </div>
