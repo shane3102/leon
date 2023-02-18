@@ -5,7 +5,7 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 @Component({
   selector: 'app-dropdown-bad-ui-good-ux',
   templateUrl: './dropdown-bad-ui-good-ux.component.html',
-  styleUrls: ['../../style/bad-ui-good-ux-style.css','./dropdown-bad-ui-good-ux.component.css']
+  styleUrls: ['../../style/bad-ui-good-ux-style.css', './dropdown-bad-ui-good-ux.component.css']
 })
 export class DropdownBadUiGoodUxComponent implements OnInit {
 
@@ -23,11 +23,20 @@ export class DropdownBadUiGoodUxComponent implements OnInit {
   }
 
   onSelect(option: HTMLSelectElement) {
+    this.getChosenOptionArray.markAsTouched();
 
     (this.getChosenOptionArray).clear()
 
     this.getChosenOptionArray.push(new FormControl(JSON.parse(option.value)))
 
+  }
+
+  touchedNotFilled(): boolean {
+    return (this.getChosenOptionArray && this.getChosenOptionArray.touched && this.getChosenOptionArray.errors?.['required'])
+  }
+
+  touchedValid(): boolean {
+    return (this.getChosenOptionArray && this.getChosenOptionArray.touched && this.getChosenOptionArray.valid)
   }
 
 }
