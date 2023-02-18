@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
@@ -11,11 +12,17 @@ export class MultipleChoiceBadUiGoodUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup;
+  @Input() triedSubmiting: Observable<void>;
+
+  private triedSubmittingSubscription: Subscription;
 
   constructor() { }
 
   ngOnInit(): void {
     this.questionFormGroup.get('chosenOptions')?.addValidators([Validators.required])
+    this.triedSubmittingSubscription = this.triedSubmiting.subscribe(() => {
+      this.getChosenOptionArray.markAsTouched();
+    })
   }
 
   get getChosenOptionArray(): FormArray {
@@ -33,6 +40,14 @@ export class MultipleChoiceBadUiGoodUxComponent implements OnInit {
       this.getChosenOptionArray.removeAt(indexOfCheckedElement);
     }
 
+  }
+
+  touchedNotFilled(): boolean {
+    return (this.getChosenOptionArray && this.getChosenOptionArray.touched && this.getChosenOptionArray.errors?.['required'])
+  }
+
+  touchedValid(): boolean {
+    return (this.getChosenOptionArray && this.getChosenOptionArray.touched && this.getChosenOptionArray.valid)
   }
 
 }
