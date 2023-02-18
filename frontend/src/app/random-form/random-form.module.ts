@@ -22,6 +22,13 @@ import { LongAnswerBadUiGoodUxComponent } from './components/question-types/bad-
 import { MultipleChoiceBadUiGoodUxComponent } from './components/question-types/bad-ui-good-ux/concrete/multiple-choice-bad-ui-good-ux/multiple-choice-bad-ui-good-ux.component';
 import { ShortAnswerBadUiGoodUxComponent } from './components/question-types/bad-ui-good-ux/concrete/short-answer-bad-ui-good-ux/short-answer-bad-ui-good-ux.component';
 import { SingleChoiceBadUiGoodUxComponent } from './components/question-types/bad-ui-good-ux/concrete/single-choice-bad-ui-good-ux/single-choice-bad-ui-good-ux.component';
+import { QuestionGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/question-good-ui-bad-ux/question-good-ui-bad-ux.component';
+import { DropdownGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/dropdown-good-ui-bad-ux/dropdown-good-ui-bad-ux.component';
+import { LineScaleGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/line-scale-good-ui-bad-ux/line-scale-good-ui-bad-ux.component';
+import { LongAnswerGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/long-answer-good-ui-bad-ux/long-answer-good-ui-bad-ux.component';
+import { MultipleChoiceGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/multiple-choice-good-ui-bad-ux/multiple-choice-good-ui-bad-ux.component';
+import { ShortAnswerGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/short-answer-good-ui-bad-ux/short-answer-good-ui-bad-ux.component';
+import { SingleChoiceGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/single-choice-good-ui-bad-ux/single-choice-good-ui-bad-ux.component';
 
 
 
@@ -46,6 +53,13 @@ import { SingleChoiceBadUiGoodUxComponent } from './components/question-types/ba
     MultipleChoiceBadUiGoodUxComponent,
     ShortAnswerBadUiGoodUxComponent,
     SingleChoiceBadUiGoodUxComponent,
+    QuestionGoodUiBadUxComponent,
+    DropdownGoodUiBadUxComponent,
+    LineScaleGoodUiBadUxComponent,
+    LongAnswerGoodUiBadUxComponent,
+    MultipleChoiceGoodUiBadUxComponent,
+    ShortAnswerGoodUiBadUxComponent,
+    SingleChoiceGoodUiBadUxComponent,
   ],
   imports: [
     CommonModule,
