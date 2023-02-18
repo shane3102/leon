@@ -1,1 +1,8 @@
-<p>question-good-ui-bad-ux works!</p>
+<div *ngIf="question" [ngSwitch]="question.type">
+    <app-dropdown-good-ui-bad-ux *ngSwitchCase='questionTypes.DROPDOWN.sent'></app-dropdown-good-ui-bad-ux>
+    <app-line-scale-good-ui-bad-ux *ngSwitchCase='questionTypes.LINE_SCALE.sent'></app-line-scale-good-ui-bad-ux>
+    <app-long-answer-good-ui-bad-ux *ngSwitchCase='questionTypes.LONG_ANSWER.sent'></app-long-answer-good-ui-bad-ux>
+    <app-multiple-choice-good-ui-bad-ux *ngSwitchCase='questionTypes.MULTIPLE_CHOICE.sent'></app-multiple-choice-good-ui-bad-ux>
+    <app-short-answer-good-ui-bad-ux *ngSwitchCase='questionTypes.SHORT_ANSWER.sent'></app-short-answer-good-ui-bad-ux>
+    <app-single-choice-good-ui-bad-ux *ngSwitchCase='questionTypes.SINGLE_CHOICE.sent'></app-single-choice-good-ui-bad-ux>
+</div>
