@@ -119,7 +119,7 @@ public abstract class FormMapper {
                         ?
                         null
                         :
-                        (UserEntity) userService.loadUserByUsername(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()));
+                        (UserEntity) userService.loadUserByUsername(((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())));
     }
 
     @Mappings({
