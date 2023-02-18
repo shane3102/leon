@@ -1,6 +1,10 @@
-<div class="question" [formGroup]="questionFormGroup">
+<div class="question" [ngStyle]="touchedNotFilled() ? 
+    {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
+    touchedValid() ? 
+    {'border-left': '1px solid #BAFF39', 'border-right': '1px solid #BAFF39'} : {}" 
+    [formGroup]="questionFormGroup">
     <p>{{question.question}}</p>
-    <div style="display: flex; justify-content: space-around;">
+    <div style="display: flex; justify-content: space-around;" (blur)="this.getChosenOptionArray.markAsTouched()">
         <div *ngFor="let option of question.options">
             <div style="display: block; padding-top: 50%;">
                 <div style="rotate: -34.75deg; transform-origin: bottom left;">
@@ -8,6 +12,11 @@
                 </div>
                 <input type="radio" name="lineScaleAnswer" [value]="option | json" (click)="onChange($event)">
             </div>
+        </div>
+    </div>
+    <div style="height: 24px; color: red;">
+        <div *ngIf="touchedNotFilled()">
+            Odpowiedz jest wymagana
         </div>
     </div>
 </div>

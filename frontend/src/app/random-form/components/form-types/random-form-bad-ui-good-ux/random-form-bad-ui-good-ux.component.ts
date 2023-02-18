@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { FormToCompleteResponse } from 'src/app/random-form/models/form-to-complete-response';
 import { RandomFormService } from 'src/app/random-form/services/random-form.service';
 
@@ -15,6 +16,8 @@ export class RandomFormBadUiGoodUxComponent implements OnInit {
   @Output() formSentEvent = new EventEmitter();
 
   randomFormGroup: FormGroup;
+
+  triedSubmiting: Subject<void> = new Subject<void>()
 
   constructor(private randomFormService: RandomFormService) { }
 
@@ -34,6 +37,8 @@ export class RandomFormBadUiGoodUxComponent implements OnInit {
           this.formSentEvent.emit();
         }
       })
+    } else {
+      this.triedSubmiting.next();
     }
   }
 
