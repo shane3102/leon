@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { FormToCompleteResponse } from 'src/app/random-form/models/form-to-complete-response';
 import { RandomFormService } from 'src/app/random-form/services/random-form.service';
 
@@ -17,7 +17,8 @@ export class RandomFormBadUiGoodUxComponent implements OnInit {
 
   randomFormGroup: FormGroup;
 
-  triedSubmiting: Subject<void> = new Subject<void>()
+  triedSubmitingSubject: Subject<void> = new Subject<void>()
+  triedSubmitting: Observable<boolean> = of(false);
 
   constructor(private randomFormService: RandomFormService) { }
 
@@ -38,8 +39,13 @@ export class RandomFormBadUiGoodUxComponent implements OnInit {
         }
       })
     } else {
-      this.triedSubmiting.next();
+      this.triedSubmitingSubject.next();
+      this.triedSubmitting = of(true);
     }
+  }
+
+  touchedNotFilled(): boolean {
+    return this.randomFormGroup && this.randomFormGroup.touched && this.randomFormGroup.invalid
   }
 
 }
