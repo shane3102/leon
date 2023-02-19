@@ -15,20 +15,19 @@
     background-color: #6E6E6E;
     border-radius: 20px 0px 20px 0px;
     border: none;
-    padding: 10px;
-    min-height: 58px;
-    min-width: 114px;
+    padding: 20px;
+    line-height: normal;
+    min-width: 123px;
+}
+
+#loginButton:active:enabled {
+    padding: 16px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    min-width: 115px;
 }
 
 #loginButton:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
-}
-
-#loginButton:active:enabled {
-    padding: 8px;
-    margin-bottom: 2px;
-    margin-top: 2px;
-    min-height: 50px;
-    min-width: 110px;
+    opacity: 0.9;
 }
