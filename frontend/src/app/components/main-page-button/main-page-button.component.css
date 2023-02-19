@@ -7,9 +7,10 @@
     width: 30vh;
     margin: auto;
     font-size: 3vh;
+    line-height: normal;
 }
 
-.actionButton:disabled{
+.actionButton:disabled {
     background-color: #6E6E6E;
     border: 5px solid #6E6E6E;
     color: black
@@ -17,7 +18,7 @@
 
 .actionButtonText {
     height: 8vw;
-    justify-content:center;
+    justify-content: center;
 }
 
 .actionButton:hover:enabled {
@@ -44,6 +45,6 @@
     max-height: 0;
 }
 
-.icon{
+.icon {
     font-size: 10vh;
 }

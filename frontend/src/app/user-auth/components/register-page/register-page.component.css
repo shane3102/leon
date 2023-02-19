@@ -6,22 +6,23 @@
     background-color: #6E6E6E;
     border-radius: 20px 0px 20px 0px;
     border: none;
-    padding: 10px;
-    min-height: 58px;
-    min-width: 200px;
+    padding: 20px;
+    min-height: 50px;
+    min-width: 196px;
+    line-height: normal;
 }
 
 #registerButton:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: 0.9;
 }
 
 #registerButton:active:enabled {
-    padding: 8px;
-    margin-bottom: 2px;
-    margin-top: 2px;
-    min-height: 52px;
-    min-width: 198px;
+    padding: 16px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    min-height: 42px;
+    min-width: 172px;
 }
 
 #usernameSpinner {

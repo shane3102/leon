@@ -5,31 +5,38 @@
             <input placeholder="Login" class="loginRegisterInput" type="text" formControlName="username">
         </div>
         <div class="lineValidationMessage">
-            <span *ngIf="getUsernameControl && getUsernameControl.touched && getUsernameControl.errors?.['required']">Podaj swój login</span>
-            <span *ngIf="getUsernameControl && getUsernameControl.touched && !getUsernameControl.errors?.['required'] && getUsernameControl.errors?.['usernameExist']">Istnieje użytkownik o podanym loginie</span>
+            <span
+                *ngIf="getUsernameControl && getUsernameControl.touched && getUsernameControl.errors?.['required']">Podaj
+                swój login</span>
+            <span
+                *ngIf="getUsernameControl && getUsernameControl.touched && !getUsernameControl.errors?.['required'] && getUsernameControl.errors?.['usernameExist']">Istnieje
+                użytkownik o podanym loginie</span>
         </div>
         <div class="line">
             <input placeholder="Hasło" class="loginRegisterInput" type="password" formControlName="password">
         </div>
         <div class="lineValidationMessage">
             <span
-                *ngIf="getPasswordControl && getPasswordControl.touched && getPasswordControl.errors?.['required']">Hasło jest wymagane</span>
+                *ngIf="getPasswordControl && getPasswordControl.touched && getPasswordControl.errors?.['required']">Hasło
+                jest wymagane</span>
         </div>
         <div class="line">
-            <input placeholder="Powtórz hasło" class="loginRegisterInput" type="password" formControlName="passwordConfirmation">
+            <input placeholder="Powtórz hasło" class="loginRegisterInput" type="password"
+                formControlName="passwordConfirmation">
         </div>
         <div class="lineValidationMessage">
             <span
-                *ngIf="getPasswordConfirmationControl && getPasswordConfirmationControl.touched && getPasswordConfirmationControl.errors?.['required']">Powtórzenie hasła jest wymagane</span>
-                <span *ngIf="getPasswordConfirmationControl && getPasswordConfirmationControl.touched && !getPasswordConfirmationControl.errors?.['required'] && registerForm.errors?.['passwordsNotEqual']">Hasła są różne</span>
+                *ngIf="getPasswordConfirmationControl && getPasswordConfirmationControl.touched && getPasswordConfirmationControl.errors?.['required']">Powtórzenie
+                hasła jest wymagane</span>
+            <span
+                *ngIf="getPasswordConfirmationControl && getPasswordConfirmationControl.touched && !getPasswordConfirmationControl.errors?.['required'] && registerForm.errors?.['passwordsNotEqual']">Hasła
+                są różne</span>
         </div>
         <div class="line">
-            <div id="registerButton">
-                <button id="registerButton" type="submit" [disabled]="!registerForm.valid">
-                    <div *ngIf="!(isRegistering |async)">Zarejestruj się</div>
-                    <div *ngIf="(isRegistering |async)" id="loadingSpinner" class="spinner-border" role="status"></div>
-                </button>
-            </div>
+            <button id="registerButton" type="submit" [disabled]="!registerForm.valid">
+                <div *ngIf="!(isRegistering |async)">Zarejestruj się</div>
+                <div *ngIf="(isRegistering |async)" id="loadingSpinner" class="spinner-border" role="status"></div>
+            </button>
         </div>
         <div class="lineValidationMessage"></div>
     </form>
