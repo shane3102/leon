@@ -12,7 +12,7 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 export class QuestionGoodUiBadUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
-  @Input() wholeForm: FormGroup
+  @Input() wholeForm: FormGroup;
   @Input() resetFormSubject: Subject<void>;
   questionFormGroup: FormGroup;
 
