@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
-import { maxOneOptionChosen } from '../../../../../validators/bad-ui-bad-ux.validation';
+import { maxOneOptionChosen } from '../../../../../validators/form.validation';
 
 @Component({
   selector: 'app-line-scale-bad-ui-bad-ux',
