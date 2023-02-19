@@ -6,7 +6,7 @@
     [formGroup]="questionFormGroup">
     <p>{{question.question}}</p>
     <div *ngFor="let option of question.options">
-        <input type="radio" name="lineScaleAnswer" [value]="option | json" (click)="onChange($event)">
+        <input type="radio" [name]="question.question" [value]="option | json" (click)="onChange($event)">
         {{option.content}}
     </div>
     <div style="height: 24px; color: red;">

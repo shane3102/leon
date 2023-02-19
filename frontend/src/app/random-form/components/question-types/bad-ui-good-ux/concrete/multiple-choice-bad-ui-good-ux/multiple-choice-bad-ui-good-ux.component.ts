@@ -31,6 +31,8 @@ export class MultipleChoiceBadUiGoodUxComponent implements OnInit {
 
   onChange(event: Event) {
 
+    this.getChosenOptionArray.markAsTouched();
+
     let checkbox = (event.currentTarget as HTMLInputElement)
 
     if (checkbox.checked) {

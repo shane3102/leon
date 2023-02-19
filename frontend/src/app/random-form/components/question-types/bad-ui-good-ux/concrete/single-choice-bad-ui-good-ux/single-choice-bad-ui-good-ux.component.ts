@@ -31,6 +31,8 @@ export class SingleChoiceBadUiGoodUxComponent implements OnInit {
 
   onChange(event: Event) {
 
+    this.getChosenOptionArray.markAsTouched();
+
     let option: HTMLInputElement = event.currentTarget as HTMLInputElement
 
     (this.getChosenOptionArray).clear()
