@@ -30,8 +30,8 @@ $frontend-good-ux-theme: mat.define-light-theme((color: (primary: $frontend-good
 // that you are using.
 @include mat.all-component-themes($frontend-good-ux-theme);
 
-$frontend-bad-ux-primary: mat.define-palette(mat.$red-palette);
-$frontend-bad-ux-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
+$frontend-bad-ux-primary: mat.define-palette(mat.$gray-palette);
+$frontend-bad-ux-accent: mat.define-palette(mat.$blue-gray-palette, A200, A100, A400);
 
 $frontend-bad-ux-warn: mat.define-palette(mat.$green-palette);
 
