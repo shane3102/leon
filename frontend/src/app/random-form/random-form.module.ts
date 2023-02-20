@@ -30,6 +30,8 @@ import { MultipleChoiceGoodUiBadUxComponent } from './components/question-types/
 import { ShortAnswerGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/short-answer-good-ui-bad-ux/short-answer-good-ui-bad-ux.component';
 import { SingleChoiceGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/single-choice-good-ui-bad-ux/single-choice-good-ui-bad-ux.component';
 import { MatSelectModule } from '@angular/material/select'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { MatSelectModule } from '@angular/material/select'
     BrowserModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   exports: [
     FillRandomFormComponent
