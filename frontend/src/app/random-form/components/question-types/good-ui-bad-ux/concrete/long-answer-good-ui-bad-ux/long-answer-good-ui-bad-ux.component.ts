@@ -35,6 +35,7 @@ export class LongAnswerGoodUiBadUxComponent implements OnInit {
 
   onReset() {
     setTimeout(() => {
+      this.questionFormGroup.setControl('answer', new FormControl(""))
       this.questionFormGroup.setControl('id', new FormControl(this.id))
       this.questionFormGroup.setControl('type', new FormControl(this.type))
     }, 0);
