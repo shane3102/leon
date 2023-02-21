@@ -21,6 +21,8 @@ export class DropdownGoodUiBadUxComponent implements OnInit {
   private id: number;
   private type: string;
 
+  value: string;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -30,10 +32,6 @@ export class DropdownGoodUiBadUxComponent implements OnInit {
     this.type = this.questionFormGroup.get('type')?.value;
 
     this.resetFormSubscription = this.resetFormSubject.subscribe(() => {
-
-      let dropdown = document.getElementById("dropdownElement") as HTMLSelectElement
-
-      dropdown.selectedIndex = 0;
 
       this.onReset();
     })
@@ -54,6 +52,9 @@ export class DropdownGoodUiBadUxComponent implements OnInit {
   }
 
   onReset() {
+
+    this.value = "";
+
     setTimeout(() => {
       this.questionFormGroup.setControl('id', new FormControl(this.id));
       this.questionFormGroup.setControl('type', new FormControl(this.type));

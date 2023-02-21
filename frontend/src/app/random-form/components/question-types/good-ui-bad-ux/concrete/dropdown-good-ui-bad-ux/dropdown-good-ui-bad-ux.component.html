@@ -1,12 +1,13 @@
 <div class="question" [formGroup]="questionFormGroup">
     <h1>Lista rozwijana</h1>
     <mat-form-field>
-        <mat-select #option (selectionChange)="onSelect(option)">
+        <mat-select [(ngModel)]="value" [ngModelOptions]="{standalone: true}" id="dropdownElement" #option (selectionChange)="onSelect(option)">
             <mat-option selected value=""></mat-option>
             <mat-option class="autoWidth" [value]="option| json" *ngFor="let option of question.options">
                 {{option.content}}
             </mat-option>
         </mat-select>
     </mat-form-field><br>
-    <label>{{question.question}}</label>
+    {{question.question}}
+    <button type="reset" (click)="onReset()">Resetuj</button>
 </div>
