@@ -1,1 +1,10 @@
-<p>short-answer-good-ui-bad-ux works!</p>
+<div class="question">
+    <form>
+        <h1>Krótka odpowiedź</h1>
+        <mat-form-field [formGroup]="questionFormGroup">
+            <input matInput formControlName="answer">
+        </mat-form-field>
+        {{question.question}}
+        <button mat-raised-button class="mat-primary" type="reset" (click)="onReset()">Resetuj</button>
+    </form>
+</div>
