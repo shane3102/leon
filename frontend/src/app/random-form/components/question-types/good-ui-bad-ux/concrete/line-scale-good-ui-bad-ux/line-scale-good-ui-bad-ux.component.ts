@@ -33,9 +33,6 @@ export class LineScaleGoodUiBadUxComponent implements OnInit {
     this.type = this.questionFormGroup.get('type')?.value;
 
     this.resetFormSubscription = this.resetFormSubject.subscribe(() => {
-      this.question.options.forEach(o => {
-        o.checked = false;
-      });
       this.onReset();
     })
     this.question.options.forEach(option => {option.checked = false})
