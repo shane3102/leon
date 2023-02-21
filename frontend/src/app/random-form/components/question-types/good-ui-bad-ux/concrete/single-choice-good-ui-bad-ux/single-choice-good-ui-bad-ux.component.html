@@ -1,1 +1,19 @@
-<p>single-choice-good-ui-bad-ux works!</p>
+<div class="question" [formGroup]="questionFormGroup">
+    <h1>Jednokrotny wybór</h1>
+    <form [formGroup]="questionFormGroup">
+        <div style="display: flex; justify-content: space-around;">
+            <div *ngFor="let option of question.options">
+                <div style="display: block;">
+                    <div>
+                        <mat-checkbox [checked]="option.checked" [(ngModel)]="option.checked"
+                            [ngModelOptions]="{standalone: true}" id="{{option.id}}" [value]="option | json"
+                            (change)="onChange($event, option)"></mat-checkbox>
+                    </div>
+                    <div>{{option.content}}</div>
+                </div>
+            </div>
+        </div>
+        {{question.question}}
+        <button mat-raised-button class="mat-primary" type="reset" (click)="onReset()">Resetuj</button>
+    </form>
+</div>
