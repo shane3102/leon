@@ -32,6 +32,7 @@ import { SingleChoiceGoodUiBadUxComponent } from './components/question-types/go
 import { MatSelectModule } from '@angular/material/select'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatInputModule } from '@angular/material/input'
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
     FontAwesomeModule,
     MatSelectModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatInputModule
   ],
   exports: [
     FillRandomFormComponent

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { MatInput } from '@angular/material/input';
 import { MatRadioChange } from '@angular/material/radio';
 import { Observable, Subscription } from 'rxjs';
 import { OptionResponse } from 'src/app/random-form/models/option-response';
@@ -32,16 +33,12 @@ export class LineScaleGoodUiBadUxComponent implements OnInit {
     this.type = this.questionFormGroup.get('type')?.value;
 
     this.resetFormSubscription = this.resetFormSubject.subscribe(() => {
-      document.querySelectorAll(".lineScaleCheckbox").forEach(
-        el => {
-          let checkbox: HTMLInputElement = el as HTMLInputElement;
-          if (checkbox.checked) {
-            checkbox.checked = false;
-          }
-        }
-      )
+      this.question.options.forEach(o => {
+        o.checked = false;
+      });
       this.onReset();
     })
+    this.question.options.forEach(option => {option.checked = false})
   }
 
   get getChosenOptionArray(): FormArray {
@@ -60,6 +57,10 @@ export class LineScaleGoodUiBadUxComponent implements OnInit {
   }
 
   onReset() {
+
+    this.question.options.forEach(o => {
+      o.checked = false;
+    });
     setTimeout(() => {
       this.questionFormGroup.setControl('id', new FormControl(this.id));
       this.questionFormGroup.setControl('type', new FormControl(this.type));

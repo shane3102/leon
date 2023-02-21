@@ -1,12 +1,16 @@
-<div class="question" [formGroup]="questionFormGroup">
+<div class="question">
     <h1>Skala liniowa</h1>
-    <div style="display: flex; justify-content: space-around;">
-        <div *ngFor="let option of question.options; let i=index">
-            {{i+1}}. <mat-checkbox [value]="option | json" (change)="onChange($event, option)"></mat-checkbox>
+    <form [formGroup]="questionFormGroup">
+        <div style="display: flex; justify-content: space-around;">
+            <div *ngFor="let option of question.options; let i=index">
+                {{i+1}}. <mat-checkbox [checked]="option.checked" [(ngModel)]="option.checked" [ngModelOptions]="{standalone: true}"  id="{{option.id}}" [value]="option | json"
+                    (change)="onChange($event, option)"></mat-checkbox>
+            </div>
         </div>
-    </div>
-    <div *ngFor="let option of question.options; let i=index">
-        {{i+1}}. {{option.content}}
-    </div>
-    {{question.question}}
+        <div *ngFor="let option of question.options; let i=index">
+            {{i+1}}. {{option.content}}
+        </div>
+        {{question.question}}
+        <button type="reset" (click)="onReset()">Resetuj</button>
+    </form>
 </div>
