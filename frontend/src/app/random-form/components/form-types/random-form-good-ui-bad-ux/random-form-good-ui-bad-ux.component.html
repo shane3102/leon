@@ -5,6 +5,25 @@
                 [question]="question"></app-question-good-ui-bad-ux>
         </div>
     </div>
-    <button mat-raised-button class="mat-primary" type="submit">Prześlij</button>
-    <button mat-raised-button class="mat-primary" type="reset" (click)="resetForm()">Resetuj</button>
+    <div style="color: green;" *ngFor="let control of getAnswersFormArray.controls; let i = index">
+        <label *ngIf="control.invalid && (triedSubmiting | async)">
+            Pytanie numer {{i+1}} jest źle wypełnione:
+            <span *ngIf="control.get('chosenOptions')?.errors?.['required']">
+                należy odpowiedzieć na pytanie;
+            </span>
+            <span *ngIf="control.get('chosenOptions')?.errors?.['maxOneOptionChosen']">
+                należy wybrać jedną odpowiedź;
+            </span>
+            <span *ngIf="control.get('answer')?.errors?.['required']">
+                należy odpowiedzieć na pytanie;
+            </span>
+            <span *ngIf="control.get('answer')?.errors?.['nullValidator']">
+                należy odpowiedzieć na pytanie;
+            </span>
+        </label>
+    </div>
+    <div style="display: flex; justify-content: space-around; margin: 10px">
+        <button mat-raised-button class="mat-primary" type="submit">Prześlij</button>
+        <button mat-raised-button class="mat-primary" type="reset" (click)="resetForm()">Resetuj</button>
+    </div>
 </form>
