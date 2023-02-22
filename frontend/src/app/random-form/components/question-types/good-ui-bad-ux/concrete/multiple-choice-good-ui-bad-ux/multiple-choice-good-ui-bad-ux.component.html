@@ -5,15 +5,15 @@
     <form [formGroup]="questionFormGroup">
         <div style="display: flex; justify-content: space-around;">
             <div *ngFor="let option of question.options">
-                <div style="display: block; margin: 5px;">
-                    <div>
+                <div style="margin: 5px; text-align: center; flex-direction: column;">
+                    <div style="display: inline-block;">
                         <mat-radio-button
                         [checked]="option.checked"
                         [name]="option | json" 
                         [value]="option | json" 
                         (click)="onChange(option)"></mat-radio-button>
                     </div>
-                    <div style="text-justify: inter-word;">{{option.content}}</div>
+                    <div>{{option.content}}</div>
                 </div>
             </div>
         </div>
