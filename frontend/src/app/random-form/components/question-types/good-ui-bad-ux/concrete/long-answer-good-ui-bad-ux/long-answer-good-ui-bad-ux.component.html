@@ -1,1 +1,14 @@
-<p>long-answer-good-ui-bad-ux works!</p>
+<div class="question">
+    <form>
+        <div style=" width: 100%; text-align: center;">
+            <h1>Długa odpowiedź</h1>
+        </div>
+        <mat-form-field [formGroup]="questionFormGroup">
+            <textarea matInput formControlName="answer"></textarea>
+        </mat-form-field>
+        <div style="margin: 10px; display: flex; justify-content: space-around; align-items: baseline;">
+            <div>{{question.question}}</div>
+            <button mat-raised-button class="mat-primary" type="reset" (click)="onReset()">Resetuj</button>
+        </div>   
+    </form>
+</div>

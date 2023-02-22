@@ -6,5 +6,4 @@
     <app-short-answer-bad-ui-good-ux [triedSubmiting]="triedSubmiting.asObservable()" [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.SHORT_ANSWER.sent'></app-short-answer-bad-ui-good-ux>
     <app-single-choice-bad-ui-good-ux [triedSubmiting]="triedSubmiting.asObservable()" [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.SINGLE_CHOICE.sent'></app-single-choice-bad-ui-good-ux>
 </div>
-{{questionFormGroup.value | json}}
 <hr>

@@ -1,2 +1,29 @@
-<p>random-form-good-ui-bad-ux works!</p>
-<button (click)="formSentEvent.emit()">Prześlij</button>
+<form class="bad-ux" [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
+    <div *ngIf="randomFormGroup" style="display: flex; margin-right: auto; flex-wrap: wrap;">
+        <div *ngFor="let question of formToComplete.questions; let i = index" (click)="resetTriedSubmitting()">
+            <app-question-good-ui-bad-ux [resetFormSubject]="resetFormSubject" [wholeForm]="randomFormGroup"
+                [question]="question"></app-question-good-ui-bad-ux>
+        </div>
+    </div>
+    <div style="color: green;" *ngFor="let control of getAnswersFormArray.controls; let i = index">
+        <label *ngIf="control.invalid && (triedSubmiting | async)">
+            Pytanie numer {{i+1}} jest źle wypełnione:
+            <span *ngIf="control.get('chosenOptions')?.errors?.['required']">
+                należy odpowiedzieć na pytanie;
+            </span>
+            <span *ngIf="control.get('chosenOptions')?.errors?.['maxOneOptionChosen']">
+                należy wybrać jedną odpowiedź;
+            </span>
+            <span *ngIf="control.get('answer')?.errors?.['required']">
+                należy odpowiedzieć na pytanie;
+            </span>
+            <span *ngIf="control.get('answer')?.errors?.['nullValidator']">
+                należy odpowiedzieć na pytanie;
+            </span>
+        </label>
+    </div>
+    <div style="display: flex; justify-content: space-around; margin: 10px">
+        <button mat-raised-button class="mat-primary" type="submit">Prześlij</button>
+        <button mat-raised-button class="mat-primary" type="reset" (click)="resetForm()">Resetuj</button>
+    </div>
+</form>

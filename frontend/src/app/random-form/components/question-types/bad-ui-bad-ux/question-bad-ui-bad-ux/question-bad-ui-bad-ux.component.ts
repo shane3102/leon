@@ -14,7 +14,7 @@ export class QuestionBadUiBadUxComponent implements OnInit {
   @Input() question: QuestionResponse;
   @Input() wholeForm: FormGroup
   @Input() resetFormSubject: Subject<void>;
-  questionFormGroup: FormGroup
+  questionFormGroup: FormGroup;
 
   questionTypes = new QuestionTypes();
 

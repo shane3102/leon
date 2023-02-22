@@ -1,1 +1,26 @@
-<p>multiple-choice-good-ui-bad-ux works!</p>
+<div class="question">
+    <div style=" width: 100%; text-align: center;">
+        <h1>Wielokrotny wybór</h1>
+    </div>
+    <form [formGroup]="questionFormGroup">
+        <div style="display: flex; justify-content: space-around;">
+            <div *ngFor="let option of question.options">
+                <div style="margin: 5px; text-align: center; flex-direction: column;">
+                    <div style="display: inline-block;">
+                        <mat-radio-button
+                        [checked]="option.checked"
+                        [name]="option | json" 
+                        [value]="option | json" 
+                        (click)="onChange(option)"></mat-radio-button>
+                    </div>
+                    <div>{{option.content}}</div>
+                </div>
+            </div>
+        </div>
+        <div style="margin: 10px; display: flex; justify-content: space-around; align-items: baseline;">
+            <div>{{question.question}}</div>
+            <button mat-raised-button class="mat-primary" type="reset" (click)="onReset()">Resetuj</button>
+        </div>   
+    </form>
+</div>
+ 

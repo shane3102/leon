@@ -1,9 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { OptionResponse } from 'src/app/random-form/models/option-response';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
-import { maxOneOptionChosen } from '../../validators/bad-ui-bad-ux.validation';
+import { maxOneOptionChosen } from '../../../../../validators/form.validation';
 
 @Component({
   selector: 'app-dropdown-bad-ui-bad-ux',

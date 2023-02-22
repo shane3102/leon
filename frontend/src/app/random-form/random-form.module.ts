@@ -29,8 +29,11 @@ import { LongAnswerGoodUiBadUxComponent } from './components/question-types/good
 import { MultipleChoiceGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/multiple-choice-good-ui-bad-ux/multiple-choice-good-ui-bad-ux.component';
 import { ShortAnswerGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/short-answer-good-ui-bad-ux/short-answer-good-ui-bad-ux.component';
 import { SingleChoiceGoodUiBadUxComponent } from './components/question-types/good-ui-bad-ux/concrete/single-choice-good-ui-bad-ux/single-choice-good-ui-bad-ux.component';
-
-
+import { MatSelectModule } from '@angular/material/select'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatInputModule } from '@angular/material/input'
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,13 @@ import { SingleChoiceGoodUiBadUxComponent } from './components/question-types/go
     FormsModule,
     BrowserModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatRadioModule,
+    MatButtonModule
   ],
   exports: [
     FillRandomFormComponent
