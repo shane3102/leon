@@ -1,2 +1,12 @@
-<p>random-form-good-ui-good-ux works!</p>
-<button (click)="formSentEvent.emit()">Prześlij</button>
+<form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
+    <hr>
+    <div *ngFor="let question of formToComplete.questions">
+        <app-question-good-ui-good-ux [wholeForm]="randomFormGroup" [question]="question" [triedSubmiting]="triedSubmitingSubject"></app-question-good-ui-good-ux>
+    </div>
+    <button type="sumbit">Prześlij</button>
+    <div style="height: 24px; color: red;">
+        <div *ngIf="(triedSubmitting | async) && touchedNotFilled()">
+            Nie odpowiedziano na przynajmniej jedno pytanie
+        </div>
+    </div>
+</form>

@@ -2,5 +2,5 @@
     <app-random-form-bad-ui-bad-ux *ngSwitchCase="'BadUIBadUX'" [formToComplete]="badUiBadUxForm" (formSentEvent)="nextFormOrFinnish()"></app-random-form-bad-ui-bad-ux>
     <app-random-form-bad-ui-good-ux *ngSwitchCase="'BadUIGoodUX'" [formToComplete]="badUiGoodUxForm" (formSentEvent)="nextFormOrFinnish()"></app-random-form-bad-ui-good-ux>
     <app-random-form-good-ui-bad-ux *ngSwitchCase="'GoodUIBadUX'" [formToComplete]="goodUiBadUxForm" (formSentEvent)="nextFormOrFinnish()"></app-random-form-good-ui-bad-ux>
-    <app-random-form-good-ui-good-ux *ngSwitchCase="'GoodUIGoodUX'" (formSentEvent)="nextFormOrFinnish()"></app-random-form-good-ui-good-ux>
+    <app-random-form-good-ui-good-ux *ngSwitchCase="'GoodUIGoodUX'" [formToComplete]="goodUiGoodUxForm" (formSentEvent)="nextFormOrFinnish()"></app-random-form-good-ui-good-ux>
 </div>
