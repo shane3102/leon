@@ -24,7 +24,6 @@ export class LongAnswerBadUiGoodUxComponent implements OnInit {
       this.questionFormGroup.controls['answer'].markAsTouched();
     })
   }
-
   touchedNotFilled(): boolean {
     return (this.questionFormGroup.controls['answer'] && this.questionFormGroup.controls['answer'].touched && this.questionFormGroup.controls['answer'].errors?.['required'])
   }
@@ -32,5 +31,4 @@ export class LongAnswerBadUiGoodUxComponent implements OnInit {
   touchedValid(): boolean {
     return (this.questionFormGroup.controls['answer'] && this.questionFormGroup.controls['answer'].touched && this.questionFormGroup.controls['answer'].valid)
   }
-
 }

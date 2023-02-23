@@ -10,7 +10,6 @@ import { QuestionResponse } from 'src/app/random-form/models/question-response';
 })
 export class LongAnswerGoodUiGoodUxComponent implements OnInit {
 
-  
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup;
   @Input() triedSubmiting: Observable<void>;
@@ -35,6 +34,5 @@ export class LongAnswerGoodUiGoodUxComponent implements OnInit {
   touchedValid(): boolean {
     return (this.questionFormGroup.controls['answer'] && this.questionFormGroup.controls['answer'].touched && this.questionFormGroup.controls['answer'].valid)
   }
-
 
 }

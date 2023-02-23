@@ -33,7 +33,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatInputModule } from '@angular/material/input'
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { QuestionGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/question-good-ui-good-ux/question-good-ui-good-ux.component';
 import { DropdownGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/concrete/dropdown-good-ui-good-ux/dropdown-good-ui-good-ux.component';
 import { LineScaleGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/concrete/line-scale-good-ui-good-ux/line-scale-good-ui-good-ux.component';
@@ -41,6 +41,7 @@ import { LongAnswerGoodUiGoodUxComponent } from './components/question-types/goo
 import { MultipleChoiceGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/concrete/multiple-choice-good-ui-good-ux/multiple-choice-good-ui-good-ux.component';
 import { ShortAnswerGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/concrete/short-answer-good-ui-good-ux/short-answer-good-ui-good-ux.component';
 import { SingleChoiceGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/concrete/single-choice-good-ui-good-ux/single-choice-good-ui-good-ux.component';
+import { AutosizeModule } from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { SingleChoiceGoodUiGoodUxComponent } from './components/question-types/g
     MatCheckboxModule,
     MatInputModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
+    AutosizeModule
   ],
   exports: [
     FillRandomFormComponent

@@ -1,14 +1,13 @@
-<div class="question" 
-    [ngStyle]="focus && !touchedNotFilled() ? 
+<div class="question" [ngStyle]="focus && !touchedNotFilled() ? 
     {'border-left': '1px solid blue', 'border-right': '1px solid blue'} :
     touchedNotFilled() ? 
     {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
     touchedValid() ? 
-    {'border-left': '1px solid #BAFF39', 'border-right': '1px solid #BAFF39'} : {}" 
-    [formGroup]="questionFormGroup">
+    {'border-left': '1px solid #BAFF39', 'border-right': '1px solid #BAFF39'} : {}" [formGroup]="questionFormGroup">
     <p>{{question.question}}</p>
     <mat-form-field>
-        <textarea (focus)="focus=true" (blur)="focus=false" matInput placeholder="Wpisz odpowiedź" style="width: 100%;" formControlName="answer"></textarea>
+        <textarea (focus)="focus=true" (blur)="focus=false" matInput cdkTextareaAutosize cdkAutosizeMinRows="2"
+            placeholder="Wpisz odpowiedź" style="width: 100%;" formControlName="answer"></textarea>
         <mat-error style="color: red;">
             Odpowiedz jest wymagana
         </mat-error>
