@@ -18,7 +18,7 @@ export class ShortAnswerBadUiGoodUxComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.questionFormGroup.controls['answer']?.setValidators([Validators.required]);
     this.triedSubmittingSubscription = this.triedSubmiting.subscribe(() => {
       this.questionFormGroup.controls['answer'].markAsTouched();
