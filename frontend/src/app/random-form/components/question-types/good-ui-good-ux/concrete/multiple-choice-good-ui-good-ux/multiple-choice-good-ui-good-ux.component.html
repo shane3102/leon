@@ -1,1 +1,15 @@
-<p>multiple-choice-good-ui-good-ux works!</p>
+<div class="question" [ngStyle]="touchedNotFilled() ? 
+    {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
+    touchedValid() ? 
+    {'border-left': '1px solid #BAFF39', 'border-right': '1px solid #BAFF39'} : {}" [formGroup]="questionFormGroup">
+    <p>{{question.question}}</p>
+    <div *ngFor="let option of question.options">
+        <mat-checkbox [checked]="option.checked" [value]="option | json"
+            (change)="onChange($event, option)">{{option.content}}</mat-checkbox>
+    </div>
+    <div style="height: 6px;">
+        <mat-hint style="color: red;" *ngIf="touchedNotFilled()">
+            Odpowiedz jest wymagana
+        </mat-hint>
+    </div>
+</div>

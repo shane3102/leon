@@ -7,7 +7,7 @@
     <p>{{question.question}}</p>
     <mat-form-field>
         <mat-label>Wybierz odpowiedź</mat-label>
-        <mat-select formArrayName="questions" (focus)="focus=true" (blur)="onBlur()" #option (selectionChange)="onSelect(option)">
+        <mat-select formArrayName="chosenOptions" (focus)="focus=true" (blur)="onBlur()" #option (selectionChange)="onSelect(option)">
             <mat-option selected value="" style="display: none;"></mat-option>
             <mat-option [value]="option| json" *ngFor="let option of question.options">
                 {{option.content}}
