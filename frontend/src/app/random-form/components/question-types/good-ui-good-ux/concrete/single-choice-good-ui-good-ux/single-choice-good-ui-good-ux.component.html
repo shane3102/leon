@@ -1,1 +1,15 @@
-<p>single-choice-good-ui-good-ux works!</p>
+<div class="question" [ngStyle]="touchedNotFilled() ? 
+    {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
+    valid() ? 
+    {'border-left': '1px solid green', 'border-right': '1px solid green'} : {}" [formGroup]="questionFormGroup">
+    <p>{{question.question}}</p>
+    <div *ngFor="let option of question.options">
+        <mat-radio-button [name]="question.question" [value]="option | json"
+            (change)="onChange(option)">{{option.content}}</mat-radio-button>
+    </div>
+    <div style="height: 6px;">
+        <mat-hint style="color: red;" *ngIf="touchedNotFilled()">
+            Odpowiedz jest wymagana
+        </mat-hint>
+    </div>
+</div>
