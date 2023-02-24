@@ -1,7 +1,7 @@
 <div class="question" [ngStyle]="touchedNotFilled() ? 
     {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
     touchedValid() ? 
-    {'border-left': '1px solid #BAFF39', 'border-right': '1px solid #BAFF39'} : {}" [formGroup]="questionFormGroup">
+    {'border-left': '1px solid green', 'border-right': '1px solid green'} : {}" [formGroup]="questionFormGroup">
     <p>{{question.question}}</p>
     <mat-form-field>
         <mat-label>Wpisz odpowiedź</mat-label>
