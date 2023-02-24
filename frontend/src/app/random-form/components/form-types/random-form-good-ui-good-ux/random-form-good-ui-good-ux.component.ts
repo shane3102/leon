@@ -26,7 +26,7 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
     this.randomFormGroup = new FormGroup({
       'answers': new FormArray([]),
       'uxLevel': new FormControl('GOOD'),
-      'uiLevel': new FormControl('BAD'),
+      'uiLevel': new FormControl('GOOD'),
       'durationToAnswer': new FormControl(null) //TODO liczenie tego 
     })
   }

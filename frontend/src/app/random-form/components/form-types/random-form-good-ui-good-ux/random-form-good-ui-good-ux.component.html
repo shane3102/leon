@@ -3,10 +3,13 @@
     <div *ngFor="let question of formToComplete.questions">
         <app-question-good-ui-good-ux [wholeForm]="randomFormGroup" [question]="question" [triedSubmiting]="triedSubmitingSubject"></app-question-good-ui-good-ux>
     </div>
-    <button type="sumbit">Prześlij</button>
-    <div style="height: 24px; color: red;">
-        <div *ngIf="(triedSubmitting | async) && touchedNotFilled()">
-            Nie odpowiedziano na przynajmniej jedno pytanie
+    <div style="display: flex;justify-content: center; flex-direction: column;">
+        <button mat-raised-button class="mat-primary" type="sumbit">Prześlij</button>
+        <div style="height: 24px; color: red;">
+            <div *ngIf="(triedSubmitting | async) && touchedNotFilled()">
+                Nie odpowiedziano na przynajmniej jedno pytanie
+            </div>
         </div>
     </div>
+    
 </form>
