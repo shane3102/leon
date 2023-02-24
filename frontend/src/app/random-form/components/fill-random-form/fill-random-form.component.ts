@@ -46,7 +46,6 @@ export class FillRandomFormComponent implements OnInit {
 
   public nextFormOrFinnish() {
     this.index++
-    console.log(this.formsToFillOrder[this.index]);
     if (this.index > 3) {
       //TODO zrób coś
     }
