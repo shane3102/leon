@@ -1,0 +1,8 @@
+#getFormsSpinner{
+    width: 10vw;
+    height: 10vw;
+    margin: auto;
+    color: #BAFF39;
+    display: flex;
+    justify-content: center;
+}

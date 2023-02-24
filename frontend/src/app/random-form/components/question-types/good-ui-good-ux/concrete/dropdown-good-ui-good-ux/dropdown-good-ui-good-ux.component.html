@@ -1,0 +1,20 @@
+<div class="question" [ngStyle]="focus ? 
+    {'border-left': '1px solid blue', 'border-right': '1px solid blue'} :
+    touchedNotFilled() ? 
+    {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
+    touchedValid() ? 
+    {'border-left': '1px solid green', 'border-right': '1px solid green'} : {}" [formGroup]="questionFormGroup">
+    <p>{{question.question}}</p>
+    <mat-form-field>
+        <mat-label>Wybierz odpowiedź</mat-label>
+        <mat-select formArrayName="chosenOptions" (focus)="focus=true" (blur)="onBlur()" #option (selectionChange)="onSelect(option)">
+            <mat-option selected value="" style="display: none;"></mat-option>
+            <mat-option [value]="option| json" *ngFor="let option of question.options">
+                {{option.content}}
+            </mat-option>
+        </mat-select>
+        <mat-hint style="color: red;" *ngIf="touchedNotFilled()">
+            Odpowiedz jest wymagana
+        </mat-hint>
+    </mat-form-field>
+</div>

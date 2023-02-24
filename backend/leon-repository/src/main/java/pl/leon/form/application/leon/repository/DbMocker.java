@@ -86,6 +86,7 @@ public class DbMocker {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> MultipleChoiceQuestionEntity.builder()
                 .question("Pytanie z wielokrotnym wyborem numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("wielokrotny wybór", formNumber))
+                .countAnswers(0L)
                 .build()).collect(Collectors.toList());
     }
 
@@ -93,6 +94,7 @@ public class DbMocker {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> DropdownQuestionEntity.builder()
                 .question("Pytanie z listą rozwijaną numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("lista wybieralna", formNumber))
+                .countAnswers(0L)
                 .build()).collect(Collectors.toList());
     }
 
@@ -100,6 +102,7 @@ public class DbMocker {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> LineScaleQuestionEntity.builder()
                 .question("Pytanie ze skalą liniową numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptionsLineScale("skala liniowa", formNumber))
+                .countAnswers(0L)
                 .build()).collect(Collectors.toList());
     }
 
@@ -107,18 +110,21 @@ public class DbMocker {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> SingleChoiceQuestionEntity.builder()
                 .question("Pytanie jednokrotnego wyboru numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("jednokrotny wybór", formNumber))
+                .countAnswers(0L)
                 .build()).collect(Collectors.toList());
     }
 
     private List<ShortAnswerQuestionEntity> getShortAnswerQuestions(int count, int formNumber) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> ShortAnswerQuestionEntity.builder()
                 .question("Pytanie o krótkiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
+                .countAnswers(0L)
                 .build()).collect(Collectors.toList());
     }
 
     private List<LongAnswerQuestionEntity> getLongAnswerQuestions(int count, int formNumber) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> LongAnswerQuestionEntity.builder()
                 .question("Pytanie o długiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
+                .countAnswers(0L)
                 .build()).collect(Collectors.toList());
     }
 

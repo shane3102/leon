@@ -12,6 +12,7 @@ import pl.leon.form.application.leon.service.question.interfaces.QuestionService
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -26,26 +27,28 @@ import java.util.stream.Stream;
 public class FormToCompleteService {
     private final List<QuestionServiceInterface> questionServices;
 
-    public List<FormToCompleteResponse> generateFormsToComplete(Short formCount, Short questionToGenerateFOrEachFormCount) {
-        log.info("generateFourFormsToComplete({})", questionToGenerateFOrEachFormCount);
+    public List<FormToCompleteResponse> generateFormsToComplete(Short formCount, Short questionToGenerateForEachFormCount) {
+        log.info("generateFourFormsToComplete({})", questionToGenerateForEachFormCount);
 
         List<FormToCompleteResponse> resultForms = new ArrayList<>();
 
         Map<QuestionServiceInterface, List<Long>> usedQuestionsIdsForEachQuestionType = new HashMap<>();
 
         for (int i = 0; i < formCount; i++) {
-            List<QuestionResponse> questions = questionServiceAndQuestionsToGenerateMap(questionToGenerateFOrEachFormCount)
+            List<QuestionResponse> questions = questionServiceAndQuestionsToGenerateMap(questionToGenerateForEachFormCount)
                     .entrySet()
                     .stream().map(serviceQuestionCountEntry -> getQuestionsAndTemporarilyMarkAsUsed(serviceQuestionCountEntry, usedQuestionsIdsForEachQuestionType))
                     .flatMap(Collection::stream)
                     .collect(Collectors.toList());
+
+            Collections.shuffle(questions);
 
             FormToCompleteResponse singleForm = FormToCompleteResponse.builder().questions(questions).build();
 
             resultForms.add(singleForm);
         }
 
-        log.info("generateFourFormsToComplete({}) = {}", questionToGenerateFOrEachFormCount, resultForms);
+        log.info("generateFourFormsToComplete({}) = {}", questionToGenerateForEachFormCount, resultForms);
         return resultForms;
     }
 

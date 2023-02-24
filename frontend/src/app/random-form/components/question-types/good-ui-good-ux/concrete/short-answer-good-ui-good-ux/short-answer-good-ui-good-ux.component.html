@@ -1,0 +1,13 @@
+<div class="question" [ngStyle]="touchedNotFilled() ? 
+    {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
+    touchedValid() ? 
+    {'border-left': '1px solid green', 'border-right': '1px solid green'} : {}" [formGroup]="questionFormGroup">
+    <p>{{question.question}}</p>
+    <mat-form-field>
+        <mat-label>Wpisz odpowiedź</mat-label>
+        <input matInput style="width: 100%;" formControlName="answer">
+        <mat-error *ngIf="touchedNotFilled()">
+            Odpowiedz jest wymagana
+        </mat-error>
+    </mat-form-field>
+</div>

@@ -1,0 +1,16 @@
+<div class="question" [ngStyle]="touchedNotFilled() ? 
+    {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
+    valid() ? 
+    {'border-left': '1px solid green', 'border-right': '1px solid green'} : {}" [formGroup]="questionFormGroup">
+    <p>{{question.question}}</p>
+    <div *ngFor="let option of question.options">
+        <!-- <div style="height: 50px;"></div> -->
+        <mat-radio-button style="height: 30px;" [name]="question.question" [value]="option | json"
+            (change)="onChange(option)">{{option.content}}</mat-radio-button>
+    </div>
+    <div style="height: 6px;">
+        <mat-hint style="color: red;" *ngIf="touchedNotFilled()">
+            Odpowiedz jest wymagana
+        </mat-hint>
+    </div>
+</div>

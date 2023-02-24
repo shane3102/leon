@@ -4,17 +4,19 @@ import { Observable, Subscription } from 'rxjs';
 import { QuestionResponse } from 'src/app/random-form/models/question-response';
 
 @Component({
-  selector: 'app-long-answer-bad-ui-good-ux',
-  templateUrl: './long-answer-bad-ui-good-ux.component.html',
-  styleUrls: ['../../style/bad-ui-good-ux-style.css','./long-answer-bad-ui-good-ux.component.css']
+  selector: 'app-long-answer-good-ui-good-ux',
+  templateUrl: './long-answer-good-ui-good-ux.component.html',
+  styleUrls: ['../../style/good-ui-good-ux-style.css', './long-answer-good-ui-good-ux.component.css']
 })
-export class LongAnswerBadUiGoodUxComponent implements OnInit {
+export class LongAnswerGoodUiGoodUxComponent implements OnInit {
 
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup;
   @Input() triedSubmiting: Observable<void>;
 
   private triedSubmittingSubscription: Subscription;
+
+  focus: boolean;
 
   constructor() { }
 
@@ -24,6 +26,7 @@ export class LongAnswerBadUiGoodUxComponent implements OnInit {
       this.questionFormGroup.controls['answer'].markAsTouched();
     })
   }
+
   touchedNotFilled(): boolean {
     return (this.questionFormGroup.controls['answer'] && this.questionFormGroup.controls['answer'].touched && this.questionFormGroup.controls['answer'].errors?.['required'])
   }
@@ -31,4 +34,5 @@ export class LongAnswerBadUiGoodUxComponent implements OnInit {
   touchedValid(): boolean {
     return (this.questionFormGroup.controls['answer'] && this.questionFormGroup.controls['answer'].touched && this.questionFormGroup.controls['answer'].valid)
   }
+
 }

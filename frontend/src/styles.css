@@ -74,10 +74,10 @@ input:focus::placeholder {
     height: 40px;
 }
 
-#mainPage{
+#mainPage {
     height: calc(100vh - 130px);
-    margin-left: 50px; 
-    margin-right: 50px; 
+    margin-left: 50px;
+    margin-right: 50px;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -89,22 +89,22 @@ input:focus::placeholder {
 ::-webkit-datetime-edit-day-field { color: #6E6E6E; }
 ::-webkit-datetime-edit-year-field { color: #6E6E6E; }
 ::-webkit-inner-spin-button { display: none; }
-::-webkit-calendar-picker-indicator { 
-    margin-right: 1em; 
+::-webkit-calendar-picker-indicator {
+    margin-right: 1em;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px #BAFF39;
     border-radius: 10px 0px 10px 0px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #6E6E6E; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6E6E6E;
     border-radius: 10px 0px 10px 0px;
-  }
+}
