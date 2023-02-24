@@ -1,3 +1,7 @@
+<div *ngIf="!(responseCame | async)" style="display: flex; justify-content: center; align-items: center; height: 85vh;">
+    <div id="getFormsSpinner" class="spinner-border"></div>
+</div>
+
 <div *ngIf="responseCame | async" [ngSwitch]="getCurrentForm() | async">
     <app-random-form-bad-ui-bad-ux *ngSwitchCase="'BadUIBadUX'" [formToComplete]="badUiBadUxForm" (formSentEvent)="nextFormOrFinnish()"></app-random-form-bad-ui-bad-ux>
     <app-random-form-bad-ui-good-ux *ngSwitchCase="'BadUIGoodUX'" [formToComplete]="badUiGoodUxForm" (formSentEvent)="nextFormOrFinnish()"></app-random-form-bad-ui-good-ux>
