@@ -1,10 +1,9 @@
 <div 
     class="question"
     [ngStyle]="touchedNotFilled() ? 
-    {'border-left': '1px solid red', 'border-right': '1px solid red'} : 
+    {'border': '1px solid red'} : 
     touchedValid() ? 
-    {'border-left': '1px solid #BAFF39', 'border-right': '1px solid #BAFF39'} : {}"
-    [formGroup]="questionFormGroup">
+    {'border': '1px solid #BAFF39'} : {}" [formGroup]="questionFormGroup">
     <p>{{question.question}}</p>
     <select #option (blur)="this.getChosenOptionArray.markAsTouched()" (change)="onSelect(option)" *ngIf="questionFormGroup" formArrayName="chosenOptions">
         <option disabled selected style="display: none;">-- Wybierz odpowiedz --</option>

@@ -1,5 +1,4 @@
 .question {
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
+    border: 1px solid lightgray;
     width: calc(100%-2px);
 }
