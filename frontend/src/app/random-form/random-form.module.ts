@@ -42,6 +42,7 @@ import { MultipleChoiceGoodUiGoodUxComponent } from './components/question-types
 import { ShortAnswerGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/concrete/short-answer-good-ui-good-ux/short-answer-good-ui-good-ux.component';
 import { SingleChoiceGoodUiGoodUxComponent } from './components/question-types/good-ui-good-ux/concrete/single-choice-good-ui-good-ux/single-choice-good-ui-good-ux.component';
 import { AutosizeModule } from 'ngx-autosize';
+import { SurveyOnRandomFormsModule } from '../survey-on-random-forms/survey-on-random-forms.module';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { AutosizeModule } from 'ngx-autosize';
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
-    AutosizeModule
+    AutosizeModule,
+    SurveyOnRandomFormsModule
   ],
   exports: [
     FillRandomFormComponent
