@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
+import { FormUiUxRequest } from 'src/app/models/form-ui-ux-request';
 import { FormToCompleteResponse } from '../../models/form-to-complete-response';
 import { RandomFormService } from '../../services/random-form.service';
 
@@ -41,6 +42,10 @@ export class FillRandomFormComponent implements OnInit {
   }
 
   public getCurrentForm(): Observable<string> {
+
+    if (this.allFormsFilled()) {
+      return of();
+    }
     return of(this.formsToFillOrder[this.index]);
   }
 
@@ -49,6 +54,18 @@ export class FillRandomFormComponent implements OnInit {
     if (this.index > 3) {
       //TODO zrób coś
     }
+  }
+
+  public allFormsFilled(){
+    return this.index >= this.formsToFillOrder.length;
+  }
+
+  public mapToFormUiUxRequest(): FormUiUxRequest[]{
+     return this.formsToFillOrder.map((formString, index) =>{
+      let uiUxInfo: string[] = formString.toUpperCase().replace('UX','').split('UI')
+      console.log(uiUxInfo);
+      return {uiLevel: uiUxInfo[0], uxLevel: uiUxInfo[1], formNumber: index} as FormUiUxRequest
+    })
   }
 
   // Shuffle the order of forms
