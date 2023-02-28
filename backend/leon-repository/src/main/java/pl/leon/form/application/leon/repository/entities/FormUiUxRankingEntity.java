@@ -27,4 +27,6 @@ public class FormUiUxRankingEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormUiUxEntity> formsInOrder;
+
+    private String comment;
 }
