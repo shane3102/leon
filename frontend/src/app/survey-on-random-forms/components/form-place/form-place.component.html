@@ -5,9 +5,12 @@
     <div 
     style="font-size: 10vh; position:absolute; width: 20vh; z-index: -1;" 
     [ngStyle]="place==0 ? {'color':'rgb(255,215,0)'} : place==1 ? {'color':'rgb(192,192,192)'} : place==2 ? {'color':'rgb(205, 127, 50)'} : {}">
-        {{place+1}}
+        {{(getRomanNumber())}}
     </div>
     <div *ngFor="let chosen of form">
         <app-form-panel-representation [uiUxrequest]="chosen"></app-form-panel-representation>
     </div>
+</div>
+<div style="width: 15vh; height: 24px; text-align: center; color: red; line-height: normal;">
+    <div *ngIf="triedAddingTwoFormsOnOnePlace | async">Można umieścić tylko jedną ankietę</div>
 </div>
