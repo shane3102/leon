@@ -1,5 +1,7 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { FormUiUxRequest } from '../../../models/form-ui-ux-request';
 import { EmmittForm } from '../../model/emitt-form';
 import { FormSurveyRequest } from '../../model/form-survey-request';
@@ -16,13 +18,12 @@ export class SurveyOnRandomFormsComponent implements OnInit {
     { uiLevel: 'BAD', uxLevel: 'BAD', formNumber: 1 }, { uiLevel: 'BAD', uxLevel: 'GOOD', formNumber: 2 }, { uiLevel: 'GOOD', uxLevel: 'BAD', formNumber: 3 }, { uiLevel: 'GOOD', uxLevel: 'GOOD', formNumber: 4 }
   ];
 
+  triedSubmitingWithoutRankingForms: Observable<boolean> = of(false);
   commentOnForms: string = "";
-
   formsLength: void[];
-
   responseFormUiUxOrder: Map<number, FormUiUxRequest> = new Map();
 
-  constructor(formSurveyService: FormSurveyService) { }
+  constructor(private formSurveyService: FormSurveyService, private router: Router) { }
 
   ngOnInit(): void {
     this.formsLength = this.forms.map(() => { });
@@ -42,12 +43,19 @@ export class SurveyOnRandomFormsComponent implements OnInit {
 
     let orderOfForms = Array.from(new Map([...this.responseFormUiUxOrder].sort((a, b) => a[0] - b[0]))).map(el => el[1]);
 
-    let formSurveyRequest: FormSurveyRequest = {
-      'formsInOrder': orderOfForms,
-      'commentOnForms': this.commentOnForms
-    }
+    if (orderOfForms.length < 4) {
+      this.triedSubmitingWithoutRankingForms = of(true);
+      setTimeout(() => { this.triedSubmitingWithoutRankingForms = of(false) }, 2000)
+    } else {
+      let formSurveyRequest: FormSurveyRequest = {
+        'formsInOrder': orderOfForms,
+        'commentOnForms': this.commentOnForms
+      }
 
-    console.log(formSurveyRequest);
+      this.formSurveyService.submitFormSurvey(formSurveyRequest).subscribe({
+        next: () => { this.router.navigateByUrl('main-page'); }
+      })
+    }
   }
 
 }
