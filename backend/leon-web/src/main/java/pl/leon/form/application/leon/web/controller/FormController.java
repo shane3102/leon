@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.leon.form.application.leon.model.both.FormCompleted;
 import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
+import pl.leon.form.application.leon.model.request.forms.FormUiUxRankingRequest;
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
 import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
 import pl.leon.form.application.leon.model.response.forms.FormToCompleteResponse;
 import pl.leon.form.application.leon.service.FormService;
 import pl.leon.form.application.leon.service.FormToCompleteService;
 import pl.leon.form.application.leon.service.FormCompletedService;
+import pl.leon.form.application.leon.service.FormUiUxRankingService;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class FormController {
     private final FormService formService;
     private final FormCompletedService formCompletedService;
     private final FormToCompleteService formToCompleteService;
+    private final FormUiUxRankingService formUiUxRankingService;
 
     @GetMapping("/get-random-form")
     public ResponseEntity<?> getRandomForm(@RequestParam(name = "question-count") Short questionToGenerateCount) {
@@ -78,6 +81,14 @@ public class FormController {
         log.info("submitForm({})", formCompleted);
         FormCompleted response = formCompletedService.submitCompletedForm(formCompleted);
         log.info("submitForm({}) = {}", formCompleted, response);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/add-ranking")
+    public ResponseEntity<?> addNewRanking(@RequestBody FormUiUxRankingRequest request) {
+        log.info("addNewRanking({})", request);
+        FormUiUxRankingRequest response = formUiUxRankingService.addRanking(request);
+        log.info("addNewRanking({})", request);
         return ResponseEntity.ok(response);
     }
 }
