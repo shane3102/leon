@@ -1,5 +1,16 @@
-<div style="display: flex; justify-content: space-between; align-items: center; height: 20vh;">
-    <div *ngFor="let form of forms">
-        <app-form-panel-representation [uiUxrequest]="form"></app-form-panel-representation>
+<div cdkDropListGroup>
+    <div cdkDropList [cdkDropListData]="forms" (cdkDropListDropped)="onDropBack($event)" style="display: flex; justify-content: space-around; align-items: center; height: 20vh;">
+        <div *ngFor="let form of forms">
+            <app-form-panel-representation [uiUxrequest]="form"></app-form-panel-representation>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-around; align-items: center; height: 20vh;">
+        <div *ngFor="let form of formsLength; let i=index">
+            <app-form-place [place]="i" (placedOutput)="onPlaced($event)"></app-form-place>
+        </div>
     </div>
 </div>
+
+<textarea #comment [value]="commentOnForms" (input)="commentOnForms = comment.value"></textarea>
+
+<button (click)="submit()">Siema</button>
