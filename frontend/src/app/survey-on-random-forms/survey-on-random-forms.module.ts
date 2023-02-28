@@ -6,6 +6,7 @@ import { FormModule } from '../form/form.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { FormPlaceComponent } from './components/form-place/form-place.component'
+import { AutosizeModule } from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormPlaceComponent } from './components/form-place/form-place.component
     CommonModule,
     FormModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    AutosizeModule
   ],
   exports:[
     SurveyOnRandomFormsComponent
