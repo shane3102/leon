@@ -12,5 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FormUiUxRankingRequest {
-    List<FormUiUxRequest> formsInOrder;
+    private List<FormUiUxRequest> formsInOrder;
+    private String comment;
 }
