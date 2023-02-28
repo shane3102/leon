@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.leon.form.application.leon.repository.entities.FormUiUxRankingEntity;
 
 @Repository
-public interface FormUiUxRepository extends JpaRepository<FormUiUxRankingEntity, Long> {
+public interface FormUiUxRankingRepository extends JpaRepository<FormUiUxRankingEntity, Long> {
 }

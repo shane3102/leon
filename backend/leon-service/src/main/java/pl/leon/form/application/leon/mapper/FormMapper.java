@@ -87,7 +87,7 @@ public abstract class FormMapper {
     @Autowired
     protected QuestionMapperManager questionMapperManager;
 
-    public abstract FormUiUxRankingEntity mapUiUxRankingRequestToResponse(FormUiUxRankingRequest request);
+    public abstract FormUiUxRankingEntity mapUiUxRankingRequestToEntity(FormUiUxRankingRequest request);
 
     public abstract FormUiUxRankingRequest mapUiUxEntityToResponse(FormUiUxRankingEntity entity);
 
