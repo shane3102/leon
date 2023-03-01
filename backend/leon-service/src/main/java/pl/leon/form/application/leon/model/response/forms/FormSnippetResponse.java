@@ -13,4 +13,6 @@ public class FormSnippetResponse {
     private Long id;
     private String title;
     private String author;
+    private boolean disabled;
+    private boolean resultsAvailableForEveryone;
 }

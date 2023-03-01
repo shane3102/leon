@@ -2,6 +2,8 @@ package pl.leon.form.application.leon.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.not_found.concrete.FormNotFound;
 import pl.leon.form.application.leon.mapper.FormMapper;
@@ -54,8 +56,8 @@ public class FormService {
         return response;
     }
 
-    public List<FormSnippetResponse> list() {
-        return mapper.mapToSnippetResponses(formRepository.findAll());
+    public Page<FormSnippetResponse> list(Pageable pageable) {
+        return formRepository.findAll(pageable).map(mapper::mapToSnippetResponse);
     }
 
     public FormResponse readConcreteForm(Long id) {
