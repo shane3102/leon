@@ -25,11 +25,19 @@ export class FillRandomFormComponent implements OnInit {
 
   index: number = 0;
   responseCame: Observable<boolean> = of(false);
+  allFormsFilled: Observable<boolean> = of(false);
+  formsInFillingOrder: FormUiUxRequest[];
 
   constructor(private randomFormService: RandomFormService) { }
 
   ngOnInit(): void {
     this.shuffle(this.formsToFillOrder);
+
+    this.formsInFillingOrder = this.formsToFillOrder.map((formString, index) => {
+      let uiUxInfo: string[] = formString.toUpperCase().replace('UX', '').split('UI')
+      return { uiLevel: uiUxInfo[0], uxLevel: uiUxInfo[1], formNumber: index } as FormUiUxRequest
+    })
+
     this.randomFormService.getEachRandomForm(4, 10).subscribe({
       next: res => {
         this.badUiBadUxForm = res[0];
@@ -43,29 +51,22 @@ export class FillRandomFormComponent implements OnInit {
 
   public getCurrentForm(): Observable<string> {
 
-    if (this.allFormsFilled()) {
-      return of();
-    }
-    return of(this.formsToFillOrder[this.index]);
+    let result: Observable<string> = of();
+
+    this.allFormsFilled.subscribe(aff => {
+      if (!aff) {
+        result = of(this.formsToFillOrder[this.index]);
+      }
+    });
+
+    return result;
   }
 
   public nextFormOrFinnish() {
     this.index++
     if (this.index > 3) {
-      //TODO zrób coś
+      this.allFormsFilled = of(true);
     }
-  }
-
-  public allFormsFilled(){
-    return this.index >= this.formsToFillOrder.length;
-  }
-
-  public mapToFormUiUxRequest(): FormUiUxRequest[]{
-     return this.formsToFillOrder.map((formString, index) =>{
-      let uiUxInfo: string[] = formString.toUpperCase().replace('UX','').split('UI')
-      console.log(uiUxInfo);
-      return {uiLevel: uiUxInfo[0], uxLevel: uiUxInfo[1], formNumber: index} as FormUiUxRequest
-    })
   }
 
   // Shuffle the order of forms

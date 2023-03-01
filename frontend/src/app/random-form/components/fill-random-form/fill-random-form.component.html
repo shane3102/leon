@@ -9,4 +9,4 @@
     <app-random-form-good-ui-good-ux *ngSwitchCase="'GoodUIGoodUX'" [formToComplete]="goodUiGoodUxForm" (formSentEvent)="nextFormOrFinnish()"></app-random-form-good-ui-good-ux>
 </div>
 
-<app-survey-on-random-forms *ngIf="allFormsFilled()" [forms]="mapToFormUiUxRequest()"></app-survey-on-random-forms>
+<app-survey-on-random-forms *ngIf="allFormsFilled | async" [forms]="formsInFillingOrder"></app-survey-on-random-forms>
