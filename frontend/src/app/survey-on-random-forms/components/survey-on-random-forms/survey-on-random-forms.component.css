@@ -1,0 +1,43 @@
+#comment {
+    border-radius: 20px 0px 20px 0px;
+    border: 2.5px solid #6E6E6E;
+    padding: 10px;
+    color: #6E6E6E;
+    resize: none;
+    outline: none;
+    width: 60vw;
+}
+
+#comment:focus {
+    border-color: #BAFF39 !important;
+}
+
+#submitFormOrder{
+    background-color: #6E6E6E;
+    color: white;
+    outline: none;
+    border-radius: 20px 0px 20px 0px;
+    padding: 20px;
+    font-size: 20px;
+    border: none;
+}
+
+#submitFormOrder:active{
+    padding: 18px;
+    margin: 2px;
+}
+
+#thankYouTitle{
+    font-size: 40px;
+    color: #6E6E6E;
+    text-align: center;
+    padding: 1%;
+    margin: 1%;
+}
+
+#infoToUser{
+    color: #6E6E6E;
+    padding: 1%;
+    margin: 1%;
+    font-size: 20px;
+}

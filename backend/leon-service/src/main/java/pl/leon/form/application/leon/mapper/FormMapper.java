@@ -7,13 +7,13 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.both.FormCompleted;
 import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
 import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
+import pl.leon.form.application.leon.model.request.forms.FormUiUxRankingRequest;
 import pl.leon.form.application.leon.model.request.questions.QuestionCreateRequest;
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
 import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
@@ -28,6 +28,7 @@ import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.FormCompletedEntity;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
+import pl.leon.form.application.leon.repository.entities.FormUiUxRankingEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.UserEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
@@ -85,6 +86,10 @@ public abstract class FormMapper {
 
     @Autowired
     protected QuestionMapperManager questionMapperManager;
+
+    public abstract FormUiUxRankingEntity mapUiUxRankingRequestToEntity(FormUiUxRankingRequest request);
+
+    public abstract FormUiUxRankingRequest mapUiUxEntityToResponse(FormUiUxRankingEntity entity);
 
     @Mappings({
             @Mapping(target = "dropdownQuestions", source = "questions"),

@@ -1,0 +1,11 @@
+.place {
+    border: dashed 2px;
+    border-radius: 10vh;
+    width: 15vh;
+    height: 15vh;
+    text-align: center;
+    line-height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
