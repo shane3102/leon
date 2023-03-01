@@ -5,13 +5,13 @@
             [triedSubmiting]="triedSubmitingSubject"></app-question-good-ui-good-ux>
     </div>
     <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-        <button style="height: 50px; width: 20vw;" mat-raised-button class="mat-primary" type="sumbit">
+        <button style="height: 50px; width: 20vw; line-height: 30px; " mat-raised-button class="mat-primary" type="sumbit">
             <div style="display: flex; justify-content: center;">
-                <div *ngIf="!(submitting | async)" style="line-height: 30px; font-size: 30px;">
+                <div *ngIf="!(submitting | async)" style="font-size: 30px;">
                     Prześlij
                 </div>
                 <mat-icon *ngIf="submitting | async">
-                    <mat-spinner color="accent" diameter="30"></mat-spinner>
+                    <mat-spinner color="accent" diameter="25"></mat-spinner>
                 </mat-icon>
             </div>
         </button>

@@ -35,12 +35,14 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
   submitForm(request: any) {
     if (!this.randomFormGroup.invalid) {
       this.submitting = of(true);
-      this.randomFormService.submitRandomForm(request).subscribe({
-        next: res => {
-          this.formSentEvent.emit();
-          this.submitting = of(false);
-        }
-      })
+      setTimeout(() => {
+        this.randomFormService.submitRandomForm(request).subscribe({
+          next: res => {
+            this.formSentEvent.emit();
+            this.submitting = of(false);
+          }
+        });
+      }, 5000)
     } else {
       this.triedSubmitingSubject.next();
       this.triedSubmitting = of(true);

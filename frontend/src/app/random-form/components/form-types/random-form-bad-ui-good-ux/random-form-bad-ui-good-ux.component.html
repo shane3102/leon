@@ -1,11 +1,17 @@
 <form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
     <div *ngFor="let question of formToComplete.questions">
-        <app-question-bad-ui-good-ux [wholeForm]="randomFormGroup" [question]="question" [triedSubmiting]="triedSubmitingSubject"></app-question-bad-ui-good-ux>
+        <app-question-bad-ui-good-ux [wholeForm]="randomFormGroup" [question]="question"
+            [triedSubmiting]="triedSubmitingSubject"></app-question-bad-ui-good-ux>
     </div>
-    <button type="sumbit">Prześlij</button>
-    <div style="height: 24px; color: red;">
-        <div *ngIf="(triedSubmitting | async) && touchedNotFilled()">
-            Nie odpowiedziano na przynajmniej jedno pytanie
+    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+        <button style="width: 20vw; height: 50px; line-height: 50px;" type="sumbit">
+            Prześlij
+            <div *ngIf="submitting | async" style="height: 40px; width: 40px;" class="spinner-border"></div>
+        </button>
+        <div style="height: 24px; color: red;">
+            <div *ngIf="(triedSubmitting | async) && touchedNotFilled()">
+                Nie odpowiedziano na przynajmniej jedno pytanie
+            </div>
         </div>
     </div>
 </form>

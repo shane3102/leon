@@ -19,6 +19,7 @@ export class RandomFormBadUiGoodUxComponent implements OnInit {
 
   triedSubmitingSubject: Subject<void> = new Subject<void>()
   triedSubmitting: Observable<boolean> = of(false);
+  submitting: Observable<boolean> = of(false);
 
   constructor(private randomFormService: RandomFormService) { }
 
@@ -33,9 +34,11 @@ export class RandomFormBadUiGoodUxComponent implements OnInit {
 
   submitForm(request: any) {
     if (!this.randomFormGroup.invalid) {
+      this.submitting = of(true);
       this.randomFormService.submitRandomForm(request).subscribe({
         next: res => {
           this.formSentEvent.emit();
+          this.submitting = of(false);
         }
       })
     } else {
