@@ -14,9 +14,7 @@ import { FormSurveyService } from '../../services/form-survey-service';
 })
 export class SurveyOnRandomFormsComponent implements OnInit {
 
-  @Input() forms: FormUiUxRequest[] = [
-    { uiLevel: 'BAD', uxLevel: 'BAD', formNumber: 1 }, { uiLevel: 'BAD', uxLevel: 'GOOD', formNumber: 2 }, { uiLevel: 'GOOD', uxLevel: 'BAD', formNumber: 3 }, { uiLevel: 'GOOD', uxLevel: 'GOOD', formNumber: 4 }
-  ];
+  @Input() forms: FormUiUxRequest[];
 
   triedSubmitingWithoutRankingForms: Observable<boolean> = of(false);
   commentOnForms: string = "";
@@ -32,6 +30,7 @@ export class SurveyOnRandomFormsComponent implements OnInit {
   onDropBack(event: CdkDragDrop<FormUiUxRequest[]>) {
     transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
     this.forms.sort((e1, e2) => e1.formNumber - e2.formNumber)
+
   }
 
   onPlaced(emmitedForm: EmmittForm) {
@@ -43,7 +42,7 @@ export class SurveyOnRandomFormsComponent implements OnInit {
 
     let orderOfForms = Array.from(new Map([...this.responseFormUiUxOrder].sort((a, b) => a[0] - b[0]))).map(el => el[1]);
 
-    if (orderOfForms.length < 4) {
+    if (orderOfForms.length < 4 || this.forms.length > 0) {
       this.triedSubmitingWithoutRankingForms = of(true);
       setTimeout(() => { this.triedSubmitingWithoutRankingForms = of(false) }, 2000)
     } else {
