@@ -35,4 +35,4 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AddFormComponent
   ]
 })
-export class FormModule { }
+export class AddFormModule { }

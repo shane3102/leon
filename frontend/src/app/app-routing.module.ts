@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './user-auth/components/login-page/login-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterPageComponent } from './user-auth/components/register-page/register-page.component';
-import { AddFormComponent } from './form/components/add-form/add-form.component';
+import { AddFormComponent } from './add-form/components/add-form/add-form.component';
 import { AuthGuard } from './authGuard/auth.service';
 import { FillRandomFormComponent } from './random-form/components/fill-random-form/fill-random-form.component';
 

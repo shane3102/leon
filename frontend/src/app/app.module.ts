@@ -17,7 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { UserAuthModule } from './user-auth/user-auth.module';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
-import { FormModule } from './form/form.module';
+import { AddFormModule } from './add-form/add-form.module';
 import { AuthGuard } from './authGuard/auth.service';
 import { RandomFormModule } from './random-form/random-form.module';
 
@@ -39,7 +39,7 @@ import { RandomFormModule } from './random-form/random-form.module';
     BrowserAnimationsModule,
     FontAwesomeModule,
     UserAuthModule,
-    FormModule,
+    AddFormModule,
     RandomFormModule
   ],
   providers: [
