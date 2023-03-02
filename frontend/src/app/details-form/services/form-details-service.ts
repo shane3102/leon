@@ -17,7 +17,9 @@ export class FormDetailsService {
         let params = new HttpParams();
         params = params.set('page', page);
         params = params.set('size', size);
-        params = params.set('sort', sortColumn + (sortDirection == 'NONE' ? '' : (',' + sortDirection)))
+        if(sortDirection!='NONE'){
+            params = params.set('sort', sortColumn + ',' + sortDirection)
+        }
 
         return this.http.get<any>(this.PATH + "/list", { params: params });
     }

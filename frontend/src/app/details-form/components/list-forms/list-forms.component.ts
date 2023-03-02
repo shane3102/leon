@@ -53,14 +53,12 @@ export class ListFormsComponent implements OnInit {
   getPaginatedForms() {
     this.isDataLoaded = of(false);
 
-    setTimeout(() => {
-      this.formDetailsService.listForms(0, 4, this.sortedColumnName, this.sortDirection).subscribe({
-        next: (response) => {
-          this.displayedFormSnippets = response.content;
-          this.isDataLoaded = of(true);
-        }
-      })
-    }, 2000);
+    this.formDetailsService.listForms(0, 4, this.sortedColumnName, this.sortDirection).subscribe({
+      next: (response) => {
+        this.displayedFormSnippets = response.content;
+        this.isDataLoaded = of(true);
+      }
+    })
 
   }
 
