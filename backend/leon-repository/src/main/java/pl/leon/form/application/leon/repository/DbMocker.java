@@ -13,6 +13,7 @@ import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQu
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -40,6 +41,9 @@ public class DbMocker {
     }
 
     private void generateForms() {
+
+        LocalDate dateAdded = LocalDate.now().minusDays(10);
+
         for (int i = 0; i < 5; i++) {
 
             int multipleChoiceQuestionsCount = random.nextInt(20, 30);
@@ -68,6 +72,7 @@ public class DbMocker {
             shortAnswerQuestions = shortAnswerQuestionRepository.saveAll(shortAnswerQuestions);
 
             FormEntity form = FormEntity.builder()
+                    .dateAdded(dateAdded)
                     .title("Tytuł formularza numer " + (i + 1))
                     .subject("Opis formularza numer " + (i + 1))
                     .multipleChoiceQuestions(multipleChoiceQuestions)
@@ -78,6 +83,8 @@ public class DbMocker {
                     .shortAnswerQuestions(shortAnswerQuestions)
                     .build();
             formRepository.save(form);
+
+            dateAdded = dateAdded.plusDays(1);
 
         }
     }

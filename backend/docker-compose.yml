@@ -1,4 +1,5 @@
 version: '3.8'
+name: leon_backend
 services:
   db:
     container_name: postgres_leon_container
