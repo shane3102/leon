@@ -69,6 +69,10 @@ th {
 }
 
 #pageElements{
+    outline: none;
     background: #BAFF39;
     color: #6E6E6E;
+    margin: 1vh;
+    font-size: 2vh;
+    border-radius: 15px 15px 0px 0px;
 }
