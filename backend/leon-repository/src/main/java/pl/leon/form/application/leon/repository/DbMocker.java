@@ -46,7 +46,7 @@ public class DbMocker {
 
         for (int i = 0; i < 7; i++) {
 
-            generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i != 6);
+            generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6);
 
             dateAdded = dateAdded.plusDays(1);
 
