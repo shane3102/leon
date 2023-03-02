@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListFormsComponent } from './components/list-forms/list-forms.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -9,7 +10,8 @@ import { ListFormsComponent } from './components/list-forms/list-forms.component
     ListFormsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ],
   exports: [
     ListFormsComponent

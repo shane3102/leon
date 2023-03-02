@@ -1,1 +1,28 @@
-<p>list-forms works!</p>
+<div style="display: flex; justify-content: center; margin: 5vh;">
+    <table>
+        <thead>
+            <tr>
+                <th class="tableHeaders" (click)="sort('title')">
+                    Tytuł
+                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='title') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                </th>
+                <th class="tableHeaders" (click)="sort('author')">
+                    Autor
+                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='author') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                </th>
+                <th class="tableHeaders" (click)="sort('dateTo')">
+                    Data końcowa
+                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='dateTo') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                </th>
+                <th class="tableHeaders" (click)="sort('dateAdded')">
+                    Data dodania
+                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='dateAdded') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+</div>
