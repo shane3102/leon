@@ -1,9 +1,9 @@
 export class FormSnippetResponse{
-    private id: number;
-    private title: string;
-    private author: string;
-    private disabled: string;
-    private dateTo: string;
-    private dateAdded: string;
-    private resultsAvailableForEveryone: string;
+    id: number;
+    title: string;
+    author: string;
+    disabled: string;
+    dateTo: string;
+    dateAdded: string;
+    resultsAvailableForEveryone: string;
 }

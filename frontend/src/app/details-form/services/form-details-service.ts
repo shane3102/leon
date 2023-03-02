@@ -1,17 +1,24 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Page } from "ngx-pagination";
 import { Observable } from "rxjs";
 import { FormSnippetResponse } from "../models/form-snippet-response";
 
 @Injectable({
     providedIn: 'root'
 })
-export class AddNewFormService {
+export class FormDetailsService {
     readonly PATH: string = "api/form"
 
     constructor(private http: HttpClient) { }
 
-    public listForms() : Observable<FormSnippetResponse[]> {
-        return this.http.get<FormSnippetResponse[]>(this.PATH + "/list");
+    public listForms(page: number, size: number, sortColumn: string, sortDirection: string): Observable<any> {
+
+        let params = new HttpParams();
+        params = params.set('page', page);
+        params = params.set('size', size);
+        params = params.set('sort', sortColumn + (sortDirection == 'NONE' ? '' : (',' + sortDirection)))
+
+        return this.http.get<any>(this.PATH + "/list", { params: params });
     }
 }
