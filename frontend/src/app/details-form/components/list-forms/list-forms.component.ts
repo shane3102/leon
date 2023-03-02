@@ -17,6 +17,9 @@ export class ListFormsComponent implements OnInit {
 
   isDataLoaded: Observable<boolean> = of(false);
 
+  totalItems: number;
+  pageNumber: number = 0;
+  itemsPerPage: number = 10;
   sortedColumnName: string = 'dateAdded'
   sortDirection: string = SortDirection.DESC
   displayedFormSnippets: FormSnippetResponse[];
@@ -53,13 +56,24 @@ export class ListFormsComponent implements OnInit {
   getPaginatedForms() {
     this.isDataLoaded = of(false);
 
-    this.formDetailsService.listForms(0, 4, this.sortedColumnName, this.sortDirection).subscribe({
+    this.formDetailsService.listForms(this.pageNumber, this.itemsPerPage, this.sortedColumnName, this.sortDirection).subscribe({
       next: (response) => {
         this.displayedFormSnippets = response.content;
+        this.totalItems = response.totalElements;
         this.isDataLoaded = of(true);
       }
     })
 
+  }
+
+  changeAmountOfItemsPerPage(newItemsPerPage: number) {
+    this.itemsPerPage = newItemsPerPage
+    this.getPaginatedForms()
+  }
+
+  pageChange(pageNumber: number) {
+    this.pageNumber = pageNumber;
+    this.getPaginatedForms()
   }
 
 }

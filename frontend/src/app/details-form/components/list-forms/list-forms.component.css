@@ -41,3 +41,30 @@ th {
     padding: 0.75vh;
     margin: 1.25vh
 }
+
+.paginationControl {
+    border-radius: 20px 0px 20px 0px;
+    background-color: #6E6E6E;
+    color: white;
+    margin: 1vh;
+    font-size: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formPagination ::ng-deep .ngx-pagination .current {
+    background: #BAFF39;
+    color: #6E6E6E;
+}
+
+.formPagination ::ng-deep .ngx-pagination .hover {
+    background: #BAFF39;
+    color: #6E6E6E;
+    border-radius: 20px;
+}
+
+#pageElements{
+    background: #BAFF39;
+    color: #6E6E6E;
+}
