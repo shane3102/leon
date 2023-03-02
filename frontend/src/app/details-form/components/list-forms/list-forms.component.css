@@ -53,6 +53,10 @@ th {
     justify-content: center;
 }
 
+.formPagination ::ng-deep .ngx-pagination{
+    color: white;
+}
+
 .formPagination ::ng-deep .ngx-pagination .current {
     background: #BAFF39;
     color: #6E6E6E;
