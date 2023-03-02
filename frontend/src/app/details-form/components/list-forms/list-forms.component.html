@@ -1,35 +1,53 @@
-<div style="display: flex; justify-content: center; margin: 5vh;">
+<div style="display: flex; justify-content: center; margin: 2vw;">
     <table>
         <thead>
             <tr>
-                <th id="noKurde" class="tableHeaders" (click)="sort('title')">
-                    Tytuł
-                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='title') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                <th style="background-color: white;"></th>
+                <th width="30vw" class="tableHeaders" (click)="sort('title')">
+                    <div style="width: 30vw; padding: 10px;">
+                        Tytuł
+                        <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='title') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                    </div>
                 </th>
-                <th class="tableHeaders" (click)="sort('author')">
-                    Autor
-                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='author') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                <th style="width: 10vw;" class="tableHeaders" (click)="sort('user.username')">
+                    <div style="width: 10vw; padding: 10px;">
+                        Autor
+                        <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='user.username') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                    </div>
                 </th>
-                <th class="tableHeaders" (click)="sort('dateTo')">
-                    Data końcowa
-                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='dateTo') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                <th style="width: 10vw;" class="tableHeaders" (click)="sort('dateTo')">
+                    <div style="width: 10vw; padding: 10px;">
+                        Data końcowa
+                        <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='dateTo') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                    </div>
                 </th>
-                <th class="tableHeaders" (click)="sort('dateAdded')">
-                    Data dodania
-                    <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='dateAdded') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                <th style="width: 10vw;" class="tableHeaders" (click)="sort('dateAdded')">
+                    <div style="width: 10vw; padding: 10px;">
+                        Data dodania
+                        <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='dateAdded') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
+                    </div>
                 </th>
-                <th style="background-color: white; width: 20vw;"></th>
-                <th style="background-color: white; width: 20vw;"></th>
+                <th style="background-color: white; width: 10vw;"></th>
+                <th style="background-color: white; width: 15vw;"></th>
             </tr>
         </thead>
         <tbody *ngIf="isDataLoaded | async">
-            <tr *ngFor="let form of displayedFormSnippets">
+            <tr [ngStyle]="i%2!=0 ? {'background-color': 'rgb(233,231,231)'} : {}" *ngFor="let form of displayedFormSnippets; let i=index">
+                <td style="background-color: white; font-size: 2vh;padding: 1.5vh;">{{i+1}}</td>
                 <td class="tableContent">{{form.title}}</td>
-                <td class="tableContent">{{form.author}}</td>
-                <td class="tableContent">{{form.dateTo}}</td>
-                <td class="tableContent">{{form.dateAdded}}</td>
-                <td class="tableContent">5</td>
-                <td class="tableContent">6</td>
+                <td class="tableContent">{{form.author==undefined ? "Brak" : form.author}}</td>
+                <td class="tableContent">{{form.dateTo==undefined ? "Brak": (form.dateTo | date:'dd.MM.yyyy')}}</td>
+                <td class="tableContent">{{form.dateAdded | date: 'dd.MM.yyyy'}}</td>
+                <td style="background-color: white;">
+                    <div *ngIf="!form.disabled" style="display: flex; justify-content: center;">
+                        <button class="actionButton">Wypełnij ankietę</button>
+                    </div>
+                </td>
+                <td style="background-color: white;">
+                    <div *ngIf="!form.resultsAvailableForEveryone" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="actionButton">Aktualne wyniki ankiety</button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

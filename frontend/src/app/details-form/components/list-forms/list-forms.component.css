@@ -2,7 +2,6 @@
     background-color: #6E6E6E;
     color: white;
     text-align: center;
-    width: 20vw;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -11,22 +10,34 @@
     user-select: none;
 }
 
-.tableContent{
-    width: 20vw;
+.tableContent {
+    font-size: 2vh;
+    padding: 1.5vh;
 }
 
-table, th, td {
+/* table, th, td {
     margin: none;
     border: 1px solid black;
-}
+} */
 
-th{
-    width: 20vw;
-    border-radius: 20px 0px 20px 0px;
+th {
+    border-radius: 20px 20px 0px 0px;
     background-color: #6E6E6E;
-    font-size: 1.5vw;
+    font-size: 2.2vh;
 }
 
-td{
-    width: 20vw;
+.actionButton {
+    border: none;
+    background-color: #6E6E6E;
+    color: white;
+    border-radius: 20px 0px 20px 0px;
+    padding: 1vh;
+    margin: 1vh;
+    outline: none;
+    font-size: 2vh;
+}
+
+.actionButton:active {
+    padding: 0.75vh;
+    margin: 1.25vh
 }
