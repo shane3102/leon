@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,7 +73,7 @@ public class FormController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listConcreteForms(Pageable pageable) {
+    public ResponseEntity<?> listConcreteForms(@PageableDefault(sort = "dateAdded", direction = Sort.Direction.DESC) Pageable pageable) {
         log.info("listConcreteForms()");
         Page<FormSnippetResponse> response = formService.list(pageable);
         log.info("listConcreteForms() = {}", response == null ? null : response.getTotalElements());

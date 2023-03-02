@@ -2,9 +2,9 @@ package pl.leon.form.application.leon.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -58,7 +57,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                         .build()
                         .verify(token.replace(TOKEN_PREFIX, ""))
                         .getSubject();
-            } catch (JWTDecodeException | TokenExpiredException ignored) {
+            } catch (JWTDecodeException | TokenExpiredException | AlgorithmMismatchException ignored) {
             }
             if (username == null) return null;
             UserDetails userDetails = userService.loadUserByUsername(username);
