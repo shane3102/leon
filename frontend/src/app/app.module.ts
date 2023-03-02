@@ -20,6 +20,7 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 import { AddFormModule } from './add-form/add-form.module';
 import { AuthGuard } from './authGuard/auth.service';
 import { RandomFormModule } from './random-form/random-form.module';
+import { DetailsFormModule } from './details-form/details-form.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RandomFormModule } from './random-form/random-form.module';
     FontAwesomeModule,
     UserAuthModule,
     AddFormModule,
-    RandomFormModule
+    RandomFormModule,
+    DetailsFormModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
