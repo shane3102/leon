@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faSort, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
+import { Observable, of } from 'rxjs';
+import { FormSnippetResponse } from '../../models/form-snippet-response';
+import { FormDetailsService } from '../../services/form-details-service';
 
 enum SortDirection {
   DESC = "DESC", ASC = "ASC", NONE = "NONE"
@@ -12,20 +15,23 @@ enum SortDirection {
 })
 export class ListFormsComponent implements OnInit {
 
+  isDataLoaded: Observable<boolean> = of(false);
+
   sortedColumnName: string = 'dateAdded'
   sortDirection: string = SortDirection.DESC
+  displayedFormSnippets: FormSnippetResponse[];
 
   sortIcon = faSort;
   sortIconDesc = faSortDown;
   sortIconAsc = faSortUp;
 
-  constructor() { }
+  constructor(private formDetailsService: FormDetailsService) { }
 
   ngOnInit(): void {
+    this.getPaginatedForms();
   }
 
   sort(column: string) {
-
     if (this.sortedColumnName == column) {
       switch (this.sortDirection) {
         case SortDirection.DESC:
@@ -41,7 +47,20 @@ export class ListFormsComponent implements OnInit {
     }
     this.sortedColumnName = column;
 
-    console.log(this.sortedColumnName + " " + this.sortDirection)
+    this.getPaginatedForms()
+  }
+
+  getPaginatedForms() {
+    this.isDataLoaded = of(false);
+
+    setTimeout(() => {
+      this.formDetailsService.listForms(0, 4, this.sortedColumnName, this.sortDirection).subscribe({
+        next: (response) => {
+          this.displayedFormSnippets = response.content;
+          this.isDataLoaded = of(true);
+        }
+      })
+    }, 2000);
 
   }
 

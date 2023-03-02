@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <th class="tableHeaders" (click)="sort('title')">
+                <th id="noKurde" class="tableHeaders" (click)="sort('title')">
                     Tytuł
                     <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='title') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
                 </th>
@@ -18,10 +18,18 @@
                     Data dodania
                     <fa-icon [icon]="(sortDirection == 'NONE' || sortedColumnName!='dateAdded') ? sortIcon : sortDirection == 'DESC' ? sortIconDesc : sortIconAsc"></fa-icon>
                 </th>
+                <th style="background-color: white; width: 20vw;"></th>
+                <th style="background-color: white; width: 20vw;"></th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
+        <tbody *ngIf="isDataLoaded | async">
+            <tr *ngFor="let form of displayedFormSnippets">
+                <td class="tableContent">{{form.title}}</td>
+                <td class="tableContent">{{form.author}}</td>
+                <td class="tableContent">{{form.dateTo}}</td>
+                <td class="tableContent">{{form.dateAdded}}</td>
+                <td class="tableContent">5</td>
+                <td class="tableContent">6</td>
             </tr>
         </tbody>
     </table>
