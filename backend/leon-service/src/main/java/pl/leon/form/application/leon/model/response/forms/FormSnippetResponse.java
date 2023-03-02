@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,5 +16,7 @@ public class FormSnippetResponse {
     private String title;
     private String author;
     private boolean disabled;
+    private LocalDate dateTo;
+    private LocalDate dateAdded;
     private boolean resultsAvailableForEveryone;
 }

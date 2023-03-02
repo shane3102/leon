@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
@@ -35,6 +36,8 @@ public class FormEntity {
     private Long id;
 
     private LocalDate dateTo;
+
+    private LocalDate dateAdded;
 
     private boolean disabled;
 
@@ -65,4 +68,10 @@ public class FormEntity {
 
     @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE}, orphanRemoval = true)
     private List<SingleChoiceQuestionEntity> singleChoiceQuestions;
+
+    @PrePersist
+    void prePersist() {
+        if (dateAdded == null)
+            dateAdded = LocalDate.now();
+    }
 }
