@@ -6,14 +6,16 @@ import { RegisterPageComponent } from './user-auth/components/register-page/regi
 import { AddFormComponent } from './add-form/components/add-form/add-form.component';
 import { AuthGuard } from './authGuard/auth.service';
 import { FillRandomFormComponent } from './random-form/components/fill-random-form/fill-random-form.component';
+import { ListFormsComponent } from './details-form/components/list-forms/list-forms.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'main-page', component: MainPageComponent },
   { path: 'login-page', component: LoginPageComponent },
   { path: 'register-page', component: RegisterPageComponent },
-  { path: 'add-form', component: AddFormComponent, canActivate: [AuthGuard]},
-  { path: 'random-form', component: FillRandomFormComponent}
+  { path: 'add-form', component: AddFormComponent, canActivate: [AuthGuard] },
+  { path: 'random-form', component: FillRandomFormComponent },
+  { path: 'list', component: ListFormsComponent }
 ];
 
 @NgModule({

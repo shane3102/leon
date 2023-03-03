@@ -1,0 +1,78 @@
+.tableHeaders {
+    background-color: #6E6E6E;
+    color: white;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tableContent {
+    font-size: 2vh;
+    padding: 1.5vh;
+}
+
+/* table, th, td {
+    margin: none;
+    border: 1px solid black;
+} */
+
+th {
+    border-radius: 20px 20px 0px 0px;
+    background-color: #6E6E6E;
+    font-size: 2.2vh;
+}
+
+.actionButton {
+    border: none;
+    background-color: #6E6E6E;
+    color: white;
+    border-radius: 20px 0px 20px 0px;
+    padding: 1vh;
+    margin: 1vh;
+    outline: none;
+    font-size: 2vh;
+}
+
+.actionButton:active {
+    padding: 0.75vh;
+    margin: 1.25vh
+}
+
+.paginationControl {
+    border-radius: 20px 0px 20px 0px;
+    background-color: #6E6E6E;
+    color: white;
+    margin: 1vh;
+    font-size: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formPagination ::ng-deep .ngx-pagination{
+    color: white;
+}
+
+.formPagination ::ng-deep .ngx-pagination .current {
+    background: #BAFF39;
+    color: #6E6E6E;
+}
+
+.formPagination ::ng-deep .ngx-pagination .hover {
+    background: #BAFF39;
+    color: #6E6E6E;
+    border-radius: 20px;
+}
+
+#pageElements{
+    outline: none;
+    background: #BAFF39;
+    color: #6E6E6E;
+    margin: 1vh;
+    font-size: 2vh;
+    border-radius: 15px 15px 0px 0px;
+}

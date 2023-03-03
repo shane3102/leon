@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
@@ -155,8 +156,6 @@ public abstract class FormMapper {
             @Mapping(target = "author", source = "user.username")
     })
     public abstract FormSnippetResponse mapToSnippetResponse(FormEntity formEntity);
-
-    public abstract List<FormSnippetResponse> mapToSnippetResponses(List<FormEntity> formEntities);
 
     protected FormEntity mapIdToForm(Long formId) {
         return formId == null ? null : formRepository.getById(formId);

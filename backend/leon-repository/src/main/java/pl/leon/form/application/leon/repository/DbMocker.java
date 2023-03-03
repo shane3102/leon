@@ -13,6 +13,7 @@ import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQu
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -40,46 +41,58 @@ public class DbMocker {
     }
 
     private void generateForms() {
-        for (int i = 0; i < 5; i++) {
 
-            int multipleChoiceQuestionsCount = random.nextInt(20, 30);
-            int dropdownQuestionsCount = random.nextInt(10, 20);
-            int lineScaleQuestionsCount = random.nextInt(5, 15);
-            int singleChoiceQuestionsCount = random.nextInt(10, 20);
-            int longAnswerQuestionsCount = random.nextInt(0, 10);
-            int shortAnswerQuestionsCount = random.nextInt(5, 15);
+        LocalDate dateAdded = LocalDate.now().minusDays(10);
 
-            List<MultipleChoiceQuestionEntity> multipleChoiceQuestions = getMultipleChoiceQuestions(multipleChoiceQuestionsCount, i + 1);
-            multipleChoiceQuestions = multipleChoiceQuestionRepository.saveAll(multipleChoiceQuestions);
+        for (int i = 0; i < 100; i++) {
 
-            List<DropdownQuestionEntity> dropdownQuestions = getDropdownQuestions(dropdownQuestionsCount, i + 1);
-            dropdownQuestions = dropdownQuestionRepository.saveAll(dropdownQuestions);
+            generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6);
 
-            List<LineScaleQuestionEntity> lineScaleQuestions = getLineScaleQuestions(lineScaleQuestionsCount, i + 1);
-            lineScaleQuestions = lineScaleQuestionRepository.saveAll(lineScaleQuestions);
-
-            List<SingleChoiceQuestionEntity> singleChoiceQuestions = getSingleChoiceQuestions(singleChoiceQuestionsCount, i + 1);
-            singleChoiceQuestions = singleChoiceQuestionRepository.saveAll(singleChoiceQuestions);
-
-            List<LongAnswerQuestionEntity> longAnswerQuestions = getLongAnswerQuestions(longAnswerQuestionsCount, i + 1);
-            longAnswerQuestions = longAnswerQuestionRepository.saveAll(longAnswerQuestions);
-
-            List<ShortAnswerQuestionEntity> shortAnswerQuestions = getShortAnswerQuestions(shortAnswerQuestionsCount, i + 1);
-            shortAnswerQuestions = shortAnswerQuestionRepository.saveAll(shortAnswerQuestions);
-
-            FormEntity form = FormEntity.builder()
-                    .title("Tytuł formularza numer " + (i + 1))
-                    .subject("Opis formularza numer " + (i + 1))
-                    .multipleChoiceQuestions(multipleChoiceQuestions)
-                    .dropdownQuestions(dropdownQuestions)
-                    .lineScaleQuestions(lineScaleQuestions)
-                    .singleChoiceQuestions(singleChoiceQuestions)
-                    .longAnswerQuestions(longAnswerQuestions)
-                    .shortAnswerQuestions(shortAnswerQuestions)
-                    .build();
-            formRepository.save(form);
+            dateAdded = dateAdded.plusDays(1);
 
         }
+    }
+
+    private void generateSingleForm(int i, LocalDate dateAdded, boolean disabled, boolean resultsAvailableForEveryone) {
+        int multipleChoiceQuestionsCount = random.nextInt(20, 30);
+        int dropdownQuestionsCount = random.nextInt(10, 20);
+        int lineScaleQuestionsCount = random.nextInt(5, 15);
+        int singleChoiceQuestionsCount = random.nextInt(10, 20);
+        int longAnswerQuestionsCount = random.nextInt(0, 10);
+        int shortAnswerQuestionsCount = random.nextInt(5, 15);
+
+        List<MultipleChoiceQuestionEntity> multipleChoiceQuestions = getMultipleChoiceQuestions(multipleChoiceQuestionsCount, i + 1);
+        multipleChoiceQuestions = multipleChoiceQuestionRepository.saveAll(multipleChoiceQuestions);
+
+        List<DropdownQuestionEntity> dropdownQuestions = getDropdownQuestions(dropdownQuestionsCount, i + 1);
+        dropdownQuestions = dropdownQuestionRepository.saveAll(dropdownQuestions);
+
+        List<LineScaleQuestionEntity> lineScaleQuestions = getLineScaleQuestions(lineScaleQuestionsCount, i + 1);
+        lineScaleQuestions = lineScaleQuestionRepository.saveAll(lineScaleQuestions);
+
+        List<SingleChoiceQuestionEntity> singleChoiceQuestions = getSingleChoiceQuestions(singleChoiceQuestionsCount, i + 1);
+        singleChoiceQuestions = singleChoiceQuestionRepository.saveAll(singleChoiceQuestions);
+
+        List<LongAnswerQuestionEntity> longAnswerQuestions = getLongAnswerQuestions(longAnswerQuestionsCount, i + 1);
+        longAnswerQuestions = longAnswerQuestionRepository.saveAll(longAnswerQuestions);
+
+        List<ShortAnswerQuestionEntity> shortAnswerQuestions = getShortAnswerQuestions(shortAnswerQuestionsCount, i + 1);
+        shortAnswerQuestions = shortAnswerQuestionRepository.saveAll(shortAnswerQuestions);
+
+        FormEntity form = FormEntity.builder()
+                .dateAdded(dateAdded)
+                .disabled(disabled)
+                .resultsAvailableForEveryone(resultsAvailableForEveryone)
+                .title("Tytuł formularza numer " + (i + 1))
+                .subject("Opis formularza numer " + (i + 1))
+                .multipleChoiceQuestions(multipleChoiceQuestions)
+                .dropdownQuestions(dropdownQuestions)
+                .lineScaleQuestions(lineScaleQuestions)
+                .singleChoiceQuestions(singleChoiceQuestions)
+                .longAnswerQuestions(longAnswerQuestions)
+                .shortAnswerQuestions(shortAnswerQuestions)
+                .build();
+        formRepository.save(form);
     }
 
     private List<MultipleChoiceQuestionEntity> getMultipleChoiceQuestions(int count, int formNumber) {

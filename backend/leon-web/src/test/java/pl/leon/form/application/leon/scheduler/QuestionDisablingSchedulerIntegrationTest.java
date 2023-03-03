@@ -8,7 +8,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.transaction.annotation.Transactional;
+import pl.leon.form.application.leon.repository.DbMocker;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
@@ -57,6 +59,8 @@ public class QuestionDisablingSchedulerIntegrationTest {
     private ShortAnswerQuestionRepository shortAnswerQuestionRepository;
     @Autowired
     private SingleChoiceQuestionRepository singleChoiceQuestionRepository;
+    @MockBean
+    private DbMocker dbMocker;
 
     private static final String QUESTION_CONTENT = "Pytanie na śniadanie";
     private static final String ANSWER_CONTENT_1 = "Odpowiedz 1";

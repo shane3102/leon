@@ -2,6 +2,10 @@ package pl.leon.form.application.leon.web.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,10 +73,10 @@ public class FormController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listConcreteForms() {
+    public ResponseEntity<?> listConcreteForms(@PageableDefault(sort = "dateAdded", direction = Sort.Direction.DESC) Pageable pageable) {
         log.info("listConcreteForms()");
-        List<FormSnippetResponse> response = formService.list();
-        log.info("listConcreteForms() = {}", response == null ? null : response.size());
+        Page<FormSnippetResponse> response = formService.list(pageable);
+        log.info("listConcreteForms() = {}", response == null ? null : response.getTotalElements());
         return ResponseEntity.ok(response);
     }
 

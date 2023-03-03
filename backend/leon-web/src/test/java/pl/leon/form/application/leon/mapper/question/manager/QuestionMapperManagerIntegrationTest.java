@@ -7,9 +7,11 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import pl.leon.form.application.leon.model.response.questions.OptionResponse;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
+import pl.leon.form.application.leon.repository.DbMocker;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
@@ -54,6 +56,9 @@ public class QuestionMapperManagerIntegrationTest {
 
     @Autowired
     private QuestionMapperManager questionMapperManager;
+
+    @MockBean
+    private DbMocker dbMocker;
 
     private static Stream<Arguments> entityArguments() {
         return Stream.of(
