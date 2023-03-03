@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
-import pl.leon.form.application.leon.model.response.options.OptionResponse;
+import pl.leon.form.application.leon.model.response.options.OptionStatisticsResponse;
 
 import java.util.List;
 
@@ -13,9 +13,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionResponse {
+public class QuestionStatisticsResponse {
     private Long id;
     private String question;
-    private List<OptionResponse> options;
+    private List<OptionStatisticsResponse> options;
     private QuestionType type;
+    private Long countAnswers;
 }

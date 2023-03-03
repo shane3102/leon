@@ -6,7 +6,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
@@ -46,10 +45,7 @@ import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQu
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 import pl.leon.form.application.leon.service.UserService;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 

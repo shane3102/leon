@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import pl.leon.form.application.leon.model.response.questions.OptionResponse;
+import pl.leon.form.application.leon.model.response.options.OptionResponse;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
 import pl.leon.form.application.leon.repository.DbMocker;

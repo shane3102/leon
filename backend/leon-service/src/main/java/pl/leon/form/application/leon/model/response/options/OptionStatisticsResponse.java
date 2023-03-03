@@ -1,5 +1,6 @@
-package pl.leon.form.application.leon.model.response.questions;
+package pl.leon.form.application.leon.model.response.options;
 
+import jdk.jfr.Percentage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OptionResponse {
+public class OptionStatisticsResponse {
     private Long id;
     private String content;
+    private Long count;
+    @Percentage
+    private double percentageOfAnswers;
 }
