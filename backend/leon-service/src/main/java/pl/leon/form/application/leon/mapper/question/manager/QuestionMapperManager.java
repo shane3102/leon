@@ -14,6 +14,7 @@ import pl.leon.form.application.leon.mapper.question.ShortAnswerQuestionMapper;
 import pl.leon.form.application.leon.mapper.question.SingleChoiceQuestionMapper;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.model.response.questions.QuestionStatisticsResponse;
 import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
@@ -58,6 +59,13 @@ public class QuestionMapperManager {
         return response;
     }
 
+    public QuestionStatisticsResponse mapToStatisticsResponse(QuestionMethodsInterface questionEntity) {
+        log.info("Entity type: {}", questionEntity.getClass());
+        QuestionStatisticsResponse response = mappers.get(questionEntity.getClass()).mapToStatisticsResponse(questionEntity);
+        log.info("Response: {}", response);
+        return response;
+    }
+
     public QuestionAnswering mapToAnswering(Object questionAnsweringEntity) {
         log.info("Entity type: {}", questionAnsweringEntity.getClass());
         QuestionAnswering response = mappers.get(questionAnsweringEntity.getClass()).mapToAnswering(questionAnsweringEntity);
@@ -77,6 +85,21 @@ public class QuestionMapperManager {
         }
 
         log.info("mapToResponses({}) = {}", questionLists == null ? null : questionLists.length, resultList);
+        return resultList;
+    }
+
+    public List<QuestionStatisticsResponse> mapToStatisticsResponses(List... questionLists) {
+        log.info("mapToStatisticsResponses({})", questionLists == null ? null : questionLists.length);
+
+        List<QuestionStatisticsResponse> resultList = new ArrayList<>();
+
+        for (List<QuestionMethodsInterface> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
+            concreteQuestionList.forEach(
+                    question -> resultList.add(mapToStatisticsResponse(question))
+            );
+        }
+
+        log.info("mapToStatisticsResponses({}, {})", questionLists == null ? null : questionLists.length, resultList);
         return resultList;
     }
 

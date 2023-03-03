@@ -17,6 +17,7 @@ import pl.leon.form.application.leon.model.request.forms.FormUiUxRankingRequest;
 import pl.leon.form.application.leon.model.request.questions.QuestionCreateRequest;
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
 import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
+import pl.leon.form.application.leon.model.response.forms.FormStatisticsResponse;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
@@ -135,6 +136,18 @@ public abstract class FormMapper {
                     "))")
     })
     public abstract FormResponse mapToResponse(FormEntity formEntity);
+
+    @Mappings({
+            @Mapping(target = "questions", expression = "java(questionMapperManager.mapToStatisticsResponses(" +
+                    "formEntity.getDropdownQuestions(), " +
+                    "formEntity.getLineScaleQuestions(), " +
+                    "formEntity.getLongAnswerQuestions(), " +
+                    "formEntity.getMultipleChoiceQuestions(), " +
+                    "formEntity.getShortAnswerQuestions(), " +
+                    "formEntity.getSingleChoiceQuestions()" +
+                    "))")
+    })
+    public abstract FormStatisticsResponse mapToStatisticsResponse(FormEntity formEntity);
 
     @Mappings({
             @Mapping(target = "answers", expression = "java(questionMapperManager.mapToAnswering(" +
