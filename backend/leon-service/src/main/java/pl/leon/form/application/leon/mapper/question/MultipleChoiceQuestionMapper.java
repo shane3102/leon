@@ -6,7 +6,9 @@ import org.mapstruct.Mappings;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.model.response.questions.QuestionStatisticsResponse;
 import pl.leon.form.application.leon.repository.entities.question_answers.MultipleChoiceQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
 
 @Component
@@ -15,6 +17,13 @@ public abstract class MultipleChoiceQuestionMapper implements QuestionMapper<Mul
     @Override
     @Mapping(target="type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
     public abstract QuestionResponse mapToResponse(MultipleChoiceQuestionEntity questionEntity);
+
+    @Override
+    @Mappings({
+            @Mapping(target="options", source="questionEntity"),
+            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
+    })
+    public abstract QuestionStatisticsResponse mapToStatisticsResponse(MultipleChoiceQuestionEntity questionEntity);
 
     @Override
     @Mappings({

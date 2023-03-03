@@ -24,6 +24,8 @@ public abstract class LongAnswerQuestionMapper implements QuestionMapper<LongAns
     @Mapping(target="type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
     public abstract QuestionResponse mapToResponse(LongAnswerQuestionEntity questionEntity);
 
+
+
     @Override
     @Mappings({
             @Mapping(target = "id", source = "question.id"),

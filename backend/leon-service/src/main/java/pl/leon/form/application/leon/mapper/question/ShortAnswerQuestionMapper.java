@@ -6,6 +6,7 @@ import org.mapstruct.Mappings;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.model.response.questions.QuestionStatisticsResponse;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
@@ -24,6 +25,13 @@ public abstract class ShortAnswerQuestionMapper implements QuestionMapper<ShortA
     @Override
     @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
     public abstract QuestionResponse mapToResponse(ShortAnswerQuestionEntity questionEntity);
+
+    @Override
+    @Mappings({
+            @Mapping(target="options", source="questionEntity"),
+            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
+    })
+    public abstract QuestionStatisticsResponse mapToStatisticsResponse(ShortAnswerQuestionEntity questionEntity);
 
     @Override
     @Mappings({
