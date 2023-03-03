@@ -10,11 +10,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.both.FormCompleted;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
+import pl.leon.form.application.leon.repository.DbMocker;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.FormCompletedRepository;
 import pl.leon.form.application.leon.repository.FormRepository;
@@ -103,6 +105,9 @@ public class FormSubmitCompletedTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private DbMocker dbMocker;
 
     private static final String URL = "/api/form";
 
