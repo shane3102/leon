@@ -99,7 +99,7 @@ public class QuestionMapperManager {
             );
         }
 
-        log.info("mapToStatisticsResponses({}, {})", questionLists == null ? null : questionLists.length, resultList);
+        log.info("mapToStatisticsResponses({}) = {}", questionLists == null ? null : questionLists.length, resultList);
         return resultList;
     }
 

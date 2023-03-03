@@ -10,7 +10,6 @@ import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManag
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.SingleChoiceQuestionAnswerEntity;
-import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 import pl.leon.form.application.leon.service.question.interfaces.IncrementCountForOptionInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;

@@ -33,12 +33,16 @@ public interface QuestionMapper<QuestionType extends QuestionMethodsInterface, A
     }
 
     default List<OptionStatisticsResponse> mapToOptionsStatistics(QuestionType questionEntity) {
+        if (questionEntity.getOptions() == null) {
+            return null;
+        }
+
         return questionEntity.getOptions().stream().map(optionEntity -> OptionStatisticsResponse.builder()
                 .id(optionEntity.getId())
                 .content(optionEntity.getContent())
                 .count(optionEntity.getCount())
                 .percentageOfAnswers(
-                        (questionEntity.getCountAnswers() == null || questionEntity.getCountAnswers()==0) ? 0d : ((double) optionEntity.getCount() / questionEntity.getCountAnswers())
+                        (questionEntity.getCountAnswers() == null || questionEntity.getCountAnswers() == 0) ? 0d : ((double) optionEntity.getCount() / questionEntity.getCountAnswers())
                 )
                 .build()).collect(Collectors.toList());
     }
