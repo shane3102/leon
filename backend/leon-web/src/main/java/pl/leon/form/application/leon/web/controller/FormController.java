@@ -20,6 +20,7 @@ import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
 import pl.leon.form.application.leon.model.request.forms.FormUiUxRankingRequest;
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
 import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
+import pl.leon.form.application.leon.model.response.forms.FormStatisticsResponse;
 import pl.leon.form.application.leon.model.response.forms.FormToCompleteResponse;
 import pl.leon.form.application.leon.service.FormService;
 import pl.leon.form.application.leon.service.FormToCompleteService;
@@ -61,6 +62,14 @@ public class FormController {
         FormResponse formResponse = formService.readConcreteForm(id);
         log.info("getConcreteForm({}) = {}", id, formResponse);
         return ResponseEntity.ok(formResponse);
+    }
+
+    @GetMapping("/statistics/{id}")
+    public ResponseEntity<?> getFormWithStatistics(@PathVariable Long id) {
+        log.info("getFormWithStatistics({})", id);
+        FormStatisticsResponse formStatisticsResponse = formService.readConcreteFormWithStatistics(id);
+        log.info("getFormWithStatistics({}) = {}", id, formStatisticsResponse);
+        return ResponseEntity.ok(formStatisticsResponse);
     }
 
     @PostMapping("/add")
