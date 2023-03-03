@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
-import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
+import pl.leon.form.application.leon.repository.entities.UserEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
@@ -14,7 +14,6 @@ import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQ
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -23,6 +22,8 @@ import java.util.stream.Stream;
 @Component
 @AllArgsConstructor
 public class DbMocker {
+
+    private final UserRepository userRepository;
 
     private final FormRepository formRepository;
 
@@ -37,23 +38,25 @@ public class DbMocker {
 
     @PostConstruct
     void mockForms() {
-        generateForms();
+        UserEntity user = UserEntity.builder().username("user").build();
+        user = userRepository.save(user);
+        generateForms(user);
     }
 
-    private void generateForms() {
+    private void generateForms(UserEntity user) {
 
         LocalDate dateAdded = LocalDate.now().minusDays(10);
 
         for (int i = 0; i < 100; i++) {
 
-            generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6);
+            generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6, user);
 
             dateAdded = dateAdded.plusDays(1);
 
         }
     }
 
-    private void generateSingleForm(int i, LocalDate dateAdded, boolean disabled, boolean resultsAvailableForEveryone) {
+    private void generateSingleForm(int i, LocalDate dateAdded, boolean disabled, boolean resultsAvailableForEveryone, UserEntity user) {
         int multipleChoiceQuestionsCount = random.nextInt(20, 30);
         int dropdownQuestionsCount = random.nextInt(10, 20);
         int lineScaleQuestionsCount = random.nextInt(5, 15);
@@ -80,6 +83,7 @@ public class DbMocker {
         shortAnswerQuestions = shortAnswerQuestionRepository.saveAll(shortAnswerQuestions);
 
         FormEntity form = FormEntity.builder()
+                .user(user)
                 .dateAdded(dateAdded)
                 .disabled(disabled)
                 .resultsAvailableForEveryone(resultsAvailableForEveryone)
