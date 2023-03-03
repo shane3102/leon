@@ -47,7 +47,7 @@ public class DbMocker {
 
         LocalDate dateAdded = LocalDate.now().minusDays(10);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
 
             generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6, user);
 
@@ -57,30 +57,6 @@ public class DbMocker {
     }
 
     private void generateSingleForm(int i, LocalDate dateAdded, boolean disabled, boolean resultsAvailableForEveryone, UserEntity user) {
-        int multipleChoiceQuestionsCount = random.nextInt(20, 30);
-        int dropdownQuestionsCount = random.nextInt(10, 20);
-        int lineScaleQuestionsCount = random.nextInt(5, 15);
-        int singleChoiceQuestionsCount = random.nextInt(10, 20);
-        int longAnswerQuestionsCount = random.nextInt(0, 10);
-        int shortAnswerQuestionsCount = random.nextInt(5, 15);
-
-        List<MultipleChoiceQuestionEntity> multipleChoiceQuestions = getMultipleChoiceQuestions(multipleChoiceQuestionsCount, i + 1);
-        multipleChoiceQuestions = multipleChoiceQuestionRepository.saveAll(multipleChoiceQuestions);
-
-        List<DropdownQuestionEntity> dropdownQuestions = getDropdownQuestions(dropdownQuestionsCount, i + 1);
-        dropdownQuestions = dropdownQuestionRepository.saveAll(dropdownQuestions);
-
-        List<LineScaleQuestionEntity> lineScaleQuestions = getLineScaleQuestions(lineScaleQuestionsCount, i + 1);
-        lineScaleQuestions = lineScaleQuestionRepository.saveAll(lineScaleQuestions);
-
-        List<SingleChoiceQuestionEntity> singleChoiceQuestions = getSingleChoiceQuestions(singleChoiceQuestionsCount, i + 1);
-        singleChoiceQuestions = singleChoiceQuestionRepository.saveAll(singleChoiceQuestions);
-
-        List<LongAnswerQuestionEntity> longAnswerQuestions = getLongAnswerQuestions(longAnswerQuestionsCount, i + 1);
-        longAnswerQuestions = longAnswerQuestionRepository.saveAll(longAnswerQuestions);
-
-        List<ShortAnswerQuestionEntity> shortAnswerQuestions = getShortAnswerQuestions(shortAnswerQuestionsCount, i + 1);
-        shortAnswerQuestions = shortAnswerQuestionRepository.saveAll(shortAnswerQuestions);
 
         FormEntity form = FormEntity.builder()
                 .user(user)
@@ -89,59 +65,93 @@ public class DbMocker {
                 .resultsAvailableForEveryone(resultsAvailableForEveryone)
                 .title("Tytuł formularza numer " + (i + 1))
                 .subject("Opis formularza numer " + (i + 1))
-                .multipleChoiceQuestions(multipleChoiceQuestions)
-                .dropdownQuestions(dropdownQuestions)
-                .lineScaleQuestions(lineScaleQuestions)
-                .singleChoiceQuestions(singleChoiceQuestions)
-                .longAnswerQuestions(longAnswerQuestions)
-                .shortAnswerQuestions(shortAnswerQuestions)
                 .build();
+
+        form = formRepository.save(form);
+
+        int multipleChoiceQuestionsCount = random.nextInt(20, 30);
+        int dropdownQuestionsCount = random.nextInt(10, 20);
+        int lineScaleQuestionsCount = random.nextInt(5, 15);
+        int singleChoiceQuestionsCount = random.nextInt(10, 20);
+        int longAnswerQuestionsCount = random.nextInt(0, 10);
+        int shortAnswerQuestionsCount = random.nextInt(5, 15);
+
+        List<MultipleChoiceQuestionEntity> multipleChoiceQuestions = getMultipleChoiceQuestions(multipleChoiceQuestionsCount, i + 1, form);
+        multipleChoiceQuestions = multipleChoiceQuestionRepository.saveAll(multipleChoiceQuestions);
+
+        List<DropdownQuestionEntity> dropdownQuestions = getDropdownQuestions(dropdownQuestionsCount, i + 1, form);
+        dropdownQuestions = dropdownQuestionRepository.saveAll(dropdownQuestions);
+
+        List<LineScaleQuestionEntity> lineScaleQuestions = getLineScaleQuestions(lineScaleQuestionsCount, i + 1, form);
+        lineScaleQuestions = lineScaleQuestionRepository.saveAll(lineScaleQuestions);
+
+        List<SingleChoiceQuestionEntity> singleChoiceQuestions = getSingleChoiceQuestions(singleChoiceQuestionsCount, i + 1, form);
+        singleChoiceQuestions = singleChoiceQuestionRepository.saveAll(singleChoiceQuestions);
+
+        List<LongAnswerQuestionEntity> longAnswerQuestions = getLongAnswerQuestions(longAnswerQuestionsCount, i + 1, form);
+        longAnswerQuestions = longAnswerQuestionRepository.saveAll(longAnswerQuestions);
+
+        List<ShortAnswerQuestionEntity> shortAnswerQuestions = getShortAnswerQuestions(shortAnswerQuestionsCount, i + 1, form);
+        shortAnswerQuestions = shortAnswerQuestionRepository.saveAll(shortAnswerQuestions);
+
+        form.setMultipleChoiceQuestions(multipleChoiceQuestions);
+        form.setDropdownQuestions(dropdownQuestions);
+        form.setLineScaleQuestions(lineScaleQuestions);
+        form.setSingleChoiceQuestions(singleChoiceQuestions);
+        form.setLongAnswerQuestions(longAnswerQuestions);
+        form.setShortAnswerQuestions(shortAnswerQuestions);
         formRepository.save(form);
     }
 
-    private List<MultipleChoiceQuestionEntity> getMultipleChoiceQuestions(int count, int formNumber) {
+    private List<MultipleChoiceQuestionEntity> getMultipleChoiceQuestions(int count, int formNumber, FormEntity form) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> MultipleChoiceQuestionEntity.builder()
                 .question("Pytanie z wielokrotnym wyborem numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("wielokrotny wybór", formNumber))
                 .countAnswers(0L)
+                .form(form)
                 .build()).collect(Collectors.toList());
     }
 
-    private List<DropdownQuestionEntity> getDropdownQuestions(int count, int formNumber) {
+    private List<DropdownQuestionEntity> getDropdownQuestions(int count, int formNumber, FormEntity form) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> DropdownQuestionEntity.builder()
                 .question("Pytanie z listą rozwijaną numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("lista wybieralna", formNumber))
                 .countAnswers(0L)
+                .form(form)
                 .build()).collect(Collectors.toList());
     }
 
-    private List<LineScaleQuestionEntity> getLineScaleQuestions(int count, int formNumber) {
+    private List<LineScaleQuestionEntity> getLineScaleQuestions(int count, int formNumber, FormEntity form) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> LineScaleQuestionEntity.builder()
                 .question("Pytanie ze skalą liniową numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptionsLineScale("skala liniowa", formNumber))
                 .countAnswers(0L)
+                .form(form)
                 .build()).collect(Collectors.toList());
     }
 
-    private List<SingleChoiceQuestionEntity> getSingleChoiceQuestions(int count, int formNumber) {
+    private List<SingleChoiceQuestionEntity> getSingleChoiceQuestions(int count, int formNumber, FormEntity form) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> SingleChoiceQuestionEntity.builder()
                 .question("Pytanie jednokrotnego wyboru numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("jednokrotny wybór", formNumber))
                 .countAnswers(0L)
+                .form(form)
                 .build()).collect(Collectors.toList());
     }
 
-    private List<ShortAnswerQuestionEntity> getShortAnswerQuestions(int count, int formNumber) {
+    private List<ShortAnswerQuestionEntity> getShortAnswerQuestions(int count, int formNumber, FormEntity form) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> ShortAnswerQuestionEntity.builder()
                 .question("Pytanie o krótkiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .countAnswers(0L)
+                .form(form)
                 .build()).collect(Collectors.toList());
     }
 
-    private List<LongAnswerQuestionEntity> getLongAnswerQuestions(int count, int formNumber) {
+    private List<LongAnswerQuestionEntity> getLongAnswerQuestions(int count, int formNumber, FormEntity form) {
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> LongAnswerQuestionEntity.builder()
                 .question("Pytanie o długiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .countAnswers(0L)
+                .form(form)
                 .build()).collect(Collectors.toList());
     }
 
