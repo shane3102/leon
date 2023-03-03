@@ -9,6 +9,7 @@ import pl.leon.form.application.leon.core.exceptions.bad_request.BadRequestExcep
 import pl.leon.form.application.leon.core.exceptions.i_am_a_teapot.IAmATeapotException;
 import pl.leon.form.application.leon.core.exceptions.internal_server_error.InternalServerErrorException;
 import pl.leon.form.application.leon.core.exceptions.not_found.NotFoundException;
+import pl.leon.form.application.leon.core.exceptions.unauthorized.UnauthorizedException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -35,5 +36,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({NotFoundException.class})
     public final ExceptionMessage handleNotFound(NotFoundException notFoundException) {
         return new ExceptionMessage(notFoundException.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({UnauthorizedException.class})
+    public final ExceptionMessage handleUnauthorized(UnauthorizedException unauthorizedException) {
+        return new ExceptionMessage(unauthorizedException.getMessage());
     }
 }

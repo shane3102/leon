@@ -20,7 +20,10 @@ public enum ExceptionMessages {
     EXCEPTION_WHEN_FILTER_CHAINING_AUTHENTICATION("There was an exception when filter chaining authentication. Exception message: "),
 
     // not found
-    FORM_NOT_FOUND("There is no form with given id");
+    FORM_NOT_FOUND("There is no form with given id"),
+
+    // unauthorized
+    STATISTICS_NOT_AVAILABLE_TO_USER("User is not authorized to check statistics of form");
 
     private final String message;
 }
