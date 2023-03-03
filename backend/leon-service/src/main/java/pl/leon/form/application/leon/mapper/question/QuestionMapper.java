@@ -37,7 +37,9 @@ public interface QuestionMapper<QuestionType extends QuestionMethodsInterface, A
                 .id(optionEntity.getId())
                 .content(optionEntity.getContent())
                 .count(optionEntity.getCount())
-                .percentageOfAnswers((double) optionEntity.getCount() / questionEntity.getCountAnswers())
+                .percentageOfAnswers(
+                        (questionEntity.getCountAnswers() == null || questionEntity.getCountAnswers()==0) ? 0d : ((double) optionEntity.getCount() / questionEntity.getCountAnswers())
+                )
                 .build()).collect(Collectors.toList());
     }
 }

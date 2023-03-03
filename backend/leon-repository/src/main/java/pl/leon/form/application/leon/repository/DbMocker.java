@@ -146,6 +146,7 @@ public class DbMocker {
 
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> OptionEntity.builder()
                 .content("Odpowiedz na pytanie typu " + questionTypeName + " numer " + (i + 1) + " na pytanie z ankiety numer " + formNumber)
+                .count(0L)
                 .build()).collect(Collectors.toList());
     }
 
@@ -154,6 +155,7 @@ public class DbMocker {
 
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> OptionEntity.builder()
                 .content("Odp nr " + (i + 1) + " a " + formNumber)
+                .count(0L)
                 .build()).collect(Collectors.toList());
     }
 }
