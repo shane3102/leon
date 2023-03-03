@@ -17,6 +17,7 @@ import pl.leon.form.application.leon.repository.entities.questions.DropdownQuest
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
+import pl.leon.form.application.leon.repository.entities.questions.QuestionMethodsInterface;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
@@ -136,7 +137,7 @@ public class QuestionMapperManagerIntegrationTest {
 
     @ParameterizedTest
     @MethodSource("entityArguments")
-    void givenQuestionEntity_whenMapToQuestionResponse_thenResponseEqualExpected(Object mappedQuestionEntity, QuestionResponse expectedResponse, QuestionType questionType) {
+    void givenQuestionEntity_whenMapToQuestionResponse_thenResponseEqualExpected(QuestionMethodsInterface mappedQuestionEntity, QuestionResponse expectedResponse, QuestionType questionType) {
         // given
         expectedResponse.setType(questionType);
 

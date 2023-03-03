@@ -24,6 +24,7 @@ import pl.leon.form.application.leon.repository.entities.questions.DropdownQuest
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
+import pl.leon.form.application.leon.repository.entities.questions.QuestionMethodsInterface;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
@@ -50,7 +51,7 @@ public class QuestionMapperManager {
     private final ShortAnswerQuestionMapper shortAnswerQuestionMapper;
     private final SingleChoiceQuestionMapper singleChoiceQuestionMapper;
 
-    public QuestionResponse mapToResponse(Object questionEntity) {
+    public QuestionResponse mapToResponse(QuestionMethodsInterface questionEntity) {
         log.info("Entity type: {}", questionEntity.getClass());
         QuestionResponse response = mappers.get(questionEntity.getClass()).mapToResponse(questionEntity);
         log.info("Response: {}", response);
@@ -69,7 +70,7 @@ public class QuestionMapperManager {
 
         List<QuestionResponse> resultList = new ArrayList<>();
 
-        for (List<Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
+        for (List<QuestionMethodsInterface> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
             concreteQuestionList.forEach(
                     question -> resultList.add(mapToResponse(question))
             );
