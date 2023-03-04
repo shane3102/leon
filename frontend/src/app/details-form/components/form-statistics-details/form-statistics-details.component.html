@@ -1,12 +1,26 @@
 <div *ngIf="formDetails">
-    {{formDetails.id}}
-    {{formDetails.title}}
-    {{formDetails.subject}}
-    {{formDetails.dateTo}}
-    {{formDetails.dateAdded}}
-    {{formDetails.disabled}}
-    {{formDetails.resultsAvailableForEveryone}}
-    <div *ngFor="let question of formDetails.questions">
-        <app-question-statistics-details [questionStatistics]="question"></app-question-statistics-details>
+
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div id="formMainInfo">
+            <h1>{{formDetails.title}}</h1>
+            <h3>{{formDetails.subject}}</h3>
+        </div>
+        <div id="formDatesInfo">
+            <div>Data dodania formularza: {{formDetails.dateAdded}}</div>
+            <div>Data końcowa: {{formDetails.dateTo == undefined ? "Brak" : formDetails.dateTo}}</div>
+        </div>
+        <div id="formSettingsInfo">
+            <div>Blokada odpowiedzi na pytania: {{formDetails.disabled ? "Tak" : "Nie"}}</div>
+            <div>Statystyki ankiety dostępne dla każdego: {{formDetails.resultsAvailableForEveryone ? "Tak" : "Nie"}}
+            </div>
+        </div>
+        <div id="questionsLabel">
+            Pytania
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div style="width: 80vw" *ngFor="let question of formDetails.questions">
+            <app-question-statistics-details [questionStatistics]="question"></app-question-statistics-details>
+        </div>
     </div>
 </div>

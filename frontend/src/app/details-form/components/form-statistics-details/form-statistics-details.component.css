@@ -1,0 +1,33 @@
+#formMainInfo {
+    border: 2.5px solid #6E6E6E;
+    border-radius: 20px 0px 20px 0px;
+    text-align: center;
+    margin: 0.5vw;
+    width: 80vw;
+}
+
+#formDatesInfo {
+    border: 2.5px solid #6E6E6E;
+    border-radius: 20px 0px 20px 0px;
+    text-align: center;
+    margin: 0.5vw;
+    width: 39.5vw;
+}
+
+#formSettingsInfo {
+    border: 2.5px solid #6E6E6E;
+    border-radius: 20px 0px 20px 0px;
+    text-align: center;
+    margin: 0.5vw;
+    width: 39.5vw;
+}
+
+#questionsLabel {
+    width: 80vw;
+    border-radius: 20px 20px 0px 0px;
+    color: white;
+    background-color: #6E6E6E;
+    text-align: center;
+    font-size: 1vw;
+    padding: 0.25vw;
+}
