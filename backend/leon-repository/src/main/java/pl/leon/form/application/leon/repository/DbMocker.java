@@ -104,39 +104,62 @@ public class DbMocker {
     }
 
     private List<MultipleChoiceQuestionEntity> getMultipleChoiceQuestions(int count, int formNumber, FormEntity form) {
-        return Stream.iterate(0, i -> i + 1).limit(count).map(i -> MultipleChoiceQuestionEntity.builder()
+
+        List<MultipleChoiceQuestionEntity> result = Stream.iterate(0, i -> i + 1).limit(count).map(i -> MultipleChoiceQuestionEntity.builder()
                 .question("Pytanie z wielokrotnym wyborem numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("wielokrotny wybór", formNumber))
-                .countAnswers(0L)
                 .form(form)
                 .build()).collect(Collectors.toList());
+
+        result.forEach(oneResult -> {
+            oneResult.setCountAnswers(oneResult.getOptions().stream().mapToLong(OptionEntity::getCount).sum());
+        });
+
+        return result;
     }
 
     private List<DropdownQuestionEntity> getDropdownQuestions(int count, int formNumber, FormEntity form) {
-        return Stream.iterate(0, i -> i + 1).limit(count).map(i -> DropdownQuestionEntity.builder()
+        List<DropdownQuestionEntity> result = Stream.iterate(0, i -> i + 1).limit(count).map(i -> DropdownQuestionEntity.builder()
                 .question("Pytanie z listą rozwijaną numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("lista wybieralna", formNumber))
-                .countAnswers(0L)
                 .form(form)
                 .build()).collect(Collectors.toList());
+
+        result.forEach(oneResult -> {
+            oneResult.setCountAnswers(oneResult.getOptions().stream().mapToLong(OptionEntity::getCount).sum());
+        });
+
+        return result;
     }
 
     private List<LineScaleQuestionEntity> getLineScaleQuestions(int count, int formNumber, FormEntity form) {
-        return Stream.iterate(0, i -> i + 1).limit(count).map(i -> LineScaleQuestionEntity.builder()
+        List<LineScaleQuestionEntity> result = Stream.iterate(0, i -> i + 1).limit(count).map(i -> LineScaleQuestionEntity.builder()
                 .question("Pytanie ze skalą liniową numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptionsLineScale("skala liniowa", formNumber))
                 .countAnswers(0L)
                 .form(form)
                 .build()).collect(Collectors.toList());
+
+        result.forEach(oneResult -> {
+            oneResult.setCountAnswers(oneResult.getOptions().stream().mapToLong(OptionEntity::getCount).sum());
+        });
+
+        return result;
     }
 
     private List<SingleChoiceQuestionEntity> getSingleChoiceQuestions(int count, int formNumber, FormEntity form) {
-        return Stream.iterate(0, i -> i + 1).limit(count).map(i -> SingleChoiceQuestionEntity.builder()
+        List<SingleChoiceQuestionEntity> result = Stream.iterate(0, i -> i + 1).limit(count).map(i -> SingleChoiceQuestionEntity.builder()
                 .question("Pytanie jednokrotnego wyboru numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("jednokrotny wybór", formNumber))
                 .countAnswers(0L)
                 .form(form)
                 .build()).collect(Collectors.toList());
+
+        result.forEach(oneResult -> {
+            oneResult.setCountAnswers(oneResult.getOptions().stream().mapToLong(OptionEntity::getCount).sum());
+        });
+
+        return result;
     }
 
     private List<ShortAnswerQuestionEntity> getShortAnswerQuestions(int count, int formNumber, FormEntity form) {
@@ -160,7 +183,7 @@ public class DbMocker {
 
         return Stream.iterate(0, i -> i + 1).limit(count).map(i -> OptionEntity.builder()
                 .content("Odpowiedz na pytanie typu " + questionTypeName + " numer " + (i + 1) + " na pytanie z ankiety numer " + formNumber)
-                .count(0L)
+                .count(random.nextLong(0, 100))
                 .build()).collect(Collectors.toList());
     }
 
