@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ListFormsComponent } from './components/list-forms/list-forms.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormStatisticsDetailsComponent } from './components/form-statistics-details/form-statistics-details.component';
+import { QuestionStatisticsDetailsComponent } from './components/question-statistics-details/question-statistics-details.component';
 
 
 
 @NgModule({
   declarations: [
-    ListFormsComponent
+    ListFormsComponent,
+    FormStatisticsDetailsComponent,
+    QuestionStatisticsDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +20,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule
   ],
   exports: [
-    ListFormsComponent
+    ListFormsComponent,
+    FormStatisticsDetailsComponent
   ]
 })
 export class DetailsFormModule { }
