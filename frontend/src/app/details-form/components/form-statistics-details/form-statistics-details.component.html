@@ -1,0 +1,12 @@
+<div *ngIf="formDetails">
+    {{formDetails.id}}
+    {{formDetails.title}}
+    {{formDetails.subject}}
+    {{formDetails.dateTo}}
+    {{formDetails.dateAdded}}
+    {{formDetails.disabled}}
+    {{formDetails.resultsAvailableForEveryone}}
+    <div *ngFor="let question of formDetails.questions">
+        <app-question-statistics-details [questionStatistics]="question"></app-question-statistics-details>
+    </div>
+</div>
