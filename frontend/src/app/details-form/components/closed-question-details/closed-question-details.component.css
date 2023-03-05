@@ -1,0 +1,45 @@
+.bars {
+    border-top: 1px dashed;
+    border-bottom: 1px dashed;
+    height: 25vh;
+    width: 20vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.bar {
+    width: 2.5vw;
+}
+
+.percentages {
+    width: 20vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.percentage {
+    width: 2.5vw;
+    text-align: center;
+}
+
+.percentageLabel {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 12px;
+    height: 25vh;
+}
+
+.tableHeaders {
+    background-color: #6E6E6E;
+    color: white;
+    text-align: center;
+}
+
+th {
+    border-radius: 20px 20px 0px 0px;
+    background-color: #6E6E6E;
+    font-size: 1.5vh;
+}
