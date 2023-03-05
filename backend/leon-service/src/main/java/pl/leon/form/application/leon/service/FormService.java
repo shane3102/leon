@@ -6,10 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.not_found.concrete.FormNotFound;
+import pl.leon.form.application.leon.core.exceptions.unauthorized.concrete.StatisticsNotAvailableToUser;
 import pl.leon.form.application.leon.mapper.FormMapper;
 import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
 import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
+import pl.leon.form.application.leon.model.response.forms.FormStatisticsResponse;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
@@ -19,7 +21,7 @@ import pl.leon.form.application.leon.repository.ShortAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 
-import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -28,6 +30,7 @@ public class FormService {
 
     private final FormMapper mapper;
     private final FormRepository formRepository;
+    private final UserService userService;
 
     private final DropdownQuestionRepository dropdownQuestionRepository;
     private final LineScaleQuestionRepository lineScaleQuestionRepository;
@@ -66,5 +69,19 @@ public class FormService {
         FormResponse formResponse = mapper.mapToResponse(formEntity);
         log.info("readConcreteForm({}) = {}", id, formResponse);
         return formResponse;
+    }
+
+    public FormStatisticsResponse readConcreteFormWithStatistics(Long id) {
+        log.info("readConcreteFormWithStatistics({})", id);
+
+        FormEntity formEntity = formRepository.findById(id).orElseThrow(FormNotFound::new);
+
+        if (!formEntity.isResultsAvailableForEveryone() && !Objects.equals(formEntity.getUser(), userService.getCurrentlyLoggedUser())) {
+            throw new StatisticsNotAvailableToUser();
+        }
+
+        FormStatisticsResponse formStatisticsResponse = mapper.mapToStatisticsResponse(formEntity);
+        log.info("readConcreteFormWithStatistics({}) = {}", id, formStatisticsResponse);
+        return formStatisticsResponse;
     }
 }

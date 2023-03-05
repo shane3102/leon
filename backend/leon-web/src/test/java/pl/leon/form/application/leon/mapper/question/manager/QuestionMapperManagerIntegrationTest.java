@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import pl.leon.form.application.leon.model.response.questions.OptionResponse;
+import pl.leon.form.application.leon.model.response.options.OptionResponse;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
 import pl.leon.form.application.leon.model.both.questions.type.QuestionType;
 import pl.leon.form.application.leon.repository.DbMocker;
@@ -17,6 +17,7 @@ import pl.leon.form.application.leon.repository.entities.questions.DropdownQuest
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
+import pl.leon.form.application.leon.repository.entities.questions.QuestionMethodsInterface;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
@@ -136,7 +137,7 @@ public class QuestionMapperManagerIntegrationTest {
 
     @ParameterizedTest
     @MethodSource("entityArguments")
-    void givenQuestionEntity_whenMapToQuestionResponse_thenResponseEqualExpected(Object mappedQuestionEntity, QuestionResponse expectedResponse, QuestionType questionType) {
+    void givenQuestionEntity_whenMapToQuestionResponse_thenResponseEqualExpected(QuestionMethodsInterface mappedQuestionEntity, QuestionResponse expectedResponse, QuestionType questionType) {
         // given
         expectedResponse.setType(questionType);
 

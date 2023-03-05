@@ -1,0 +1,46 @@
+#formMainInfo {
+    border: 2.5px solid #6E6E6E;
+    border-radius: 20px 0px 20px 0px;
+    margin: 0.5vw;
+    width: 49.5vw;
+    background-color: rgb(233, 231, 231);
+}
+
+#formAdditionalInfo {
+    border: 2.5px solid #6E6E6E;
+    border-radius: 20px 0px 20px 0px;
+    text-align: center;
+    margin: 0.5vw;
+    padding: 0.5vw;
+    width: 29.5vw;
+    background-color: rgb(233, 231, 231);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#formDownload {
+    border-radius: 20px 0px 20px 0px;
+    background-color: #6E6E6E;
+    color: white;
+    padding: 1vw;
+    margin: 0.5vw;
+    font-size: 1vw;
+    outline: none;
+    border: none;
+}
+
+#formDownload:active {
+    padding: 0.75vw;
+    margin: 0.75vw;
+}
+
+#questionsLabel {
+    width: 80vw;
+    border-radius: 20px 20px 0px 0px;
+    color: white;
+    background-color: #6E6E6E;
+    text-align: center;
+    font-size: 1.5vw;
+    padding: 0.75vw;
+}

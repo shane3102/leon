@@ -2,6 +2,8 @@ package pl.leon.form.application.leon.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -45,5 +47,20 @@ public class UserService implements UserDetailsService {
         return mapper.mapToResponse(repository.save(newUser));
     }
 
+    public UserEntity getCurrentlyLoggedUser() {
+        UserEntity loggedUser = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication == null) && !authentication.getPrincipal().equals("anonymousUser")) {
+            if (authentication.getPrincipal() instanceof String) {
+                loggedUser = repository.findByUsername((String) authentication.getPrincipal());
+            } else {
+                loggedUser = (UserEntity) authentication.getPrincipal();
+            }
+        }
+
+        return loggedUser;
+    }
 
 }

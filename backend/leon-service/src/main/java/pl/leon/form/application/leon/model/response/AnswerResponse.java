@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.model.response.questions;
+package pl.leon.form.application.leon.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OptionResponse {
+public class AnswerResponse {
     private Long id;
     private String content;
 }

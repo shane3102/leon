@@ -1,0 +1,15 @@
+<div *ngIf="questionStatistics.countAnswers==0">
+    Brak odpowiedzi
+</div>
+
+<div *ngIf="questionStatistics.countAnswers>0">
+    <div>
+        Ilość odpowiedzi w sumie: {{questionStatistics.countAnswers}}
+    </div>
+    <div class="answersLabel">Odpowiedzi:</div>
+    <div style="overflow: auto; height: 40vh; max-height: fit-content;">
+        <div *ngFor="let answer of questionStatistics.answers;let i=index">
+            <div [ngStyle]="i%2 != 0 ? {'background-color': 'rgb(233,231,231)'} : {}">{{answer.content}}</div>
+        </div>
+    </div>
+</div>

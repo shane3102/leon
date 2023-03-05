@@ -1,0 +1,47 @@
+<div *ngIf="formDetails">
+
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div id="formMainInfo">
+            <div style="font-size: 1.25vw; text-align: center; line-height: normal; margin-left: 0.25vw; margin-right: 0.25vw;">{{formDetails.title}}</div>
+            <div style="font-size: 1vw; line-height: normal; width: 100%; margin-left: 0.25vw; margin-right: 0.25vw;">{{formDetails.subject}}</div>
+            <h1></h1>
+            <h3></h3>
+        </div>
+        <div id="formAdditionalInfo">
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: end;">Data dodania:</td>
+                            <td style="text-align: left;">{{formDetails.dateAdded | date:'dd.MM.yyyy'}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: end;">Data końcowa:</td>
+                            <td style="text-align: left;">{{formDetails.dateTo == undefined ? "Brak" : (formDetails.dateTo | date:'dd.MM.yyyy')}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: end;">Blokada odpowiedzi na pytania:</td>
+                            <td style="text-align: left;">{{formDetails.disabled ? "Tak" : "Nie"}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: end;">Statystyki ankiety ogólnodostępne:</td>
+                            <td style="text-align: left;">{{formDetails.resultsAvailableForEveryone ? "Tak" : "Nie"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button id="formDownload">
+                Pobierz wyniki 
+                <fa-icon [icon]="faDownload"></fa-icon>
+            </button>
+        </div>
+        <div id="questionsLabel">
+            Pytania
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div style="width: 80vw" *ngFor="let question of formDetails.questions">
+            <app-question-statistics-details [questionStatistics]="question"></app-question-statistics-details>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
+import pl.leon.form.application.leon.repository.entities.OptionEntity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -47,4 +48,9 @@ public class ShortAnswerQuestionEntity implements QuestionMethodsInterface {
     @ManyToOne
     @JoinColumn(name = "form_id")
     private FormEntity form;
+
+    @Override
+    public List<OptionEntity> getOptions() {
+        return null;
+    }
 }

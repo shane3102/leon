@@ -7,6 +7,7 @@ import { AddFormComponent } from './add-form/components/add-form/add-form.compon
 import { AuthGuard } from './authGuard/auth.service';
 import { FillRandomFormComponent } from './random-form/components/fill-random-form/fill-random-form.component';
 import { ListFormsComponent } from './details-form/components/list-forms/list-forms.component';
+import { FormStatisticsDetailsComponent } from './details-form/components/form-statistics-details/form-statistics-details.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'register-page', component: RegisterPageComponent },
   { path: 'add-form', component: AddFormComponent, canActivate: [AuthGuard] },
   { path: 'random-form', component: FillRandomFormComponent },
-  { path: 'list', component: ListFormsComponent }
+  { path: 'list', component: ListFormsComponent },
+  { path: 'form-details/:id', component: FormStatisticsDetailsComponent }
 ];
 
 @NgModule({

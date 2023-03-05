@@ -1,0 +1,16 @@
+<div class="expandContent" (click)="changeExpand()">
+    {{questionStatistics.question}}
+    <fa-icon *ngIf="expand | async" [icon]="faCaretUp"></fa-icon>
+    <fa-icon *ngIf="!(expand | async)" [icon]="faCaretDown"></fa-icon>
+</div>
+<div [ngStyle]="(expand | async) ? {'max-height': '50vh'} : {'max-height': '0'}" class="mainContent">
+
+
+    <div *ngIf="openQuestionTypes.includes(questionStatistics.type)">
+        <app-closed-question-details [questionStatistics]="questionStatistics"></app-closed-question-details>      
+    </div>
+    
+    <div *ngIf="!openQuestionTypes.includes(questionStatistics.type)">
+        <app-open-question-details [questionStatistics]="questionStatistics"></app-open-question-details>      
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div style="display: flex; justify-content: space-between;">
+    <div>
+        <div>
+            Ilość odpowiedzi w sumie: {{questionStatistics.countAnswers}}
+        </div>
+        <div style="margin-top: 1vh;">
+            <table>
+                <thead>
+                    <th class="tableHeaders" style="width: 35vw">Odpowiedź:</th>
+                    <th class="tableHeaders" style="width: 10vw">Ilość odpowiedzi:</th>
+                    <th class="tableHeaders" style="width: 10vw">Procent odpowiedzi:</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let option of questionStatistics.options; let i = index"
+                        [ngStyle]="i%2 != 0 ? {'background-color': 'rgb(233,231,231)'} : {}">
+                        <td style="width: 30vw">{{option.content}}</td>
+                        <td style="width: 10vw">{{option.count}}</td>
+                        <td style="width: 10vw">{{option.percentageOfAnswers | percent}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center;  margin-top: 12px; margin-right: 1vw;">
+        <div class="percentageLabel">
+            <div>100%</div>
+            <div>50%</div>
+            <div>0%</div>
+        </div>
+        <div>
+            <div class="bars">
+                <div *ngFor="let option of questionStatistics.options; let i = index">
+                    <div [ngStyle]="
+                i==0? {'background-color': 'green', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==1? {'background-color': 'blue', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==2? {'background-color': 'yellow', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==3? {'background-color': 'red', 'height': (option.percentageOfAnswers*20)+'vh'}:
+                i==4? {'background-color': 'purple', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==5? {'background-color': 'orange', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==6? {'background-color': 'brown', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==7? {'background-color': 'Cyan', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==8? {'background-color': 'pink', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                i==9? {'background-color': 'greenyellow', 'height': (option.percentageOfAnswers*20)+'vh'}: 
+                {}" class="bar">
+                    </div>
+                </div>
+            </div>
+            <div class="percentages">
+                <div *ngFor="let option of questionStatistics.options; let i = index">
+                    <div class="percentage">
+                        {{option.percentageOfAnswers | percent}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

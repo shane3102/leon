@@ -14,6 +14,7 @@ import pl.leon.form.application.leon.mapper.question.ShortAnswerQuestionMapper;
 import pl.leon.form.application.leon.mapper.question.SingleChoiceQuestionMapper;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.model.response.questions.QuestionStatisticsResponse;
 import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.LineScaleQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.LongAnswerQuestionAnswerEntity;
@@ -24,6 +25,7 @@ import pl.leon.form.application.leon.repository.entities.questions.DropdownQuest
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
+import pl.leon.form.application.leon.repository.entities.questions.QuestionMethodsInterface;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
@@ -50,9 +52,16 @@ public class QuestionMapperManager {
     private final ShortAnswerQuestionMapper shortAnswerQuestionMapper;
     private final SingleChoiceQuestionMapper singleChoiceQuestionMapper;
 
-    public QuestionResponse mapToResponse(Object questionEntity) {
+    public QuestionResponse mapToResponse(QuestionMethodsInterface questionEntity) {
         log.info("Entity type: {}", questionEntity.getClass());
         QuestionResponse response = mappers.get(questionEntity.getClass()).mapToResponse(questionEntity);
+        log.info("Response: {}", response);
+        return response;
+    }
+
+    public QuestionStatisticsResponse mapToStatisticsResponse(QuestionMethodsInterface questionEntity) {
+        log.info("Entity type: {}", questionEntity.getClass());
+        QuestionStatisticsResponse response = mappers.get(questionEntity.getClass()).mapToStatisticsResponse(questionEntity);
         log.info("Response: {}", response);
         return response;
     }
@@ -69,13 +78,28 @@ public class QuestionMapperManager {
 
         List<QuestionResponse> resultList = new ArrayList<>();
 
-        for (List<Object> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
+        for (List<QuestionMethodsInterface> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
             concreteQuestionList.forEach(
                     question -> resultList.add(mapToResponse(question))
             );
         }
 
         log.info("mapToResponses({}) = {}", questionLists == null ? null : questionLists.length, resultList);
+        return resultList;
+    }
+
+    public List<QuestionStatisticsResponse> mapToStatisticsResponses(List... questionLists) {
+        log.info("mapToStatisticsResponses({})", questionLists == null ? null : questionLists.length);
+
+        List<QuestionStatisticsResponse> resultList = new ArrayList<>();
+
+        for (List<QuestionMethodsInterface> concreteQuestionList : Optional.ofNullable(questionLists).orElse(new List[]{})) {
+            concreteQuestionList.forEach(
+                    question -> resultList.add(mapToStatisticsResponse(question))
+            );
+        }
+
+        log.info("mapToStatisticsResponses({}) = {}", questionLists == null ? null : questionLists.length, resultList);
         return resultList;
     }
 

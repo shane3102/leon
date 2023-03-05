@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
+import pl.leon.form.application.leon.model.response.questions.QuestionStatisticsResponse;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
@@ -26,6 +27,13 @@ public abstract class LineScaleQuestionMapper implements QuestionMapper<LineScal
     @Override
     @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
     public abstract QuestionResponse mapToResponse(LineScaleQuestionEntity questionEntity);
+
+    @Override
+    @Mappings({
+            @Mapping(target="options", source="questionEntity"),
+            @Mapping(target = "type", expression = "java(pl.leon.form.application.leon.model.both.questions.type.QuestionType.getTypeByQuestionType(questionEntity.getClass()))")
+    })
+    public abstract QuestionStatisticsResponse mapToStatisticsResponse(LineScaleQuestionEntity questionEntity);
 
     @Override
     @Mappings({
