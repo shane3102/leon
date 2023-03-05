@@ -17,10 +17,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { UserAuthModule } from './user-auth/user-auth.module';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
-import { AddFormModule } from './add-form/add-form.module';
+import { FormAddModule } from './form-add/form-add.module';
 import { AuthGuard } from './authGuard/auth.service';
-import { RandomFormModule } from './random-form/random-form.module';
-import { DetailsFormModule } from './details-form/details-form.module';
+import { FormRandomModule } from './form-random/form-random.module';
+import { FormDetailsModule } from './form-details/form-details.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +40,9 @@ import { DetailsFormModule } from './details-form/details-form.module';
     BrowserAnimationsModule,
     FontAwesomeModule,
     UserAuthModule,
-    AddFormModule,
-    RandomFormModule,
-    DetailsFormModule
+    FormAddModule,
+    FormRandomModule,
+    FormDetailsModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

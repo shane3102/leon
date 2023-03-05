@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './user-auth/components/login-page/login-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterPageComponent } from './user-auth/components/register-page/register-page.component';
-import { AddFormComponent } from './add-form/components/add-form/add-form.component';
+import { AddFormComponent } from './form-add/components/add-form/add-form.component';
 import { AuthGuard } from './authGuard/auth.service';
-import { FillRandomFormComponent } from './random-form/components/fill-random-form/fill-random-form.component';
-import { ListFormsComponent } from './details-form/components/list-forms/list-forms.component';
-import { FormStatisticsDetailsComponent } from './details-form/components/form-statistics-details/form-statistics-details.component';
+import { FillRandomFormComponent } from './form-random/components/fill-random-form/fill-random-form.component';
+import { ListFormsComponent } from './form-details/components/list-forms/list-forms.component';
+import { FormStatisticsDetailsComponent } from './form-details/components/form-statistics-details/form-statistics-details.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
