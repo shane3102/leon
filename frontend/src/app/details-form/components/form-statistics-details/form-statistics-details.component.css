@@ -3,7 +3,7 @@
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     margin: 0.5vw;
-    width: 48vw;
+    width: 28vw;
     background-color: rgb(233,231,231);
 }
 
@@ -12,7 +12,8 @@
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     margin: 0.5vw;
-    width: 15vw;
+    padding: 0.5vw;
+    width: 25vw;
     background-color: rgb(233,231,231);
 }
 
@@ -21,7 +22,8 @@
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     margin: 0.5vw;
-    width: 15vw;
+    padding: 0.5vw;
+    width: 25vw;
     background-color: rgb(233,231,231);
 }
 

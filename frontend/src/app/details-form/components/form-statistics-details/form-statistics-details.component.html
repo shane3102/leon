@@ -6,8 +6,8 @@
             <h3>{{formDetails.subject}}</h3>
         </div>
         <div id="formDatesInfo">
-            <div>Data dodania formularza: {{formDetails.dateAdded}}</div>
-            <div>Data końcowa: {{formDetails.dateTo == undefined ? "Brak" : formDetails.dateTo}}</div>
+            <div>Data dodania formularza: {{formDetails.dateAdded | date:'dd.MM.yyyy'}}</div>
+            <div>Data końcowa: {{formDetails.dateTo == undefined ? "Brak" : (formDetails.dateTo | date:'dd.MM.yyyy')}}</div>
         </div>
         <div id="formSettingsInfo">
             <div>Blokada odpowiedzi na pytania: {{formDetails.disabled ? "Tak" : "Nie"}}</div>
