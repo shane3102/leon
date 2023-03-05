@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormStatisticsResponse } from '../../models/form-statistics-response';
 import { FormDetailsService } from '../../services/form-details-service';
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-form-statistics-details',
@@ -12,6 +13,8 @@ export class FormStatisticsDetailsComponent implements OnInit {
 
   private id: number;
   formDetails: FormStatisticsResponse;
+
+  faDownload = faDownload;
 
   constructor(
     private router: Router,
@@ -24,14 +27,14 @@ export class FormStatisticsDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.formDetailsService.getFormStatistics(this.id)
-    .subscribe({
-      error: () => {
-        this.router.navigateByUrl('/main-page');
-      },
-      next: (res) => {
-        this.formDetails = res;
-      }
-    })
+      .subscribe({
+        error: () => {
+          this.router.navigateByUrl('/main-page');
+        },
+        next: (res) => {
+          this.formDetails = res;
+        }
+      })
   }
 
 }

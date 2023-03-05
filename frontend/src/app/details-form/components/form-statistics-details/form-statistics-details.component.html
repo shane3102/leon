@@ -2,17 +2,38 @@
 
     <div style="display: flex; justify-content: center; flex-wrap: wrap;">
         <div id="formMainInfo">
-            <h1>{{formDetails.title}}</h1>
-            <h3>{{formDetails.subject}}</h3>
+            <div style="font-size: 1.25vw; text-align: center; line-height: normal; margin-left: 0.25vw; margin-right: 0.25vw;">{{formDetails.title}}</div>
+            <div style="font-size: 1vw; line-height: normal; width: 100%; margin-left: 0.25vw; margin-right: 0.25vw;">{{formDetails.subject}}</div>
+            <h1></h1>
+            <h3></h3>
         </div>
-        <div id="formDatesInfo">
-            <div>Data dodania formularza: {{formDetails.dateAdded | date:'dd.MM.yyyy'}}</div>
-            <div>Data końcowa: {{formDetails.dateTo == undefined ? "Brak" : (formDetails.dateTo | date:'dd.MM.yyyy')}}</div>
-        </div>
-        <div id="formSettingsInfo">
-            <div>Blokada odpowiedzi na pytania: {{formDetails.disabled ? "Tak" : "Nie"}}</div>
-            <div>Statystyki ankiety ogólnodostępne: {{formDetails.resultsAvailableForEveryone ? "Tak" : "Nie"}}
+        <div id="formAdditionalInfo">
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: end;">Data dodania:</td>
+                            <td style="text-align: left;">{{formDetails.dateAdded | date:'dd.MM.yyyy'}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: end;">Data końcowa:</td>
+                            <td style="text-align: left;">{{formDetails.dateTo == undefined ? "Brak" : (formDetails.dateTo | date:'dd.MM.yyyy')}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: end;">Blokada odpowiedzi na pytania:</td>
+                            <td style="text-align: left;">{{formDetails.disabled ? "Tak" : "Nie"}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: end;">Statystyki ankiety ogólnodostępne:</td>
+                            <td style="text-align: left;">{{formDetails.resultsAvailableForEveryone ? "Tak" : "Nie"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <button id="formDownload">
+                Pobierz wyniki 
+                <fa-icon [icon]="faDownload"></fa-icon>
+            </button>
         </div>
         <div id="questionsLabel">
             Pytania

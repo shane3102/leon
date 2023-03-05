@@ -1,30 +1,38 @@
 #formMainInfo {
     border: 2.5px solid #6E6E6E;
     border-radius: 20px 0px 20px 0px;
-    text-align: center;
     margin: 0.5vw;
-    width: 28vw;
-    background-color: rgb(233,231,231);
+    width: 49.5vw;
+    background-color: rgb(233, 231, 231);
 }
 
-#formDatesInfo {
+#formAdditionalInfo {
     border: 2.5px solid #6E6E6E;
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     margin: 0.5vw;
     padding: 0.5vw;
-    width: 25vw;
-    background-color: rgb(233,231,231);
+    width: 29.5vw;
+    background-color: rgb(233, 231, 231);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#formSettingsInfo {
-    border: 2.5px solid #6E6E6E;
+#formDownload {
     border-radius: 20px 0px 20px 0px;
-    text-align: center;
+    background-color: #6E6E6E;
+    color: white;
+    padding: 1vw;
     margin: 0.5vw;
-    padding: 0.5vw;
-    width: 25vw;
-    background-color: rgb(233,231,231);
+    font-size: 1vw;
+    outline: none;
+    border: none;
+}
+
+#formDownload:active {
+    padding: 0.75vw;
+    margin: 0.75vw;
 }
 
 #questionsLabel {
