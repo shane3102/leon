@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { QuestionResponse } from 'src/app/random-form/models/question-response';
+import { Observable, of } from 'rxjs';
 import { QuestionStatisticsResponse } from '../../models/question-statistics-response';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-question-statistics-details',
@@ -11,9 +12,19 @@ export class QuestionStatisticsDetailsComponent implements OnInit {
 
   @Input() questionStatistics: QuestionStatisticsResponse;
 
+  expand: Observable<boolean> = of(false)
+  faCaretDown = faCaretDown
+  faCaretUp = faCaretUp
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeExpand(){
+    this.expand.subscribe(ex => {
+      this.expand = of(!ex)
+    })
   }
 
 }
