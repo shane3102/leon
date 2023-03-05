@@ -2,6 +2,7 @@ package pl.leon.form.application.leon.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.UserEntity;
@@ -163,19 +164,47 @@ public class DbMocker {
     }
 
     private List<ShortAnswerQuestionEntity> getShortAnswerQuestions(int count, int formNumber, FormEntity form) {
-        return Stream.iterate(0, i -> i + 1).limit(count).map(i -> ShortAnswerQuestionEntity.builder()
+        List<ShortAnswerQuestionEntity> result = Stream.iterate(0, i -> i + 1).limit(count).map(i -> ShortAnswerQuestionEntity.builder()
                 .question("Pytanie o krótkiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
-                .countAnswers(0L)
+                .countAnswers(random.nextLong(1, 10))
                 .form(form)
                 .build()).collect(Collectors.toList());
+
+
+        for (ShortAnswerQuestionEntity oneResult : result) {
+            ShortAnswerQuestionEntity finalOneResult = shortAnswerQuestionRepository.save(oneResult);
+
+            List<AnswerEntity> answers = Stream
+                    .iterate(0, i -> i + 1)
+                    .limit(oneResult.getCountAnswers())
+                    .map(i -> AnswerEntity.builder().shortAnswerQuestionEntity(finalOneResult).content("Odpowiedz dla pytania typu krótka odpowiedź numer " + i).build()).collect(Collectors.toList());
+
+            oneResult.setAnswers(answers);
+
+        }
+
+        return result;
     }
 
     private List<LongAnswerQuestionEntity> getLongAnswerQuestions(int count, int formNumber, FormEntity form) {
-        return Stream.iterate(0, i -> i + 1).limit(count).map(i -> LongAnswerQuestionEntity.builder()
+        List<LongAnswerQuestionEntity> result = Stream.iterate(0, i -> i + 1).limit(count).map(i -> LongAnswerQuestionEntity.builder()
                 .question("Pytanie o długiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
-                .countAnswers(0L)
+                .countAnswers(random.nextLong(20,100))
                 .form(form)
                 .build()).collect(Collectors.toList());
+
+        for (LongAnswerQuestionEntity oneResult : result) {
+            LongAnswerQuestionEntity finalOneResult = longAnswerQuestionRepository.save(oneResult);
+
+            List<AnswerEntity> answers = Stream
+                    .iterate(0, i -> i + 1)
+                    .limit(oneResult.getCountAnswers())
+                    .map(i -> AnswerEntity.builder().longAnswerQuestionEntity(finalOneResult).content("Odpowiedz dla pytania typu długa odpowiedź numer " + i).build()).collect(Collectors.toList());
+
+            oneResult.setAnswers(answers);
+
+        }
+        return result;
     }
 
     private List<OptionEntity> getOptions(String questionTypeName, int formNumber) {
