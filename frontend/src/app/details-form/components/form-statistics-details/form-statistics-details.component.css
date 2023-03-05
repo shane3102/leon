@@ -3,7 +3,8 @@
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     margin: 0.5vw;
-    width: 80vw;
+    width: 48vw;
+    background-color: rgb(233,231,231);
 }
 
 #formDatesInfo {
@@ -11,7 +12,8 @@
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     margin: 0.5vw;
-    width: 39.5vw;
+    width: 15vw;
+    background-color: rgb(233,231,231);
 }
 
 #formSettingsInfo {
@@ -19,7 +21,8 @@
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     margin: 0.5vw;
-    width: 39.5vw;
+    width: 15vw;
+    background-color: rgb(233,231,231);
 }
 
 #questionsLabel {
@@ -28,6 +31,6 @@
     color: white;
     background-color: #6E6E6E;
     text-align: center;
-    font-size: 1vw;
-    padding: 0.25vw;
+    font-size: 1.5vw;
+    padding: 0.75vw;
 }
