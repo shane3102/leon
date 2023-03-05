@@ -12,6 +12,8 @@ export class QuestionStatisticsDetailsComponent implements OnInit {
 
   @Input() questionStatistics: QuestionStatisticsResponse;
 
+  openQuestionTypes: string[] = ["DROPDOWN", "LINE_SCALE", "MULTIPLE_CHOICE", "SINGLE_CHOICE"]
+
   expand: Observable<boolean> = of(false)
   faCaretDown = faCaretDown
   faCaretUp = faCaretUp

@@ -1,6 +1,4 @@
 .mainContent {
-    display: flex;
-    justify-content: space-between;
     -webkit-transition: max-height 0.5s;
     -moz-transition: max-height 0.5s;
     -ms-transition: max-height 0.5s;
@@ -16,34 +14,4 @@
     font-size: 2vh;
     text-align: center;
     border-bottom: 1px solid #6E6E6E;
-}
-
-.bars {
-    border-top: 1px dashed;
-    border-bottom: 1px dashed;
-    height: 20vh;
-    width: 20vw;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
-}
-
-.bar {
-    width: 2.5vw;
-}
-
-.percentages {
-    width: 20vw;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
-}
-
-.percentage {
-    width: 2.5vw;
-    text-align: center;
-}
-
-.xd{
-    display: block;
 }
