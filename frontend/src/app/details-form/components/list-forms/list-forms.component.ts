@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faSort, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 import { Observable, of } from 'rxjs';
 import { FormSnippetResponse } from '../../models/form-snippet-response';
@@ -28,7 +29,7 @@ export class ListFormsComponent implements OnInit {
   sortIconDesc = faSortDown;
   sortIconAsc = faSortUp;
 
-  constructor(private formDetailsService: FormDetailsService) { }
+  constructor(private formDetailsService: FormDetailsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getPaginatedForms();
@@ -74,6 +75,10 @@ export class ListFormsComponent implements OnInit {
   pageChange(pageNumber: number) {
     this.pageNumber = pageNumber;
     this.getPaginatedForms()
+  }
+
+  checkStatistics(formId: number) {
+    this.router.navigateByUrl("/form-details/" + formId)
   }
 
 }

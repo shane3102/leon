@@ -55,7 +55,7 @@
                     <td style="background-color: white;">
                         <div *ngIf="form.resultsAvailableForEveryone"
                             style="display: flex; justify-content: center; align-items: center;">
-                            <button class="actionButton">Aktualne wyniki ankiety</button>
+                            <button (click)="checkStatistics(form.id)" class="actionButton">Aktualne wyniki ankiety</button>
                         </div>
                     </td>
                 </tr>
