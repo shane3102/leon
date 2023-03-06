@@ -1,0 +1,7 @@
+{{formResponse.title}}
+{{formResponse.subject}}
+<app-random-form-good-ui-good-ux 
+    *ngIf="formToComplete" 
+    [id]="formResponse.id" 
+    [formToComplete]="formToComplete">
+</app-random-form-good-ui-good-ux>
