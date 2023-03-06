@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faCaretDown, faList, faListAlt, faListOl, faListUl } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faList, faListAlt, faListOl, faListUl,faClipboardCheck, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-main-page-button',
@@ -11,6 +11,7 @@ export class MainPageButtonComponent implements OnInit {
   @Input() description: string;
   @Input() iconClass: string;
   @Input() disable: boolean;
+  @Input() image: IconDefinition
 
   downIcon = faCaretDown;
   listIcon = faList;
