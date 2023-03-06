@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faSort, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 import { Observable, of } from 'rxjs';
 import { FormSnippetResponse } from '../../models/form-snippet-response';
@@ -16,6 +16,8 @@ enum SortDirection {
 })
 export class ListFormsComponent implements OnInit {
 
+  username: string;
+
   isDataLoaded: Observable<boolean> = of(false);
 
   totalItems: number;
@@ -29,7 +31,19 @@ export class ListFormsComponent implements OnInit {
   sortIconDesc = faSortDown;
   sortIconAsc = faSortUp;
 
-  constructor(private formDetailsService: FormDetailsService, private router: Router) { }
+  constructor(
+    private formDetailsService: FormDetailsService,
+    private router: Router,
+    private route: ActivatedRoute) {
+    this.route.params.subscribe(
+      params => {
+        this.username = params['username'];
+        if (this.username != undefined && this.username != localStorage.getItem('username')) {
+          router.navigateByUrl("/main-page");
+        }
+      }
+    )
+  }
 
   ngOnInit(): void {
     this.getPaginatedForms();
@@ -57,7 +71,7 @@ export class ListFormsComponent implements OnInit {
   getPaginatedForms() {
     this.isDataLoaded = of(false);
 
-    this.formDetailsService.listForms(this.pageNumber, this.itemsPerPage, this.sortedColumnName, this.sortDirection).subscribe({
+    this.formDetailsService.listForms(this.username, this.pageNumber - 1, this.itemsPerPage, this.sortedColumnName, this.sortDirection).subscribe({
       next: (response) => {
         this.displayedFormSnippets = response.content;
         this.totalItems = response.totalElements;
@@ -79,6 +93,10 @@ export class ListFormsComponent implements OnInit {
 
   checkStatistics(formId: number) {
     this.router.navigateByUrl("/form-details/" + formId)
+  }
+
+  isLoggedUser(username: string): boolean {
+    return localStorage.getItem('username') == username;
   }
 
 }

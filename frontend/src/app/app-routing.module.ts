@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'add-form', component: AddFormComponent, canActivate: [AuthGuard] },
   { path: 'random-form', component: FillRandomFormComponent },
   { path: 'list', component: ListFormsComponent },
+  { path: 'list/:username', component: ListFormsComponent },
   { path: 'form-details/:id', component: FormStatisticsDetailsComponent }
 ];
 

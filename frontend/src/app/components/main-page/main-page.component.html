@@ -3,5 +3,5 @@
     <app-main-page-button routerLink="../list" text="Ankiety użytkowników" description="Pozwala przejrzeć i wypełnić ankiety dodane przez użytkowników oraz przeglądać ich statystyki."></app-main-page-button>
     <app-main-page-button text="Statystyki dotyczące ankiet losowo generowanych" description="Pozwala na przejrzenie statystyk dotyczących ankiet losowo generowanych"></app-main-page-button>
     <app-main-page-button routerLink="../add-form" text="Dodaj własną ankietę" description="Pozwala na dodanie nowej ankiety" [disable]=!isLogged()></app-main-page-button>
-    <app-main-page-button routerLink="../list" text="Moje ankiety" description="Pozwala przeglądać ankiety dodane przez użytkownika oraz sprawdzać ich wyniki i statystyki" [disable]=!isLogged()></app-main-page-button>
+    <app-main-page-button routerLink="../list/{{getUsername()}}" text="Moje ankiety" description="Pozwala przeglądać ankiety dodane przez użytkownika oraz sprawdzać ich wyniki i statystyki" [disable]=!isLogged()></app-main-page-button>
 </div>

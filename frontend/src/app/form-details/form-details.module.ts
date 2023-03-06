@@ -7,6 +7,7 @@ import { FormStatisticsDetailsComponent } from './components/form-statistics-det
 import { QuestionStatisticsDetailsComponent } from './components/question-statistics-details/question-statistics-details.component';
 import { ClosedQuestionDetailsComponent } from './components/closed-question-details/closed-question-details.component';
 import { OpenQuestionDetailsComponent } from './components/open-question-details/open-question-details.component';
+import { FormRandomModule } from '../form-random/form-random.module';
 
 
 
@@ -21,7 +22,8 @@ import { OpenQuestionDetailsComponent } from './components/open-question-details
   imports: [
     CommonModule,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormRandomModule
   ],
   exports: [
     ListFormsComponent,

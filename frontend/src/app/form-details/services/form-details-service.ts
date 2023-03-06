@@ -13,9 +13,12 @@ export class FormDetailsService {
 
     constructor(private http: HttpClient) { }
 
-    public listForms(page: number, size: number, sortColumn: string, sortDirection: string): Observable<any> {
+    public listForms(username: string, page: number, size: number, sortColumn: string, sortDirection: string): Observable<any> {
 
         let params = new HttpParams();
+        if (username != undefined) {
+            params = params.set('username', username);
+        }
         params = params.set('page', page);
         params = params.set('size', size);
         if (sortDirection != 'NONE') {

@@ -44,7 +44,11 @@
                     let i=index">
                     <td style="background-color: white; font-size: 2vh;padding: 1.5vh;">{{i+1}}</td>
                     <td class="tableContent">{{form.title}}</td>
-                    <td class="tableContent">{{form.author==undefined ? "Brak" : form.author}}</td>
+                    <td class="tableContent">
+                        <div [ngStyle]="isLoggedUser(form.author) ? {'background-color':'#BAFF39', 'padding': '5px', 'border-radius': '20px'} : {}">
+                            {{form.author==undefined ? "Brak" : form.author}}
+                        </div>
+                    </td>
                     <td class="tableContent">{{form.dateTo==undefined ? "Brak": (form.dateTo | date:'dd.MM.yyyy')}}</td>
                     <td class="tableContent">{{form.dateAdded | date: 'dd.MM.yyyy'}}</td>
                     <td style="background-color: white;">

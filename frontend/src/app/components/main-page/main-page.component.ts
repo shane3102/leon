@@ -17,4 +17,8 @@ export class MainPageComponent implements OnInit {
     return this.jwtClientService.isLogged();
   }
 
+  public getUsername(): string{
+    return localStorage.getItem("username") == null ? "" : localStorage.getItem("username") as string
+  }
+
 }
