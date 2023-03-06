@@ -94,6 +94,10 @@ export class ListFormsComponent implements OnInit {
   checkStatistics(formId: number) {
     this.router.navigateByUrl("/form-details/" + formId)
   }
+  
+  fillForm(formId: number){
+    this.router.navigateByUrl("/form/" + formId)
+  }
 
   isLoggedUser(username: string): boolean {
     return localStorage.getItem('username') == username;

@@ -39,4 +39,8 @@ export class FormFillSingleComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goToMainPage(){
+    this.router.navigateByUrl('/main-page');
+  }
+
 }

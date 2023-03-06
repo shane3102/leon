@@ -3,5 +3,7 @@
 <app-random-form-good-ui-good-ux 
     *ngIf="formToComplete" 
     [id]="formResponse.id" 
-    [formToComplete]="formToComplete">
+    [formToComplete]="formToComplete"
+    (formSentEvent)="goToMainPage()"
+    >
 </app-random-form-good-ui-good-ux>

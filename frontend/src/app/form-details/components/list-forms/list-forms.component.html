@@ -53,7 +53,7 @@
                     <td class="tableContent">{{form.dateAdded | date: 'dd.MM.yyyy'}}</td>
                     <td style="background-color: white;">
                         <div *ngIf="!form.disabled" style="display: flex; justify-content: center;">
-                            <button class="actionButton">Wypełnij ankietę</button>
+                            <button (click)="fillForm(form.id)" class="actionButton">Wypełnij ankietę</button>
                         </div>
                     </td>
                     <td style="background-color: white;">
