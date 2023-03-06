@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FormToCompleteResponse } from "../models/form-to-complete-response";
+import { FormToCompleteResponse } from "../../models/form-to-complete-response";
 import { FormRandomModule } from "../form-random.module";
 
 @Injectable({

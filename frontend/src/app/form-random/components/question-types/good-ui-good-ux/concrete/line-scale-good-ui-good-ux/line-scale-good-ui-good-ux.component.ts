@@ -4,7 +4,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatRadioChange } from '@angular/material/radio';
 import { Observable, Subscription } from 'rxjs';
 import { OptionResponse } from 'src/app/form-random/models/option-response';
-import { QuestionResponse } from 'src/app/form-random/models/question-response';
+import { QuestionResponse } from 'src/app/models/question-response';
 
 @Component({
   selector: 'app-line-scale-good-ui-good-ux',

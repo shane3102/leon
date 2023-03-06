@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
-import { FormToCompleteResponse } from 'src/app/form-random/models/form-to-complete-response';
+import { FormToCompleteResponse } from 'src/app/models/form-to-complete-response';
 import { RandomFormService } from 'src/app/form-random/services/random-form.service';
 
 @Component({

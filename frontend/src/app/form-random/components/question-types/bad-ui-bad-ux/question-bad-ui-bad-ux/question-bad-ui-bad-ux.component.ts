@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { QuestionResponse } from 'src/app/form-random/models/question-response';
+import { QuestionResponse } from 'src/app/models/question-response';
 import { QuestionTypes } from 'src/app/models/question-types';
 
 @Component({

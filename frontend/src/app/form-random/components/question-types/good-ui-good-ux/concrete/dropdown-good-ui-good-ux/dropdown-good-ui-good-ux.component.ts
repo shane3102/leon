@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { Observable, Subscription } from 'rxjs';
-import { QuestionResponse } from 'src/app/form-random/models/question-response';
+import { QuestionResponse } from 'src/app/models/question-response';
 
 @Component({
   selector: 'app-dropdown-good-ui-good-ux',

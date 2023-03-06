@@ -5,7 +5,7 @@ import { MatInput } from '@angular/material/input';
 import { MatRadioChange } from '@angular/material/radio';
 import { Observable, Subscription } from 'rxjs';
 import { OptionResponse } from 'src/app/form-random/models/option-response';
-import { QuestionResponse } from 'src/app/form-random/models/question-response';
+import { QuestionResponse } from 'src/app/models/question-response';
 import { maxOneOptionChosen } from 'src/app/form-random/validators/form.validation';
 
 @Component({

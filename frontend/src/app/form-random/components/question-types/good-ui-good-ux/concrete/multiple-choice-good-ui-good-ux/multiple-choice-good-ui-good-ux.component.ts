@@ -3,7 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Observable, Subscription } from 'rxjs';
 import { OptionResponse } from 'src/app/form-random/models/option-response';
-import { QuestionResponse } from 'src/app/form-random/models/question-response';
+import { QuestionResponse } from 'src/app/models/question-response';
 
 @Component({
   selector: 'app-multiple-choice-good-ui-good-ux',

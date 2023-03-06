@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { FormUiUxRequest } from 'src/app/models/form-ui-ux-request';
-import { FormToCompleteResponse } from '../../models/form-to-complete-response';
+import { FormToCompleteResponse } from '../../../models/form-to-complete-response';
 import { RandomFormService } from '../../services/random-form.service';
 
 @Component({
