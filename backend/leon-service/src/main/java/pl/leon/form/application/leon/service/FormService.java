@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.not_found.concrete.FormNotFound;
+import pl.leon.form.application.leon.core.exceptions.unauthorized.concrete.FormsPrivateToUser;
 import pl.leon.form.application.leon.core.exceptions.unauthorized.concrete.StatisticsNotAvailableToUser;
 import pl.leon.form.application.leon.mapper.FormMapper;
 import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
@@ -59,8 +60,20 @@ public class FormService {
         return response;
     }
 
-    public Page<FormSnippetResponse> list(Pageable pageable) {
-        return formRepository.findAll(pageable).map(mapper::mapToSnippetResponse);
+    public Page<FormSnippetResponse> list(Pageable pageable, String username) {
+        log.info("list({}, {})", pageable, username);
+        Page<FormSnippetResponse> response;
+        if (username != null) {
+            if (!userService.getCurrentlyLoggedUser().getUsername().equals(username)) {
+                throw new FormsPrivateToUser();
+            }
+            response = formRepository.findAllByUserUsername(username, pageable).map(mapper::mapToSnippetResponse);
+        } else {
+            response = formRepository.findAll(pageable).map(mapper::mapToSnippetResponse);
+        }
+
+        log.info("list({}, {}) = {}", pageable, username, response);
+        return response;
     }
 
     public FormResponse readConcreteForm(Long id) {

@@ -23,7 +23,8 @@ public enum ExceptionMessages {
     FORM_NOT_FOUND("There is no form with given id"),
 
     // unauthorized
-    STATISTICS_NOT_AVAILABLE_TO_USER("User is not authorized to check statistics of form");
+    STATISTICS_NOT_AVAILABLE_TO_USER("User is not authorized to check statistics of form"),
+    FORMS_PRIVATE_TO_USER("Not logged user forms");
 
     private final String message;
 }

@@ -82,9 +82,11 @@ public class FormController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listConcreteForms(@PageableDefault(sort = "dateAdded", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<?> listConcreteForms(
+            @PageableDefault(sort = "dateAdded", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(required = false) String username) {
         log.info("listConcreteForms()");
-        Page<FormSnippetResponse> response = formService.list(pageable);
+        Page<FormSnippetResponse> response = formService.list(pageable, username);
         log.info("listConcreteForms() = {}", response == null ? null : response.getTotalElements());
         return ResponseEntity.ok(response);
     }
