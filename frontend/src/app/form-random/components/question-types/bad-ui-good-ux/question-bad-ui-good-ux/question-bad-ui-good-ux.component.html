@@ -1,4 +1,4 @@
-<div *ngIf="question" [ngSwitch]="question.type">
+<div class="question" *ngIf="question" [ngSwitch]="question.type">
     <app-dropdown-bad-ui-good-ux [triedSubmiting]="triedSubmiting.asObservable()"  [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.DROPDOWN.sent'></app-dropdown-bad-ui-good-ux>
     <app-line-scale-bad-ui-good-ux [triedSubmiting]="triedSubmiting.asObservable()"  [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.LINE_SCALE.sent'></app-line-scale-bad-ui-good-ux>
     <app-long-answer-bad-ui-good-ux [triedSubmiting]="triedSubmiting.asObservable()"  [questionFormGroup]="questionFormGroup" [question]="question" *ngSwitchCase='questionTypes.LONG_ANSWER.sent'></app-long-answer-bad-ui-good-ux>
