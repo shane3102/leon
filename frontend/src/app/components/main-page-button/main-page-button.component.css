@@ -17,8 +17,13 @@
 }
 
 .actionButtonText {
+    font-size: 1.5vw;
     height: 8vw;
     justify-content: center;
+}
+
+.actionButton:hover:enabled .actionButtonText {
+    font-size: 1.55vw;
 }
 
 .actionButton:hover:enabled {
