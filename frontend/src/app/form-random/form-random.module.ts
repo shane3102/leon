@@ -100,7 +100,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormRandomSurveyModule
   ],
   exports: [
-    FillRandomFormComponent
+    FillRandomFormComponent,
+    RandomFormGoodUiGoodUxComponent
   ]
 })
 export class FormRandomModule { }

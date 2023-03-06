@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
-import { FormToCompleteResponse } from 'src/app/form-random/models/form-to-complete-response';
+import { FormToCompleteResponse } from 'src/app/models/form-to-complete-response';
 import { RandomFormService } from 'src/app/form-random/services/random-form.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { RandomFormService } from 'src/app/form-random/services/random-form.serv
 })
 export class RandomFormGoodUiGoodUxComponent implements OnInit {
 
+  @Input() formId: number;
   @Input() formToComplete: FormToCompleteResponse = new FormToCompleteResponse();
 
   @Output() formSentEvent = new EventEmitter();
@@ -30,19 +31,21 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
       'uiLevel': new FormControl('GOOD'),
       'durationToAnswer': new FormControl(null) //TODO liczenie tego 
     })
+
+    if (this.formId != undefined) {
+      this.randomFormGroup.addControl('completedFormId', new FormControl(this.formId));
+    }
   }
 
   submitForm(request: any) {
     if (!this.randomFormGroup.invalid) {
       this.submitting = of(true);
-      setTimeout(() => {
-        this.randomFormService.submitRandomForm(request).subscribe({
-          next: res => {
-            this.formSentEvent.emit();
-            this.submitting = of(false);
-          }
-        });
-      }, 5000)
+      this.randomFormService.submitRandomForm(request).subscribe({
+        next: res => {
+          this.formSentEvent.emit();
+          this.submitting = of(false);
+        }
+      });
     } else {
       this.triedSubmitingSubject.next();
       this.triedSubmitting = of(true);
