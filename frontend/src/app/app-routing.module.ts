@@ -8,6 +8,7 @@ import { AuthGuard } from './authGuard/auth.service';
 import { FillRandomFormComponent } from './form-random/components/fill-random-form/fill-random-form.component';
 import { ListFormsComponent } from './form-details/components/list-forms/list-forms.component';
 import { FormStatisticsDetailsComponent } from './form-details/components/form-statistics-details/form-statistics-details.component';
+import { FormFillSingleComponent } from './form-details/components/form-fill-single/form-fill-single.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'random-form', component: FillRandomFormComponent },
   { path: 'list', component: ListFormsComponent },
   { path: 'list/:username', component: ListFormsComponent },
-  { path: 'form-details/:id', component: FormStatisticsDetailsComponent }
+  { path: 'form-details/:id', component: FormStatisticsDetailsComponent },
+  { path: 'form/:id', component: FormFillSingleComponent }
 ];
 
 @NgModule({

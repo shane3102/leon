@@ -8,6 +8,7 @@ import { QuestionStatisticsDetailsComponent } from './components/question-statis
 import { ClosedQuestionDetailsComponent } from './components/closed-question-details/closed-question-details.component';
 import { OpenQuestionDetailsComponent } from './components/open-question-details/open-question-details.component';
 import { FormRandomModule } from '../form-random/form-random.module';
+import { FormFillSingleComponent } from './components/form-fill-single/form-fill-single.component';
 
 
 
@@ -17,7 +18,8 @@ import { FormRandomModule } from '../form-random/form-random.module';
     FormStatisticsDetailsComponent,
     QuestionStatisticsDetailsComponent,
     ClosedQuestionDetailsComponent,
-    OpenQuestionDetailsComponent
+    OpenQuestionDetailsComponent,
+    FormFillSingleComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { FormRandomModule } from '../form-random/form-random.module';
   ],
   exports: [
     ListFormsComponent,
-    FormStatisticsDetailsComponent
+    FormStatisticsDetailsComponent,
+    FormFillSingleComponent
   ]
 })
 export class FormDetailsModule { }
