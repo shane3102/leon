@@ -1,7 +1,9 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { Page } from "ngx-pagination";
 import { Observable } from "rxjs";
+import { FormResponse } from "../models/form-response";
 import { FormSnippetResponse } from "../models/form-snippet-response";
 import { FormStatisticsResponse } from "../models/form-statistics-response";
 
@@ -30,5 +32,9 @@ export class FormDetailsService {
 
     public getFormStatistics(id: number): Observable<FormStatisticsResponse> {
         return this.http.get<FormStatisticsResponse>(this.PATH + "/statistics/" + id);
+    }
+
+    public getConcreteForm(id: number): Observable<FormResponse> {
+        return this.http.get<FormResponse>(this.PATH + "/" + id)
     }
 }
