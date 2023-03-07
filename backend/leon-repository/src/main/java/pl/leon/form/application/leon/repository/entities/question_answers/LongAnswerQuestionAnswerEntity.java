@@ -33,7 +33,7 @@ public class LongAnswerQuestionAnswerEntity {
     @OneToOne(cascade = CascadeType.MERGE)
     private AnswerEntity answer;
 
-    private Duration durationToAnswer;
+    private Long durationToAnswerInMilliseconds;
 
     @OneToOne(cascade = CascadeType.MERGE)
     private FormCompletedEntity formCompleted;

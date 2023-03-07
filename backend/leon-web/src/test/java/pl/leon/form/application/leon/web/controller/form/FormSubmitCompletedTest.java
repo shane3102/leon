@@ -180,11 +180,11 @@ public class FormSubmitCompletedTest {
                 Arguments.of(
                         form1,
                         List.of(
-                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion1).option(dropdownQuestion1.getOptions().get(2)).durationToAnswer(ZERO).build(),
-                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion3).option(dropdownQuestion3.getOptions().get(1)).durationToAnswer(ZERO).build()
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion1).option(dropdownQuestion1.getOptions().get(2)).durationToAnswerInMilliseconds(0L).build(),
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion3).option(dropdownQuestion3.getOptions().get(1)).durationToAnswerInMilliseconds(0L).build()
                         ),
                         List.of(
-                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion2).option(lineScaleQuestion2.getOptions().get(0)).durationToAnswer(ZERO).build()
+                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion2).option(lineScaleQuestion2.getOptions().get(0)).durationToAnswerInMilliseconds(0L).build()
                         ),
                         List.of(
                                 MultipleChoiceQuestionAnswerEntity.builder().question(multipleChoiceQuestion3).options(List.of(multipleChoiceQuestion3.getOptions().get(3))).build()
@@ -204,12 +204,12 @@ public class FormSubmitCompletedTest {
                 Arguments.of(
                         null,
                         List.of(
-                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion1).option(dropdownQuestion1.getOptions().get(0)).durationToAnswer(ZERO).build(),
-                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion2).option(dropdownQuestion2.getOptions().get(1)).durationToAnswer(ZERO).build()
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion1).option(dropdownQuestion1.getOptions().get(0)).durationToAnswerInMilliseconds(0L).build(),
+                                DropdownQuestionAnswerEntity.builder().question(dropdownQuestion2).option(dropdownQuestion2.getOptions().get(1)).durationToAnswerInMilliseconds(0L).build()
                         ),
                         List.of(
-                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion1).option(lineScaleQuestion1.getOptions().get(2)).durationToAnswer(ZERO).build(),
-                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion3).option(lineScaleQuestion3.getOptions().get(3)).durationToAnswer(ZERO).build()
+                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion1).option(lineScaleQuestion1.getOptions().get(2)).durationToAnswerInMilliseconds(0L).build(),
+                                LineScaleQuestionAnswerEntity.builder().question(lineScaleQuestion3).option(lineScaleQuestion3.getOptions().get(3)).durationToAnswerInMilliseconds(0L).build()
                         ),
                         List.of(
                                 MultipleChoiceQuestionAnswerEntity.builder().question(multipleChoiceQuestion3).options(List.of(multipleChoiceQuestion3.getOptions().get(1))).build(),

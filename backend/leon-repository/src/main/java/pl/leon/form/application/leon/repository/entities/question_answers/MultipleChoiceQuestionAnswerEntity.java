@@ -35,7 +35,7 @@ public class MultipleChoiceQuestionAnswerEntity {
     @ManyToMany(cascade = CascadeType.MERGE)
     private List<OptionEntity> options;
 
-    private Duration durationToAnswer;
+    private Long durationToAnswerInMilliseconds;
 
     @OneToOne(cascade = CascadeType.MERGE)
     private FormCompletedEntity formCompleted;

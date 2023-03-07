@@ -189,7 +189,7 @@ public abstract class FormMapper {
                 .filter(answer -> DROPDOWN.equals(answer.getType()))
                 .map(answer ->
                         DropdownQuestionAnswerEntity.builder()
-                                .durationToAnswer(answer.getDurationToAnswer())
+                                .durationToAnswerInMilliseconds(answer.getDurationToAnswerInMilliseconds())
                                 .question(dropdownQuestionRepository.getById(answer.getId()))
                                 .option(optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId()))
                                 .build()
@@ -216,7 +216,7 @@ public abstract class FormMapper {
                 .filter(answer -> LINE_SCALE.equals(answer.getType()))
                 .map(answer ->
                         LineScaleQuestionAnswerEntity.builder()
-                                .durationToAnswer(answer.getDurationToAnswer())
+                                .durationToAnswerInMilliseconds(answer.getDurationToAnswerInMilliseconds())
                                 .question(lineScaleQuestionRepository.getById(answer.getId()))
                                 .option(optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId()))
                                 .build()
@@ -242,7 +242,7 @@ public abstract class FormMapper {
                 .filter(answer -> LONG_ANSWER.equals(answer.getType()))
                 .map(answer ->
                         LongAnswerQuestionAnswerEntity.builder()
-                                .durationToAnswer(answer.getDurationToAnswer())
+                                .durationToAnswerInMilliseconds(answer.getDurationToAnswerInMilliseconds())
                                 .question(longAnswerQuestionRepository.getById(answer.getId()))
                                 .answer(AnswerEntity.builder().content(answer.getAnswer()).build())
                                 .build()
@@ -269,7 +269,7 @@ public abstract class FormMapper {
                 .filter(answer -> MULTIPLE_CHOICE.equals(answer.getType()))
                 .map(answer ->
                         MultipleChoiceQuestionAnswerEntity.builder()
-                                .durationToAnswer(answer.getDurationToAnswer())
+                                .durationToAnswerInMilliseconds(answer.getDurationToAnswerInMilliseconds())
                                 .question(multipleChoiceQuestionRepository.getById(answer.getId()))
                                 .options(mapToMultipleOptions(answer.getChosenOptions()))
                                 .build()
@@ -300,7 +300,7 @@ public abstract class FormMapper {
                 .filter(answer -> SHORT_ANSWER.equals(answer.getType()))
                 .map(answer ->
                         ShortAnswerQuestionAnswerEntity.builder()
-                                .durationToAnswer(answer.getDurationToAnswer())
+                                .durationToAnswerInMilliseconds(answer.getDurationToAnswerInMilliseconds())
                                 .question(shortAnswerQuestionRepository.getById(answer.getId()))
                                 .answer(AnswerEntity.builder().content(answer.getAnswer()).build())
                                 .build()
@@ -327,7 +327,7 @@ public abstract class FormMapper {
                 .filter(answer -> SINGLE_CHOICE.equals(answer.getType()))
                 .map(answer ->
                         SingleChoiceQuestionAnswerEntity.builder()
-                                .durationToAnswer(answer.getDurationToAnswer())
+                                .durationToAnswerInMilliseconds(answer.getDurationToAnswerInMilliseconds())
                                 .question(singleChoiceQuestionRepository.getById(answer.getId()))
                                 .option(optionRepository.getById(answer.getChosenOptions().stream().findFirst().orElse(new Option()).getId()))
                                 .build()

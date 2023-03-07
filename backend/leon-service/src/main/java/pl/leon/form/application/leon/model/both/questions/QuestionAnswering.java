@@ -19,5 +19,5 @@ public class QuestionAnswering {
     private Set<Option> chosenOptions;
     private String answer;
     private QuestionType type;
-    private Duration durationToAnswer;
+    private Long durationToAnswerInMilliseconds;
 }

@@ -33,7 +33,7 @@ public class DropdownQuestionAnswerEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     private OptionEntity option;
 
-    private Duration durationToAnswer;
+    private Long durationToAnswerInMilliseconds;
 
     @OneToOne(cascade = CascadeType.MERGE)
     private FormCompletedEntity formCompleted;
