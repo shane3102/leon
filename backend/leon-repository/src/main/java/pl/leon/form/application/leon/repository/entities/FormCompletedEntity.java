@@ -27,15 +27,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.time.Duration;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Entity
@@ -58,7 +54,7 @@ public class FormCompletedEntity {
     @Enumerated(EnumType.STRING)
     private FormLevelType uiLevel;
 
-    private Duration formCompleteDuration;
+    private Long completeDurationInMilliseconds;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
