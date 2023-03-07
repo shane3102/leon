@@ -35,7 +35,6 @@ export class SurveyOnRandomFormsComponent implements OnInit {
 
   onPlaced(emmitedForm: EmmittForm) {
     this.responseFormUiUxOrder.set(emmitedForm.place, emmitedForm.form);
-    console.log(Array.from(new Map([...this.responseFormUiUxOrder].sort((a, b) => a[0] - b[0]))).map(el => el[1]));
   }
 
   submit() {
