@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { FormChangeSubject } from 'src/app/form-random/models/form-change-subject';
 import { QuestionResponse } from 'src/app/models/question-response';
 import { maxOneOptionChosen } from '../../../../../validators/form.validation';
 
@@ -14,6 +15,7 @@ export class LineScaleBadUiBadUxComponent implements OnInit {
   @Input() question: QuestionResponse;
   @Input() questionFormGroup: FormGroup;
   @Input() resetFormSubject: Observable<void>;
+  @Input() formResultChanged: Observable<FormChangeSubject> = new Observable<FormChangeSubject>();
 
   private resetFormSubscription: Subscription;
 
