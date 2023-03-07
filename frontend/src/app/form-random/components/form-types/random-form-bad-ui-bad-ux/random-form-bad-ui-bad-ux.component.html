@@ -1,7 +1,11 @@
 <form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
     <div *ngIf="randomFormGroup" style="display: flex; margin-right: auto; flex-wrap: wrap;">
         <div *ngFor="let question of formToComplete.questions; let i = index" (click)="resetTriedSubmitting()">
-            <app-question-bad-ui-bad-ux [resetFormSubject]="resetFormSubject" [wholeForm]="randomFormGroup"
+            <app-question-bad-ui-bad-ux 
+                (passFormChangeFurther)="questionFilled($event)"
+                [formResultChanged]="formResultChanged" 
+                [resetFormSubject]="resetFormSubject" 
+                [wholeForm]="randomFormGroup"
                 [question]="question"></app-question-bad-ui-bad-ux>
         </div>
     </div>
