@@ -15,6 +15,8 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
 
   @Output() formSentEvent = new EventEmitter();
 
+  formStartCompletingTime: number = Date.now();
+
   randomFormGroup: FormGroup;
   triedSubmiting: Observable<boolean> = of(false)
 
@@ -23,6 +25,8 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
   constructor(private randomFormService: RandomFormService) { }
 
   ngOnInit(): void {
+
+
     this.randomFormGroup = new FormGroup({
       'answers': new FormArray([]),
       'uxLevel': new FormControl('BAD'),
@@ -43,6 +47,8 @@ export class RandomFormBadUiBadUxComponent implements OnInit {
     if (this.randomFormGroup.invalid) {
       this.triedSubmiting = of(true)
     } else {
+      request.completeDurationInMilliseconds = Date.now() - this.formStartCompletingTime;
+
       this.randomFormService.submitRandomForm(request).subscribe({
         next: res => {
           this.formSentEvent.emit()

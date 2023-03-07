@@ -15,6 +15,8 @@ export class RandomFormGoodUiBadUxComponent implements OnInit {
 
   @Output() formSentEvent = new EventEmitter();
 
+  formStartCompletingTime: number = Date.now();
+
   randomFormGroup: FormGroup;
   triedSubmiting: Observable<boolean> = of(false)
 
@@ -43,6 +45,8 @@ export class RandomFormGoodUiBadUxComponent implements OnInit {
     if (this.randomFormGroup.invalid) {
       this.triedSubmiting = of(true)
     } else {
+      request.completeDurationInMilliseconds = Date.now() - this.formStartCompletingTime;
+
       this.randomFormService.submitRandomForm(request).subscribe({
         next: res => {
           this.formSentEvent.emit()
