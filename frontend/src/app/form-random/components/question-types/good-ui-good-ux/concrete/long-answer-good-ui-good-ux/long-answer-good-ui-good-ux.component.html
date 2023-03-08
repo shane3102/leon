@@ -6,7 +6,7 @@
     {'border-left': '1px solid green', 'border-right': '1px solid green'} : {}" [formGroup]="questionFormGroup">
     <p>{{question.question}}</p>
     <mat-form-field>
-        <textarea (focus)="focus=true" (blur)="focus=false" matInput cdkTextareaAutosize cdkAutosizeMinRows="2"
+        <textarea (focus)="focus=true" (blur)="focus=false; formChange();" matInput cdkTextareaAutosize cdkAutosizeMinRows="2"
             placeholder="Wpisz odpowiedź" style="width: 100%;" formControlName="answer"></textarea>
         <mat-error style="color: red;">
             Odpowiedz jest wymagana
