@@ -36,7 +36,6 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
       'answers': new FormArray([]),
       'uxLevel': new FormControl('GOOD'),
       'uiLevel': new FormControl('GOOD'),
-      'durationToAnswer': new FormControl(null) //TODO liczenie tego 
     })
 
     if (this.formId != undefined) {

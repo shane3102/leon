@@ -32,7 +32,6 @@ export class QuestionGoodUiBadUxComponent implements OnInit {
       'chosenOptions': new FormArray([]),
       'answer': new FormControl(),
       'type': new FormControl(this.question.type),
-      'durationToAnswer': new FormControl(null)//TODO liczenie tego
     });
     (this.wholeForm.get('answers') as FormArray).push(this.questionFormGroup)
   }
