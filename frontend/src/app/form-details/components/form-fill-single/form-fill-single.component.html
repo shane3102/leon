@@ -1,10 +1,10 @@
 <div *ngIf="formResponse" id="title">
     {{formResponse.title}}
 </div>
-{{formResponse.subject}}
+<div *ngIf="formResponse">{{formResponse.subject}}</div>
 <app-random-form-good-ui-good-ux 
     *ngIf="formToComplete" 
-    [id]="formResponse.id" 
+    [formId]="formResponse.id" 
     [formToComplete]="formToComplete"
     (formSentEvent)="goToMainPage()"
     >

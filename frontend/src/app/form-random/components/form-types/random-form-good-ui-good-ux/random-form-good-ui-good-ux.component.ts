@@ -28,7 +28,7 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
 
   triedSubmitingSubject: Subject<void> = new Subject<void>();
   formResultChanged: Subject<FormChangeSubject> = new Subject<FormChangeSubject>();
-  
+
   constructor(private randomFormService: RandomFormService) { }
 
   ngOnInit(): void {
@@ -64,6 +64,13 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
     if (!this.randomFormGroup.invalid) {
 
       request.completeDurationInMilliseconds = Date.now() - this.formStartCompletingTime;
+
+      if (this.formId != undefined) {
+        request.completeDurationInMilliseconds = undefined;
+        request.answers.forEach((a: any) => {
+          a.durationToAnswerInMilliseconds = undefined;
+        })
+      }
 
       this.submitting = of(true);
       this.randomFormService.submitRandomForm(request).subscribe({
