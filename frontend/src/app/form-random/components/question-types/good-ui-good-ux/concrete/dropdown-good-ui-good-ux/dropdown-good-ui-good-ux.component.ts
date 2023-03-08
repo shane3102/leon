@@ -34,6 +34,10 @@ export class DropdownGoodUiGoodUxComponent implements OnInit {
     this.triedSubmittingSubscription = this.triedSubmiting.subscribe(() => {
       this.getChosenOptionArray.markAsTouched();
     })
+
+    this.formResultChangedSubscription = this.formResultChanged.subscribe(change => {
+      this.currentFormResultChange = change;
+    })
   }
 
   get getChosenOptionArray(): FormArray {
