@@ -25,9 +25,9 @@ export class LongAnswerGoodUiBadUxComponent implements OnInit {
 
   private currentFormResultChange: FormChangeSubject = new FormChangeSubject(undefined, 0, 0, Date.now());
 
-
   private id: number;
   private type: string;
+  private timeSpent: number;
 
   constructor() { }
 
@@ -55,9 +55,11 @@ export class LongAnswerGoodUiBadUxComponent implements OnInit {
     if (this.currentFormResultChange.id == this.question.id) {
       changeTimeInMilliseconds = changeTime - this.currentFormResultChange.startedFillingForm - this.currentFormResultChange.startedFillingQuestion;
       this.questionFormGroup.get('durationToAnswerInMilliseconds')?.setValue(changeTimeInMilliseconds)
+      this.timeSpent = changeTimeInMilliseconds;
     } else {
       changeTimeInMilliseconds = changeTime - this.currentFormResultChange.startedFillingForm - this.currentFormResultChange.finishedFillingQuestion - this.currentFormResultChange.startedFillingQuestion;
       this.questionFormGroup.get('durationToAnswerInMilliseconds')?.setValue(changeTimeInMilliseconds + this.questionFormGroup.get('durationToAnswerInMilliseconds')?.value)
+      this.timeSpent = changeTimeInMilliseconds + this.questionFormGroup.get('durationToAnswerInMilliseconds')?.value;
     }
 
     this.formChanged.emit(new FormChanged(this.question.id, changeTimeInMilliseconds));
@@ -68,6 +70,7 @@ export class LongAnswerGoodUiBadUxComponent implements OnInit {
       this.questionFormGroup.setControl('answer', new FormControl(""))
       this.questionFormGroup.setControl('id', new FormControl(this.id))
       this.questionFormGroup.setControl('type', new FormControl(this.type))
+      this.questionFormGroup.setControl('durationToAnswerInMilliseconds', new FormControl(this.timeSpent));
     }, 0);
   }
 
