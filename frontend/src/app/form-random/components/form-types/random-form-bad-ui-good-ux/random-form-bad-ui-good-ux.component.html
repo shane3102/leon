@@ -1,6 +1,10 @@
 <form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
     <div *ngFor="let question of formToComplete.questions">
-        <app-question-bad-ui-good-ux [wholeForm]="randomFormGroup" [question]="question"
+        <app-question-bad-ui-good-ux 
+            (passFormChangeFurther)="questionFilled($event)"
+            [formResultChanged]="formResultChanged"
+            [wholeForm]="randomFormGroup" 
+            [question]="question"
             [triedSubmiting]="triedSubmitingSubject"></app-question-bad-ui-good-ux>
     </div>
     <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">

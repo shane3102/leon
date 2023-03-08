@@ -87,8 +87,6 @@ export class LineScaleBadUiBadUxComponent implements OnInit {
     }
 
     this.formChanged.emit(new FormChanged(this.question.id, changeTimeInMilliseconds));
-
-    console.log(changeTimeInMilliseconds);
   }
 
   onReset() {
