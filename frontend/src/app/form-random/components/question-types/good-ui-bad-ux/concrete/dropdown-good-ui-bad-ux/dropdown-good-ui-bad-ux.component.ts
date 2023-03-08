@@ -26,7 +26,6 @@ export class DropdownGoodUiBadUxComponent implements OnInit {
 
   private currentFormResultChange: FormChangeSubject = new FormChangeSubject(undefined, 0, 0, Date.now());
 
-
   private id: number;
   private type: string;
 

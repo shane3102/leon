@@ -44,6 +44,10 @@ export class LineScaleGoodUiBadUxComponent implements OnInit {
       this.onReset();
     });
     this.question.options.forEach(option => { option.checked = false })
+
+    this.formResultChangedSubscription = this.formResultChanged.subscribe(change => {
+      this.currentFormResultChange = change;
+    })
   }
 
   get getChosenOptionArray(): FormArray {
