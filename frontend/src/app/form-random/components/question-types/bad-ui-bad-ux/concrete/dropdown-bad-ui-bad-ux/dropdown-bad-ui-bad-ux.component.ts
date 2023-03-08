@@ -64,10 +64,6 @@ export class DropdownBadUiBadUxComponent implements OnInit {
 
   }
 
-  get getDurationToAnswerControl(): FormControl {
-    return this.questionFormGroup.get('durationToAnswerInMilliseconds') as FormControl;
-  }
-
   formChange() {
 
     let changeTime: number = Date.now();
@@ -76,15 +72,13 @@ export class DropdownBadUiBadUxComponent implements OnInit {
 
     if (this.currentFormResultChange.id == this.question.id) {
       changeTimeInMilliseconds = changeTime - this.currentFormResultChange.startedFillingForm - this.currentFormResultChange.startedFillingQuestion;
+      this.questionFormGroup.get('durationToAnswerInMilliseconds')?.setValue(changeTimeInMilliseconds)
     } else {
       changeTimeInMilliseconds = changeTime - this.currentFormResultChange.startedFillingForm - this.currentFormResultChange.finishedFillingQuestion - this.currentFormResultChange.startedFillingQuestion;
+      this.questionFormGroup.get('durationToAnswerInMilliseconds')?.setValue(changeTimeInMilliseconds + this.questionFormGroup.get('durationToAnswerInMilliseconds')?.value)
     }
 
-    this.questionFormGroup.get('durationToAnswerInMilliseconds')?.setValue(changeTimeInMilliseconds)
-
     this.formChanged.emit(new FormChanged(this.question.id, changeTimeInMilliseconds));
-
-    console.log(changeTimeInMilliseconds);
   }
 
   onReset() {
