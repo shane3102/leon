@@ -4,7 +4,7 @@
     touchedValid() ? 
     {'border': '1px solid #BAFF39'} : {}" [formGroup]="questionFormGroup">
     <p>{{question.question}}</p>
-    <textarea (blur)="formChange()" autosize placeholder="Wpisz odpowiedź..." style="width: 100%; resize: none;" formControlName="answer"></textarea>
+    <textarea (input)="formChange()" autosize placeholder="Wpisz odpowiedź..." style="width: 100%; resize: none;" formControlName="answer"></textarea>
     <div style="height: 24px; color: red;">
         <div *ngIf="touchedNotFilled()">
             Odpowiedz jest wymagana

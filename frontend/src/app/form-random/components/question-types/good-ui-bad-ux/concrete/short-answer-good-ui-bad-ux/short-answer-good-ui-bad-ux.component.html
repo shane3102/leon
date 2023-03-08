@@ -4,7 +4,7 @@
             <h1>Krótka odpowiedź</h1>
         </div>
         <mat-form-field [formGroup]="questionFormGroup">
-            <input (blur)="formChange()" matInput formControlName="answer">
+            <input (input)="formChange()" matInput formControlName="answer">
         </mat-form-field>
         <div style="margin: 10px; display: flex; justify-content: space-around; align-items: baseline;">
             <div>{{question.question}}</div>

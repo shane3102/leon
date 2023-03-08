@@ -1,7 +1,7 @@
 <div class="question">
     <h1>Krótka odpowiedź</h1>
     <form [formGroup]="questionFormGroup">
-        <input (blur)="formChange()" type="text" formControlName="answer">
+        <input (input)="formChange()" type="text" formControlName="answer">
         {{question.question}}
         <button type="reset" (click)="onReset()">Resetuj</button>
     </form>

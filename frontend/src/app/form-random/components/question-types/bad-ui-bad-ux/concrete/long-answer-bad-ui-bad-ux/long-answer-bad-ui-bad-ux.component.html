@@ -1,7 +1,7 @@
 <div class="question">
     <h1>Długa odpowiedź</h1>
     <form [formGroup]="questionFormGroup">
-        <textarea (blur)="formChange()" formControlName="answer"></textarea>
+        <textarea (input)="formChange()" formControlName="answer"></textarea>
         {{question.question}}
         <button type="reset" (click)="onReset()">Resetuj</button>
     </form>
