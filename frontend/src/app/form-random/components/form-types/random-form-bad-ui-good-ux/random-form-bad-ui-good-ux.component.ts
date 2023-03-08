@@ -53,8 +53,6 @@ export class RandomFormBadUiGoodUxComponent implements OnInit {
     this.currentFormChange.id = formChange.id;
 
     this.formResultChanged.next(this.currentFormChange);
-    console.log(this.currentFormChange);
-
   }
 
   submitForm(request: any) {
