@@ -32,7 +32,7 @@ export class QuestionBadUiBadUxComponent implements OnInit {
       'chosenOptions': new FormArray([]),
       'answer': new FormControl(),
       'type': new FormControl(this.question.type),
-      'durationToAnswerInMilliseconds': new FormControl(null)//TODO liczenie tego
+      'durationToAnswerInMilliseconds': new FormControl(0)
     });
     (this.wholeForm.get('answers') as FormArray).push(this.questionFormGroup)
   }
