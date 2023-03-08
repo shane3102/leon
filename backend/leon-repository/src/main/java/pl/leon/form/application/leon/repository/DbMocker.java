@@ -48,7 +48,7 @@ public class DbMocker {
 
         LocalDate dateAdded = LocalDate.now().minusDays(10);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 25; i++) {
 
             generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6, user);
 
@@ -70,12 +70,12 @@ public class DbMocker {
 
         form = formRepository.save(form);
 
-        int multipleChoiceQuestionsCount = random.nextInt(20, 30);
-        int dropdownQuestionsCount = random.nextInt(10, 20);
-        int lineScaleQuestionsCount = random.nextInt(5, 15);
-        int singleChoiceQuestionsCount = random.nextInt(10, 20);
-        int longAnswerQuestionsCount = random.nextInt(0, 10);
-        int shortAnswerQuestionsCount = random.nextInt(5, 15);
+        int multipleChoiceQuestionsCount = random.nextInt(1, 5);
+        int dropdownQuestionsCount = random.nextInt(1, 5);
+        int lineScaleQuestionsCount = random.nextInt(1, 5);
+        int singleChoiceQuestionsCount = random.nextInt(1, 5);
+        int longAnswerQuestionsCount = random.nextInt(1, 5);
+        int shortAnswerQuestionsCount = random.nextInt(1, 5);
 
         List<MultipleChoiceQuestionEntity> multipleChoiceQuestions = getMultipleChoiceQuestions(multipleChoiceQuestionsCount, i + 1, form);
         multipleChoiceQuestions = multipleChoiceQuestionRepository.saveAll(multipleChoiceQuestions);
