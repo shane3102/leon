@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { FormChangeSubject } from 'src/app/form-random/models/form-change-subject';
+import { FormChanged } from 'src/app/form-random/models/form-changed';
 import { QuestionResponse } from 'src/app/models/question-response';
 import { QuestionTypes } from 'src/app/models/question-types';
 
@@ -14,6 +16,10 @@ export class QuestionGoodUiBadUxComponent implements OnInit {
   @Input() question: QuestionResponse;
   @Input() wholeForm: FormGroup;
   @Input() resetFormSubject: Subject<void>;
+  @Input() formResultChanged: Subject<FormChangeSubject> = new Subject<FormChangeSubject>();
+
+  @Output() passFormChangeFurther = new EventEmitter<FormChanged>()
+
   questionFormGroup: FormGroup;
 
   questionTypes = new QuestionTypes();
@@ -29,6 +35,10 @@ export class QuestionGoodUiBadUxComponent implements OnInit {
       'durationToAnswer': new FormControl(null)//TODO liczenie tego
     });
     (this.wholeForm.get('answers') as FormArray).push(this.questionFormGroup)
+  }
+
+  passFormChangeFurtherMethod(formChanged: FormChanged) {
+    this.passFormChangeFurther.emit(formChanged);
   }
 
 }
