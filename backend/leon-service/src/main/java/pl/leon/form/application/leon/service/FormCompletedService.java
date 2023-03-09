@@ -3,14 +3,10 @@ package pl.leon.form.application.leon.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.leon.form.application.leon.mapper.FormMapper;
-import pl.leon.form.application.leon.model.both.FormCompleted;
+import pl.leon.form.application.leon.model.both.forms.FormCompleted;
 import pl.leon.form.application.leon.repository.FormCompletedRepository;
-import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.FormCompletedEntity;
-import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
-import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.service.question.DropdownQuestionService;
 import pl.leon.form.application.leon.service.question.LineScaleQuestionService;
 import pl.leon.form.application.leon.service.question.LongAnswerQuestionService;
@@ -19,8 +15,6 @@ import pl.leon.form.application.leon.service.question.ShortAnswerQuestionService
 import pl.leon.form.application.leon.service.question.SingleChoiceQuestionService;
 import pl.leon.form.application.leon.validation.ValidationService;
 
-import java.util.AbstractMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j

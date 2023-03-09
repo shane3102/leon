@@ -14,7 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
-import pl.leon.form.application.leon.model.both.FormCompleted;
+import pl.leon.form.application.leon.model.both.forms.FormCompleted;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
 import pl.leon.form.application.leon.repository.DbMocker;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
@@ -50,7 +50,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.time.Duration.ZERO;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
