@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.repository;
+package pl.leon.form.application.leon.repository.question;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

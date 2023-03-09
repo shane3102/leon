@@ -7,17 +7,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.i_am_a_teapot.concrete.NewlyAddedAnswerWasNotAttachedToQuestion;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
-import pl.leon.form.application.leon.repository.ShortAnswerQuestionRepository;
+import pl.leon.form.application.leon.repository.question.ShortAnswerQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.ShortAnswerQuestionAnswerEntity;
-import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.service.question.interfaces.AddNewAnswerInterface;
 import pl.leon.form.application.leon.service.question.interfaces.QuestionServiceInterface;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
