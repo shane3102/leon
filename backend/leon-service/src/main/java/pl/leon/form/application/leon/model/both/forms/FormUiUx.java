@@ -1,4 +1,4 @@
-package pl.leon.form.application.leon.model.request.forms;
+package pl.leon.form.application.leon.model.both.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import pl.leon.form.application.leon.core.enums.FormLevelType;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormUiUxRequest {
+public class FormUiUx {
     private FormLevelType uxLevel;
     private FormLevelType uiLevel;
 }

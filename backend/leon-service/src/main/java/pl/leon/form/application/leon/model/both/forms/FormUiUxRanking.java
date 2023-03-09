@@ -1,9 +1,10 @@
-package pl.leon.form.application.leon.model.request.forms;
+package pl.leon.form.application.leon.model.both.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.leon.form.application.leon.model.both.forms.FormUiUx;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormUiUxRankingRequest {
-    private List<FormUiUxRequest> formsInOrder;
+public class FormUiUxRanking {
+    private List<FormUiUx> formsInOrder;
     private String commentOnForms;
 }
