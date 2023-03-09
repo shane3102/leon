@@ -3,6 +3,8 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
 import { FormToCompleteResponse } from 'src/app/models/form-to-complete-response';
 import { RandomFormService } from 'src/app/form-random/services/random-form.service';
+import { FormChangeSubject } from 'src/app/form-random/models/form-change-subject';
+import { FormChanged } from 'src/app/form-random/models/form-changed';
 
 @Component({
   selector: 'app-random-form-good-ui-bad-ux',
@@ -15,12 +17,14 @@ export class RandomFormGoodUiBadUxComponent implements OnInit {
 
   @Output() formSentEvent = new EventEmitter();
 
-  formStartCompletingTime: number = Date.now();
+  formStartCompletingTime: number = Date.now(); 
+  currentFormChange: FormChangeSubject = new FormChangeSubject(undefined, 0, 0, Date.now());
 
   randomFormGroup: FormGroup;
   triedSubmiting: Observable<boolean> = of(false)
 
-  resetFormSubject: Subject<void> = new Subject<void>()
+  resetFormSubject: Subject<void> = new Subject<void>();
+  formResultChanged: Subject<FormChangeSubject> = new Subject<FormChangeSubject>();
 
   constructor(private randomFormService: RandomFormService) { }
 
@@ -29,8 +33,9 @@ export class RandomFormGoodUiBadUxComponent implements OnInit {
       'answers': new FormArray([]),
       'uxLevel': new FormControl('BAD'),
       'uiLevel': new FormControl('GOOD'),
-      'durationToAnswer': new FormControl(null) //TODO liczenie tego 
     })
+
+    this.formResultChanged.next(this.currentFormChange);
   }
 
   resetForm() {
@@ -39,6 +44,21 @@ export class RandomFormGoodUiBadUxComponent implements OnInit {
       this.randomFormGroup.setControl('uiLevel', new FormControl('GOOD'))
       this.resetFormSubject.next();
     }, 0);
+  }
+
+  questionFilled(formChange: FormChanged) {
+
+    if (formChange.id != this.currentFormChange.id) {
+      this.currentFormChange.startedFillingQuestion = this.currentFormChange.startedFillingQuestion + this.currentFormChange.finishedFillingQuestion;
+    }
+    if (this.currentFormChange.id == undefined) {
+      this.currentFormChange.startedFillingQuestion = 0;
+    }
+
+    this.currentFormChange.finishedFillingQuestion = formChange.userFilled;
+    this.currentFormChange.id = formChange.id;
+
+    this.formResultChanged.next(this.currentFormChange);
   }
 
   submitForm(request: any) {

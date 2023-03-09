@@ -3,6 +3,8 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
 import { FormToCompleteResponse } from 'src/app/models/form-to-complete-response';
 import { RandomFormService } from 'src/app/form-random/services/random-form.service';
+import { FormChangeSubject } from 'src/app/form-random/models/form-change-subject';
+import { FormChanged } from 'src/app/form-random/models/form-changed';
 
 @Component({
   selector: 'app-random-form-good-ui-good-ux',
@@ -17,12 +19,15 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
   @Output() formSentEvent = new EventEmitter();
 
   formStartCompletingTime: number = Date.now();
+  currentFormChange: FormChangeSubject = new FormChangeSubject(undefined, 0, 0, Date.now());
 
   randomFormGroup: FormGroup;
 
-  triedSubmitingSubject: Subject<void> = new Subject<void>()
   triedSubmitting: Observable<boolean> = of(false);
   submitting: Observable<boolean> = of(false);
+
+  triedSubmitingSubject: Subject<void> = new Subject<void>();
+  formResultChanged: Subject<FormChangeSubject> = new Subject<FormChangeSubject>();
 
   constructor(private randomFormService: RandomFormService) { }
 
@@ -31,7 +36,6 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
       'answers': new FormArray([]),
       'uxLevel': new FormControl('GOOD'),
       'uiLevel': new FormControl('GOOD'),
-      'durationToAnswer': new FormControl(null) //TODO liczenie tego 
     })
 
     if (this.formId != undefined) {
@@ -39,10 +43,32 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
     }
   }
 
+  questionFilled(formChange: FormChanged) {
+
+    if (formChange.id != this.currentFormChange.id) {
+      this.currentFormChange.startedFillingQuestion = this.currentFormChange.startedFillingQuestion + this.currentFormChange.finishedFillingQuestion;
+    }
+    if (this.currentFormChange.id == undefined) {
+      this.currentFormChange.startedFillingQuestion = 0;
+    }
+
+    this.currentFormChange.finishedFillingQuestion = formChange.userFilled;
+    this.currentFormChange.id = formChange.id;
+
+    this.formResultChanged.next(this.currentFormChange);
+  }
+
   submitForm(request: any) {
     if (!this.randomFormGroup.invalid) {
 
       request.completeDurationInMilliseconds = Date.now() - this.formStartCompletingTime;
+
+      if (this.formId != undefined) {
+        request.completeDurationInMilliseconds = undefined;
+        request.answers.forEach((a: any) => {
+          a.durationToAnswerInMilliseconds = undefined;
+        })
+      }
 
       this.submitting = of(true);
       this.randomFormService.submitRandomForm(request).subscribe({
