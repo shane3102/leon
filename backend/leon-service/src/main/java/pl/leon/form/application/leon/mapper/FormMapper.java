@@ -9,15 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
-import pl.leon.form.application.leon.model.both.FormCompleted;
+import pl.leon.form.application.leon.model.both.forms.FormCompleted;
 import pl.leon.form.application.leon.model.request.forms.FormCreateRequest;
 import pl.leon.form.application.leon.model.both.Option;
 import pl.leon.form.application.leon.model.both.questions.QuestionAnswering;
-import pl.leon.form.application.leon.model.request.forms.FormUiUxRankingRequest;
+import pl.leon.form.application.leon.model.both.forms.FormUiUxRanking;
 import pl.leon.form.application.leon.model.request.questions.QuestionCreateRequest;
 import pl.leon.form.application.leon.model.response.forms.FormResponse;
 import pl.leon.form.application.leon.model.response.forms.FormSnippetResponse;
 import pl.leon.form.application.leon.model.response.forms.FormStatisticsResponse;
+import pl.leon.form.application.leon.model.response.forms.FormUiUxRandomCompletingStatisticsResponse;
 import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.FormRepository;
 import pl.leon.form.application.leon.repository.LineScaleQuestionRepository;
@@ -29,6 +30,7 @@ import pl.leon.form.application.leon.repository.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.AnswerEntity;
 import pl.leon.form.application.leon.repository.entities.FormCompletedEntity;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
+import pl.leon.form.application.leon.repository.entities.FormUiUxEntity;
 import pl.leon.form.application.leon.repository.entities.FormUiUxRankingEntity;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.UserEntity;
@@ -46,10 +48,13 @@ import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQu
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 import pl.leon.form.application.leon.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static pl.leon.form.application.leon.core.enums.FormLevelType.BAD;
+import static pl.leon.form.application.leon.core.enums.FormLevelType.GOOD;
 import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.DROPDOWN;
 import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.LINE_SCALE;
 import static pl.leon.form.application.leon.model.both.questions.type.QuestionType.LONG_ANSWER;
@@ -85,9 +90,39 @@ public abstract class FormMapper {
     @Autowired
     protected QuestionMapperManager questionMapperManager;
 
-    public abstract FormUiUxRankingEntity mapUiUxRankingRequestToEntity(FormUiUxRankingRequest request);
+    public abstract FormUiUxRankingEntity mapUiUxRankingDtoToEntity(FormUiUxRanking request);
 
-    public abstract FormUiUxRankingRequest mapUiUxEntityToResponse(FormUiUxRankingEntity entity);
+    public abstract FormUiUxRanking mapUiUxRankingEntityToDto(FormUiUxRankingEntity request);
+
+    public List<FormUiUxRandomCompletingStatisticsResponse> mapRankingsToResponseWithCounts(List<FormUiUxRankingEntity> rankings) {
+        FormUiUxRandomCompletingStatisticsResponse badUiBadUx = new FormUiUxRandomCompletingStatisticsResponse(BAD, BAD);
+        FormUiUxRandomCompletingStatisticsResponse badUiGoodUx = new FormUiUxRandomCompletingStatisticsResponse(BAD, GOOD);
+        FormUiUxRandomCompletingStatisticsResponse goodUiBadUx = new FormUiUxRandomCompletingStatisticsResponse(GOOD, BAD);
+        FormUiUxRandomCompletingStatisticsResponse goodUiGoodUx = new FormUiUxRandomCompletingStatisticsResponse(GOOD, GOOD);
+
+        for (FormUiUxRankingEntity ranking : rankings) {
+            for (int i = 0; i < ranking.getFormsInOrder().size(); i++) {
+                FormUiUxEntity record = ranking.getFormsInOrder().get(i);
+
+                if (BAD.equals(record.getUiLevel()) && BAD.equals(record.getUxLevel())) {
+                    badUiBadUx.incrementPlaceByIndex(i);
+                } else if (BAD.equals(record.getUiLevel()) && GOOD.equals(record.getUxLevel())) {
+                    badUiGoodUx.incrementPlaceByIndex(i);
+                } else if (GOOD.equals(record.getUiLevel()) && BAD.equals(record.getUxLevel())) {
+                    goodUiBadUx.incrementPlaceByIndex(i);
+                } else if (GOOD.equals(record.getUiLevel()) && GOOD.equals(record.getUxLevel())) {
+                    goodUiGoodUx.incrementPlaceByIndex(i);
+                }
+            }
+        }
+
+        List<FormUiUxRandomCompletingStatisticsResponse> result = new ArrayList<>(List.of(goodUiGoodUx, badUiGoodUx, goodUiBadUx, badUiBadUx));
+        result.sort((o1, o2) -> o2.getFirstPlaceCount() - o1.getFirstPlaceCount());
+
+        return result;
+    }
+
+    public abstract FormUiUxRanking mapUiUxEntityToResponse(FormUiUxRankingEntity entity);
 
     @Mappings({
             @Mapping(target = "dropdownQuestions", source = "questions"),
