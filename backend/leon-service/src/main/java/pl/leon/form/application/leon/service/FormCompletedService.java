@@ -133,7 +133,6 @@ public class FormCompletedService {
         result.add(getAverageTimesByType(GOOD, BAD));
         result.add(getAverageTimesByType(BAD, GOOD));
         result.add(getAverageTimesByType(BAD, BAD));
-        result.sort(((o1, o2) -> (int) (o1.getAverageTimeToFillForm() - o2.getAverageTimeToFillForm())));
         log.debug("getRankingsWithAverageTimes() = {}", result);
         return result;
     }

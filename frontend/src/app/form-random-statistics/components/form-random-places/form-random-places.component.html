@@ -1,0 +1,13 @@
+<div style="margin-top: 0.5vh;">
+    <div class="info">
+        Wykresy prezentujące ile razy formularz o konkretnym poziomie interfejsu użytkownika oraz poziomie intuicyjności interfejsu został sklasyfikowany na konkretnym miejscu
+    </div>
+    <div style="display: flex; justify-content: space-around; align-items: center;" *ngIf="!(isLoadingPlaces | async)">
+        <div *ngFor="let form of formsPlaces">
+            <app-form-random-places-bar-graph [formPlaces]="form"></app-form-random-places-bar-graph>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-around; align-items: center;">
+        <div *ngIf="(isLoadingPlaces | async)" class="spinner-border" style="height: 10vw; width: 10vw"></div>
+    </div>
+</div>

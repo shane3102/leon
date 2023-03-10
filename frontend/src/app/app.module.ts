@@ -21,6 +21,7 @@ import { FormAddModule } from './form-add/form-add.module';
 import { AuthGuard } from './authGuard/auth.service';
 import { FormRandomModule } from './form-random/form-random.module';
 import { FormDetailsModule } from './form-details/form-details.module';
+import { FormRandomStatisticsModule } from './form-random-statistics/form-random-statistics.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FormDetailsModule } from './form-details/form-details.module';
     UserAuthModule,
     FormAddModule,
     FormRandomModule,
-    FormDetailsModule
+    FormDetailsModule,
+    FormRandomStatisticsModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
