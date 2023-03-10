@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.leon.form.application.leon.model.both.forms.FormUiUxRanking;
 import pl.leon.form.application.leon.model.response.forms.FormStatisticsResponse;
 import pl.leon.form.application.leon.model.response.forms.FormUiUxRandomCompletingStatisticsResponse;
+import pl.leon.form.application.leon.model.response.forms.FormUiUxTypeRandomTimeStatisticsResponse;
+import pl.leon.form.application.leon.service.FormCompletedService;
 import pl.leon.form.application.leon.service.FormService;
 import pl.leon.form.application.leon.service.FormUiUxRankingService;
 
@@ -24,6 +26,7 @@ import java.util.List;
 public class FormStatisticsController {
 
     private final FormService formService;
+    private final FormCompletedService formCompletedService;
     private final FormUiUxRankingService formUiUxRankingService;
 
     @GetMapping("/{id}")
@@ -47,6 +50,14 @@ public class FormStatisticsController {
         log.info("getEachRanking()");
         List<FormUiUxRanking> response = formUiUxRankingService.getAllRankings();
         log.info("getEachRanking() = {}", response.size());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/random-forms/times-to-answer")
+    public ResponseEntity<?> getFillingRandomFormTimes() {
+        log.info("getFillingRandomFormTimes()");
+        List<FormUiUxTypeRandomTimeStatisticsResponse> response = formCompletedService.getRankingsWithAverageTimes();
+        log.info("getFillingRandomFormTimes() = {}", response);
         return ResponseEntity.ok(response);
     }
 
