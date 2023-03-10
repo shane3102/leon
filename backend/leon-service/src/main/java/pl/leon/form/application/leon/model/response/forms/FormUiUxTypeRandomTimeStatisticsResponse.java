@@ -17,5 +17,6 @@ public class FormUiUxTypeRandomTimeStatisticsResponse {
     private FormLevelType uiLevel;
     private FormLevelType uxLevel;
     private List<QuestionUiUxStatisticsResponse> averageTimeToAnswerPerQuestionType;
+    private double averageTimeToFillForm;
     private long answerCount;
 }
