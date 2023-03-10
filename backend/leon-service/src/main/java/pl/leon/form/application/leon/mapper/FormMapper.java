@@ -116,10 +116,7 @@ public abstract class FormMapper {
             }
         }
 
-        List<FormUiUxRandomCompletingStatisticsResponse> result = new ArrayList<>(List.of(goodUiGoodUx, badUiGoodUx, goodUiBadUx, badUiBadUx));
-        result.sort((o1, o2) -> o2.getFirstPlaceCount() - o1.getFirstPlaceCount());
-
-        return result;
+        return List.of(goodUiGoodUx, badUiGoodUx, goodUiBadUx, badUiBadUx);
     }
 
     public abstract FormUiUxRanking mapUiUxEntityToResponse(FormUiUxRankingEntity entity);
