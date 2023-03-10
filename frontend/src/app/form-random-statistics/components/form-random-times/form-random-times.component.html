@@ -1,0 +1,13 @@
+<div>
+    <div class="info">
+        Tabele prezentujące ile średnio czasu użytkownik potrzebował czasu na wypełnienie formularza oraz odpowiedź na pytanie konkretnego typu względem sposobu prezentacji
+    </div>
+    <div style="display: flex; justify-content: space-around; align-items: center;" *ngIf="!(isLoadingTimes | async)">
+        <div *ngFor="let singleTimeStatistics of timeStatisticsResponse">
+            <app-form-random-times-table [timesStatistics]="singleTimeStatistics"></app-form-random-times-table>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-around; align-items: center;">
+        <div *ngIf="(isLoadingTimes | async)" class="spinner-border" style="height: 10vw; width: 10vw"></div>
+    </div>
+</div>

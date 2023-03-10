@@ -1,0 +1,41 @@
+<div class="wholeContent">
+    <div style="display: flex; justify-content: space-around; flex-direction: column;">
+        <div class="infoLine">
+            <div>
+                Wygląd interfejsu użytkownika: 
+            </div>
+            <div>
+                {{timesStatistics.uiLevel == 'GOOD'? "Estetyczny": "Nieestetyczny"}}
+            </div>
+        </div>
+        <div class="infoLine">
+            <div>
+                Intuicyjność interfejsu użytkownika: 
+            </div>
+            <div>
+                {{timesStatistics.uxLevel == 'GOOD'? "Przyjazny": "Nieprzyjazny"}}
+            </div>
+        </div>
+    
+        <div class="infoLine">
+            <div>
+                Średni czas potrzebny na wypełnienie ankiety: 
+            </div>
+            <div>
+                {{millisToMinutesAndSeconds(timesStatistics.averageTimeToFillForm)}}
+            </div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <th>Typ pytania</th>
+            <th>Średni czas potrzebny na odpowiedź</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let times of timesStatistics.averageTimeToAnswerPerQuestionType; let i=index" [ngStyle]="i%2==1 ? {'background-color': 'white'} : {}">
+                <td>{{getNameBySent(times.questionType)}}</td>
+                <td style="text-align: end;">{{millisToMinutesAndSeconds(times.averageTimeToAnswerSingleQuestion)}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
