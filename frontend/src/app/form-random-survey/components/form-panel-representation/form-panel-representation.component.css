@@ -1,10 +1,13 @@
 .panel {
-    width: 10vh;
-    height: 10vh;
+    width: 16vh;
+    height: 16vh;
     text-align: center;
+    line-height: normal;
     vertical-align: middle;
-    line-height: 10vh;
     background-color: rgb(233, 231, 231);
     border-radius: 20px 0px 20px 0px;
     border: 2.5px solid #BAFF39;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
 }
