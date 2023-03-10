@@ -1,7 +1,7 @@
 <div id="mainPage">
     <app-main-page-button [image]="faClipboardCheck" routerLink="../random-form" text="Wypełnij losowe ankiety" description="Pozwala wypełnić losowo generowane ankiety spośród pytań dodanych przez użytkowników"></app-main-page-button>
     <app-main-page-button [image]="listOlIcon" routerLink="../list" text="Ankiety użytkowników" description="Pozwala przejrzeć i wypełnić ankiety dodane przez użytkowników oraz przeglądać ich statystyki."></app-main-page-button>
-    <app-main-page-button [image]="chart" text="Statystyki dotyczące ankiet losowo generowanych" description="Pozwala na przejrzenie statystyk dotyczących ankiet losowo generowanych"></app-main-page-button>
+    <app-main-page-button [image]="chart" routerLink="../random-form-statistics" text="Statystyki dotyczące ankiet losowo generowanych" description="Pozwala na przejrzenie statystyk dotyczących ankiet losowo generowanych"></app-main-page-button>
     <app-main-page-button [image]="faClipboardList" routerLink="../add-form" text="Dodaj własną ankietę" description="Pozwala na dodanie nowej ankiety" [disable]=!isLogged()></app-main-page-button>
     <app-main-page-button [image]="listUlIcon" routerLink="../list/{{getUsername()}}" text="Moje ankiety" description="Pozwala przeglądać ankiety dodane przez użytkownika oraz sprawdzać ich wyniki i statystyki" [disable]=!isLogged()></app-main-page-button>
 </div>
