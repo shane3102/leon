@@ -7,16 +7,16 @@ export class QuestionTypes {
     public SINGLE_CHOICE: QuestionType = { sent: "SINGLE_CHOICE", name: "Jednokrotny wybór" };
 
     public types: QuestionType[] = [
-        this.DROPDOWN, 
-        this.LINE_SCALE, 
-        this.LONG_ANSWER, 
-        this.MULTIPLE_CHOICE, 
-        this.SHORT_ANSWER, 
+        this.DROPDOWN,
+        this.LINE_SCALE,
+        this.LONG_ANSWER,
+        this.MULTIPLE_CHOICE,
+        this.SHORT_ANSWER,
         this.SINGLE_CHOICE
     ];
 }
 
-export class QuestionType{
+export class QuestionType {
     sent: string;
     name: string;
 }
