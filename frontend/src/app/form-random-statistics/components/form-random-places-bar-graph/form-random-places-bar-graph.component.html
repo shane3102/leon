@@ -1,0 +1,34 @@
+<div class="wholeContent">
+    <div style="display: flex; justify-content: space-around; flex-direction: column;">
+        <div class="infoLine">
+            <div>
+                Wygląd interfejsu użytkownika: 
+            </div>
+            <div>
+                {{formPlaces.uiLevel == 'GOOD'? "Estetyczny": "Nieestetyczny"}}
+            </div>
+        </div>
+        <div class="infoLine">
+            <div>
+                Intuicyjność interfejsu użytkownika: 
+            </div>
+            <div>
+                {{formPlaces.uxLevel == 'GOOD'? "Przyjazny": "Nieprzyjazny"}}
+            </div>
+        </div>
+    </div>
+    
+    <div
+        style="display: flex; justify-content: space-around; align-items: end; width: 17.5vw; height: 20vh; border-top: 1px dashed; border-bottom: 1px dashed;">
+        <div [ngStyle]="total == 0 ? {} : {'height': formPlaces.firstPlaceCount/total*20+'vh'}" style="width: 2.5vw; background-color: green;"></div>
+        <div [ngStyle]="total == 0 ? {} : {'height': formPlaces.secondPlaceCount/total*20+'vh'}" style="width: 2.5vw; background-color: blue;"></div>
+        <div [ngStyle]="total == 0 ? {} : {'height': formPlaces.thirdPlaceCount/total*20+'vh'}" style="width: 2.5vw; background-color: yellow;"></div>
+        <div [ngStyle]="total == 0 ? {} : {'height': formPlaces.fourthPlaceCount/total*20+'vh'}" style="width: 2.5vw; background-color: red;"></div>
+    </div>
+    <div style="display: flex; justify-content: space-around; align-items: end; width: 17.5vw;">
+        <div>I ({{formPlaces.firstPlaceCount}})</div>
+        <div>II ({{formPlaces.secondPlaceCount}})</div>
+        <div>III ({{formPlaces.thirdPlaceCount}})</div>
+        <div>IV ({{formPlaces.fourthPlaceCount}})</div>
+    </div>
+</div>

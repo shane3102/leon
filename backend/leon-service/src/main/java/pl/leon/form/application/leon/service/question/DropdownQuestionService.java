@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.ChosenOptionWasNotFoundInAvailableOptions;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
-import pl.leon.form.application.leon.repository.DropdownQuestionRepository;
+import pl.leon.form.application.leon.repository.question.DropdownQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import pl.leon.form.application.leon.repository.entities.question_answers.DropdownQuestionAnswerEntity;
 import pl.leon.form.application.leon.repository.entities.questions.DropdownQuestionEntity;

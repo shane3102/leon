@@ -13,8 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.time.Duration;
 
 @Data
@@ -22,7 +24,8 @@ import java.time.Duration;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DropdownQuestionAnswerEntity {
+@Table(name = "DROPDOWN_QUESTION_ANSWER")
+public class DropdownQuestionAnswerEntity implements QuestionAnswerMethodsInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,6 +38,7 @@ public class DropdownQuestionAnswerEntity {
 
     private Long durationToAnswerInMilliseconds;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+    @JoinColumn(name = "form_completed_id", referencedColumnName = "id")
     private FormCompletedEntity formCompleted;
 }

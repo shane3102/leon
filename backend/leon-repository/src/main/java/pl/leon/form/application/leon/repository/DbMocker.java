@@ -12,6 +12,12 @@ import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQue
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
+import pl.leon.form.application.leon.repository.question.DropdownQuestionRepository;
+import pl.leon.form.application.leon.repository.question.LineScaleQuestionRepository;
+import pl.leon.form.application.leon.repository.question.LongAnswerQuestionRepository;
+import pl.leon.form.application.leon.repository.question.MultipleChoiceQuestionRepository;
+import pl.leon.form.application.leon.repository.question.ShortAnswerQuestionRepository;
+import pl.leon.form.application.leon.repository.question.SingleChoiceQuestionRepository;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;

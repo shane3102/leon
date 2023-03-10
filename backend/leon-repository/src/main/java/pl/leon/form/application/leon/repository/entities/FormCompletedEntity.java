@@ -34,12 +34,12 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FormCompletedValidation
 @Table(name = "COMPLETED_FORM")
+@Entity(name = "COMPLETED_FORM")
 public class FormCompletedEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,21 +60,23 @@ public class FormCompletedEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "formCompleted", cascade = CascadeType.ALL)
     private List<DropdownQuestionAnswerEntity> answeredDropdownQuestions;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "formCompleted", cascade = CascadeType.ALL)
     private List<LineScaleQuestionAnswerEntity> answeredLineScaleQuestions;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "formCompleted", cascade = CascadeType.ALL)
     private List<LongAnswerQuestionAnswerEntity> answeredLongAnswerQuestions;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "formCompleted", cascade = CascadeType.ALL)
     private List<MultipleChoiceQuestionAnswerEntity> answeredMultipleChoiceQuestions;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "formCompleted", cascade = CascadeType.ALL)
     private List<ShortAnswerQuestionAnswerEntity> answeredShortAnswerQuestions;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "formCompleted", cascade = CascadeType.ALL)
     private List<SingleChoiceQuestionAnswerEntity> answeredSingleChoiceQuestions;
 }
+
+

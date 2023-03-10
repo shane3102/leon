@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.leon.form.application.leon.core.exceptions.bad_request.concrete.TooManyQuestionsToGenerate;
 import pl.leon.form.application.leon.mapper.question.manager.QuestionMapperManager;
 import pl.leon.form.application.leon.model.response.questions.QuestionResponse;
-import pl.leon.form.application.leon.repository.QuestionRepositoryInterface;
+import pl.leon.form.application.leon.repository.question.QuestionRepositoryInterface;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 import pl.leon.form.application.leon.repository.entities.questions.QuestionMethodsInterface;
 

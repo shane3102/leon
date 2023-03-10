@@ -7,7 +7,7 @@ import { FormSurveyRequest } from "../model/form-survey-request";
 })
 export class FormSurveyService {
 
-    private readonly PATH: string = "/api/form/add-ranking"
+    private readonly PATH: string = "/api/form/statistics/add-ranking"
 
     constructor(private http: HttpClient) { }
 

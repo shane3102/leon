@@ -1,0 +1,14 @@
+.infoLine{
+    display: flex; 
+    justify-content: space-between; 
+    width: 16.5vw;
+    margin: 0.5vw;
+}
+
+.wholeContent {
+    border-radius: 20px 0px 20px 0px;
+    border: solid #BAFF39;
+    padding: 0.5vw;
+    margin: 0.5vw;
+    background-color: rgb(233, 231, 231);
+}
