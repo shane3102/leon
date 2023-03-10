@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div
-                style="display: flex; justify-content: space-between; align-items: center; height: 15vh; margin: 1.5vw; margin-right: 1.5vw;">
+                style="display: flex; justify-content: space-between; align-items: center; height: 15vh; margin-left: 1.5vw; margin-right: 1.5vw;">
                 <div *ngFor="let form of formsLength; let i=index">
                     <app-form-place [place]="i" (placedOutput)="onPlaced($event)"></app-form-place>
                 </div>
