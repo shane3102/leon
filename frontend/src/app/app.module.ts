@@ -10,7 +10,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { ButtonComponent } from './components/header-button/header-button.component';
 import { MainPageButtonComponent } from './components/main-page-button/main-page-button.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -51,7 +51,8 @@ import { FormRandomStatisticsModule } from './form-random-statistics/form-random
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    AuthGuard
+    AuthGuard,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
