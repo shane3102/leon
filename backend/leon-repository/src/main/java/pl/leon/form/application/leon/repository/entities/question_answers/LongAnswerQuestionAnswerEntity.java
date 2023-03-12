@@ -39,4 +39,14 @@ public class LongAnswerQuestionAnswerEntity implements QuestionAnswerMethodsInte
     @ManyToOne
     @JoinColumn(name = "form_completed_id", referencedColumnName = "id")
     private FormCompletedEntity formCompleted;
+
+    @Override
+    public String getOptionCount() {
+        return "Nie dotyczy";
+    }
+
+    @Override
+    public String getTextAnswer() {
+        return answer.getContent();
+    }
 }

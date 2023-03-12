@@ -41,4 +41,9 @@ public class MultipleChoiceQuestionAnswerEntity implements QuestionAnswerMethods
     @ManyToOne
     @JoinColumn(name = "form_completed_id", referencedColumnName = "id")
     private FormCompletedEntity formCompleted;
+
+    @Override
+    public String getOptionCount() {
+        return String.valueOf(options.size());
+    }
 }
