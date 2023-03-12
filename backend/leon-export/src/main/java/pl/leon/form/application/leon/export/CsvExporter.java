@@ -11,7 +11,11 @@ import pl.leon.form.application.leon.repository.entities.questions.QuestionMetho
 import pl.leon.form.application.leon.repository.question_answer.QuestionAnswerRepositoryInterface;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -53,7 +57,7 @@ public class CsvExporter {
 
     }
 
-    public byte[] csvReportFormCompletedResults(Long formId) {
+    public String csvReportFormCompletedResultsAsString(Long formId) {
         List<QuestionMethodsInterface> allQuestionsOfForm = formRepository.getById(formId).getAllQuestions();
 
         StringBuilder sb = new StringBuilder();
@@ -65,7 +69,40 @@ public class CsvExporter {
             sb.append(csvRowEncoder.returnFormCompletedResultsRow(formCompleted, allQuestionsOfForm));
         }
 
-        return sb.toString().getBytes(StandardCharsets.UTF_8);
+        return sb.toString();
+    }
+
+    public String csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(Long formId) {
+        List<QuestionMethodsInterface> allQuestionsOfForm = formRepository.getById(formId).getAllQuestions();
+
+        List<List<QuestionAnswerMethodsInterface>> listOfAnswersOfEachQuestion = allQuestionsOfForm.stream()
+                .map(question -> questionAnswersRepositories.stream()
+                        .map(questionRepository -> (List<QuestionAnswerMethodsInterface>) questionRepository.findAllByQuestionId(question.getId()))
+                        .flatMap(Collection::stream).collect(Collectors.toList()))
+                .collect(Collectors.toList());
+
+        int maxAnswersCount = listOfAnswersOfEachQuestion.stream().max(Comparator.comparingInt(List::size)).orElse(new ArrayList<>()).size();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(csvRowEncoder.returnFormCompletedResultsRowByFormQuestions(allQuestionsOfForm));
+
+        for (int lineNumber = 0; lineNumber < maxAnswersCount; lineNumber++) {
+            sb.append(csvRowEncoder.returnFormCompletedAnswersForRandomFormsRow(lineNumber, listOfAnswersOfEachQuestion));
+        }
+
+        return sb.toString();
+    }
+
+    public byte[] csvReportFormCompletedResultsOfQuestionsFromRandomForms(Long formId) {
+        return csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(formId).getBytes(StandardCharsets.UTF_8);
+    }
+
+    public byte[] csvReportFormCompletedResults(Long formId) {
+        return csvReportFormCompletedResultsAsString(formId).getBytes(StandardCharsets.UTF_8);
+    }
+
+    public byte[] csvReportFormCompletedResultsAllAnswers(Long formId) {
+        return (csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(formId) + csvReportFormCompletedResultsAsString(formId)).getBytes(StandardCharsets.UTF_8);
     }
 
 }

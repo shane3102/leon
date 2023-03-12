@@ -102,4 +102,22 @@ public class CsvRowEncoder {
 
         return result;
     }
+
+    public String returnFormCompletedAnswersForRandomFormsRow(int index, List<List<QuestionAnswerMethodsInterface>> listOfAnswers) {
+        StringBuilder sb = new StringBuilder();
+
+        for (List<QuestionAnswerMethodsInterface> answers : listOfAnswers) {
+            sb.append("ODPOWIEDZI Z ANKIET GENEROWANYCH LOSOWO;");
+            if (index < answers.size()) {
+                sb.append(answers.get(index).getTextAnswer());
+            }
+            sb.append('\n');
+        }
+
+        String result = sb.substring(0, sb.length() - 1);
+
+        result = result + '\n';
+
+        return result;
+    }
 }
