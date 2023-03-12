@@ -1,4 +1,4 @@
-<form [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
+<form #screen [formGroup]="randomFormGroup" (ngSubmit)="submitForm(randomFormGroup.value)">
     <hr>
     <div *ngFor="let question of formToComplete.questions">
         <app-question-good-ui-good-ux 

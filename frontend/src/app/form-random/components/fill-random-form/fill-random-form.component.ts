@@ -69,6 +69,10 @@ export class FillRandomFormComponent implements OnInit {
     }
   }
 
+  addNewScreenshot(srcImg: string) {
+    this.formsInFillingOrder[this.index].screenshot = srcImg;
+  }
+
   // Shuffle the order of forms
   shuffle(array: any[]) {
     let currentIndex = array.length, randomIndex;

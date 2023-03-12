@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
 import { FormToCompleteResponse } from 'src/app/models/form-to-complete-response';
 import { RandomFormService } from 'src/app/form-random/services/random-form.service';
 import { FormChangeSubject } from 'src/app/form-random/models/form-change-subject';
 import { FormChanged } from 'src/app/form-random/models/form-changed';
+import { NgxCaptureService } from 'ngx-capture';
 
 @Component({
   selector: 'app-random-form-good-ui-good-ux',
@@ -13,10 +14,13 @@ import { FormChanged } from 'src/app/form-random/models/form-changed';
 })
 export class RandomFormGoodUiGoodUxComponent implements OnInit {
 
+  @ViewChild('screen', { static: true }) screen: any;
+
   @Input() formId: number;
   @Input() formToComplete: FormToCompleteResponse = new FormToCompleteResponse();
 
   @Output() formSentEvent = new EventEmitter();
+  @Output() screenshotMade = new EventEmitter<string>();
 
   formStartCompletingTime: number = Date.now();
   currentFormChange: FormChangeSubject = new FormChangeSubject(undefined, 0, 0, Date.now());
@@ -29,7 +33,7 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
   triedSubmitingSubject: Subject<void> = new Subject<void>();
   formResultChanged: Subject<FormChangeSubject> = new Subject<FormChangeSubject>();
 
-  constructor(private randomFormService: RandomFormService) { }
+  constructor(private randomFormService: RandomFormService, private captureService: NgxCaptureService) { }
 
   ngOnInit(): void {
     this.randomFormGroup = new FormGroup({
@@ -41,6 +45,12 @@ export class RandomFormGoodUiGoodUxComponent implements OnInit {
     if (this.formId != undefined) {
       this.randomFormGroup.addControl('completedFormId', new FormControl(this.formId));
     }
+
+    setTimeout(() => {
+      this.captureService.getImage(this.screen.nativeElement, true).subscribe(img => {
+        this.screenshotMade.emit(img);
+      })
+    })
   }
 
   questionFilled(formChange: FormChanged) {

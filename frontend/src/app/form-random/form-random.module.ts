@@ -45,6 +45,7 @@ import { SingleChoiceGoodUiGoodUxComponent } from './components/question-types/g
 import { AutosizeModule } from 'ngx-autosize';
 import { FormRandomSurveyModule } from '../form-random-survey/form-random-survey.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxCaptureModule } from 'ngx-capture';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatProgressSpinnerModule,
     AutosizeModule,
-    FormRandomSurveyModule
+    FormRandomSurveyModule,
+    NgxCaptureModule
   ],
   exports: [
     FillRandomFormComponent,

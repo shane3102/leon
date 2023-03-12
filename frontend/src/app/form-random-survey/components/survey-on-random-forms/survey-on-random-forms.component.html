@@ -15,18 +15,18 @@
                 </div>
             </div>
             <div
-                style="display: flex; justify-content: space-between; align-items: center; height: 20vh; margin-left: 1.5vw; margin-right: 1.5vw">
+                style="display: flex; justify-content: space-between; align-items: center; height: 15vh; margin-left: 1.5vw; margin-right: 1.5vw;">
                 <div *ngFor="let form of formsLength; let i=index">
                     <app-form-place [place]="i" (placedOutput)="onPlaced($event)"></app-form-place>
                 </div>
             </div>
         </div>
-        <div style="height: 24px; color: red;">
+        <div style="margin-top: 10vh; height: 24px; color: red;">
             <div *ngIf="triedSubmitingWithoutRankingForms | async">Nie uszertegowano wszystkich formularzy</div>
         </div>
 
         <div
-            style="display: flex; justify-content: space-around; align-items: center; flex-direction: column; height: 20vh;">
+            style="display: flex; justify-content: space-around; align-items: center; flex-direction: column; height: 15vh;">
             <textarea placeholder="Twoje uwagi dotyczące wypełniania ankiet (opcjonalne)" autosize id="comment" #comment
                 [value]="commentOnForms" (input)="commentOnForms = comment.value"></textarea>
 
