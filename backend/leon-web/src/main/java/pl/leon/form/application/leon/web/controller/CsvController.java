@@ -39,4 +39,23 @@ public class CsvController {
         log.info("getCompletedFormResultsById({}) = success", id);
         return response;
     }
+
+    //TODO do naprawy
+    @GetMapping("/completed-form-results-random-forms/{id}")
+    public byte[] getCompletedFormResultsByIdOfRandomForms(@PathVariable Long id) {
+        log.info("getCompletedFormResultsById({})", id);
+        byte[] response = csvExporter.csvReportFormCompletedResultsOfQuestionsFromRandomForms(id);
+        log.info("getCompletedFormResultsById({}) = success", id);
+        return response;
+    }
+
+    //TODO do naprawy
+    @GetMapping("/completed-form-results-all/{id}")
+    public byte[] csvReportFormCompletedResultsAllAnswers(@PathVariable Long id) {
+        log.info("getCompletedFormResultsById({})", id);
+        byte[] response = csvExporter.csvReportFormCompletedResultsAllAnswers(id);
+        log.info("getCompletedFormResultsById({}) = success", id);
+        return response;
+    }
+
 }
