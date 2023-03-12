@@ -12,4 +12,6 @@ public interface QuestionAnswerRepositoryInterface<T extends QuestionAnswerMetho
     List<T> findAllByFormCompletedUxLevelAndFormCompletedUiLevelAndFormCompletedCompletedFormNull(FormLevelType uxLevel, FormLevelType uiLevel);
 
     List<T> findAllByFormCompletedCompletedFormNull();
+
+    List<T> findAllByQuestionId(Long id);
 }

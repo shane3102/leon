@@ -6,6 +6,8 @@ import pl.leon.form.application.leon.repository.entities.OptionEntity;
 import java.util.List;
 
 public interface QuestionMethodsInterface {
+    Long getId();
+
     void setDisabled(boolean disabled);
 
     FormEntity getForm();
