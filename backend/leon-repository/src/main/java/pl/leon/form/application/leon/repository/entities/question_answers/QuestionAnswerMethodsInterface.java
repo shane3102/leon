@@ -10,6 +10,8 @@ public interface QuestionAnswerMethodsInterface {
 
     FormCompletedEntity getFormCompleted();
 
+    String getAnswersAsText();
+
     default String getOptionCount() {
         return String.valueOf(1L);
     }

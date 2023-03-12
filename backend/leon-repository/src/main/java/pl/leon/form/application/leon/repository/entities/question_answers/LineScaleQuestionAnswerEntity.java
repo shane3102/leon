@@ -40,4 +40,9 @@ public class LineScaleQuestionAnswerEntity implements QuestionAnswerMethodsInter
     @ManyToOne
     @JoinColumn(name = "form_completed_id", referencedColumnName = "id")
     private FormCompletedEntity formCompleted;
+
+    @Override
+    public String getAnswersAsText() {
+        return option.getContent();
+    }
 }

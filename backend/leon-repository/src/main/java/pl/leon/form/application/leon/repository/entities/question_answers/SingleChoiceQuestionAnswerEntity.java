@@ -39,4 +39,9 @@ public class SingleChoiceQuestionAnswerEntity implements QuestionAnswerMethodsIn
     @ManyToOne
     @JoinColumn(name = "form_completed_id", referencedColumnName = "id")
     private FormCompletedEntity formCompleted;
+
+    @Override
+    public String getAnswersAsText() {
+        return option.getContent();
+    }
 }

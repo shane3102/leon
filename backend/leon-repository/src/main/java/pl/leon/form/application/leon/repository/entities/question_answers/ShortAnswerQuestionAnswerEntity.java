@@ -49,4 +49,9 @@ public class ShortAnswerQuestionAnswerEntity implements QuestionAnswerMethodsInt
     public String getTextAnswer() {
         return answer.getContent();
     }
+
+    @Override
+    public String getAnswersAsText() {
+        return answer.getContent();
+    }
 }
