@@ -13,4 +13,6 @@ public interface FormCompletedRepository extends JpaRepository<FormCompletedEnti
     List<FormCompletedEntity> findAllByUxLevelAndUiLevelAndCompletedFormNull(FormLevelType uxLevel, FormLevelType uiLevel);
 
     List<FormCompletedEntity> findAllByCompletedFormNull();
+
+    List<FormCompletedEntity> findAllByCompletedFormId(Long id);
 }
