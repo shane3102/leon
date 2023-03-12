@@ -11,4 +11,6 @@ import java.util.List;
 public interface FormCompletedRepository extends JpaRepository<FormCompletedEntity, Long> {
 
     List<FormCompletedEntity> findAllByUxLevelAndUiLevelAndCompletedFormNull(FormLevelType uxLevel, FormLevelType uiLevel);
+
+    List<FormCompletedEntity> findAllByCompletedFormNull();
 }
