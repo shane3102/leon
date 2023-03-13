@@ -1,6 +1,6 @@
 <div>
     <div class="info">
-        Tabele prezentujące ile średnio czasu użytkownik potrzebował czasu na wypełnienie formularza oraz odpowiedź na pytanie konkretnego typu względem sposobu prezentacji
+        Tabele prezentujące ile średnio czasu użytkownik potrzebował na wypełnienie formularza oraz odpowiedź na pytanie konkretnego typu względem sposobu prezentacji
     </div>
     <div style="display: flex; justify-content: space-around; align-items: center;" *ngIf="!(isLoadingTimes | async)">
         <div *ngFor="let singleTimeStatistics of timeStatisticsResponse">
