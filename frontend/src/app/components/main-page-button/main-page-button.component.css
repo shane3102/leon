@@ -4,9 +4,9 @@
     border-radius: 50px 0px 50px 0px;
     border: 5px solid #BAFF39;
     height: 60vh;
-    width: 30vh;
+    width: 15vw;
     margin: auto;
-    font-size: 3vh;
+    font-size: 1.5vw;
     line-height: normal;
 }
 
@@ -23,16 +23,17 @@
 }
 
 .actionButton:hover:enabled .actionButtonText {
-    font-size: 1.55vw;
+    font-size: 1.6vw;
 }
 
 .actionButton:hover:enabled {
-    width: 31vh;
+    width: 16vw;
     height: 61vh;
 }
 
 .actionButton:hover:enabled .description {
     max-height: 15vh;
+    font-size: 1.1vw;
 }
 
 .descriptionWrapper {
@@ -40,7 +41,7 @@
 }
 
 .description {
-    font-size: 2vh;
+    font-size: 1vw;
     -webkit-transition: max-height 1s;
     -moz-transition: max-height 1s;
     -ms-transition: max-height 1s;
