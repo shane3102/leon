@@ -214,6 +214,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -241,6 +242,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -267,6 +269,7 @@ public abstract class FormMapper {
         return LongAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -294,6 +297,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -325,6 +329,7 @@ public abstract class FormMapper {
         return ShortAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -352,6 +357,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 

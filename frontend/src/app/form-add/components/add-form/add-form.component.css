@@ -13,6 +13,8 @@
     border-radius: 20px 0px 20px 0px;
     margin: 1%;
     min-width: 198px;
+    line-height: normal;
+    text-align: center;
 }
 
 .submitButton:active {
