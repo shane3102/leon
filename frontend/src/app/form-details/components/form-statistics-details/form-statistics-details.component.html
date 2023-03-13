@@ -2,38 +2,78 @@
 
     <div style="display: flex; justify-content: center; flex-wrap: wrap;">
         <div id="formMainInfo">
-            <div style="font-size: 1.25vw; text-align: center; line-height: normal; margin-left: 0.25vw; margin-right: 0.25vw;">{{formDetails.title}}</div>
-            <div style="font-size: 1vw; line-height: normal; width: 100%; margin-left: 0.25vw; margin-right: 0.25vw;">{{formDetails.subject}}</div>
+            <div
+                style="font-size: 1.25vw; text-align: center; line-height: normal; margin-left: 0.25vw; margin-right: 0.25vw;">
+                {{formDetails.title}}</div>
+            <div style="font-size: 1vw; line-height: normal; width: 100%; margin-left: 0.25vw; margin-right: 0.25vw;">
+                {{formDetails.subject}}</div>
             <h1></h1>
             <h3></h3>
         </div>
         <div id="formAdditionalInfo">
-            <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style="text-align: end;">Data dodania:</td>
-                            <td style="text-align: left;">{{formDetails.dateAdded | date:'dd.MM.yyyy'}}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: end;">Data końcowa:</td>
-                            <td style="text-align: left;">{{formDetails.dateTo == undefined ? "Brak" : (formDetails.dateTo | date:'dd.MM.yyyy')}}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: end;">Blokada odpowiedzi na pytania:</td>
-                            <td style="text-align: left;">{{formDetails.disabled ? "Tak" : "Nie"}}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: end;">Statystyki ankiety ogólnodostępne:</td>
-                            <td style="text-align: left;">{{formDetails.resultsAvailableForEveryone ? "Tak" : "Nie"}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table>
+                <tbody>
+                    <tr style="background-color: white;">
+                        <td style="text-align: center;">Data dodania:</td>
+                        <td style="text-align: center;">{{formDetails.dateAdded | date:'dd.MM.yyyy'}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">Data końcowa:</td>
+                        <td style="text-align: center;">{{formDetails.dateTo == undefined ? "Brak" : (formDetails.dateTo
+                            | date:'dd.MM.yyyy')}}</td>
+                    </tr>
+                    <tr style="background-color: white;">
+                        <td style="text-align: center;">Blokada odpowiedzi na pytania:</td>
+                        <td style="text-align: center;">{{formDetails.disabled ? "Tak" : "Nie"}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">Statystyki ankiety ogólnodostępne:</td>
+                        <td style="text-align: center;">{{formDetails.resultsAvailableForEveryone ? "Tak" : "Nie"}}</td>
+                    </tr>
+                    <tr style="background-color: white;">
+                        <td style="text-align: center;">Pytania ankietowe wyłączone z ankiet losowych:</td>
+                        <td style="text-align: center;">{{formDetails.disabledFormRandomFormGenerating ? "Tak" : "Nie"}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="formDetails.disabledFormRandomFormGenerating">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button (click)="downloadReportsOnlyThisFormAnswers()" id="formDownload">
+                        Pobierz odpowiedzi (.csv)
+                        <fa-icon [icon]="faDownload"></fa-icon>
+                    </button>
+                </div>
             </div>
-            <button (click)="downloadReports()" id="formDownload">
-                Pobierz wyniki 
-                <fa-icon [icon]="faDownload"></fa-icon>
-            </button>
+            <div *ngIf="!formDetails.disabledFormRandomFormGenerating">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        Pobierz odpowiedzi (odpowiedzi tylko dla tej ankiety):
+                    </div>
+                    <button (click)="downloadReportsOnlyThisFormAnswers()" class="formDownloadLittle">
+                        .csv
+                        <fa-icon [icon]="faDownload"></fa-icon>
+                    </button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        Pobierz odpowiedzi (odpowiedzi z ankiet losowych):
+                    </div>
+                    <button (click)="downloadReportsRandomFormsAnswers()" class="formDownloadLittle">
+                        .csv
+                        <fa-icon [icon]="faDownload"></fa-icon>
+                    </button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        Pobierz odpowiedzi (wszystkie odpowiedzi):
+                    </div>
+                    <button (click)="downloadReportsAllAnswers()" class="formDownloadLittle">
+                        .csv
+                        <fa-icon [icon]="faDownload"></fa-icon>
+                    </button>
+                </div>
+            </div>
         </div>
         <div id="questionsLabel">
             Pytania
