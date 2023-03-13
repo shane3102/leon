@@ -47,7 +47,7 @@
             </div>
             <div *ngIf="!formDetails.disabledFormRandomFormGenerating">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
+                    <div class="downloadsInfo">
                         Pobierz odpowiedzi (odpowiedzi tylko dla tej ankiety):
                     </div>
                     <button (click)="downloadReportsOnlyThisFormAnswers()" class="formDownloadLittle">
@@ -56,7 +56,7 @@
                     </button>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
+                    <div class="downloadsInfo">
                         Pobierz odpowiedzi (odpowiedzi z ankiet losowych):
                     </div>
                     <button (click)="downloadReportsRandomFormsAnswers()" class="formDownloadLittle">
@@ -65,7 +65,7 @@
                     </button>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
+                    <div class="downloadsInfo">
                         Pobierz odpowiedzi (wszystkie odpowiedzi):
                     </div>
                     <button (click)="downloadReportsAllAnswers()" class="formDownloadLittle">

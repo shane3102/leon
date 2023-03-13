@@ -51,6 +51,10 @@
     margin: 0.375vw;
 }
 
+.downloadsInfo{
+    font-size: 0.625vw;
+}
+
 #questionsLabel {
     width: 80vw;
     border-radius: 20px 20px 0px 0px;
