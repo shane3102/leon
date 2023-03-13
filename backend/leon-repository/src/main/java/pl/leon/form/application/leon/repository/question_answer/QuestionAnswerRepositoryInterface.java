@@ -13,5 +13,5 @@ public interface QuestionAnswerRepositoryInterface<T extends QuestionAnswerMetho
 
     List<T> findAllByFormCompletedCompletedFormNull();
 
-    List<T> findAllByQuestionId(Long id);
+    List<T> findAllByQuestionIdAndQuestionQuestionAndFormCompletedCompletedFormNull(Long questionId, String questionContent);
 }

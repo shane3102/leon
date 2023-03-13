@@ -79,4 +79,21 @@ export class CsvService {
         })
     }
 
+    getCompletedFormResultsByIdOfAllForms(id: number) {
+        this.http.get<any>(this.PATH + "/completed-form-results-all/" + id, { responseType: 'blob' as 'json' }).subscribe({
+            next: (response: any) => {
+                const report = document.createElement('a');
+                const objectUrl = URL.createObjectURL(response);
+                report.href = objectUrl;
+                let currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+                report.download = 'wyniki-ankiety-' + currentDate + '.csv';
+                report.click();
+                URL.revokeObjectURL(objectUrl);
+            },
+            error: (error: HttpErrorResponse) => {
+                console.log("Could not get reports " + error.message);
+            }
+        })
+    }
+
 }

@@ -46,7 +46,7 @@ public class CsvExporter {
         StringBuilder sb = new StringBuilder();
         sb.append(csvRowEncoder.QUESTION_ANSWERED_HEADLINE);
 
-        for (QuestionAnswerRepositoryInterface questionAnswersRepository : questionAnswersRepositories) {
+        for (QuestionAnswerRepositoryInterface<QuestionAnswerMethodsInterface> questionAnswersRepository : questionAnswersRepositories) {
             List<QuestionAnswerMethodsInterface> questionAnswers = questionAnswersRepository.findAllByFormCompletedCompletedFormNull();
             for (QuestionAnswerMethodsInterface questionAnswer : questionAnswers) {
                 sb.append(csvRowEncoder.returnQuestionAnsweredRow(questionAnswer));
@@ -57,11 +57,9 @@ public class CsvExporter {
 
     }
 
-    public String csvReportFormCompletedResultsAsString(Long formId) {
-        List<QuestionMethodsInterface> allQuestionsOfForm = formRepository.getById(formId).getAllQuestions();
+    public String csvReportFormCompletedResultsAsString(Long formId, List<QuestionMethodsInterface> allQuestionsOfForm) {
 
         StringBuilder sb = new StringBuilder();
-        sb.append(csvRowEncoder.returnFormCompletedResultsRowByFormQuestions(allQuestionsOfForm));
 
         List<FormCompletedEntity> completedFormsByFormId = formCompletedRepository.findAllByCompletedFormId(formId);
 
@@ -72,19 +70,17 @@ public class CsvExporter {
         return sb.toString();
     }
 
-    public String csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(Long formId) {
-        List<QuestionMethodsInterface> allQuestionsOfForm = formRepository.getById(formId).getAllQuestions();
+    public String csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(Long formId, List<QuestionMethodsInterface> allQuestionsOfForm) {
 
         List<List<QuestionAnswerMethodsInterface>> listOfAnswersOfEachQuestion = allQuestionsOfForm.stream()
                 .map(question -> questionAnswersRepositories.stream()
-                        .map(questionRepository -> (List<QuestionAnswerMethodsInterface>) questionRepository.findAllByQuestionId(question.getId()))
+                        .map(questionRepository -> (List<QuestionAnswerMethodsInterface>) questionRepository.findAllByQuestionIdAndQuestionQuestionAndFormCompletedCompletedFormNull(question.getId(), question.getQuestion()))
                         .flatMap(Collection::stream).collect(Collectors.toList()))
                 .collect(Collectors.toList());
 
         int maxAnswersCount = listOfAnswersOfEachQuestion.stream().max(Comparator.comparingInt(List::size)).orElse(new ArrayList<>()).size();
 
         StringBuilder sb = new StringBuilder();
-        sb.append(csvRowEncoder.returnFormCompletedResultsRowByFormQuestions(allQuestionsOfForm));
 
         for (int lineNumber = 0; lineNumber < maxAnswersCount; lineNumber++) {
             sb.append(csvRowEncoder.returnFormCompletedAnswersForRandomFormsRow(lineNumber, listOfAnswersOfEachQuestion));
@@ -94,15 +90,35 @@ public class CsvExporter {
     }
 
     public byte[] csvReportFormCompletedResultsOfQuestionsFromRandomForms(Long formId) {
-        return csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(formId).getBytes(StandardCharsets.UTF_8);
+        List<QuestionMethodsInterface> allQuestionsOfForm = formRepository.getById(formId).getAllQuestions();
+
+        String headline = csvRowEncoder.returnFormCompletedResultsRowByFormQuestions(allQuestionsOfForm);
+
+        return (headline +
+                csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(formId, allQuestionsOfForm))
+                .getBytes(StandardCharsets.UTF_8);
     }
 
     public byte[] csvReportFormCompletedResults(Long formId) {
-        return csvReportFormCompletedResultsAsString(formId).getBytes(StandardCharsets.UTF_8);
+        List<QuestionMethodsInterface> allQuestionsOfForm = formRepository.getById(formId).getAllQuestions();
+
+        String headline = csvRowEncoder.returnFormCompletedResultsRowByFormQuestions(allQuestionsOfForm);
+
+        return (headline +
+                csvReportFormCompletedResultsAsString(formId, allQuestionsOfForm))
+                .getBytes(StandardCharsets.UTF_8);
     }
 
     public byte[] csvReportFormCompletedResultsAllAnswers(Long formId) {
-        return (csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(formId) + csvReportFormCompletedResultsAsString(formId)).getBytes(StandardCharsets.UTF_8);
+
+        List<QuestionMethodsInterface> allQuestionsOfForm = formRepository.getById(formId).getAllQuestions();
+
+        String headline = csvRowEncoder.returnFormCompletedResultsRowByFormQuestions(allQuestionsOfForm);
+
+        return (headline +
+                csvReportFormCompletedResultsAsString(formId, allQuestionsOfForm) +
+                csvReportFormCompletedResultsOfQuestionsFromRandomFormsAsString(formId, allQuestionsOfForm))
+                .getBytes(StandardCharsets.UTF_8);
     }
 
 }

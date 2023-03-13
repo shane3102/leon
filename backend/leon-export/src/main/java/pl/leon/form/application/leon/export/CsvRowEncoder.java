@@ -105,13 +105,13 @@ public class CsvRowEncoder {
 
     public String returnFormCompletedAnswersForRandomFormsRow(int index, List<List<QuestionAnswerMethodsInterface>> listOfAnswers) {
         StringBuilder sb = new StringBuilder();
+        sb.append("ODPOWIEDZI Z ANKIET GENEROWANYCH LOSOWO;");
 
         for (List<QuestionAnswerMethodsInterface> answers : listOfAnswers) {
-            sb.append("ODPOWIEDZI Z ANKIET GENEROWANYCH LOSOWO;");
             if (index < answers.size()) {
-                sb.append(answers.get(index).getTextAnswer());
+                sb.append(answers.get(index).getAnswersAsText());
             }
-            sb.append('\n');
+            sb.append(';');
         }
 
         String result = sb.substring(0, sb.length() - 1);

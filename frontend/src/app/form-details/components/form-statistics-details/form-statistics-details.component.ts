@@ -40,7 +40,9 @@ export class FormStatisticsDetailsComponent implements OnInit {
   }
 
   downloadReports() {
+    // this.csvService.getCompletedFormResultsByIdOfAllForms(this.id);
     this.csvService.getCompletedFormResultsByIdOfRandomForms(this.id);
+    // this.csvService.getCompletedFormResultsById(this.id);
     // this.csvService.getFormCompletedCsvReport();
     // this.csvService.getAnsweredQuestionsCsvReport();
   }
