@@ -8,6 +8,7 @@ import pl.leon.form.application.leon.repository.entities.questions.DropdownQuest
 import pl.leon.form.application.leon.repository.entities.questions.LineScaleQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.LongAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.MultipleChoiceQuestionEntity;
+import pl.leon.form.application.leon.repository.entities.questions.QuestionMethodsInterface;
 import pl.leon.form.application.leon.repository.entities.questions.ShortAnswerQuestionEntity;
 import pl.leon.form.application.leon.repository.entities.questions.SingleChoiceQuestionEntity;
 
@@ -22,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -42,6 +44,8 @@ public class FormEntity {
     private boolean disabled;
 
     private boolean resultsAvailableForEveryone;
+
+    private boolean disabledFormRandomFormGenerating;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -68,6 +72,19 @@ public class FormEntity {
 
     @OneToMany(mappedBy = "form", cascade = {CascadeType.MERGE}, orphanRemoval = true)
     private List<SingleChoiceQuestionEntity> singleChoiceQuestions;
+
+    public List<QuestionMethodsInterface> getAllQuestions() {
+        List<QuestionMethodsInterface> result = new ArrayList<>();
+
+        result.addAll(dropdownQuestions);
+        result.addAll(lineScaleQuestions);
+        result.addAll(longAnswerQuestions);
+        result.addAll(multipleChoiceQuestions);
+        result.addAll(shortAnswerQuestions);
+        result.addAll(singleChoiceQuestions);
+
+        return result;
+    }
 
     @PrePersist
     void prePersist() {

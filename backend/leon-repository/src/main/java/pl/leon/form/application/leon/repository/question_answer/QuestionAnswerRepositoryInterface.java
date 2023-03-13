@@ -10,4 +10,8 @@ import java.util.List;
 @NoRepositoryBean
 public interface QuestionAnswerRepositoryInterface<T extends QuestionAnswerMethodsInterface> extends JpaRepository<T, Long> {
     List<T> findAllByFormCompletedUxLevelAndFormCompletedUiLevelAndFormCompletedCompletedFormNull(FormLevelType uxLevel, FormLevelType uiLevel);
+
+    List<T> findAllByFormCompletedCompletedFormNull();
+
+    List<T> findAllByQuestionIdAndQuestionQuestionAndFormCompletedCompletedFormNull(Long questionId, String questionContent);
 }

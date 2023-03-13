@@ -101,11 +101,6 @@ public class FormCompletedService {
             multipleChoiceQuestionService.incrementOption(answer);
         }).collect(Collectors.toList()));
 
-        formCompletedEntity.getAnsweredDropdownQuestions().forEach(dropdownQuestionService::incrementOption);
-        formCompletedEntity.getAnsweredLineScaleQuestions().forEach(lineScaleQuestionService::incrementOption);
-        formCompletedEntity.getAnsweredSingleChoiceQuestions().forEach(singleChoiceQuestionService::incrementOption);
-        formCompletedEntity.getAnsweredMultipleChoiceQuestions().forEach(multipleChoiceQuestionService::incrementOption);
-
         formCompletedEntity.setAnsweredLongAnswerQuestions(
                 formCompletedEntity.getAnsweredLongAnswerQuestions().stream().map(answering -> {
                     answering.setFormCompleted(finalFormCompleted);

@@ -1,0 +1,14 @@
+.downloadButton{
+    outline: none;
+    border: none;
+    background-color: #6E6E6E;
+    color: white;
+    margin: 0.5vw;
+    padding: 1vw;
+    border-radius: 20px 0 20px 0;
+}
+
+.downloadButton:active{
+    margin: 0.75vw;
+    padding: 0.75vw;
+}

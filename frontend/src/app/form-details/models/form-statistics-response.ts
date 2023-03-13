@@ -8,5 +8,6 @@ export class FormStatisticsResponse {
     dateAdded: Date;
     disabled: boolean;
     resultsAvailableForEveryone: boolean;
+    disabledFormRandomFormGenerating: boolean;
     questions: QuestionStatisticsResponse[];
 }

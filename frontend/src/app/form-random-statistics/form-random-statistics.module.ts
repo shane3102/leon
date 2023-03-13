@@ -5,6 +5,8 @@ import { FormRandomPlacesComponent } from './components/form-random-places/form-
 import { FormRandomTimesComponent } from './components/form-random-times/form-random-times.component';
 import { FormRandomPlacesBarGraphComponent } from './components/form-random-places-bar-graph/form-random-places-bar-graph.component';
 import { FormRandomTimesTableComponent } from './components/form-random-times-table/form-random-times-table.component';
+import { FormRandomDownloadCsvComponent } from './components/form-random-download-csv/form-random-download-csv.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -14,10 +16,12 @@ import { FormRandomTimesTableComponent } from './components/form-random-times-ta
     FormRandomPlacesComponent,
     FormRandomTimesComponent,
     FormRandomPlacesBarGraphComponent,
-    FormRandomTimesTableComponent
+    FormRandomTimesTableComponent,
+    FormRandomDownloadCsvComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ],
   exports: [
     FormRandomStatisticsComponent

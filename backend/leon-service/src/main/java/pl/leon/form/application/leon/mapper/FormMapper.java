@@ -128,6 +128,7 @@ public abstract class FormMapper {
             @Mapping(target = "multipleChoiceQuestions", source = "questions"),
             @Mapping(target = "shortAnswerQuestions", source = "questions"),
             @Mapping(target = "singleChoiceQuestions", source = "questions"),
+            @Mapping(target = "disabledFormRandomFormGenerating", source = "disableQuestionsFromRandomGeneratedForms"),
             @Mapping(target = "user", expression = "java(" +
                     "(pl.leon.form.application.leon.repository.entities.UserEntity) " +
                     "userService.loadUserByUsername((java.lang.String)org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()))")
@@ -213,6 +214,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -240,6 +242,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -266,6 +269,7 @@ public abstract class FormMapper {
         return LongAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -293,6 +297,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -324,6 +329,7 @@ public abstract class FormMapper {
         return ShortAnswerQuestionEntity.builder()
                 .question(request.getQuestion())
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 
@@ -351,6 +357,7 @@ public abstract class FormMapper {
                 .question(request.getQuestion())
                 .options(request.getOptions().stream().map(this::mapToOption).collect(Collectors.toList()))
                 .disabledFormRandomFormGenerating(request.isDisabledFormRandomFormGenerating())
+                .countAnswers(0L)
                 .build();
     }
 

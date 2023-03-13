@@ -56,7 +56,7 @@ public class DbMocker {
 
         for (int i = 0; i < 25; i++) {
 
-            generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6, user);
+            generateSingleForm(i, i == 5 ? LocalDate.now().minusDays(10) : dateAdded, i == 5, i == 6 || i == 4, user);
 
             dateAdded = dateAdded.plusDays(1);
 
@@ -70,6 +70,7 @@ public class DbMocker {
                 .dateAdded(dateAdded)
                 .disabled(disabled)
                 .resultsAvailableForEveryone(resultsAvailableForEveryone)
+                .disabledFormRandomFormGenerating(i == 6)
                 .title("Tytuł formularza numer " + (i + 1))
                 .subject("Opis formularza numer " + (i + 1))
                 .build();
@@ -116,6 +117,7 @@ public class DbMocker {
                 .question("Pytanie z wielokrotnym wyborem numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("wielokrotny wybór", formNumber))
                 .form(form)
+                .disabledFormRandomFormGenerating(form.isDisabledFormRandomFormGenerating())
                 .build()).collect(Collectors.toList());
 
         result.forEach(oneResult -> {
@@ -130,6 +132,7 @@ public class DbMocker {
                 .question("Pytanie z listą rozwijaną numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .options(getOptions("lista wybieralna", formNumber))
                 .form(form)
+                .disabledFormRandomFormGenerating(form.isDisabledFormRandomFormGenerating())
                 .build()).collect(Collectors.toList());
 
         result.forEach(oneResult -> {
@@ -145,6 +148,7 @@ public class DbMocker {
                 .options(getOptionsLineScale("skala liniowa", formNumber))
                 .countAnswers(0L)
                 .form(form)
+                .disabledFormRandomFormGenerating(form.isDisabledFormRandomFormGenerating())
                 .build()).collect(Collectors.toList());
 
         result.forEach(oneResult -> {
@@ -160,6 +164,7 @@ public class DbMocker {
                 .options(getOptions("jednokrotny wybór", formNumber))
                 .countAnswers(0L)
                 .form(form)
+                .disabledFormRandomFormGenerating(form.isDisabledFormRandomFormGenerating())
                 .build()).collect(Collectors.toList());
 
         result.forEach(oneResult -> {
@@ -174,6 +179,7 @@ public class DbMocker {
                 .question("Pytanie o krótkiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
                 .countAnswers(random.nextLong(1, 10))
                 .form(form)
+                .disabledFormRandomFormGenerating(form.isDisabledFormRandomFormGenerating())
                 .build()).collect(Collectors.toList());
 
 
@@ -195,8 +201,9 @@ public class DbMocker {
     private List<LongAnswerQuestionEntity> getLongAnswerQuestions(int count, int formNumber, FormEntity form) {
         List<LongAnswerQuestionEntity> result = Stream.iterate(0, i -> i + 1).limit(count).map(i -> LongAnswerQuestionEntity.builder()
                 .question("Pytanie o długiej odpowiedzi numer " + (i + 1) + " do ankiety numer " + formNumber + "?")
-                .countAnswers(random.nextLong(20,100))
+                .countAnswers(random.nextLong(20, 100))
                 .form(form)
+                .disabledFormRandomFormGenerating(form.isDisabledFormRandomFormGenerating())
                 .build()).collect(Collectors.toList());
 
         for (LongAnswerQuestionEntity oneResult : result) {

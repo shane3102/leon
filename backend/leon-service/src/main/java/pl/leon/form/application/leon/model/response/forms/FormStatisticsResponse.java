@@ -19,5 +19,6 @@ public class FormStatisticsResponse {
     private LocalDate dateAdded;
     private boolean disabled;
     private boolean resultsAvailableForEveryone;
+    private boolean disabledFormRandomFormGenerating;
     private List<QuestionStatisticsResponse> questions;
 }

@@ -41,4 +41,23 @@ public class MultipleChoiceQuestionAnswerEntity implements QuestionAnswerMethods
     @ManyToOne
     @JoinColumn(name = "form_completed_id", referencedColumnName = "id")
     private FormCompletedEntity formCompleted;
+
+    @Override
+    public String getOptionCount() {
+        return String.valueOf(options.size());
+    }
+
+    @Override
+    public String getAnswersAsText() {
+        StringBuilder sb = new StringBuilder();
+
+        options.forEach(option -> {
+            sb.append(option.getContent()).append(',');
+        });
+
+        String result = sb.toString();
+        result = result.substring(0, result.length() - 1);
+
+        return result;
+    }
 }
