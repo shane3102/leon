@@ -45,7 +45,11 @@ public class FormService {
         request.getQuestions()
                 .forEach(question -> question.setDisabledFormRandomFormGenerating(request.isDisableQuestionsFromRandomGeneratedForms()));
 
+        FormEntity formTmp = formRepository.save(new FormEntity());
+
         FormEntity formEntity = mapper.mapCreateRequestToEntity(request);
+
+        formEntity.setFormForEachQuestion(formTmp);
 
         formEntity.setDropdownQuestions(dropdownQuestionRepository.saveAll(formEntity.getDropdownQuestions()));
         formEntity.setLineScaleQuestions(lineScaleQuestionRepository.saveAll(formEntity.getLineScaleQuestions()));
@@ -54,6 +58,7 @@ public class FormService {
         formEntity.setShortAnswerQuestions(shortAnswerQuestionRepository.saveAll(formEntity.getShortAnswerQuestions()));
         formEntity.setSingleChoiceQuestions(singleChoiceQuestionRepository.saveAll(formEntity.getSingleChoiceQuestions()));
 
+        formEntity.setId(formTmp.getId());
         formEntity = formRepository.save(formEntity);
         FormResponse response = mapper.mapToResponse(formEntity);
         log.info("addNewForm({}) = {}", request, response);

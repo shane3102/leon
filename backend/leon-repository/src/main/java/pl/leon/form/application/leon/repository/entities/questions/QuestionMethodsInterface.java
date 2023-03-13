@@ -12,6 +12,8 @@ public interface QuestionMethodsInterface {
 
     FormEntity getForm();
 
+    void setForm(FormEntity form);
+
     List<OptionEntity> getOptions();
 
     Long getCountAnswers();

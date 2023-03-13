@@ -86,6 +86,10 @@ public class FormEntity {
         return result;
     }
 
+    public void setFormForEachQuestion(FormEntity form){
+        getAllQuestions().forEach(question -> question.setForm(form));
+    }
+
     @PrePersist
     void prePersist() {
         if (dateAdded == null)
