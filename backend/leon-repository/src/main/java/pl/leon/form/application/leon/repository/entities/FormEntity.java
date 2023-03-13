@@ -45,6 +45,8 @@ public class FormEntity {
 
     private boolean resultsAvailableForEveryone;
 
+    private boolean disabledFormRandomFormGenerating;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;

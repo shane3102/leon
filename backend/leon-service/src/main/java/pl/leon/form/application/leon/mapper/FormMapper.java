@@ -128,6 +128,7 @@ public abstract class FormMapper {
             @Mapping(target = "multipleChoiceQuestions", source = "questions"),
             @Mapping(target = "shortAnswerQuestions", source = "questions"),
             @Mapping(target = "singleChoiceQuestions", source = "questions"),
+            @Mapping(target = "disabledFormRandomFormGenerating", source = "disableQuestionsFromRandomGeneratedForms"),
             @Mapping(target = "user", expression = "java(" +
                     "(pl.leon.form.application.leon.repository.entities.UserEntity) " +
                     "userService.loadUserByUsername((java.lang.String)org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()))")
