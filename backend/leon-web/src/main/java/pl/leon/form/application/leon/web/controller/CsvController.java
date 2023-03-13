@@ -40,7 +40,6 @@ public class CsvController {
         return response;
     }
 
-    //TODO do naprawy
     @GetMapping("/completed-form-results-random-forms/{id}")
     public byte[] getCompletedFormResultsByIdOfRandomForms(@PathVariable Long id) {
         log.info("getCompletedFormResultsById({})", id);
@@ -49,7 +48,6 @@ public class CsvController {
         return response;
     }
 
-    //TODO do naprawy
     @GetMapping("/completed-form-results-all/{id}")
     public byte[] csvReportFormCompletedResultsAllAnswers(@PathVariable Long id) {
         log.info("getCompletedFormResultsById({})", id);
