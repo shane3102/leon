@@ -45,3 +45,11 @@ services:
       - SPRING_JPA_HIBERNATE_DDL-AUTO=create
       - SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL=true
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQL95Dialect
+  FRONTEND:
+    container_name: leon-frontend
+    image: leon-frontend
+    depends_on:
+      API:
+        condition: service_started
+    ports:
+      - "4200:4200"
