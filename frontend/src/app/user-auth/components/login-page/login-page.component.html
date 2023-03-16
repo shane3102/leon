@@ -23,7 +23,7 @@
                 jest wymagane</span>
         </div>
         <div class="line">
-            <button id="loginButton"> 
+            <button id="loginButton"
             [disabled]="!loginForm.valid" type="submit">
                 <div *ngIf="!(isLogging | async)">Zaloguj</div>
                 <div *ngIf="isLogging | async" id="loadingSpinner" class="spinner-border" role="status"></div>
