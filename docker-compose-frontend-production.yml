@@ -1,0 +1,8 @@
+version: '3.8'
+name: leon_backend
+services:
+  FRONTEND:
+    container_name: leon-frontend
+    image: shane3102/leon-frontend
+    ports:
+      - 80:80
