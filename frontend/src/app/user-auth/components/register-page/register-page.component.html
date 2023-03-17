@@ -41,7 +41,6 @@
         <div class="lineValidationMessage"></div>
     </form>
     <div style="min-width: 40px; margin: 5px;">
-        <!-- *ngIf="(isCheckingUsername | async)" -->
-        <div  id="usernameSpinner" class="spinner-border" role="status"></div>
+        <div *ngIf="(isCheckingUsername | async)" id="usernameSpinner" class="spinner-border" role="status"></div>
     </div>
 </div>
