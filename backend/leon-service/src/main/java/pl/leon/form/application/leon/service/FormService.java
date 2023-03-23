@@ -22,6 +22,7 @@ import pl.leon.form.application.leon.repository.question.ShortAnswerQuestionRepo
 import pl.leon.form.application.leon.repository.question.SingleChoiceQuestionRepository;
 import pl.leon.form.application.leon.repository.entities.FormEntity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Slf4j
@@ -59,6 +60,7 @@ public class FormService {
         formEntity.setSingleChoiceQuestions(singleChoiceQuestionRepository.saveAll(formEntity.getSingleChoiceQuestions()));
 
         formEntity.setId(formTmp.getId());
+        formEntity.setDateAdded(LocalDate.now());
         formEntity = formRepository.save(formEntity);
         FormResponse response = mapper.mapToResponse(formEntity);
         log.info("addNewForm({}) = {}", request, response);

@@ -28,6 +28,7 @@ import pl.leon.form.application.leon.service.question.SingleChoiceQuestionServic
 import pl.leon.form.application.leon.validation.ValidationService;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,7 @@ public class FormCompletedService {
                     return shortAnswerQuestionService.persistNewAnswer(answering);
                 }).collect(Collectors.toList())
         );
+        formCompletedEntity.setDateAdded(LocalDate.now());
 
         FormCompleted resultFormCompleted = formMapper.mapToCompleted(formCompletedRepository.save(formCompletedEntity));
 

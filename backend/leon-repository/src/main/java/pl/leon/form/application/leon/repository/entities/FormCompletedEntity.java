@@ -26,7 +26,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
@@ -94,12 +93,6 @@ public class FormCompletedEntity {
         if (questionAnswerResult != null) return questionAnswerResult;
         questionAnswerResult = answeredSingleChoiceQuestions.stream().filter(questionAnswer -> questionAnswer.getQuestion().equals(question)).findFirst().orElse(null);
         return questionAnswerResult;
-    }
-
-    @PrePersist
-    void prePersist() {
-        if (dateAdded == null)
-            dateAdded = LocalDate.now();
     }
 }
 
