@@ -38,12 +38,16 @@ export class SurveyOnRandomFormsComponent implements OnInit {
   }
 
   submit() {
-    
+
     if (this.responseFormUiUxOrder.size < 4 || this.forms.length > 0) {
       this.triedSubmitingWithoutRankingForms = of(true);
       setTimeout(() => { this.triedSubmitingWithoutRankingForms = of(false) }, 2000)
     } else {
-      let orderOfForms = Array.from(new Map([...this.responseFormUiUxOrder].sort((a, b) => a[0] - b[0]))).map(el => el[1]);
+      let orderOfForms = Array.from(new Map([...this.responseFormUiUxOrder].sort((a, b) => a[0] - b[0]))).map(el => {
+            let result: FormUiUxRequest = el[1]
+            result.screenshot = undefined;
+            return result;
+          });
       let formSurveyRequest: FormSurveyRequest = {
         'formsInOrder': orderOfForms,
         'commentOnForms': this.commentOnForms
