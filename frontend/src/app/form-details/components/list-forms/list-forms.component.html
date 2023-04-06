@@ -1,4 +1,5 @@
-<div style="width: calc(100% - 25vw); text-align: center; padding: 0.5vw; font-size: 2.5vw; line-height: normal; color: #6E6E6E; margin-right: 25vw;">
+<div
+    style="width: calc(100% - 25vw); text-align: center; padding: 0.5vw; font-size: 2.5vw; line-height: normal; color: #6E6E6E; margin-right: 25vw;">
     <div *ngIf="username">
         Moje ankiety
     </div>
@@ -6,7 +7,7 @@
         Ankiety użytkowników
     </div>
 </div>
-<div style="display: flex; justify-content: center; margin: 2vw;">
+<div style="display: flex; justify-content: center; margin: 2vw; margin-top: 0.5vw;">
     <div style="display: flex; justify-content: center; flex-direction: column;">
         <table>
             <thead>
@@ -53,7 +54,8 @@
                     <td style="background-color: white; font-size: 2vh;padding: 1.5vh;">{{i+1}}</td>
                     <td class="tableContent">{{form.title}}</td>
                     <td class="tableContent">
-                        <div [ngStyle]="isLoggedUser(form.author) ? {'background-color':'#BAFF39', 'padding': '5px', 'border-radius': '20px'} : {}">
+                        <div
+                            [ngStyle]="isLoggedUser(form.author) ? {'background-color':'#BAFF39', 'padding': '5px', 'border-radius': '20px'} : {}">
                             {{form.author==undefined ? "Brak" : form.author}}
                         </div>
                     </td>
@@ -67,7 +69,8 @@
                     <td style="background-color: white;">
                         <div *ngIf="form.resultsAvailableForEveryone || isLoggedUser(form.author) "
                             style="display: flex; justify-content: center; align-items: center;">
-                            <button (click)="checkStatistics(form.id)" class="actionButton">Aktualne wyniki ankiety</button>
+                            <button (click)="checkStatistics(form.id)" class="actionButton">Aktualne wyniki
+                                ankiety</button>
                         </div>
                     </td>
                 </tr>
@@ -83,7 +86,8 @@
                 </select>
             </div>
             <div class="paginationControl" style="width: 39.5vw">
-                <pagination-controls class="formPagination" style="margin-top: 1.5vh;" previousLabel="Poprzednia" nextLabel="Następna" (pageChange)="pageChange($event)">
+                <pagination-controls class="formPagination" style="margin-top: 1.5vh;" previousLabel="Poprzednia"
+                    nextLabel="Następna" (pageChange)="pageChange($event)">
                 </pagination-controls>
             </div>
         </div>
