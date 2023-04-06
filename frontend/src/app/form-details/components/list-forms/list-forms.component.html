@@ -65,7 +65,7 @@
                         </div>
                     </td>
                     <td style="background-color: white;">
-                        <div *ngIf="form.resultsAvailableForEveryone"
+                        <div *ngIf="form.resultsAvailableForEveryone || isLoggedUser(form.author) "
                             style="display: flex; justify-content: center; align-items: center;">
                             <button (click)="checkStatistics(form.id)" class="actionButton">Aktualne wyniki ankiety</button>
                         </div>
